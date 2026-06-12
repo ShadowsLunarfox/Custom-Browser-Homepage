@@ -1,0 +1,337 @@
+{
+  "app": {
+    "title": "マイホーム"
+  },
+  "clock": {
+    "current_time": "現在時刻",
+    "time": "時刻",
+    "loading_date": "日付を読み込み中..."
+  },
+  "search": {
+    "label": "検索",
+    "placeholder": "入力して Enter",
+    "aria_query": "検索語句",
+    "aria_engine": "検索エンジン",
+    "suggestions_aria": "検索候補",
+    "engine_selected": "{engine} を選択中",
+    "recent_search": "最近の検索",
+    "suggested": "候補",
+    "live_suggestion": "ライブ候補",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "Bing China",
+    "baidu": "Baidu",
+    "sogou": "Sogou",
+    "so360": "360 Search",
+    "shenma": "Shenma",
+    "toutiao": "Toutiao",
+    "quark": "Quark"
+  },
+  "actions": {
+    "drag_clock": "時計をドラッグ",
+    "drag_search_panel": "検索パネルをドラッグ",
+    "drag_collection_panel": "コレクションパネルをドラッグ",
+    "add_site": "サイトを追加",
+    "add_first_site": "最初のサイトを追加",
+    "settings": "設定",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "export": "エクスポート",
+    "import": "インポート",
+    "choose_image": "画像を選択",
+    "image_search": "Google 画像検索",
+    "voice_search": "音声検索",
+    "voice_search_stop": "音声検索を停止",
+    "voice_search_unavailable": "音声検索は利用できません",
+    "search_all_engines": "チェックした検索エンジン一覧の候補を使用",
+    "search_all_short": "複数",
+    "search_all_on": "複数",
+    "search_single": "現在",
+    "search_single_engine": "現在の検索エンジンの候補のみ使用",
+    "reset_colors": "色をリセット",
+    "reset_default_background": "既定の背景に戻す",
+    "toggle_pin": "ピン留めを切り替え",
+    "edit": "編集",
+    "delete": "削除"
+  },
+  "dialogs": {
+    "add_site": "サイトを追加",
+    "edit_site": "サイトを編集",
+    "image_search_title": "画像検索",
+    "image_search_desc": "ここに画像をドロップすると Google Lens で検索します。"
+  },
+  "image_search": {
+    "drop_aria": "ここに画像をドロップ、または画像を選択",
+    "drop_title": "ここに画像をドロップ",
+    "drop_hint": "画像をこのウィンドウにドラッグするか、ローカル画像ファイルを選択してください。",
+    "no_file": "画像が選択されていません",
+    "uploading": "Google Lens で {name} を検索中..."
+  },
+  "form": {
+    "name": "名前",
+    "url": "URL",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "title": "設定",
+    "library": {
+      "title": "ライブラリ",
+      "desc": "追加操作をメインページではなくここにまとめます。"
+    },
+    "backup": {
+      "title": "バックアップ",
+      "desc": "ブックマークを保存または復元します。"
+    },
+    "view_mode": {
+      "title": "表示モード",
+      "desc": "グリッド表示とリスト表示を切り替えます。",
+      "aria": "ショートカットのレイアウトモード"
+    },
+    "appearance": {
+      "title": "外観",
+      "desc": "ページ全体の見た目を調整します。"
+    },
+    "theme": {
+      "title": "テーマ",
+      "desc": "基本モードとビジュアルスタイルを選択します。"
+    },
+    "language": {
+      "label": "言語"
+    },
+    "theme_mode": {
+      "label": "テーマモード"
+    },
+    "ui_style": {
+      "label": "UI スタイル"
+    },
+    "search_engine": {
+      "label": "既定の検索エンジン"
+    },
+    "search_suggestions": {
+      "label": "検索候補"
+    },
+    "search_suggestions_all_engines": {
+      "label": "候補モード",
+      "note": "候補を現在の検索エンジンだけから取得するか、下のチェック済み一覧から取得するかを選びます。"
+    },
+    "search_suggestion_engine_limit": {
+      "label": "候補エンジン数",
+      "note": "複数候補が有効なとき、同時に使う検索エンジン数を制限します。"
+    },
+    "search_suggestion_engine_list": {
+      "label": "候補エンジン一覧",
+      "note": "複数候補が有効なとき、同時に使える検索エンジンを選びます。"
+    },
+    "search_ui": {
+      "label": "検索ボックス"
+    },
+    "shortcuts_ui": {
+      "label": "ショートカット"
+    },
+    "clock_display": {
+      "label": "時計表示"
+    },
+    "clock_style": {
+      "label": "時計スタイル"
+    },
+    "clock_size": {
+      "label": "時計サイズ"
+    },
+    "colors": {
+      "title": "色",
+      "desc": "ボタンと文字の色を調整します。"
+    },
+    "button_color": {
+      "label": "ボタン色"
+    },
+    "font_color": {
+      "label": "文字色"
+    },
+    "surface": {
+      "title": "?????",
+      "desc": "?????????????????????????"
+    },
+    "font_size": {
+      "label": "文字サイズ"
+    },
+    "corner_roundness": {
+      "label": "角丸"
+    },
+    "panel_blur": {
+      "label": "パネルのぼかし"
+    },
+    "layout": {
+      "title": "????????????",
+      "desc": "?????????????????????????????"
+    },
+    "grid": {
+      "title": "グリッド",
+      "desc": "密度と表示行数を調整します。"
+    },
+    "cards_per_row": {
+      "label": "1 行のカード数"
+    },
+    "visible_rows": {
+      "label": "表示行数"
+    },
+    "cards": {
+      "title": "カード",
+      "desc": "間隔とタイルサイズを細かく調整します。"
+    },
+    "card_gap": {
+      "label": "カード間隔"
+    },
+    "card_height": {
+      "label": "カードの高さ"
+    },
+    "background": {
+      "title": "背景"
+    },
+    "panels": {
+      "title": "パネル",
+      "desc": "中央 UI パネルの強さを調整します。"
+    },
+    "panel_transparency": {
+      "label": "UI パネルの透明度"
+    },
+    "wallpaper": {
+      "title": "壁紙",
+      "desc": "対応形式: JPG, PNG, WebP, GIF, MP4。"
+    },
+    "upload_background": {
+      "label": "カスタム壁紙ファイルをアップロード",
+      "note": "画像と GIF は通常どおり対応しています。MP4 は最大 24 MB まで対応しますが、解像度が高すぎると保存に失敗する場合があります。"
+    },
+    "reset": {
+      "title": "リセット",
+      "desc": "現在の外観または壁紙を既定値に戻します。"
+    },
+    "search": {
+      "title": "??",
+      "desc": "????????????????????"
+    },
+    "search_provider": {
+      "title": "??????",
+      "desc": "???????????????????????????"
+    },
+    "reset_appearance": {
+      "title": "???????",
+      "desc": "??????????????????????????"
+    },
+    "page_elements": {
+      "title": "?????",
+      "desc": "???????????????????????????"
+    },
+    "clock": {
+      "title": "??",
+      "desc": "?????????????????????"
+    },
+    "visibility": {
+      "title": "??",
+      "desc": "?????????????????????"
+    },
+    "reset_background": {
+      "title": "???????",
+      "desc": "??????????????????????"
+    },
+    "debug": {
+      "title": "????",
+      "desc": "?????????????????????????????"
+    }
+  },
+  "layout": {
+    "grid": "グリッド",
+    "list": "リスト"
+  },
+  "theme": {
+    "dark": "ダーク",
+    "light": "ライト"
+  },
+  "ui": {
+    "default": "既定",
+    "cartoon": "カートゥーン",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "ターミナル",
+    "paper": "ペーパー"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "簡体字中国語",
+    "ko": "韓国語",
+    "ja": "日本語",
+    "th": "タイ語",
+    "ms": "マレー語 (マレーシア)"
+  },
+  "common": {
+    "show": "表示",
+    "hide": "非表示",
+    "on": "オン",
+    "off": "オフ",
+    "selected_engine": "選択中のエンジン",
+    "all_engines": "チェック済み一覧",
+    "engine_limit_2": "2 engines",
+    "engine_limit_3": "3 engines",
+    "engine_limit_5": "5 engines"
+  },
+  "clock_styles": {
+    "classic": "クラシック",
+    "compact": "コンパクト",
+    "stacked": "スタック",
+    "pill": "ピル",
+    "panel": "パネル",
+    "calendar": "カレンダー",
+    "neon": "ネオン",
+    "analog": "アナログ盤",
+    "analog_minimal": "ミニマルアナログ",
+    "analog_bold": "太字アナログ"
+  },
+  "empty": {
+    "no_matching_title": "一致するサイトはまだありません",
+    "no_matching_desc": "別のフィルターを試すか、最初のショートカットを保存してみてください。"
+  },
+  "preset": {
+    "selected": "選択済み",
+    "midnight": "ミッドナイト",
+    "nebula": "星雲",
+    "deepsea": "深海",
+    "ember": "残り火",
+    "moss": "モス",
+    "dusk": "夕暮れ"
+  },
+  "background": {
+    "current_custom_image": "現在の背景: カスタム画像",
+    "custom_image_selected": "カスタム画像を選択しました",
+    "no_custom_image": "カスタム画像が選択されていません",
+    "current_preset": "現在の背景: {name}",
+    "current_theme": "現在の背景: テーマ",
+    "image_save_failed": "画像を保存できませんでした"
+  },
+  "alerts": {
+    "wallpaper_too_large": "この壁紙は大きすぎるため直接保存できません。小さい画像、または JPG/WebP ファイルを試してください。",
+    "image_search_google_only": "画像検索は現在 Google Lens のみを使用します。",
+    "image_search_invalid_file": "画像検索には画像ファイルを選択してください。",
+    "image_search_upload_unavailable": "このブラウザーではドラッグした画像をアップロード用に準備できません。画像を選択ボタンを試してください。",
+    "voice_search_unsupported": "このブラウザーは音声検索に対応していません。",
+    "voice_search_denied": "マイク権限がブロックされました。マイクへのアクセスを許可してから再試行してください。",
+    "voice_search_no_speech": "音声が検出されませんでした。もう一度お試しください。",
+    "voice_search_failed": "現在、音声検索を開始できません。しばらくしてからもう一度お試しください。",
+    "import_failed": "インポートに失敗しました。有効なブックマークのエクスポートファイルを選択してください。",
+    "save_failed": "変更をブラウザーのストレージに保存できませんでした。",
+    "all_engine_suggestions_warning": "すべてのエンジン候補は複数の検索プロバイダーへ同時に問い合わせるため、通常よりネットワーク使用量が増える場合があります。"
+  }
+}

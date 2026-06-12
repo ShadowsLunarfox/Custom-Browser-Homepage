@@ -1,0 +1,495 @@
+{
+  "app": {
+    "title": "My Home"
+  },
+  "clock": {
+    "current_time": "Current time",
+    "time": "Time",
+    "loading_date": "Loading date..."
+  },
+  "search": {
+    "label": "Search",
+    "placeholder": "Type and press Enter",
+    "aria_query": "Search query",
+    "aria_engine": "Search engine",
+    "suggestions_aria": "Search suggestions",
+    "engine_selected": "{engine} selected",
+    "recent_search": "Recent search",
+    "suggested": "Suggested",
+    "live_suggestion": "Live suggestion",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "Bing China",
+    "baidu": "Baidu",
+    "sogou": "Sogou",
+    "so360": "360 Search",
+    "shenma": "Shenma",
+    "toutiao": "Toutiao",
+    "quark": "Quark"
+  },
+  "search_engine_categories": {
+    "mainstream": "Mainstream",
+    "mainstream_note": "Widely used general search engines",
+    "niche": "Niche / regional",
+    "niche_note": "Privacy-focused, regional, or specialist choices",
+    "caution": "Use with caution",
+    "caution_note": "AI-first or mobile services may redirect or require sign-in"
+  },
+  "actions": {
+    "drag_clock": "Drag clock",
+    "drag_search_panel": "Drag search panel",
+    "drag_collection_panel": "Drag collection panel",
+    "add_site": "Add Site",
+    "add_first_site": "Add your first site",
+    "settings": "Settings",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "export": "Export",
+    "import": "Import",
+    "choose_image": "Choose image",
+    "image_search": "Image search with Google",
+    "voice_search": "Voice search",
+    "voice_search_stop": "Stop voice search",
+    "voice_search_unavailable": "Voice search unavailable",
+    "search_all_engines": "Use suggestions from the checked engine list",
+    "search_all_short": "Multi",
+    "search_all_on": "Multi",
+    "search_single": "Current",
+    "search_single_engine": "Use current engine suggestions only",
+    "reset_colors": "Reset Colors",
+    "reset_default_background": "Reset default background",
+    "toggle_pin": "Toggle pin",
+    "edit": "Edit",
+    "delete": "Delete",
+    "got_it": "Got it",
+    "clear_local_storage": "Clear localStorage",
+    "open_debug_tools": "Open debug tools",
+    "refresh_debug_status": "Refresh status",
+    "rerun_browser_check": "Re-run browser check",
+    "show_compatibility_notice": "Show compatibility notice",
+    "open_unsupported_preview": "Preview unsupported page",
+    "refresh_storage": "Refresh storage",
+    "clear_compatibility_acks": "Clear compatibility acknowledgements",
+    "preview_language": "Preview language",
+    "force_first_run_flow": "Force first-run flow",
+    "show_simulated_notice": "Show simulated notice",
+    "preview_simulated_unsupported": "Preview simulated unsupported page",
+    "copy_diagnostics": "Copy diagnostics",
+    "clear_wallpaper_cache": "Clear wallpaper cache",
+    "reset_settings_keep_bookmarks": "Reset settings only",
+    "reset_bookmarks_keep_settings": "Reset bookmarks only",
+    "export_debug_backup": "Export debug backup",
+    "import_debug_backup": "Import debug backup"
+  },
+  "dialogs": {
+    "add_site": "Add Site",
+    "edit_site": "Edit Site",
+    "image_search_title": "Image search",
+    "image_search_desc": "Drop an image here to search with Google Lens.",
+    "browser_compat_title": "Browser compatibility notice",
+    "browser_compat_desc": "Some features are unavailable or limited in this browser.",
+    "browser_compat_severe_title": "{browser} cannot run this extension normally",
+    "browser_compat_severe_desc": "This extension cannot run normally in this browser. Update to the latest browser or engine version, otherwise it may not be usable.",
+    "browser_compat_named_title": "{browser} compatibility notice",
+    "browser_compat_named_desc": "Compatibility checks found these notes for {browser}:",
+    "browser_compat_unavailable_heading": "Unavailable features",
+    "browser_compat_notes_heading": "Compatibility notes",
+    "browser_compat_chinese_browser": "Chinese dual-core browser",
+    "browser_compat_unknown_browser": "this browser",
+    "browser_compat_chinese_fast_mode": "If this is a dual-core browser, use Speed/Chromium mode instead of Compatibility/IE mode.",
+    "browser_compat_ie_mode": "The page appears to be running in Compatibility/IE mode. Switch to Speed/Chromium mode for this extension.",
+    "browser_compat_old_chromium": "This Chromium engine is old ({version}). Update the browser if search, wallpaper, or settings fail.",
+    "browser_compat_voice": "Voice search is not supported or is blocked by this browser.",
+    "browser_compat_random_uuid": "The browser is missing crypto.randomUUID, so new shortcuts cannot be created reliably.",
+    "browser_compat_structured_clone": "The browser is missing structuredClone, so saved settings may fail to load.",
+    "browser_compat_dialog": "Native dialog support is missing, so settings and upload dialogs may not open correctly.",
+    "browser_compat_data_transfer": "Drag-and-drop image search may not work; use the Choose image button instead.",
+    "browser_compat_indexeddb": "IndexedDB is unavailable, so large custom wallpapers may not be saved.",
+    "browser_compat_color_mix": "CSS color-mix is unavailable, so some theme colors may render differently.",
+    "browser_compat_backdrop_filter": "Backdrop blur is unavailable, so glass effects may render differently.",
+    "browser_compat_no_issue_found": "No blocking issue was detected, but browser extensions from this browser family can vary by version.",
+    "debug_title": "Debug tools",
+    "debug_desc": "Run browser checks and test compatibility surfaces.",
+    "debug_status_heading": "Current detection",
+    "debug_issues_heading": "Detected issues",
+    "debug_actions_heading": "Actions",
+    "debug_status_browser": "Browser",
+    "debug_status_chromium": "Chromium engine",
+    "debug_status_chinese": "Chinese browser",
+    "debug_status_severity": "Compatibility state",
+    "debug_status_preflight_cache": "Preflight cache",
+    "debug_status_issue_count": "Issue count",
+    "debug_features_heading": "Feature checks",
+    "debug_storage_heading": "Storage usage",
+    "debug_local_storage_heading": "Local storage viewer",
+    "debug_preflight_heading": "Preflight cache details",
+    "debug_simulation_heading": "Compatibility simulation",
+    "debug_value_yes": "Yes",
+    "debug_value_no": "No",
+    "debug_value_not_detected": "Not detected",
+    "debug_value_severe": "Severe",
+    "debug_value_notice": "Notice",
+    "debug_value_ok": "OK",
+    "debug_value_failed": "Failed",
+    "debug_value_cached": "Cached",
+    "debug_value_uncached": "Not cached",
+    "debug_value_not_available": "Not available",
+    "debug_storage_loading": "Loading",
+    "debug_storage_local_storage": "localStorage",
+    "debug_storage_extension_storage": "Extension storage",
+    "debug_storage_wallpaper": "Wallpaper cache",
+    "debug_storage_quota": "Browser quota",
+    "debug_storage_error": "Storage usage",
+    "debug_local_storage_empty": "No localStorage keys found.",
+    "debug_feature_dialog": "Required for settings, add-site, and upload dialogs.",
+    "debug_feature_indexeddb": "Required for larger custom wallpapers and MP4 wallpapers.",
+    "debug_feature_random_uuid": "Required for reliable shortcut ID generation.",
+    "debug_feature_structured_clone": "Required for safe state copying and loading.",
+    "debug_feature_voice": "Required for voice search.",
+    "debug_feature_data_transfer": "Required for drag-and-drop image search.",
+    "debug_feature_color_mix": "Required for exact theme color rendering.",
+    "debug_feature_backdrop_filter": "Required for glass blur effects.",
+    "debug_feature_local_storage": "Required for bookmarks, settings, language cache, and notices.",
+    "debug_feature_extension_storage": "Required for extension-side wallpaper and pending-link sync.",
+    "debug_feature_clipboard": "Required for copying diagnostics.",
+    "debug_storage_type_state": "App state",
+    "debug_storage_type_preflight": "Browser preflight cache",
+    "debug_storage_type_ack": "Compatibility acknowledgement",
+    "debug_storage_type_language": "Language cache",
+    "debug_storage_type_pending_link": "Pending shortcut sync",
+    "debug_storage_type_other": "Other",
+    "firefox_compat_title": "Firefox compatibility notice",
+    "firefox_compat_desc": "Firefox has limited support for some parts of this start page.",
+    "firefox_compat_voice": "Voice search is not supported in Firefox.",
+    "firefox_compat_visuals": "Some live wallpapers and visual effects may render differently than in Chromium browsers."
+  },
+  "image_search": {
+    "drop_aria": "Drop image here or choose image",
+    "drop_title": "Drop image here",
+    "drop_hint": "Drag an image into this window, or choose a local image file.",
+    "no_file": "No image selected",
+    "uploading": "Searching {name} with Google Lens..."
+  },
+  "form": {
+    "name": "Name",
+    "url": "URL",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "developer_credit": "Extension developer: Lunarfox 月狐",
+    "title": "Settings",
+    "library": {
+      "title": "Library",
+      "desc": "Keep extra actions here instead of on the main page."
+    },
+    "backup": {
+      "title": "Backup",
+      "desc": "Save or restore your bookmarks."
+    },
+    "view_mode": {
+      "title": "View mode",
+      "desc": "Switch between grid and list layouts.",
+      "aria": "Shortcut layout mode"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "desc": "Tune the overall look of the page."
+    },
+    "theme": {
+      "title": "Theme",
+      "desc": "Choose the base mode and visual style."
+    },
+    "language": {
+      "label": "Language"
+    },
+    "theme_mode": {
+      "label": "Theme mode"
+    },
+    "ui_style": {
+      "label": "UI style"
+    },
+    "search_engine": {
+      "label": "Default search engine"
+    },
+    "search_suggestions": {
+      "label": "Search suggestions"
+    },
+    "search_suggestions_all_engines": {
+      "label": "Suggestion mode",
+      "note": "Choose whether suggestions use the current engine or the checked engine list below."
+    },
+    "search_suggestion_engine_limit": {
+      "label": "Suggestion engines",
+      "note": "Limits how many engines run at the same time when multi-suggestions are enabled."
+    },
+    "search_suggestion_engine_list": {
+      "label": "Suggestion engine list",
+      "note": "Choose which engines can run at the same time when multi-suggestions are enabled."
+    },
+    "search_ui": {
+      "label": "Search box"
+    },
+    "shortcuts_ui": {
+      "label": "Shortcuts"
+    },
+    "clock_display": {
+      "label": "Clock display"
+    },
+    "clock_style": {
+      "label": "Clock style"
+    },
+    "clock_size": {
+      "label": "Clock size"
+    },
+    "colors": {
+      "title": "Colors",
+      "desc": "Adjust button and text colors."
+    },
+    "button_color": {
+      "label": "Button color"
+    },
+    "font_color": {
+      "label": "Font color"
+    },
+    "surface": {
+      "title": "Surface",
+      "desc": "Control text size, roundness, transparency, and glass effect."
+    },
+    "font_size": {
+      "label": "Font size"
+    },
+    "corner_roundness": {
+      "label": "Corner roundness"
+    },
+    "panel_blur": {
+      "label": "Panel blur"
+    },
+    "layout": {
+      "title": "Shortcut layout",
+      "desc": "Choose shortcut display mode, density, and card size."
+    },
+    "grid": {
+      "title": "Grid",
+      "desc": "Adjust density and visible rows."
+    },
+    "cards_per_row": {
+      "label": "Cards per row"
+    },
+    "visible_rows": {
+      "label": "Visible rows"
+    },
+    "cards": {
+      "title": "Cards",
+      "desc": "Fine-tune spacing and tile size."
+    },
+    "card_gap": {
+      "label": "Card gap"
+    },
+    "card_height": {
+      "label": "Card height"
+    },
+    "background": {
+      "title": "Background"
+    },
+    "panels": {
+      "title": "Panels",
+      "desc": "Control how strong the center UI panels appear."
+    },
+    "panel_transparency": {
+      "label": "UI panel transparency"
+    },
+    "wallpaper": {
+      "title": "Wallpaper",
+      "desc": "Supported formats: JPG, PNG, WebP, GIF, MP4."
+    },
+    "upload_background": {
+      "label": "Upload custom wallpaper file",
+      "note": "Images and GIFs are supported normally. MP4 is supported up to 24 MB; very high resolutions may still fail to save."
+    },
+    "reset": {
+      "title": "Reset",
+      "desc": "Restore the current appearance or wallpaper defaults."
+    },
+    "debug": {
+      "title": "Debug",
+      "desc": "Tools for testing and resetting local browser data."
+    },
+    "debug_tools": {
+      "title": "Debug tools",
+      "desc": "Open browser checks, test notices, and local storage tools."
+    },
+    "debug_simulation": {
+      "label": "Simulation"
+    },
+    "debug_language": {
+      "label": "Language preview"
+    },
+    "local_storage": {
+      "title": "Local storage",
+      "desc": "Clear page data stored in localStorage."
+    },
+    "search": {
+      "title": "Search",
+      "desc": "Choose the search provider and suggestion behavior."
+    },
+    "search_provider": {
+      "title": "Provider",
+      "desc": "Pick the default engine used by the main search box."
+    },
+    "reset_appearance": {
+      "title": "Reset appearance",
+      "desc": "Restore colors and appearance values without changing bookmarks or wallpaper."
+    },
+    "page_elements": {
+      "title": "Page elements",
+      "desc": "Show, hide, and style the main page modules."
+    },
+    "clock": {
+      "title": "Clock",
+      "desc": "Control the clock module and its display style."
+    },
+    "visibility": {
+      "title": "Visibility",
+      "desc": "Choose which main modules appear on the page."
+    },
+    "reset_background": {
+      "title": "Reset background",
+      "desc": "Return to the theme background without changing other appearance settings."
+    }
+  },
+  "debug_simulation": {
+    "current": "Current browser",
+    "firefox": "Firefox limited features",
+    "chinese": "Chinese dual-core browser",
+    "old_chromium": "Old Chromium 79",
+    "ie_mode": "Compatibility/IE mode",
+    "missing_core": "Missing core APIs"
+  },
+  "debug_language": {
+    "current": "Current language"
+  },
+  "layout": {
+    "grid": "Grid",
+    "list": "List"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "ui": {
+    "default": "Default",
+    "cartoon": "Cartoon",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "Terminal",
+    "paper": "Paper"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "Simplified Chinese",
+    "ko": "Korean",
+    "ja": "Japanese",
+    "th": "Thai",
+    "ms": "Malay (Malaysia)"
+  },
+  "common": {
+    "show": "Show",
+    "hide": "Hide",
+    "on": "On",
+    "off": "Off",
+    "selected_engine": "Selected engine",
+    "all_engines": "Checked list",
+    "engine_limit_2": "2 engines",
+    "engine_limit_3": "3 engines",
+    "engine_limit_5": "5 engines"
+  },
+  "clock_styles": {
+    "classic": "Classic",
+    "compact": "Compact",
+    "stacked": "Stacked",
+    "pill": "Pill",
+    "panel": "Panel",
+    "calendar": "Calendar",
+    "neon": "Neon",
+    "analog": "Analog Dial",
+    "analog_minimal": "Analog Minimal",
+    "analog_bold": "Analog Bold"
+  },
+  "empty": {
+    "no_matching_title": "No matching sites yet",
+    "no_matching_desc": "Try a different filter or start by saving your first shortcut."
+  },
+  "preset": {
+    "selected": "Selected",
+    "midnight": "Midnight",
+    "nebula": "Nebula",
+    "deepsea": "Deep Sea",
+    "ember": "Ember",
+    "moss": "Moss",
+    "dusk": "Dusk"
+  },
+  "background": {
+    "current_custom_image": "Current background: Custom image",
+    "custom_image_selected": "Custom image selected",
+    "no_custom_image": "No custom image selected",
+    "current_preset": "Current background: {name}",
+    "current_theme": "Current background: Theme",
+    "image_save_failed": "Image could not be saved"
+  },
+  "alerts": {
+    "wallpaper_too_large": "That wallpaper is too large to save directly. Try a smaller image or a JPG/WebP file.",
+    "video_wallpaper_too_large": "That MP4 wallpaper is too large to save directly. Try a shorter or smaller video file.",
+    "image_search_google_only": "Image search currently uses Google Lens only.",
+    "image_search_invalid_file": "Please choose an image file for image search.",
+    "image_search_upload_unavailable": "This browser cannot prepare that dragged image for upload. Try the Choose image button.",
+    "voice_search_unsupported": "This browser does not support voice search.",
+    "voice_search_denied": "Microphone permission was blocked. Allow microphone access and try again.",
+    "voice_search_no_speech": "No speech was detected. Try again.",
+    "voice_search_failed": "Voice search could not start right now. Please try again.",
+    "import_failed": "Import failed. Please choose a valid bookmark export file.",
+    "save_failed": "Changes could not be saved in browser storage.",
+    "all_engine_suggestions_warning": "All-engine suggestions will query multiple search providers at once and may use more network traffic than usual.",
+    "clear_local_storage_confirm": "This will clear localStorage for this start page and reload it. Bookmarks, layout, settings, cached language files, and compatibility acknowledgements stored in localStorage will be reset. Continue?",
+    "clear_local_storage_failed": "Local storage could not be cleared.",
+    "rerun_browser_check_confirm": "This will clear only browser compatibility caches and acknowledgement flags, then reload the page to run detection again. Your bookmarks and settings will be kept. Continue?",
+    "rerun_browser_check_failed": "Browser compatibility detection could not be restarted.",
+    "unsupported_preview_blocked": "The browser blocked the unsupported-page preview window.",
+    "delete_local_storage_key_confirm": "Delete the localStorage key \"{key}\"?",
+    "local_storage_key_deleted": "localStorage key deleted.",
+    "local_storage_key_delete_failed": "Could not delete that localStorage key.",
+    "diagnostics_copied": "Diagnostics copied to clipboard.",
+    "diagnostics_copy_failed": "Diagnostics could not be copied.",
+    "compatibility_acks_cleared": "Compatibility acknowledgements cleared.",
+    "compatibility_acks_clear_failed": "Could not clear compatibility acknowledgements.",
+    "clear_wallpaper_cache_confirm": "This will clear custom wallpaper cache and restore the default wallpaper. Continue?",
+    "wallpaper_cache_cleared": "Wallpaper cache cleared.",
+    "wallpaper_cache_clear_failed": "Wallpaper cache could not be cleared.",
+    "reset_settings_keep_bookmarks_confirm": "Reset settings, layout, search, language, and wallpaper while keeping bookmarks?",
+    "settings_reset_keep_bookmarks_done": "Settings reset while keeping bookmarks.",
+    "reset_bookmarks_keep_settings_confirm": "Reset bookmarks to the default set while keeping current settings?",
+    "bookmarks_reset_keep_settings_done": "Bookmarks reset while keeping settings.",
+    "debug_action_failed": "Debug action failed.",
+    "debug_backup_exported": "Debug backup exported.",
+    "debug_backup_export_failed": "Debug backup could not be exported.",
+    "debug_backup_import_confirm": "Import this debug backup? It may replace localStorage and app state.",
+    "debug_backup_import_failed": "Debug backup could not be imported.",
+    "debug_backup_imported": "Debug backup imported.",
+    "force_first_run_flow_confirm": "This will clear browser preflight cache and compatibility acknowledgements, then reload to show the first-run compatibility flow again. Continue?",
+    "language_preview_applied": "Language preview applied for this session.",
+    "language_preview_failed": "Language preview failed."
+  }
+}

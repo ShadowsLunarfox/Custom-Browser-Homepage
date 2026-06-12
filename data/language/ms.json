@@ -1,0 +1,337 @@
+{
+  "app": {
+    "title": "Laman Utama Saya"
+  },
+  "clock": {
+    "current_time": "Masa semasa",
+    "time": "Masa",
+    "loading_date": "Sedang memuat tarikh..."
+  },
+  "search": {
+    "label": "Cari",
+    "placeholder": "Taip dan tekan Enter",
+    "aria_query": "Pertanyaan carian",
+    "aria_engine": "Enjin carian",
+    "suggestions_aria": "Cadangan carian",
+    "engine_selected": "{engine} dipilih",
+    "recent_search": "Carian terkini",
+    "suggested": "Disyorkan",
+    "live_suggestion": "Cadangan langsung",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "Bing China",
+    "baidu": "Baidu",
+    "sogou": "Sogou",
+    "so360": "360 Search",
+    "shenma": "Shenma",
+    "toutiao": "Toutiao",
+    "quark": "Quark"
+  },
+  "actions": {
+    "drag_clock": "Seret jam",
+    "drag_search_panel": "Seret panel carian",
+    "drag_collection_panel": "Seret panel koleksi",
+    "add_site": "Tambah Laman",
+    "add_first_site": "Tambah laman pertama anda",
+    "settings": "Tetapan",
+    "close": "Tutup",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "export": "Eksport",
+    "import": "Import",
+    "choose_image": "Pilih imej",
+    "image_search": "Carian imej Google",
+    "voice_search": "Carian suara",
+    "voice_search_stop": "Hentikan carian suara",
+    "voice_search_unavailable": "Carian suara tidak tersedia",
+    "search_all_engines": "Guna cadangan daripada senarai enjin yang ditanda",
+    "search_all_short": "Multi",
+    "search_all_on": "Multi",
+    "search_single": "Semasa",
+    "search_single_engine": "Guna cadangan enjin semasa sahaja",
+    "reset_colors": "Tetapkan Semula Warna",
+    "reset_default_background": "Tetapkan semula latar belakang asal",
+    "toggle_pin": "Tukar pin",
+    "edit": "Edit",
+    "delete": "Padam"
+  },
+  "dialogs": {
+    "add_site": "Tambah Laman",
+    "edit_site": "Edit Laman",
+    "image_search_title": "Carian imej",
+    "image_search_desc": "Lepaskan imej di sini untuk mencari dengan Google Lens."
+  },
+  "image_search": {
+    "drop_aria": "Lepaskan imej di sini atau pilih imej",
+    "drop_title": "Lepaskan imej di sini",
+    "drop_hint": "Seret imej ke dalam tetingkap ini, atau pilih fail imej setempat.",
+    "no_file": "Tiada imej dipilih",
+    "uploading": "Mencari {name} dengan Google Lens..."
+  },
+  "form": {
+    "name": "Nama",
+    "url": "URL",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "title": "Tetapan",
+    "library": {
+      "title": "Pustaka",
+      "desc": "Simpan tindakan tambahan di sini supaya halaman utama kekal kemas."
+    },
+    "backup": {
+      "title": "Sandaran",
+      "desc": "Simpan atau pulihkan penanda buku anda."
+    },
+    "view_mode": {
+      "title": "Mod paparan",
+      "desc": "Tukar antara susun atur grid dan senarai.",
+      "aria": "Mod susun atur pintasan"
+    },
+    "appearance": {
+      "title": "Penampilan",
+      "desc": "Laraskan rupa keseluruhan halaman."
+    },
+    "theme": {
+      "title": "Tema",
+      "desc": "Pilih mod asas dan gaya visual."
+    },
+    "language": {
+      "label": "Bahasa"
+    },
+    "theme_mode": {
+      "label": "Mod tema"
+    },
+    "ui_style": {
+      "label": "Gaya UI"
+    },
+    "search_engine": {
+      "label": "Enjin carian lalai"
+    },
+    "search_suggestions": {
+      "label": "Cadangan carian"
+    },
+    "search_suggestions_all_engines": {
+      "label": "Mod cadangan",
+      "note": "Pilih sama ada cadangan menggunakan enjin semasa atau senarai enjin yang ditanda di bawah."
+    },
+    "search_suggestion_engine_limit": {
+      "label": "Enjin cadangan",
+      "note": "Hadkan bilangan enjin yang berjalan serentak apabila multi-suggestions dihidupkan."
+    },
+    "search_suggestion_engine_list": {
+      "label": "Senarai enjin cadangan",
+      "note": "Pilih enjin yang boleh berjalan serentak apabila multi-suggestions dihidupkan."
+    },
+    "search_ui": {
+      "label": "Kotak carian"
+    },
+    "shortcuts_ui": {
+      "label": "Pintasan"
+    },
+    "clock_display": {
+      "label": "Paparan jam"
+    },
+    "clock_style": {
+      "label": "Gaya jam"
+    },
+    "clock_size": {
+      "label": "Saiz jam"
+    },
+    "colors": {
+      "title": "Warna",
+      "desc": "Laraskan warna butang dan teks."
+    },
+    "button_color": {
+      "label": "Warna butang"
+    },
+    "font_color": {
+      "label": "Warna fon"
+    },
+    "surface": {
+      "title": "Permukaan",
+      "desc": "Kawal saiz teks, kebulatan sudut, ketelusan dan kesan kaca."
+    },
+    "font_size": {
+      "label": "Saiz fon"
+    },
+    "corner_roundness": {
+      "label": "Kebulatan sudut"
+    },
+    "panel_blur": {
+      "label": "Kabur panel"
+    },
+    "layout": {
+      "title": "Susun atur pintasan",
+      "desc": "Pilih mod paparan pintasan, kepadatan dan saiz kad."
+    },
+    "grid": {
+      "title": "Grid",
+      "desc": "Laraskan kepadatan dan baris yang kelihatan."
+    },
+    "cards_per_row": {
+      "label": "Kad setiap baris"
+    },
+    "visible_rows": {
+      "label": "Baris kelihatan"
+    },
+    "cards": {
+      "title": "Kad",
+      "desc": "Perhalusi jarak dan saiz jubin."
+    },
+    "card_gap": {
+      "label": "Jarak kad"
+    },
+    "card_height": {
+      "label": "Tinggi kad"
+    },
+    "background": {
+      "title": "Latar belakang"
+    },
+    "panels": {
+      "title": "Panel",
+      "desc": "Kawal kekuatan paparan panel di tengah UI."
+    },
+    "panel_transparency": {
+      "label": "Ketelusan panel UI"
+    },
+    "wallpaper": {
+      "title": "Kertas dinding",
+      "desc": "Format disokong: JPG, PNG, WebP, GIF, MP4."
+    },
+    "upload_background": {
+      "label": "Muat naik fail kertas dinding tersuai",
+      "note": "Imej dan GIF disokong seperti biasa. MP4 disokong sehingga 24 MB; resolusi yang terlalu tinggi masih boleh gagal disimpan."
+    },
+    "reset": {
+      "title": "Tetapkan semula",
+      "desc": "Pulihkan penampilan atau latar belakang semasa kepada nilai asal."
+    },
+    "search": {
+      "title": "Carian",
+      "desc": "Pilih penyedia carian dan tingkah laku cadangan."
+    },
+    "search_provider": {
+      "title": "Penyedia",
+      "desc": "Pilih enjin lalai untuk kotak carian utama."
+    },
+    "reset_appearance": {
+      "title": "Tetapkan semula penampilan",
+      "desc": "Pulihkan warna dan nilai penampilan tanpa menukar penanda buku atau kertas dinding."
+    },
+    "page_elements": {
+      "title": "Elemen halaman",
+      "desc": "Tunjuk, sembunyi dan gayakan modul utama halaman."
+    },
+    "clock": {
+      "title": "Jam",
+      "desc": "Kawal modul jam dan gaya paparannya."
+    },
+    "visibility": {
+      "title": "Keterlihatan",
+      "desc": "Pilih modul utama yang muncul pada halaman."
+    },
+    "reset_background": {
+      "title": "Tetapkan semula latar belakang",
+      "desc": "Kembali kepada latar tema tanpa menukar tetapan penampilan lain."
+    },
+    "debug": {
+      "title": "Nyahpepijat",
+      "desc": "Alat untuk menguji dan menetapkan semula data pelayar setempat."
+    }
+  },
+  "layout": {
+    "grid": "Grid",
+    "list": "Senarai"
+  },
+  "theme": {
+    "dark": "Gelap",
+    "light": "Cerah"
+  },
+  "ui": {
+    "default": "Lalai",
+    "cartoon": "Kartun",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "Terminal",
+    "paper": "Kertas"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "Cina Ringkas",
+    "ko": "Korea",
+    "ja": "Jepun",
+    "th": "Thai",
+    "ms": "Bahasa Melayu (Malaysia)"
+  },
+  "common": {
+    "show": "Tunjuk",
+    "hide": "Sembunyi",
+    "on": "Hidup",
+    "off": "Mati",
+    "selected_engine": "Enjin dipilih",
+    "all_engines": "Senarai ditanda",
+    "engine_limit_2": "2 engines",
+    "engine_limit_3": "3 engines",
+    "engine_limit_5": "5 engines"
+  },
+  "clock_styles": {
+    "classic": "Klasik",
+    "compact": "Padat",
+    "stacked": "Bertindan",
+    "pill": "Pil",
+    "panel": "Panel",
+    "calendar": "Kalendar",
+    "neon": "Neon",
+    "analog": "Dail Analog",
+    "analog_minimal": "Analog Minimal",
+    "analog_bold": "Analog Tebal"
+  },
+  "empty": {
+    "no_matching_title": "Belum ada laman yang sepadan",
+    "no_matching_desc": "Cuba penapis lain atau mulakan dengan menyimpan pintasan pertama anda."
+  },
+  "preset": {
+    "selected": "Dipilih",
+    "midnight": "Tengah malam",
+    "nebula": "Nebula",
+    "deepsea": "Laut dalam",
+    "ember": "Bara",
+    "moss": "Lumut",
+    "dusk": "Senja"
+  },
+  "background": {
+    "current_custom_image": "Latar belakang semasa: Imej tersuai",
+    "custom_image_selected": "Imej tersuai dipilih",
+    "no_custom_image": "Tiada imej tersuai dipilih",
+    "current_preset": "Latar belakang semasa: {name}",
+    "current_theme": "Latar belakang semasa: Tema",
+    "image_save_failed": "Imej tidak dapat disimpan"
+  },
+  "alerts": {
+    "wallpaper_too_large": "Kertas dinding itu terlalu besar untuk disimpan terus. Cuba imej yang lebih kecil atau fail JPG/WebP.",
+    "image_search_google_only": "Carian imej kini hanya menggunakan Google Lens.",
+    "image_search_invalid_file": "Sila pilih fail imej untuk carian imej.",
+    "image_search_upload_unavailable": "Pelayar ini tidak dapat menyediakan imej yang diseret untuk dimuat naik. Cuba butang Pilih imej.",
+    "voice_search_unsupported": "Pelayar ini tidak menyokong carian suara.",
+    "voice_search_denied": "Kebenaran mikrofon telah disekat. Benarkan akses mikrofon dan cuba lagi.",
+    "voice_search_no_speech": "Tiada suara dikesan. Cuba lagi.",
+    "voice_search_failed": "Carian suara tidak dapat dimulakan sekarang. Cuba lagi sebentar lagi.",
+    "import_failed": "Import gagal. Sila pilih fail eksport penanda buku yang sah.",
+    "save_failed": "Perubahan tidak dapat disimpan dalam storan pelayar.",
+    "all_engine_suggestions_warning": "Cadangan semua enjin akan memanggil beberapa penyedia carian serentak dan mungkin menggunakan lebih banyak rangkaian daripada biasa."
+  }
+}

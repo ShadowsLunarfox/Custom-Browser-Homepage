@@ -1,0 +1,495 @@
+{
+  "app": {
+    "title": "我的主页"
+  },
+  "clock": {
+    "current_time": "当前时间",
+    "time": "时间",
+    "loading_date": "正在加载日期..."
+  },
+  "search": {
+    "label": "搜索",
+    "placeholder": "输入内容后按回车",
+    "aria_query": "搜索内容",
+    "aria_engine": "搜索引擎",
+    "suggestions_aria": "搜索建议",
+    "engine_selected": "已选择 {engine}",
+    "recent_search": "最近搜索",
+    "suggested": "推荐",
+    "live_suggestion": "实时建议",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "必应中国",
+    "baidu": "百度",
+    "sogou": "搜狗",
+    "so360": "360 搜索",
+    "shenma": "神马",
+    "toutiao": "头条",
+    "quark": "夸克"
+  },
+  "search_engine_categories": {
+    "mainstream": "主流搜索引擎",
+    "mainstream_note": "使用广泛的综合搜索引擎",
+    "niche": "小众或地区型",
+    "niche_note": "注重隐私、地区服务或专门用途",
+    "caution": "谨慎使用",
+    "caution_note": "AI 或移动端服务可能跳转、要求登录或桌面支持不稳定"
+  },
+  "actions": {
+    "drag_clock": "拖动时钟",
+    "drag_search_panel": "拖动搜索面板",
+    "drag_collection_panel": "拖动收藏面板",
+    "add_site": "添加站点",
+    "add_first_site": "添加第一个站点",
+    "settings": "设定",
+    "close": "关闭",
+    "cancel": "取消",
+    "save": "保存",
+    "export": "导出",
+    "import": "导入",
+    "choose_image": "选择图片",
+    "image_search": "Google 图片搜索",
+    "voice_search": "语音搜索",
+    "voice_search_stop": "停止语音搜索",
+    "voice_search_unavailable": "语音搜索不可用",
+    "search_all_engines": "使用勾选列表里的搜索引擎联想",
+    "search_all_short": "多重",
+    "search_all_on": "多重",
+    "search_single": "当前",
+    "search_single_engine": "仅使用当前搜索引擎的联想建议",
+    "reset_colors": "重置颜色",
+    "reset_default_background": "恢复默认背景",
+    "toggle_pin": "切换置顶",
+    "edit": "编辑",
+    "delete": "删除",
+    "got_it": "我知道",
+    "clear_local_storage": "清除 localStorage",
+    "open_debug_tools": "打开调试工具",
+    "refresh_debug_status": "刷新状态",
+    "rerun_browser_check": "重新检测浏览器",
+    "show_compatibility_notice": "显示兼容提示",
+    "open_unsupported_preview": "预览不兼容页面",
+    "refresh_storage": "刷新存储",
+    "clear_compatibility_acks": "清除兼容确认记录",
+    "preview_language": "预览语言",
+    "force_first_run_flow": "强制首次流程",
+    "show_simulated_notice": "显示模拟提示",
+    "preview_simulated_unsupported": "预览模拟不兼容页",
+    "copy_diagnostics": "复制诊断信息",
+    "clear_wallpaper_cache": "清除壁纸缓存",
+    "reset_settings_keep_bookmarks": "仅重置设置",
+    "reset_bookmarks_keep_settings": "仅重置书签",
+    "export_debug_backup": "导出调试备份",
+    "import_debug_backup": "导入调试备份"
+  },
+  "dialogs": {
+    "add_site": "添加站点",
+    "edit_site": "编辑站点",
+    "image_search_title": "图片搜索",
+    "image_search_desc": "把图片拖到这里，就会用 Google Lens 搜索。",
+    "browser_compat_title": "浏览器兼容提示",
+    "browser_compat_desc": "当前浏览器不支持或限制部分功能。",
+    "browser_compat_severe_title": "{browser} 无法正常运行",
+    "browser_compat_severe_desc": "该浏览器插件无法正常运行。请更新到最新浏览器或内核版本，否则无法正常使用。",
+    "browser_compat_named_title": "{browser} 兼容提示",
+    "browser_compat_named_desc": "已为 {browser} 检测到以下兼容提示：",
+    "browser_compat_unavailable_heading": "无法使用的功能",
+    "browser_compat_notes_heading": "兼容提示",
+    "browser_compat_chinese_browser": "国产双核浏览器",
+    "browser_compat_unknown_browser": "当前浏览器",
+    "browser_compat_chinese_fast_mode": "如果这是双核浏览器，请使用“极速模式/Chromium 内核”，不要使用“兼容模式/IE 内核”。",
+    "browser_compat_ie_mode": "当前页面可能处于兼容模式/IE 内核，请切换到极速模式/Chromium 内核。",
+    "browser_compat_old_chromium": "当前 Chromium 内核版本较旧（{version}），搜索、壁纸或设置功能可能异常，建议更新浏览器。",
+    "browser_compat_voice": "语音搜索在当前浏览器中不可用或被限制。",
+    "browser_compat_random_uuid": "当前浏览器缺少 crypto.randomUUID，新建快捷方式可能无法可靠生成 ID。",
+    "browser_compat_structured_clone": "当前浏览器缺少 structuredClone，保存的设置可能无法正常读取。",
+    "browser_compat_dialog": "当前浏览器缺少原生弹窗支持，设置和上传弹窗可能无法正常打开。",
+    "browser_compat_data_transfer": "拖拽图片搜索可能不可用，请改用“选择图片”按钮。",
+    "browser_compat_indexeddb": "IndexedDB 不可用，较大的自定义壁纸可能无法保存。",
+    "browser_compat_color_mix": "CSS color-mix 不可用，部分主题颜色可能与预期不同。",
+    "browser_compat_backdrop_filter": "背景模糊不可用，毛玻璃视觉效果可能与预期不同。",
+    "browser_compat_no_issue_found": "暂未检测到阻塞问题，但同类浏览器的不同版本兼容性可能不一致。",
+    "debug_title": "调试工具",
+    "debug_desc": "运行浏览器检测，并测试兼容提示页面。",
+    "debug_status_heading": "当前检测",
+    "debug_issues_heading": "检测到的问题",
+    "debug_actions_heading": "操作",
+    "debug_status_browser": "浏览器",
+    "debug_status_chromium": "Chromium 内核",
+    "debug_status_chinese": "国产浏览器",
+    "debug_status_severity": "兼容状态",
+    "debug_status_preflight_cache": "预检缓存",
+    "debug_status_issue_count": "问题数量",
+    "debug_features_heading": "功能检测",
+    "debug_storage_heading": "存储占用",
+    "debug_local_storage_heading": "本地存储查看器",
+    "debug_preflight_heading": "预检缓存详情",
+    "debug_simulation_heading": "兼容性模拟",
+    "debug_value_yes": "是",
+    "debug_value_no": "否",
+    "debug_value_not_detected": "未检测到",
+    "debug_value_severe": "严重",
+    "debug_value_notice": "提示",
+    "debug_value_ok": "正常",
+    "debug_value_failed": "异常",
+    "debug_value_cached": "已有缓存",
+    "debug_value_uncached": "未缓存",
+    "debug_value_not_available": "不可用",
+    "debug_storage_loading": "正在读取",
+    "debug_storage_local_storage": "localStorage",
+    "debug_storage_extension_storage": "扩展存储",
+    "debug_storage_wallpaper": "壁纸缓存",
+    "debug_storage_quota": "浏览器配额",
+    "debug_storage_error": "存储占用",
+    "debug_local_storage_empty": "没有找到 localStorage 项。",
+    "debug_feature_dialog": "用于设置、添加站点和上传弹窗。",
+    "debug_feature_indexeddb": "用于保存较大的自定义壁纸和 MP4 壁纸。",
+    "debug_feature_random_uuid": "用于可靠生成快捷方式 ID。",
+    "debug_feature_structured_clone": "用于安全复制和读取状态。",
+    "debug_feature_voice": "用于语音搜索。",
+    "debug_feature_data_transfer": "用于拖拽图片搜索。",
+    "debug_feature_color_mix": "用于准确渲染主题颜色。",
+    "debug_feature_backdrop_filter": "用于毛玻璃模糊效果。",
+    "debug_feature_local_storage": "用于书签、设置、语言缓存和提示记录。",
+    "debug_feature_extension_storage": "用于扩展侧壁纸和待同步快捷方式。",
+    "debug_feature_clipboard": "用于复制诊断信息。",
+    "debug_storage_type_state": "应用状态",
+    "debug_storage_type_preflight": "浏览器预检缓存",
+    "debug_storage_type_ack": "兼容确认记录",
+    "debug_storage_type_language": "语言缓存",
+    "debug_storage_type_pending_link": "待同步快捷方式",
+    "debug_storage_type_other": "其他",
+    "firefox_compat_title": "Firefox 兼容提示",
+    "firefox_compat_desc": "检测到你正在使用 Firefox。该浏览器不支持或限制以下功能：",
+    "firefox_compat_voice": "语音搜索在 Firefox 中不可用。",
+    "firefox_compat_visuals": "部分动态壁纸和视觉效果可能与 Chromium 浏览器不同。"
+  },
+  "image_search": {
+    "drop_aria": "把图片拖到这里，或选择图片",
+    "drop_title": "把图片拖到这里",
+    "drop_hint": "把图片拖进这个窗口，或者选择本地图片文件。",
+    "no_file": "未选择图片",
+    "uploading": "正在用 Google Lens 搜索 {name}..."
+  },
+  "form": {
+    "name": "名称",
+    "url": "网址",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "developer_credit": "该插件开发者为 Lunarfox 月狐",
+    "title": "设定",
+    "library": {
+      "title": "资源库",
+      "desc": "把额外操作放在这里，不占主页空间。"
+    },
+    "backup": {
+      "title": "备份",
+      "desc": "保存或恢复你的书签。"
+    },
+    "view_mode": {
+      "title": "视图模式",
+      "desc": "在网格和列表布局之间切换。",
+      "aria": "快捷方式布局模式"
+    },
+    "appearance": {
+      "title": "外观",
+      "desc": "调整页面的整体视觉效果。"
+    },
+    "theme": {
+      "title": "主题",
+      "desc": "选择基础模式和界面风格。"
+    },
+    "language": {
+      "label": "语言"
+    },
+    "theme_mode": {
+      "label": "主题模式"
+    },
+    "ui_style": {
+      "label": "界面风格"
+    },
+    "search_engine": {
+      "label": "默认搜索引擎"
+    },
+    "search_suggestions": {
+      "label": "搜索联想"
+    },
+    "search_suggestions_all_engines": {
+      "label": "联想模式",
+      "note": "选择联想建议只来自当前搜索引擎，还是来自下方勾选的搜索引擎列表。"
+    },
+    "search_suggestion_engine_limit": {
+      "label": "联想引擎数量",
+      "note": "开启多重联想时，限制同时参与联想的搜索引擎数量。"
+    },
+    "search_suggestion_engine_list": {
+      "label": "联想引擎列表",
+      "note": "开启多重联想时，勾选哪些搜索引擎可以同时参与联想。"
+    },
+    "search_ui": {
+      "label": "搜索框"
+    },
+    "shortcuts_ui": {
+      "label": "快捷标签"
+    },
+    "clock_display": {
+      "label": "时钟显示"
+    },
+    "clock_style": {
+      "label": "时钟样式"
+    },
+    "clock_size": {
+      "label": "时钟大小"
+    },
+    "colors": {
+      "title": "颜色",
+      "desc": "调整按钮和文字颜色。"
+    },
+    "button_color": {
+      "label": "按钮颜色"
+    },
+    "font_color": {
+      "label": "字体颜色"
+    },
+    "surface": {
+      "title": "??",
+      "desc": "????????????????????"
+    },
+    "font_size": {
+      "label": "字体大小"
+    },
+    "corner_roundness": {
+      "label": "圆角大小"
+    },
+    "panel_blur": {
+      "label": "面板模糊"
+    },
+    "layout": {
+      "title": "??????",
+      "desc": "???????????????????"
+    },
+    "grid": {
+      "title": "网格",
+      "desc": "调整密度和可见行数。"
+    },
+    "cards_per_row": {
+      "label": "每行卡片数"
+    },
+    "visible_rows": {
+      "label": "可见行数"
+    },
+    "cards": {
+      "title": "卡片",
+      "desc": "微调间距和卡片尺寸。"
+    },
+    "card_gap": {
+      "label": "卡片间距"
+    },
+    "card_height": {
+      "label": "卡片高度"
+    },
+    "background": {
+      "title": "背景"
+    },
+    "panels": {
+      "title": "面板",
+      "desc": "控制中间界面面板的透明强度。"
+    },
+    "panel_transparency": {
+      "label": "界面面板透明度"
+    },
+    "wallpaper": {
+      "title": "壁纸",
+      "desc": "支持格式：JPG、PNG、WebP、GIF、MP4。"
+    },
+    "upload_background": {
+      "label": "上传自定义壁纸文件",
+      "note": "图片与 GIF 可正常上传。MP4 支持最大 24 MB；分辨率过高时仍可能无法保存。"
+    },
+    "reset": {
+      "title": "重置",
+      "desc": "恢复当前外观或壁纸默认值。"
+    },
+    "debug": {
+      "title": "??",
+      "desc": "??????????????????"
+    },
+    "debug_tools": {
+      "title": "调试工具",
+      "desc": "打开浏览器检测、提示弹窗测试和本地存储工具。"
+    },
+    "debug_simulation": {
+      "label": "模拟场景"
+    },
+    "debug_language": {
+      "label": "语言预览"
+    },
+    "local_storage": {
+      "title": "本地存储",
+      "desc": "清除当前页面保存在 localStorage 里的数据。"
+    },
+    "search": {
+      "title": "??",
+      "desc": "??????????????"
+    },
+    "search_provider": {
+      "title": "????",
+      "desc": "????????????????"
+    },
+    "reset_appearance": {
+      "title": "????",
+      "desc": "???????????????????"
+    },
+    "page_elements": {
+      "title": "????",
+      "desc": "???????????????"
+    },
+    "clock": {
+      "title": "??",
+      "desc": "????????????"
+    },
+    "visibility": {
+      "title": "????",
+      "desc": "???????????????"
+    },
+    "reset_background": {
+      "title": "????",
+      "desc": "??????????????????"
+    }
+  },
+  "debug_simulation": {
+    "current": "当前浏览器",
+    "firefox": "Firefox 功能受限",
+    "chinese": "国产双核浏览器",
+    "old_chromium": "旧 Chromium 79",
+    "ie_mode": "兼容模式/IE 内核",
+    "missing_core": "缺少核心 API"
+  },
+  "debug_language": {
+    "current": "当前语言"
+  },
+  "layout": {
+    "grid": "网格",
+    "list": "列表"
+  },
+  "theme": {
+    "dark": "深色",
+    "light": "浅色"
+  },
+  "ui": {
+    "default": "默认",
+    "cartoon": "卡通",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "终端",
+    "paper": "纸张"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "简体中文",
+    "ko": "韩语",
+    "ja": "日语",
+    "th": "泰语",
+    "ms": "马来西亚马来文"
+  },
+  "common": {
+    "show": "显示",
+    "hide": "隐藏",
+    "on": "开启",
+    "off": "关闭",
+    "selected_engine": "当前引擎",
+    "all_engines": "勾选列表",
+    "engine_limit_2": "2 个引擎",
+    "engine_limit_3": "3 个引擎",
+    "engine_limit_5": "5 个引擎"
+  },
+  "clock_styles": {
+    "classic": "经典",
+    "compact": "紧凑",
+    "stacked": "堆叠",
+    "pill": "胶囊",
+    "panel": "面板",
+    "calendar": "日历",
+    "neon": "霓虹",
+    "analog": "模拟表盘",
+    "analog_minimal": "极简模拟",
+    "analog_bold": "粗体模拟"
+  },
+  "empty": {
+    "no_matching_title": "还没有匹配的站点",
+    "no_matching_desc": "试试其他筛选词，或者先保存你的第一个快捷方式。"
+  },
+  "preset": {
+    "selected": "已选择",
+    "midnight": "午夜",
+    "nebula": "星云",
+    "deepsea": "深海",
+    "ember": "余烬",
+    "moss": "苔绿",
+    "dusk": "黄昏"
+  },
+  "background": {
+    "current_custom_image": "当前背景：自定义图片",
+    "custom_image_selected": "已选择自定义图片",
+    "no_custom_image": "未选择自定义图片",
+    "current_preset": "当前背景：{name}",
+    "current_theme": "当前背景：主题背景",
+    "image_save_failed": "图片无法保存"
+  },
+  "alerts": {
+    "wallpaper_too_large": "这张壁纸太大，无法直接保存。请尝试更小的图片，或使用 JPG/WebP 文件。",
+    "video_wallpaper_too_large": "这段 MP4 壁纸太大，无法直接保存。请尝试更短或更小的视频文件。",
+    "image_search_google_only": "图片搜索目前只会使用 Google Lens。",
+    "image_search_invalid_file": "图片搜索请选择图片文件。",
+    "image_search_upload_unavailable": "当前浏览器无法准备这个拖入的图片上传，请改用“选择图片”按钮。",
+    "voice_search_unsupported": "当前浏览器不支持语音搜索。",
+    "voice_search_denied": "麦克风权限被阻止了，请允许麦克风后再试一次。",
+    "voice_search_no_speech": "没有检测到语音，请再试一次。",
+    "voice_search_failed": "语音搜索暂时无法启动，请稍后再试。",
+    "import_failed": "导入失败，请选择有效的书签导出文件。",
+    "save_failed": "更改无法保存到浏览器存储。",
+    "all_engine_suggestions_warning": "开启后，插件会同时向多个搜索引擎请求预测，网络占用可能比平常更高。",
+    "clear_local_storage_confirm": "这会清除当前起始页的 localStorage 并重新加载页面。保存在 localStorage 里的书签、布局、设置、语言缓存和兼容性确认记录都会重置。要继续吗？",
+    "clear_local_storage_failed": "无法清除本地存储。",
+    "rerun_browser_check_confirm": "这只会清除浏览器兼容性检测缓存和确认记录，然后重新加载页面再次检测。你的书签和设置会保留。要继续吗？",
+    "rerun_browser_check_failed": "无法重新启动浏览器兼容性检测。",
+    "unsupported_preview_blocked": "浏览器阻止了不兼容页面预览窗口。",
+    "delete_local_storage_key_confirm": "要删除 localStorage 项“{key}”吗？",
+    "local_storage_key_deleted": "localStorage 项已删除。",
+    "local_storage_key_delete_failed": "无法删除该 localStorage 项。",
+    "diagnostics_copied": "诊断信息已复制到剪贴板。",
+    "diagnostics_copy_failed": "无法复制诊断信息。",
+    "compatibility_acks_cleared": "兼容确认记录已清除。",
+    "compatibility_acks_clear_failed": "无法清除兼容确认记录。",
+    "clear_wallpaper_cache_confirm": "这会清除自定义壁纸缓存，并恢复默认壁纸。要继续吗？",
+    "wallpaper_cache_cleared": "壁纸缓存已清除。",
+    "wallpaper_cache_clear_failed": "无法清除壁纸缓存。",
+    "reset_settings_keep_bookmarks_confirm": "要重置设置、布局、搜索、语言和壁纸，但保留书签吗？",
+    "settings_reset_keep_bookmarks_done": "设置已重置，书签已保留。",
+    "reset_bookmarks_keep_settings_confirm": "要把书签重置为默认书签，但保留当前设置吗？",
+    "bookmarks_reset_keep_settings_done": "书签已重置，设置已保留。",
+    "debug_action_failed": "调试操作失败。",
+    "debug_backup_exported": "调试备份已导出。",
+    "debug_backup_export_failed": "无法导出调试备份。",
+    "debug_backup_import_confirm": "要导入这个调试备份吗？它可能会替换 localStorage 和应用状态。",
+    "debug_backup_import_failed": "无法导入调试备份。",
+    "debug_backup_imported": "调试备份已导入。",
+    "force_first_run_flow_confirm": "这会清除浏览器预检缓存和兼容确认记录，然后重新加载页面，再次显示首次兼容检测流程。要继续吗？",
+    "language_preview_applied": "已在本次会话中应用语言预览。",
+    "language_preview_failed": "语言预览失败。"
+  }
+}

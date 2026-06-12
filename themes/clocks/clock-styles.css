@@ -1,0 +1,262 @@
+/* Clock panel base styles and all clock-style variants. */
+.floating-clock {
+  position: fixed;
+  top: var(--clock-top, 16px);
+  left: var(--clock-left, 16px);
+  z-index: 3;
+  display: var(--clock-display);
+  gap: 4px;
+  min-width: 238px;
+  padding: 16px 18px;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--ui-radius-lg);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(max(0px, calc(var(--panel-blur) - 4px))) saturate(120%);
+  transform: scale(var(--panel-scale, 1));
+  transform-origin: top left;
+}
+
+.clock-content {
+  display: grid;
+  gap: 10px;
+}
+
+.clock-digital {
+  display: grid;
+  gap: 4px;
+}
+
+.clock-badge {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+  text-transform: uppercase;
+}
+
+.clock {
+  font-family: "Segoe UI", "SF Pro Display", "Noto Sans SC", sans-serif;
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.date-text {
+  font-size: 0.96rem;
+  color: var(--text-soft);
+}
+
+.analog-clock {
+  display: none;
+  place-items: center;
+}
+
+.analog-clock.is-visible {
+  display: grid;
+}
+
+.analog-face {
+  position: relative;
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
+  border: 2px solid var(--panel-border);
+  background: color-mix(in srgb, var(--panel-strong) 82%, transparent);
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.04);
+}
+
+.analog-mark {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  border-radius: 999px;
+  background: var(--text-soft);
+  transform-origin: 50% 63px;
+}
+
+.mark-3 {
+  transform: rotate(90deg);
+}
+
+.mark-6 {
+  transform: rotate(180deg);
+}
+
+.mark-9 {
+  transform: rotate(270deg);
+}
+
+.analog-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 999px;
+  background: var(--text-main);
+}
+
+.hour-hand {
+  width: 6px;
+  height: 34px;
+  margin-left: -3px;
+}
+
+.minute-hand {
+  width: 4px;
+  height: 48px;
+  margin-left: -2px;
+}
+
+.second-hand {
+  width: 2px;
+  height: 56px;
+  margin-left: -1px;
+  background: var(--accent);
+}
+
+.analog-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--panel-strong);
+}
+
+.floating-clock[data-clock-style="compact"] {
+  min-width: 196px;
+  padding: 12px 14px;
+}
+
+.floating-clock[data-clock-style="compact"] .clock {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.floating-clock[data-clock-style="stacked"] .clock-content {
+  gap: 12px;
+}
+
+.floating-clock[data-clock-style="stacked"] .clock {
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+}
+
+.floating-clock[data-clock-style="pill"] {
+  border-radius: 999px;
+  min-width: 320px;
+  padding-inline: 22px;
+}
+
+.floating-clock[data-clock-style="pill"] .clock-content,
+.floating-clock[data-clock-style="panel"] .clock-content,
+.floating-clock[data-clock-style="calendar"] .clock-content {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.floating-clock[data-clock-style="pill"] .clock-digital,
+.floating-clock[data-clock-style="panel"] .clock-digital,
+.floating-clock[data-clock-style="calendar"] .clock-digital {
+  gap: 2px;
+}
+
+.floating-clock[data-clock-style="panel"] {
+  min-width: 300px;
+  border-left: 4px solid var(--accent);
+}
+
+.floating-clock[data-clock-style="calendar"] {
+  min-width: 280px;
+}
+
+.floating-clock[data-clock-style="calendar"] .clock-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.floating-clock[data-clock-style="neon"] {
+  border-color: color-mix(in srgb, var(--accent) 46%, var(--panel-border));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 30px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.floating-clock[data-clock-style="neon"] .clock {
+  color: color-mix(in srgb, var(--accent) 72%, white);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--accent) 36%, transparent);
+}
+
+.floating-clock[data-clock-style="analog"],
+.floating-clock[data-clock-style="analog-minimal"],
+.floating-clock[data-clock-style="analog-bold"] {
+  min-width: 188px;
+  justify-items: center;
+}
+
+.floating-clock[data-clock-style="analog"] .clock-digital,
+.floating-clock[data-clock-style="analog-minimal"] .clock-digital,
+.floating-clock[data-clock-style="analog-bold"] .clock-digital {
+  justify-items: center;
+}
+
+.floating-clock[data-clock-style="analog"] .clock,
+.floating-clock[data-clock-style="analog-minimal"] .clock,
+.floating-clock[data-clock-style="analog-bold"] .clock {
+  font-size: 1.15rem;
+}
+
+.floating-clock[data-clock-style="analog-minimal"] .analog-face {
+  background: transparent;
+  box-shadow: none;
+}
+
+.floating-clock[data-clock-style="analog-minimal"] .analog-mark {
+  width: 2px;
+  height: 10px;
+}
+
+.floating-clock[data-clock-style="analog-bold"] .analog-face {
+  border-width: 3px;
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.floating-clock[data-clock-style="analog-bold"] .hour-hand {
+  width: 8px;
+  height: 38px;
+  margin-left: -4px;
+}
+
+.floating-clock[data-clock-style="analog-bold"] .minute-hand {
+  width: 5px;
+  height: 54px;
+  margin-left: -2.5px;
+}
+
+.floating-clock .drag-handle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+@media (max-width: 640px) {
+  .floating-clock {
+    top: var(--clock-top, 10px);
+    left: var(--clock-left, 10px);
+    min-width: 0;
+    width: calc(100% - 20px);
+    padding: 12px 14px;
+  }
+}

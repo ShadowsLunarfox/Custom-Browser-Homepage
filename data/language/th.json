@@ -1,0 +1,337 @@
+{
+  "app": {
+    "title": "หน้าแรกของฉัน"
+  },
+  "clock": {
+    "current_time": "เวลาปัจจุบัน",
+    "time": "เวลา",
+    "loading_date": "กำลังโหลดวันที่..."
+  },
+  "search": {
+    "label": "ค้นหา",
+    "placeholder": "พิมพ์แล้วกด Enter",
+    "aria_query": "คำค้นหา",
+    "aria_engine": "เครื่องมือค้นหา",
+    "suggestions_aria": "คำแนะนำการค้นหา",
+    "engine_selected": "เลือก {engine} แล้ว",
+    "recent_search": "การค้นหาล่าสุด",
+    "suggested": "แนะนำ",
+    "live_suggestion": "คำแนะนำสด",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "Bing China",
+    "baidu": "Baidu",
+    "sogou": "Sogou",
+    "so360": "360 Search",
+    "shenma": "Shenma",
+    "toutiao": "Toutiao",
+    "quark": "Quark"
+  },
+  "actions": {
+    "drag_clock": "ลากนาฬิกา",
+    "drag_search_panel": "ลากแผงค้นหา",
+    "drag_collection_panel": "ลากแผงคอลเลกชัน",
+    "add_site": "เพิ่มเว็บไซต์",
+    "add_first_site": "เพิ่มเว็บไซต์แรกของคุณ",
+    "settings": "การตั้งค่า",
+    "close": "ปิด",
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
+    "export": "ส่งออก",
+    "import": "นำเข้า",
+    "choose_image": "เลือกรูปภาพ",
+    "image_search": "ค้นหารูปภาพด้วย Google",
+    "voice_search": "ค้นหาด้วยเสียง",
+    "voice_search_stop": "หยุดค้นหาด้วยเสียง",
+    "voice_search_unavailable": "ไม่สามารถใช้การค้นหาด้วยเสียงได้",
+    "search_all_engines": "ใช้คำแนะนำจากรายการเครื่องมือที่เลือกไว้",
+    "search_all_short": "หลาย",
+    "search_all_on": "หลาย",
+    "search_single": "ปัจจุบัน",
+    "search_single_engine": "ใช้คำแนะนำจากเครื่องมือปัจจุบันเท่านั้น",
+    "reset_colors": "รีเซ็ตสี",
+    "reset_default_background": "รีเซ็ตพื้นหลังเริ่มต้น",
+    "toggle_pin": "สลับการปักหมุด",
+    "edit": "แก้ไข",
+    "delete": "ลบ"
+  },
+  "dialogs": {
+    "add_site": "เพิ่มเว็บไซต์",
+    "edit_site": "แก้ไขเว็บไซต์",
+    "image_search_title": "ค้นหารูปภาพ",
+    "image_search_desc": "วางรูปภาพที่นี่เพื่อค้นหาด้วย Google Lens"
+  },
+  "image_search": {
+    "drop_aria": "วางรูปภาพที่นี่หรือเลือกรูปภาพ",
+    "drop_title": "วางรูปภาพที่นี่",
+    "drop_hint": "ลากรูปภาพเข้ามาในหน้าต่างนี้ หรือเลือกไฟล์รูปภาพจากเครื่อง",
+    "no_file": "ยังไม่ได้เลือกรูปภาพ",
+    "uploading": "กำลังค้นหา {name} ด้วย Google Lens..."
+  },
+  "form": {
+    "name": "ชื่อ",
+    "url": "URL",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "title": "การตั้งค่า",
+    "library": {
+      "title": "คลัง",
+      "desc": "เก็บการทำงานเพิ่มเติมไว้ที่นี่แทนที่จะวางบนหน้าแรก"
+    },
+    "backup": {
+      "title": "สำรองข้อมูล",
+      "desc": "บันทึกหรือกู้คืนบุ๊กมาร์กของคุณ"
+    },
+    "view_mode": {
+      "title": "โหมดมุมมอง",
+      "desc": "สลับระหว่างเลย์เอาต์แบบกริดและรายการ",
+      "aria": "โหมดเลย์เอาต์ทางลัด"
+    },
+    "appearance": {
+      "title": "รูปลักษณ์",
+      "desc": "ปรับภาพรวมของหน้า"
+    },
+    "theme": {
+      "title": "ธีม",
+      "desc": "เลือกโหมดพื้นฐานและสไตล์ภาพ"
+    },
+    "language": {
+      "label": "ภาษา"
+    },
+    "theme_mode": {
+      "label": "โหมดธีม"
+    },
+    "ui_style": {
+      "label": "สไตล์ UI"
+    },
+    "search_engine": {
+      "label": "เครื่องมือค้นหาเริ่มต้น"
+    },
+    "search_suggestions": {
+      "label": "คำแนะนำการค้นหา"
+    },
+    "search_suggestions_all_engines": {
+      "label": "โหมดคำแนะนำ",
+      "note": "เลือกว่าจะใช้คำแนะนำจากเครื่องมือปัจจุบัน หรือจากรายการเครื่องมือที่เลือกไว้ด้านล่าง"
+    },
+    "search_suggestion_engine_limit": {
+      "label": "จำนวนเครื่องมือแนะนำ",
+      "note": "จำกัดจำนวนเครื่องมือค้นหาที่ทำงานพร้อมกันเมื่อเปิดใช้หลายคำแนะนำ"
+    },
+    "search_suggestion_engine_list": {
+      "label": "รายการเครื่องมือแนะนำ",
+      "note": "เลือกเครื่องมือค้นหาที่สามารถทำงานพร้อมกันเมื่อเปิดใช้หลายคำแนะนำ"
+    },
+    "search_ui": {
+      "label": "ช่องค้นหา"
+    },
+    "shortcuts_ui": {
+      "label": "ทางลัด"
+    },
+    "clock_display": {
+      "label": "การแสดงนาฬิกา"
+    },
+    "clock_style": {
+      "label": "สไตล์นาฬิกา"
+    },
+    "clock_size": {
+      "label": "ขนาดนาฬิกา"
+    },
+    "colors": {
+      "title": "สี",
+      "desc": "ปรับสีปุ่มและข้อความ"
+    },
+    "button_color": {
+      "label": "สีปุ่ม"
+    },
+    "font_color": {
+      "label": "สีตัวอักษร"
+    },
+    "surface": {
+      "title": "???????",
+      "desc": "????????????????? ??????? ??????????? ????????????????"
+    },
+    "font_size": {
+      "label": "ขนาดตัวอักษร"
+    },
+    "corner_roundness": {
+      "label": "ความโค้งของมุม"
+    },
+    "panel_blur": {
+      "label": "ความเบลอของแผง"
+    },
+    "layout": {
+      "title": "???????????????",
+      "desc": "??????????????????? ??????????? ????????????"
+    },
+    "grid": {
+      "title": "กริด",
+      "desc": "ปรับความหนาแน่นและจำนวนแถวที่มองเห็น"
+    },
+    "cards_per_row": {
+      "label": "การ์ดต่อแถว"
+    },
+    "visible_rows": {
+      "label": "แถวที่มองเห็น"
+    },
+    "cards": {
+      "title": "การ์ด",
+      "desc": "ปรับระยะห่างและขนาดไทล์อย่างละเอียด"
+    },
+    "card_gap": {
+      "label": "ระยะห่างการ์ด"
+    },
+    "card_height": {
+      "label": "ความสูงการ์ด"
+    },
+    "background": {
+      "title": "พื้นหลัง"
+    },
+    "panels": {
+      "title": "แผง",
+      "desc": "ควบคุมความชัดของแผง UI ตรงกลาง"
+    },
+    "panel_transparency": {
+      "label": "ความโปร่งใสของแผง UI"
+    },
+    "wallpaper": {
+      "title": "วอลเปเปอร์",
+      "desc": "รูปแบบที่รองรับ: JPG, PNG, WebP, GIF, MP4"
+    },
+    "upload_background": {
+      "label": "อัปโหลดไฟล์วอลเปเปอร์กำหนดเอง",
+      "note": "รองรับรูปภาพและ GIF ตามปกติ MP4 รองรับสูงสุด 24 MB; หากความละเอียดสูงเกินไปอาจยังบันทึกไม่สำเร็จ"
+    },
+    "reset": {
+      "title": "รีเซ็ต",
+      "desc": "คืนค่ารูปลักษณ์หรือวอลเปเปอร์ปัจจุบันเป็นค่าเริ่มต้น"
+    },
+    "search": {
+      "title": "?????",
+      "desc": "??????????????????????????????????????"
+    },
+    "search_provider": {
+      "title": "????????????",
+      "desc": "????????????????????????????????????????????"
+    },
+    "reset_appearance": {
+      "title": "???????????????",
+      "desc": "??????????????????????????????????????????????????????"
+    },
+    "page_elements": {
+      "title": "??????????????",
+      "desc": "???? ???? ???????????????????????"
+    },
+    "clock": {
+      "title": "??????",
+      "desc": "???????????????????????????????????"
+    },
+    "visibility": {
+      "title": "?????????",
+      "desc": "??????????????????????????????"
+    },
+    "reset_background": {
+      "title": "??????????????",
+      "desc": "???????????????????????????????????????????????????????????"
+    },
+    "debug": {
+      "title": "?????",
+      "desc": "????????????????????????????????????????????????????????"
+    }
+  },
+  "layout": {
+    "grid": "กริด",
+    "list": "รายการ"
+  },
+  "theme": {
+    "dark": "มืด",
+    "light": "สว่าง"
+  },
+  "ui": {
+    "default": "เริ่มต้น",
+    "cartoon": "การ์ตูน",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "เทอร์มินัล",
+    "paper": "กระดาษ"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "จีนตัวย่อ",
+    "ko": "เกาหลี",
+    "ja": "ญี่ปุ่น",
+    "th": "ไทย",
+    "ms": "มาเลย์ (มาเลเซีย)"
+  },
+  "common": {
+    "show": "แสดง",
+    "hide": "ซ่อน",
+    "on": "เปิด",
+    "off": "ปิด",
+    "selected_engine": "เครื่องมือที่เลือก",
+    "all_engines": "รายการที่เลือกไว้",
+    "engine_limit_2": "2 engines",
+    "engine_limit_3": "3 engines",
+    "engine_limit_5": "5 engines"
+  },
+  "clock_styles": {
+    "classic": "คลาสสิก",
+    "compact": "กะทัดรัด",
+    "stacked": "ซ้อน",
+    "pill": "แคปซูล",
+    "panel": "แผง",
+    "calendar": "ปฏิทิน",
+    "neon": "นีออน",
+    "analog": "หน้าปัดอนาล็อก",
+    "analog_minimal": "อนาล็อกมินิมอล",
+    "analog_bold": "อนาล็อกหนา"
+  },
+  "empty": {
+    "no_matching_title": "ยังไม่มีเว็บไซต์ที่ตรงกัน",
+    "no_matching_desc": "ลองตัวกรองอื่น หรือเริ่มจากการบันทึกทางลัดแรกของคุณ"
+  },
+  "preset": {
+    "selected": "เลือกแล้ว",
+    "midnight": "เที่ยงคืน",
+    "nebula": "เนบิวลา",
+    "deepsea": "ทะเลลึก",
+    "ember": "ถ่านไฟ",
+    "moss": "มอส",
+    "dusk": "พลบค่ำ"
+  },
+  "background": {
+    "current_custom_image": "พื้นหลังปัจจุบัน: รูปภาพกำหนดเอง",
+    "custom_image_selected": "เลือกรูปภาพกำหนดเองแล้ว",
+    "no_custom_image": "ยังไม่ได้เลือกรูปภาพกำหนดเอง",
+    "current_preset": "พื้นหลังปัจจุบัน: {name}",
+    "current_theme": "พื้นหลังปัจจุบัน: ธีม",
+    "image_save_failed": "ไม่สามารถบันทึกรูปภาพได้"
+  },
+  "alerts": {
+    "wallpaper_too_large": "วอลเปเปอร์นี้ใหญ่เกินไปที่จะบันทึกโดยตรง ลองใช้รูปภาพที่เล็กลง หรือไฟล์ JPG/WebP",
+    "image_search_google_only": "ขณะนี้การค้นหารูปภาพใช้ Google Lens เท่านั้น",
+    "image_search_invalid_file": "โปรดเลือกไฟล์รูปภาพสำหรับการค้นหารูปภาพ",
+    "image_search_upload_unavailable": "เบราว์เซอร์นี้ไม่สามารถเตรียมรูปภาพที่ลากมาเพื่ออัปโหลดได้ ลองใช้ปุ่มเลือกรูปภาพ",
+    "voice_search_unsupported": "เบราว์เซอร์นี้ไม่รองรับการค้นหาด้วยเสียง",
+    "voice_search_denied": "สิทธิ์ไมโครโฟนถูกบล็อก โปรดอนุญาตการเข้าถึงไมโครโฟนแล้วลองอีกครั้ง",
+    "voice_search_no_speech": "ไม่พบเสียงพูด โปรดลองอีกครั้ง",
+    "voice_search_failed": "ไม่สามารถเริ่มการค้นหาด้วยเสียงได้ในตอนนี้ โปรดลองอีกครั้งภายหลัง",
+    "import_failed": "นำเข้าไม่สำเร็จ โปรดเลือกไฟล์ส่งออกบุ๊กมาร์กที่ถูกต้อง",
+    "save_failed": "ไม่สามารถบันทึกการเปลี่ยนแปลงลงในพื้นที่เก็บข้อมูลของเบราว์เซอร์ได้",
+    "all_engine_suggestions_warning": "คำแนะนำจากทุกเครื่องมือจะส่งคำขอไปยังผู้ให้บริการค้นหาหลายรายพร้อมกัน และอาจใช้เครือข่ายมากกว่าปกติ"
+  }
+}

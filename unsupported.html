@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浏览器或内核版本过旧</title>
+  <link rel="icon" type="image/png" href="resource/icons/lunar-32.png">
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: #101827;
+      color: #f3f6ff;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 36px 18px;
+    }
+
+    .panel {
+      border: 1px solid rgba(255, 122, 122, 0.52);
+      border-radius: 14px;
+      background: #1c2438;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+      padding: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin: 0 0 14px;
+      border-radius: 999px;
+      background: rgba(255, 122, 122, 0.14);
+      color: #ffb4b4;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    h2 {
+      margin: 22px 0 10px;
+      font-size: 16px;
+    }
+
+    p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    ul {
+      margin: 0;
+      padding: 14px 14px 14px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #d7deeb;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .actions {
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-block;
+      box-sizing: border-box;
+      border: 0;
+      border-radius: 10px;
+      background: #7dc4ff;
+      color: #111827;
+      cursor: pointer;
+      font-weight: 700;
+      padding: 12px 18px;
+      text-decoration: none;
+    }
+
+    .meta {
+      margin-top: 14px;
+      color: #8fa0b8;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="panel" role="alertdialog" aria-labelledby="title" aria-describedby="description">
+      <div id="badge" class="badge">无法正常运行</div>
+      <h1 id="title">浏览器或内核版本过旧</h1>
+      <p id="description">该浏览器插件无法正常运行。请更新到最新浏览器或内核版本，否则无法正常使用。</p>
+
+      <h2 id="features-title">无法使用的功能</h2>
+      <ul id="feature-list"></ul>
+
+      <div class="actions">
+        <a id="retry-link" class="button" href="home.html">重新检测</a>
+      </div>
+
+      <p id="meta" class="meta">主页面脚本没有加载。</p>
+    </section>
+  </main>
+
+  <script src="script/unsupported.js"></script>
+</body>
+</html>

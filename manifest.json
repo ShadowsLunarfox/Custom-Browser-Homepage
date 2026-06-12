@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Lunar Start Page",
+  "short_name": "Lunar Start",
+  "description": "A customizable new tab page with draggable panels, themed clocks, search, bookmarks, wallpapers, and visual style presets.",
+  "version": "1.1.0",
+  "chrome_url_overrides": {
+    "newtab": "home.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "resource/icons/lunar-16.png",
+    "32": "resource/icons/lunar-32.png",
+    "48": "resource/icons/lunar-48.png",
+    "128": "resource/icons/lunar-128.png"
+  },
+  "action": {
+    "default_title": "Lunar Start Page",
+    "default_icon": {
+      "16": "resource/icons/lunar-16.png",
+      "32": "resource/icons/lunar-32.png",
+      "48": "resource/icons/lunar-48.png"
+    }
+  },
+  "host_permissions": [
+    "https://duckduckgo.com/*",
+    "https://suggestqueries.google.com/*",
+    "https://www.google.com/*",
+    "https://api.bing.com/*",
+    "https://search.yahoo.com/*",
+    "https://suggestion.baidu.com/*",
+    "https://www.sogou.com/*",
+    "https://sug.so.360.cn/*"
+  ],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs"
+  ]
+}

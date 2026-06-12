@@ -1,0 +1,247 @@
+/* Cartoon theme overrides for playful borders, shadows, and typography. */
+body[data-theme-style="cartoon"] {
+  font-family: "Baloo 2", "Nunito", "Noto Sans SC", sans-serif;
+}
+
+body[data-theme-style="cartoon"] .hero-card,
+body[data-theme-style="cartoon"] .panel,
+body[data-theme-style="cartoon"] .floating-clock,
+body[data-theme-style="cartoon"] .app-dialog,
+body[data-theme-style="cartoon"] .settings-section,
+body[data-theme-style="cartoon"] .shortcut-card,
+body[data-theme-style="cartoon"] .empty-state-card,
+body[data-theme-style="cartoon"] .search-suggestions {
+  border: 2px solid rgba(17, 24, 39, 0.72);
+  box-shadow: 8px 8px 0 rgba(42, 48, 68, 0.32);
+}
+
+body[data-theme-style="cartoon"] .hero-card,
+body[data-theme-style="cartoon"] .panel,
+body[data-theme-style="cartoon"] .floating-clock {
+  border-radius: 28px;
+}
+
+body[data-theme-style="cartoon"] .shortcut-card,
+body[data-theme-style="cartoon"] .empty-state-card {
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--panel-strong) 78%, white 8%);
+}
+
+body[data-theme-style="cartoon"] .shortcut-main .shortcut-icon,
+body[data-theme-style="cartoon"] .engine-chip,
+body[data-theme-style="cartoon"] .pin-toggle,
+body[data-theme-style="cartoon"] .drag-handle {
+  border: 2px solid rgba(17, 24, 39, 0.68);
+}
+
+body[data-theme-style="cartoon"] .accent-button,
+body[data-theme-style="cartoon"] .secondary-button,
+body[data-theme-style="cartoon"] .ghost-button,
+body[data-theme-style="cartoon"] .mini-button,
+body[data-theme-style="cartoon"] .icon-button,
+body[data-theme-style="cartoon"] .switch-button.is-active {
+  border: 2px solid rgba(17, 24, 39, 0.72);
+  box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.22);
+}
+
+body[data-theme-style="cartoon"] .search-box-combined,
+body[data-theme-style="cartoon"] .search-engine-wrap,
+body[data-theme-style="cartoon"] .upload-field {
+  border: 2px solid rgba(17, 24, 39, 0.52);
+}
+
+body[data-theme-style="cartoon"] .custom-select-button,
+body[data-theme-style="cartoon"] .custom-select-list {
+  border: 2px solid rgba(17, 24, 39, 0.72);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--panel-strong) 78%, white 14%);
+  color: #ffffff;
+  box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.2);
+}
+
+body[data-theme-style="cartoon"] .custom-select-search .custom-select-button {
+  border: 2px solid rgba(17, 24, 39, 0.6);
+  border-radius: 16px;
+}
+
+body[data-theme-style="cartoon"] .custom-select-arrow::before,
+body[data-theme-style="cartoon"] .custom-select-arrow::after {
+  height: 3px;
+  background: rgba(17, 24, 39, 0.86);
+}
+
+body[data-theme-style="cartoon"] .custom-select-button:hover,
+body[data-theme-style="cartoon"] .custom-select-button:focus-visible,
+body[data-theme-style="cartoon"] .custom-select.is-open .custom-select-button {
+  transform: translate(-1px, -1px);
+  background: color-mix(in srgb, white 22%, var(--accent-strong));
+  color: #ffffff;
+  box-shadow: 5px 5px 0 rgba(42, 48, 68, 0.22);
+}
+
+body[data-theme-style="cartoon"] .custom-select-list {
+  padding: 8px;
+}
+
+body[data-theme-style="cartoon"] .custom-select-group {
+  margin: 6px 0 4px;
+  padding: 7px 12px;
+  border: 2px solid rgba(17, 24, 39, 0.5);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 32%, var(--panel-strong));
+  color: #ffffff;
+  box-shadow: 2px 2px 0 rgba(42, 48, 68, 0.16);
+}
+
+body[data-theme-style="cartoon"] .custom-select-group-caution {
+  background: color-mix(in srgb, #f4b942 52%, var(--panel-strong));
+  color: rgba(17, 24, 39, 0.88);
+}
+
+body[data-theme-style="cartoon"] .custom-select-option {
+  border: 2px solid transparent;
+  border-radius: 14px;
+  color: #ffffff;
+}
+
+body[data-theme-style="cartoon"] .custom-select-option:hover,
+body[data-theme-style="cartoon"] .custom-select-option:focus-visible,
+body[data-theme-style="cartoon"] .custom-select-option.is-selected {
+  border-color: rgba(17, 24, 39, 0.5);
+  background: linear-gradient(180deg, color-mix(in srgb, white 26%, var(--accent-strong)), color-mix(in srgb, white 10%, var(--accent)));
+  color: #ffffff;
+}
+
+body[data-theme-style="cartoon"] .custom-select-option.is-selected::after {
+  border-color: #ffffff;
+}
+
+body[data-theme-style="cartoon"] .custom-range {
+  height: 38px;
+}
+
+body[data-theme-style="cartoon"] .custom-range-track {
+  height: 16px;
+  border: 2px solid rgba(17, 24, 39, 0.62);
+  background: color-mix(in srgb, var(--panel-strong) 74%, white 16%);
+  box-shadow: 3px 3px 0 rgba(42, 48, 68, 0.14);
+}
+
+body[data-theme-style="cartoon"] .custom-range-fill {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, white 24%, var(--accent-strong)), color-mix(in srgb, white 8%, var(--accent)));
+}
+
+body[data-theme-style="cartoon"] .custom-range-thumb {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(17, 24, 39, 0.72);
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.75), transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, white 22%, var(--accent-strong)), var(--accent));
+  box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.22);
+}
+
+body[data-theme-style="cartoon"] .custom-range:hover .custom-range-thumb,
+body[data-theme-style="cartoon"] .custom-range:focus-visible .custom-range-thumb,
+body[data-theme-style="cartoon"] .custom-range.is-dragging .custom-range-thumb {
+  transform: translate(-50%, -54%) scale(1.08);
+  box-shadow: 5px 5px 0 rgba(42, 48, 68, 0.24);
+}
+
+body[data-theme-style="cartoon"] .search-suggestions {
+  gap: 8px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--panel-strong) 86%, white 12%);
+}
+
+body[data-theme-style="cartoon"] .search-suggestion {
+  border: 2px solid rgba(17, 24, 39, 0.36);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--panel) 74%, white 18%);
+  box-shadow: 3px 3px 0 rgba(42, 48, 68, 0.12);
+}
+
+body[data-theme-style="cartoon"] .search-suggestion:hover,
+body[data-theme-style="cartoon"] .search-suggestion.is-active {
+  border-color: rgba(17, 24, 39, 0.64);
+  background: linear-gradient(180deg, color-mix(in srgb, white 24%, var(--accent-strong)), color-mix(in srgb, white 12%, var(--accent)));
+  color: rgba(17, 24, 39, 0.9);
+}
+
+body[data-theme-style="cartoon"] .search-suggestion:hover .search-suggestion-meta,
+body[data-theme-style="cartoon"] .search-suggestion.is-active .search-suggestion-meta {
+  color: rgba(17, 24, 39, 0.68);
+}
+
+body[data-theme-style="cartoon"] .add-shortcut-card {
+  border-width: 2px;
+  border-color: rgba(17, 24, 39, 0.58);
+  background: color-mix(in srgb, var(--panel-strong) 78%, white 10%);
+}
+
+body[data-theme-style="cartoon"] .add-shortcut-window {
+  border: 2px solid rgba(17, 24, 39, 0.62);
+  border-radius: 22px 22px 18px 18px;
+  background: linear-gradient(180deg, color-mix(in srgb, white 18%, var(--accent-strong)), color-mix(in srgb, var(--panel-strong) 88%, white 12%));
+  box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.18);
+}
+
+body[data-theme-style="cartoon"] .add-shortcut-plus {
+  border: 2px solid rgba(17, 24, 39, 0.62);
+  border-radius: 18px;
+  background: linear-gradient(180deg, color-mix(in srgb, white 22%, var(--accent-strong)), color-mix(in srgb, white 10%, var(--accent)));
+  color: rgba(17, 24, 39, 0.86);
+  box-shadow: 3px 3px 0 rgba(42, 48, 68, 0.18);
+  text-shadow: none;
+}
+
+body[data-theme-style="cartoon"] h2,
+body[data-theme-style="cartoon"] h3,
+body[data-theme-style="cartoon"] h4,
+body[data-theme-style="cartoon"] .clock,
+body[data-theme-style="cartoon"] .empty-state-title {
+  font-family: "Baloo 2", "Nunito", "Noto Sans SC", sans-serif;
+}
+
+body[data-theme-style="cartoon"] .engine-check-item {
+  border: 2px solid rgba(17, 24, 39, 0.56);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel-strong) 76%, white 16%);
+  box-shadow: 3px 3px 0 rgba(42, 48, 68, 0.14);
+}
+
+body[data-theme-style="cartoon"] .engine-check-group {
+  padding-top: 12px;
+  border-top: 2px dashed rgba(17, 24, 39, 0.32);
+}
+
+body[data-theme-style="cartoon"] .engine-check-group:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+body[data-theme-style="cartoon"] .engine-check-group-head {
+  padding: 0 4px;
+}
+
+body[data-theme-style="cartoon"] .engine-check-group-head strong {
+  font-family: "Baloo 2", "Nunito", "Noto Sans SC", sans-serif;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+body[data-theme-style="cartoon"] .engine-check-group-caution .engine-check-group-head strong {
+  color: color-mix(in srgb, #f4b942 72%, var(--text-main));
+}
+
+body[data-theme-style="cartoon"] .engine-check-item:hover {
+  transform: translate(-1px, -1px);
+  background: color-mix(in srgb, white 20%, var(--accent-strong));
+  box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.18);
+}
+
+body[data-theme-style="cartoon"] .engine-check-icon {
+  border: 2px solid rgba(17, 24, 39, 0.36);
+  border-radius: 8px;
+}

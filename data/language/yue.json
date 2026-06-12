@@ -1,0 +1,337 @@
+{
+  "app": {
+    "title": "我嘅主頁"
+  },
+  "clock": {
+    "current_time": "而家時間",
+    "time": "時間",
+    "loading_date": "載入日期中..."
+  },
+  "search": {
+    "label": "搜尋",
+    "placeholder": "輸入內容之後撳 Enter",
+    "aria_query": "搜尋內容",
+    "aria_engine": "搜尋引擎",
+    "suggestions_aria": "搜尋建議",
+    "engine_selected": "已選擇 {engine}",
+    "recent_search": "最近搜尋",
+    "suggested": "建議",
+    "live_suggestion": "即時建議",
+    "from_engine": "{engine}"
+  },
+  "engines": {
+    "google": "Google",
+    "duckduckgo": "DuckDuckGo",
+    "bing": "Bing",
+    "brave": "Brave",
+    "yahoo": "Yahoo",
+    "yandex": "Yandex",
+    "naver": "Naver",
+    "ecosia": "Ecosia",
+    "startpage": "Startpage",
+    "qwant": "Qwant",
+    "perplexity": "Perplexity",
+    "you": "You.com",
+    "bing_cn": "必應中國",
+    "baidu": "百度",
+    "sogou": "搜狗",
+    "so360": "360 搜尋",
+    "shenma": "神馬",
+    "toutiao": "頭條",
+    "quark": "夸克"
+  },
+  "actions": {
+    "drag_clock": "拖動時鐘",
+    "drag_search_panel": "拖動搜尋面板",
+    "drag_collection_panel": "拖動收藏面板",
+    "add_site": "加站點",
+    "add_first_site": "加第一個站點",
+    "settings": "設定",
+    "close": "關閉",
+    "cancel": "取消",
+    "save": "儲存",
+    "export": "匯出",
+    "import": "匯入",
+    "choose_image": "揀圖片",
+    "image_search": "Google 圖片搜尋",
+    "voice_search": "語音搜尋",
+    "voice_search_stop": "停止語音搜尋",
+    "voice_search_unavailable": "語音搜尋不可用",
+    "search_all_engines": "用勾選列表入面嘅搜尋引擎聯想",
+    "search_all_short": "多重",
+    "search_all_on": "多重",
+    "search_single": "而家",
+    "search_single_engine": "淨係用而家揀嘅搜尋引擎聯想",
+    "reset_colors": "重設顏色",
+    "reset_default_background": "還原預設背景",
+    "toggle_pin": "切換置頂",
+    "edit": "編輯",
+    "delete": "刪除"
+  },
+  "dialogs": {
+    "add_site": "加站點",
+    "edit_site": "編輯站點",
+    "image_search_title": "圖片搜尋",
+    "image_search_desc": "將圖片拖到呢度，就會用 Google Lens 搜尋。"
+  },
+  "image_search": {
+    "drop_aria": "將圖片拖到呢度，或者揀圖片",
+    "drop_title": "將圖片拖到呢度",
+    "drop_hint": "將圖片拖入呢個視窗，或者揀本機圖片檔。",
+    "no_file": "未揀圖片",
+    "uploading": "正用 Google Lens 搜尋 {name}..."
+  },
+  "form": {
+    "name": "名稱",
+    "url": "網址",
+    "url_placeholder": "https://example.com"
+  },
+  "settings": {
+    "title": "設定",
+    "library": {
+      "title": "資料庫",
+      "desc": "將額外功能放喺呢度，唔使塞滿主頁。"
+    },
+    "backup": {
+      "title": "備份",
+      "desc": "儲存或者還原你嘅書籤。"
+    },
+    "view_mode": {
+      "title": "檢視模式",
+      "desc": "喺格仔同列表版面之間切換。",
+      "aria": "快捷方式版面模式"
+    },
+    "appearance": {
+      "title": "外觀",
+      "desc": "調整頁面整體視覺效果。"
+    },
+    "theme": {
+      "title": "主題",
+      "desc": "揀基本模式同介面風格。"
+    },
+    "language": {
+      "label": "語言"
+    },
+    "theme_mode": {
+      "label": "主題模式"
+    },
+    "ui_style": {
+      "label": "介面風格"
+    },
+    "search_engine": {
+      "label": "預設搜尋引擎"
+    },
+    "search_suggestions": {
+      "label": "搜尋聯想"
+    },
+    "search_suggestions_all_engines": {
+      "label": "聯想模式",
+      "note": "揀聯想建議只用而家搜尋引擎，定用下面勾選嘅搜尋引擎列表。"
+    },
+    "search_suggestion_engine_limit": {
+      "label": "聯想引擎數量",
+      "note": "開啟多重聯想時，限制同時參與聯想嘅搜尋引擎數量。"
+    },
+    "search_suggestion_engine_list": {
+      "label": "聯想引擎列表",
+      "note": "開啟多重聯想時，勾選邊啲搜尋引擎可以同時參與聯想。"
+    },
+    "search_ui": {
+      "label": "搜尋框"
+    },
+    "shortcuts_ui": {
+      "label": "快捷標籤"
+    },
+    "clock_display": {
+      "label": "時鐘顯示"
+    },
+    "clock_style": {
+      "label": "時鐘樣式"
+    },
+    "clock_size": {
+      "label": "時鐘大小"
+    },
+    "colors": {
+      "title": "顏色",
+      "desc": "調整按鈕同文字顏色。"
+    },
+    "button_color": {
+      "label": "按鈕顏色"
+    },
+    "font_color": {
+      "label": "字體顏色"
+    },
+    "surface": {
+      "title": "??",
+      "desc": "????????????????????"
+    },
+    "font_size": {
+      "label": "字體大小"
+    },
+    "corner_roundness": {
+      "label": "圓角大小"
+    },
+    "panel_blur": {
+      "label": "面板模糊"
+    },
+    "layout": {
+      "title": "????",
+      "desc": "?????????????????"
+    },
+    "grid": {
+      "title": "格仔",
+      "desc": "調整密度同可見行數。"
+    },
+    "cards_per_row": {
+      "label": "每行卡片數"
+    },
+    "visible_rows": {
+      "label": "可見行數"
+    },
+    "cards": {
+      "title": "卡片",
+      "desc": "微調間距同卡片尺寸。"
+    },
+    "card_gap": {
+      "label": "卡片間距"
+    },
+    "card_height": {
+      "label": "卡片高度"
+    },
+    "background": {
+      "title": "背景"
+    },
+    "panels": {
+      "title": "面板",
+      "desc": "控制中間介面面板有幾實。"
+    },
+    "panel_transparency": {
+      "label": "介面面板透明度"
+    },
+    "wallpaper": {
+      "title": "牆紙",
+      "desc": "支援格式：JPG、PNG、WebP、GIF、MP4。"
+    },
+    "upload_background": {
+      "label": "上傳自訂牆紙檔案",
+      "note": "圖片同 GIF 可以正常上傳。MP4 最大支援 24 MB；如果解像度太高，仍然有機會儲存失敗。"
+    },
+    "reset": {
+      "title": "重設",
+      "desc": "將目前外觀或者牆紙還原返預設。"
+    },
+    "search": {
+      "title": "??",
+      "desc": "??????????????"
+    },
+    "search_provider": {
+      "title": "????",
+      "desc": "????????????????"
+    },
+    "reset_appearance": {
+      "title": "????",
+      "desc": "???????????????????"
+    },
+    "page_elements": {
+      "title": "????",
+      "desc": "???????????????"
+    },
+    "clock": {
+      "title": "??",
+      "desc": "????????????"
+    },
+    "visibility": {
+      "title": "????",
+      "desc": "??????????????"
+    },
+    "reset_background": {
+      "title": "????",
+      "desc": "?????????????????"
+    },
+    "debug": {
+      "title": "??",
+      "desc": "??????????????????"
+    }
+  },
+  "layout": {
+    "grid": "格仔",
+    "list": "列表"
+  },
+  "theme": {
+    "dark": "深色",
+    "light": "淺色"
+  },
+  "ui": {
+    "default": "預設",
+    "cartoon": "卡通",
+    "win98": "Windows 98",
+    "winxp": "Windows XP",
+    "terminal": "終端機",
+    "paper": "紙張"
+  },
+  "languages": {
+    "en": "English",
+    "zh-CN": "簡體中文",
+    "ko": "韓文",
+    "ja": "日文",
+    "th": "泰文",
+    "ms": "馬來西亞馬來文"
+  },
+  "common": {
+    "show": "顯示",
+    "hide": "隱藏",
+    "on": "開啟",
+    "off": "關閉",
+    "selected_engine": "而家引擎",
+    "all_engines": "勾選列表",
+    "engine_limit_2": "2 個引擎",
+    "engine_limit_3": "3 個引擎",
+    "engine_limit_5": "5 個引擎"
+  },
+  "clock_styles": {
+    "classic": "經典",
+    "compact": "緊湊",
+    "stacked": "堆疊",
+    "pill": "膠囊",
+    "panel": "面板",
+    "calendar": "月曆",
+    "neon": "霓虹",
+    "analog": "指針鐘盤",
+    "analog_minimal": "極簡指針",
+    "analog_bold": "粗體指針"
+  },
+  "empty": {
+    "no_matching_title": "仲未有對應站點",
+    "no_matching_desc": "試吓其他關鍵字，或者先儲存你第一個快捷方式。"
+  },
+  "preset": {
+    "selected": "已揀",
+    "midnight": "午夜",
+    "nebula": "星雲",
+    "deepsea": "深海",
+    "ember": "餘燼",
+    "moss": "青苔",
+    "dusk": "黃昏"
+  },
+  "background": {
+    "current_custom_image": "而家背景：自訂圖片",
+    "custom_image_selected": "已揀自訂圖片",
+    "no_custom_image": "未揀自訂圖片",
+    "current_preset": "而家背景：{name}",
+    "current_theme": "而家背景：主題背景",
+    "image_save_failed": "圖片冇辦法儲存"
+  },
+  "alerts": {
+    "wallpaper_too_large": "呢張牆紙太大，冇辦法直接儲存。試吓細啲嘅圖片，或者用 JPG/WebP 檔。",
+    "image_search_google_only": "圖片搜尋而家只會用 Google Lens。",
+    "image_search_invalid_file": "圖片搜尋請揀圖片檔。",
+    "image_search_upload_unavailable": "而家個瀏覽器準備唔到呢張拖入嘅圖片上傳，請改用「揀圖片」按鈕。",
+    "voice_search_unsupported": "而家個瀏覽器唔支援語音搜尋。",
+    "voice_search_denied": "咪高峰權限畀瀏覽器擋住咗，請容許之後再試。",
+    "voice_search_no_speech": "收唔到語音，請再試一次。",
+    "voice_search_failed": "語音搜尋暫時開唔到，請稍後再試。",
+    "import_failed": "匯入失敗，請揀有效嘅書籤匯出檔。",
+    "save_failed": "變更冇辦法儲存到瀏覽器儲存空間。",
+    "all_engine_suggestions_warning": "開啟後，插件會同時向多個搜尋引擎請求預測，網絡佔用可能比平時更高。"
+  }
+}
