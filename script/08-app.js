@@ -206,6 +206,7 @@ async function initialize() {
   void localizationReady.finally(() => {
     renderSettingsPanelIfReady();
     applyTranslations();
+    window.dispatchEvent(new CustomEvent("lunar:translations-ready"));
     showBrowserCompatibilityNoticeIfNeeded();
   });
   void importPendingSavedLinks();

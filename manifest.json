@@ -3,7 +3,7 @@
   "name": "Lunar Start Page",
   "short_name": "Lunar Start",
   "description": "A customizable new tab page with draggable panels, themed clocks, search, bookmarks, wallpapers, and visual style presets.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chrome_url_overrides": {
     "newtab": "home.html"
   },
@@ -28,6 +28,7 @@
     }
   },
   "host_permissions": [
+    "https://api.github.com/*",
     "https://duckduckgo.com/*",
     "https://suggestqueries.google.com/*",
     "https://www.google.com/*",
@@ -39,6 +40,7 @@
   ],
   "permissions": [
     "storage",
+    "alarms",
     "contextMenus",
     "tabs"
   ]

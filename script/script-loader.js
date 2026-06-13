@@ -9,7 +9,8 @@
     "script/05-ui.js",
     "script/06-i18n.js",
     "script/07-storage.js",
-    "script/08-app.js"
+    "script/08-app.js",
+    "script/09-update.js"
   ];
 
   function loadScripts() {

@@ -379,6 +379,25 @@
       "desc": "??????????????????"
     }
   },
+  "updates": {
+    "title": "更新",
+    "desc": "检查 GitHub Release，并让浏览器安装已发布的扩展更新。",
+    "current_version": "当前版本",
+    "latest_version": "最新版本",
+    "check_button": "检查更新",
+    "release_button": "打开最新发布页",
+    "note": "商店或受管理的安装会自动更新。浏览器不允许扩展覆盖自身文件，因此以“加载已解压的扩展程序”方式安装时需要手动更新。",
+    "status": {
+      "idle": "尚未检查更新。",
+      "checking": "正在检查更新...",
+      "up_to_date": "当前 {current} 已是最新版本。",
+      "available": "发现 {latest}，但浏览器更新源未能自动安装，请打开发布页更新。",
+      "browser_updating": "发现 {latest}，浏览器正在自动下载或安装。",
+      "no_release": "GitHub 上暂时没有已发布的 Release。",
+      "unsupported": "当前安装方式不支持自动更新检查。",
+      "error": "检查更新失败：{error}"
+    }
+  },
   "debug_simulation": {
     "current": "当前浏览器",
     "firefox": "Firefox 功能受限",

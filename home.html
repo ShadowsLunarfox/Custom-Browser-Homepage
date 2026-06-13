@@ -195,6 +195,31 @@
 
         <section class="settings-section settings-section-wide">
           <div class="settings-section-head">
+            <h4 data-i18n="updates.title">Updates</h4>
+            <p data-i18n="updates.desc">Check GitHub Releases and let the browser install published extension updates.</p>
+          </div>
+          <div class="settings-subsection update-panel">
+            <div class="update-version-grid">
+              <div class="update-version-item">
+                <span data-i18n="updates.current_version">Current version</span>
+                <strong id="update-current-version">-</strong>
+              </div>
+              <div class="update-version-item">
+                <span data-i18n="updates.latest_version">Latest version</span>
+                <strong id="update-latest-version">-</strong>
+              </div>
+            </div>
+            <p id="update-status" class="settings-status update-status" role="status" aria-live="polite" data-i18n="updates.status.idle">Updates have not been checked yet.</p>
+            <div class="dialog-actions split-actions update-actions">
+              <button id="check-for-updates" class="secondary-button full-width" type="button" data-i18n="updates.check_button">Check for updates</button>
+              <button id="open-update-release" class="ghost-button full-width" type="button" data-i18n="updates.release_button" hidden>Open latest release</button>
+            </div>
+            <span class="field-note" data-i18n="updates.note">Store and managed installations update automatically. Unpacked extensions must be updated manually because browsers do not allow extensions to replace their own files.</span>
+          </div>
+        </section>
+
+        <section class="settings-section settings-section-wide">
+          <div class="settings-section-head">
             <h4 data-i18n="settings.search.title">Search</h4>
             <p data-i18n="settings.search.desc">Choose the search provider and suggestion behavior.</p>
           </div>
