@@ -180,33 +180,36 @@ void initialize();
 async function initialize() {
   document.documentElement.lang = normalizeLanguage(state.language || detectPreferredLanguage());
   renderPriorityBackgroundShell();
-  const backgroundReady = initializeBackgroundStorage();
-
-  try {
-    await backgroundReady;
-    renderBackground();
-  } catch (error) {
-    console.warn("Background storage initialization failed", error);
-    renderBackground();
-  }
+  const backgroundReady = initializeBackgroundStorage().then(
+    () => null,
+    (error) => error
+  );
 
   bindEvents();
   startClock();
   bindPendingLinkSync();
   primeCachedLocalization();
-  renderStartupShell();
   const localizationReady = initializeLocalization();
 
   renderAll({ includeBackground: false });
   markAppReady();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      void backgroundReady.then((error) => {
+        if (error) {
+          console.warn("Background storage initialization failed", error);
+        }
+        renderBackground();
+      });
+    });
+  });
   void localizationReady.then(() => {
-    renderAll({ includeBackground: false });
+    applyTranslations();
+    renderSearchEngine();
+    renderSettingsPanelIfReady();
   });
 
   void localizationReady.finally(() => {
-    renderSettingsPanelIfReady();
-    applyTranslations();
-    window.dispatchEvent(new CustomEvent("lunar:translations-ready"));
     showBrowserCompatibilityNoticeIfNeeded();
   });
   void importPendingSavedLinks();

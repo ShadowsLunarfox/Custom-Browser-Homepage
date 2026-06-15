@@ -1863,56 +1863,6 @@ body[data-theme="light"] .settings-subsection {
   background: rgba(255, 255, 255, 0.52);
 }
 
-.update-panel {
-  gap: 16px;
-}
-
-.update-version-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.update-version-item {
-  display: grid;
-  gap: 5px;
-  padding: 14px;
-  border-radius: var(--ui-radius-md);
-  border: 1px solid color-mix(in srgb, var(--panel-border) 85%, transparent);
-  background: color-mix(in srgb, var(--panel-strong) 64%, transparent);
-}
-
-.update-version-item span {
-  color: var(--text-soft);
-  font-size: 0.82rem;
-}
-
-.update-version-item strong {
-  color: var(--text-main);
-  font-size: 1rem;
-}
-
-.update-status {
-  min-height: 1.4em;
-}
-
-.update-status[data-tone="success"] {
-  color: #79d99a;
-}
-
-.update-status[data-tone="warning"] {
-  color: #ffd27a;
-}
-
-.update-status[data-tone="error"] {
-  color: #ff9494;
-}
-
-.update-actions[hidden],
-.update-actions button[hidden] {
-  display: none !important;
-}
-
 /* Shared field controls inside settings. */
 .color-field,
 .range-field {
@@ -2192,10 +2142,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media (max-width: 640px) {
-  .update-version-grid {
-    grid-template-columns: 1fr;
-  }
-
   .debug-status-list,
   .debug-actions-grid,
   .debug-storage-item {

@@ -139,8 +139,6 @@
     if (key !== "custom") {
       body.dataset.wallpaperPreset = key;
     }
-    preloadVideo(path);
-    playInitialVideo(path);
   }
 
   function preloadImage(path) {
@@ -152,37 +150,6 @@
     link.fetchPriority = "high";
     link.setAttribute("fetchpriority", "high");
     document.head.appendChild(link);
-  }
-
-  function preloadVideo(path) {
-    if (!path || /^data:/i.test(path)) return;
-    var link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "video";
-    link.href = path;
-    link.fetchPriority = "high";
-    link.setAttribute("fetchpriority", "high");
-    document.head.appendChild(link);
-  }
-
-  function playInitialVideo(path) {
-    var video = document.querySelector(".background-video");
-    if (!video || !path) return;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("preload", "auto");
-    if ((video.getAttribute("src") || "") !== path) {
-      video.setAttribute("src", path);
-      video.load();
-    }
-    var playAttempt = video.play();
-    if (playAttempt && typeof playAttempt.catch === "function") {
-      playAttempt.catch(function () {});
-    }
   }
 
   function normalizeHexColor(value, fallback) {

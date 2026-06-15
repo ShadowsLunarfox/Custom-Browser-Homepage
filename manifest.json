@@ -28,7 +28,6 @@
     }
   },
   "host_permissions": [
-    "https://api.github.com/*",
     "https://duckduckgo.com/*",
     "https://suggestqueries.google.com/*",
     "https://www.google.com/*",
@@ -40,7 +39,6 @@
   ],
   "permissions": [
     "storage",
-    "alarms",
     "contextMenus",
     "tabs"
   ]

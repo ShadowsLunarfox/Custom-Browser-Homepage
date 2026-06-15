@@ -13,7 +13,7 @@
   <link id="wallpaper-style-link" rel="stylesheet">
 </head>
 <body class="app-loading" data-theme="dark">
-  <video class="background-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <video class="background-video" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
   <!-- Wallpaper image layer used for custom background uploads. -->
   <div class="background-layer"></div>
   <input id="background-upload" type="file" accept="image/*,.gif,video/mp4,.mp4" hidden>
@@ -190,31 +190,6 @@
               <button id="export-links" class="ghost-button" type="button" data-i18n="actions.export">Export</button>
               <button id="import-links" class="ghost-button" type="button" data-i18n="actions.import">Import</button>
             </div>
-          </div>
-        </section>
-
-        <section class="settings-section settings-section-wide">
-          <div class="settings-section-head">
-            <h4 data-i18n="updates.title">Updates</h4>
-            <p data-i18n="updates.desc">Check GitHub Releases and let the browser install published extension updates.</p>
-          </div>
-          <div class="settings-subsection update-panel">
-            <div class="update-version-grid">
-              <div class="update-version-item">
-                <span data-i18n="updates.current_version">Current version</span>
-                <strong id="update-current-version">-</strong>
-              </div>
-              <div class="update-version-item">
-                <span data-i18n="updates.latest_version">Latest version</span>
-                <strong id="update-latest-version">-</strong>
-              </div>
-            </div>
-            <p id="update-status" class="settings-status update-status" role="status" aria-live="polite" data-i18n="updates.status.idle">Updates have not been checked yet.</p>
-            <div class="dialog-actions split-actions update-actions">
-              <button id="check-for-updates" class="secondary-button full-width" type="button" data-i18n="updates.check_button">Check for updates</button>
-              <button id="open-update-release" class="ghost-button full-width" type="button" data-i18n="updates.release_button" hidden>Open latest release</button>
-            </div>
-            <span class="field-note" data-i18n="updates.note">Store and managed installations update automatically. Unpacked extensions must be updated manually because browsers do not allow extensions to replace their own files.</span>
           </div>
         </section>
 

@@ -379,25 +379,6 @@
       "desc": "Return to the theme background without changing other appearance settings."
     }
   },
-  "updates": {
-    "title": "Updates",
-    "desc": "Check GitHub Releases and let the browser install published extension updates.",
-    "current_version": "Current version",
-    "latest_version": "Latest version",
-    "check_button": "Check for updates",
-    "release_button": "Open latest release",
-    "note": "Store and managed installations update automatically. Unpacked extensions must be updated manually because browsers do not allow extensions to replace their own files.",
-    "status": {
-      "idle": "Updates have not been checked yet.",
-      "checking": "Checking for updates...",
-      "up_to_date": "Version {current} is up to date.",
-      "available": "Version {latest} is available. The browser update source did not install it automatically.",
-      "browser_updating": "Version {latest} was found. The browser is downloading or installing it automatically.",
-      "no_release": "No published GitHub Release was found.",
-      "unsupported": "Automatic update checks are unavailable in this installation.",
-      "error": "Update check failed: {error}"
-    }
-  },
   "debug_simulation": {
     "current": "Current browser",
     "firefox": "Firefox limited features",

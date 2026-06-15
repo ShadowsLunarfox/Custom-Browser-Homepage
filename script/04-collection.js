@@ -11,6 +11,7 @@ function renderCollection() {
   }
 
   const linkTemplate = document.getElementById("link-card-template");
+  const collectionFragment = document.createDocumentFragment();
   filteredLinks.forEach((link) => {
     const fragment = linkTemplate.content.cloneNode(true);
     const card = fragment.querySelector(".shortcut-card");
@@ -43,10 +44,11 @@ function renderCollection() {
     pinButton.classList.toggle("is-active", Boolean(link.pinned));
     pinButton.innerHTML = link.pinned ? "&#9733;" : "&#9734;";
 
-    collectionGridEl.appendChild(fragment);
+    collectionFragment.appendChild(fragment);
   });
 
-  collectionGridEl.appendChild(createAddShortcutCard());
+  collectionFragment.appendChild(createAddShortcutCard());
+  collectionGridEl.appendChild(collectionFragment);
 }
 
 // Empty-state card shown when nothing matches the current filter.
@@ -54,9 +56,9 @@ function createEmptyStateElement() {
   const wrapper = document.createElement("div");
   wrapper.className = "empty-state-card";
   wrapper.innerHTML = `
-    <p class="empty-state-title">${escapeHtml(t("empty.no_matching_title"))}</p>
-    <p class="empty-state">${escapeHtml(t("empty.no_matching_desc"))}</p>
-    <button id="empty-state-add" class="accent-button" type="button">${escapeHtml(t("actions.add_first_site"))}</button>
+    <p class="empty-state-title" data-i18n="empty.no_matching_title">${escapeHtml(t("empty.no_matching_title"))}</p>
+    <p class="empty-state" data-i18n="empty.no_matching_desc">${escapeHtml(t("empty.no_matching_desc"))}</p>
+    <button id="empty-state-add" class="accent-button" type="button" data-i18n="actions.add_first_site">${escapeHtml(t("actions.add_first_site"))}</button>
   `;
   return wrapper;
 }
@@ -66,6 +68,7 @@ function createAddShortcutCard() {
   button.type = "button";
   button.className = "shortcut-card add-shortcut-card";
   button.setAttribute("aria-label", t("actions.add_site"));
+  button.dataset.i18nAriaLabel = "actions.add_site";
   button.innerHTML = `
     <span class="add-shortcut-window" aria-hidden="true">
       <span class="add-shortcut-window-bar"></span>

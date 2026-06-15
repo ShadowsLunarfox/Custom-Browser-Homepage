@@ -67,11 +67,6 @@ function renderPriorityBackgroundShell() {
   renderInitialBackgroundShell();
 }
 
-function renderStartupShell() {
-  renderPanelPositions();
-  renderLayoutSwitch();
-}
-
 // Render the full page from the current state object.
 function renderAll(options = {}) {
   const includeBackground = options.includeBackground !== false;
@@ -918,10 +913,10 @@ function playBackgroundVideo(source, options = {}) {
   backgroundVideoEl.muted = true;
   backgroundVideoEl.loop = true;
   backgroundVideoEl.playsInline = true;
-  backgroundVideoEl.preload = "auto";
+  backgroundVideoEl.preload = "metadata";
   backgroundVideoEl.setAttribute("muted", "");
   backgroundVideoEl.setAttribute("playsinline", "");
-  backgroundVideoEl.setAttribute("preload", "auto");
+  backgroundVideoEl.setAttribute("preload", "metadata");
 
   if (currentSource !== source) {
     backgroundVideoEl.setAttribute("src", source);
@@ -1142,7 +1137,6 @@ function renderInitialBackgroundShell() {
 
     if (mediaType === "video") {
       hideBackgroundLayerImage();
-      playBackgroundVideo(state.background.value);
     } else {
       stopBackgroundVideo();
       setBackgroundLayerImage(state.background.value);
@@ -1167,7 +1161,11 @@ function renderInitialBackgroundShell() {
   document.body.classList.add("has-preset-wallpaper");
   document.body.dataset.wallpaperPreset = presetKey;
   wallpaperStyleLinkEl.removeAttribute("href");
-  applyBuiltInWallpaper(preset);
+  if (preset.mediaType === "video") {
+    hideBackgroundLayerImage();
+  } else {
+    applyBuiltInWallpaper(preset);
+  }
 }
 
 function applyBuiltInWallpaper(preset) {
