@@ -1786,6 +1786,17 @@ body[data-theme="light"] .root-zone {
   text-align: center;
 }
 
+.settings-developer-credit a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.settings-developer-credit a:hover,
+.settings-developer-credit a:focus-visible {
+  text-decoration: underline;
+}
+
 .settings-section {
   padding: 22px;
   border-radius: var(--ui-radius-lg);

@@ -198,7 +198,7 @@
     "url_placeholder": "https://example.com"
   },
   "settings": {
-    "developer_credit": "该插件开发者为 Lunarfox 月狐",
+    "developer_credit": "该插件开发者为 Lunarfox 月狐 · GitHub：",
     "title": "设定",
     "library": {
       "title": "资源库",
