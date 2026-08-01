@@ -123,6 +123,21 @@ const THEME_TEXT_DEFAULTS = {
   light: "#182338"
 };
 
+const PANEL_COLOR_DEFAULTS = {
+  dark: "#1c2438",
+  light: "#ffffff"
+};
+
+const DROPDOWN_COLOR_DEFAULTS = {
+  dark: "#26304a",
+  light: "#ffffff"
+};
+
+const SLIDER_TRACK_COLOR_DEFAULTS = {
+  dark: "#33405e",
+  light: "#d8e3f5"
+};
+
 const CLOCK_STYLES = [
   "classic",
   "compact",
@@ -141,6 +156,10 @@ const DEFAULT_SETTINGS = {
   themeStyle: "default",
   accentColor: "#7dc4ff",
   textColor: THEME_TEXT_DEFAULTS.dark,
+  panelColor: "#1c2438",
+  dropdownColor: "#26304a",
+  sliderTrackColor: "#33405e",
+  sliderFillColor: "#7dc4ff",
   fontScale: 100,
   radius: 20,
   panelBlur: 22,

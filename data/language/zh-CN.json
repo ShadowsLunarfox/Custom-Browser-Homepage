@@ -199,6 +199,7 @@
   },
   "settings": {
     "developer_credit": "该插件开发者为 Lunarfox 月狐 · GitHub：",
+    "repository_link": "项目仓库：",
     "title": "设定",
     "library": {
       "title": "资源库",
@@ -273,9 +274,21 @@
     "font_color": {
       "label": "字体颜色"
     },
+    "panel_color": {
+      "label": "面板颜色"
+    },
+    "dropdown_color": {
+      "label": "下拉菜单颜色"
+    },
+    "slider_track_color": {
+      "label": "滑块轨道颜色"
+    },
+    "slider_fill_color": {
+      "label": "滑块进度颜色"
+    },
     "surface": {
-      "title": "??",
-      "desc": "????????????????????"
+      "title": "表面",
+      "desc": "控制文字大小、圆角、透明度和玻璃效果。"
     },
     "font_size": {
       "label": "字体大小"
@@ -287,8 +300,8 @@
       "label": "面板模糊"
     },
     "layout": {
-      "title": "??????",
-      "desc": "???????????????????"
+      "title": "快捷方式布局",
+      "desc": "选择快捷方式显示模式、密度和卡片大小。"
     },
     "grid": {
       "title": "网格",
@@ -333,8 +346,8 @@
       "desc": "恢复当前外观或壁纸默认值。"
     },
     "debug": {
-      "title": "??",
-      "desc": "??????????????????"
+      "title": "调试",
+      "desc": "用于测试和重置本地浏览器数据的工具。"
     },
     "debug_tools": {
       "title": "调试工具",
@@ -351,32 +364,32 @@
       "desc": "清除当前页面保存在 localStorage 里的数据。"
     },
     "search": {
-      "title": "??",
-      "desc": "??????????????"
+      "title": "搜索",
+      "desc": "选择搜索提供商和建议行为。"
     },
     "search_provider": {
-      "title": "????",
-      "desc": "????????????????"
+      "title": "提供商",
+      "desc": "选择主搜索框使用的默认引擎。"
     },
     "reset_appearance": {
-      "title": "????",
-      "desc": "???????????????????"
+      "title": "重置外观",
+      "desc": "恢复颜色和外观数值，不更改书签或壁纸。"
     },
     "page_elements": {
-      "title": "????",
-      "desc": "???????????????"
+      "title": "页面元素",
+      "desc": "显示、隐藏和设置主页模块样式。"
     },
     "clock": {
-      "title": "??",
-      "desc": "????????????"
+      "title": "时钟",
+      "desc": "控制时钟模块及其显示样式。"
     },
     "visibility": {
-      "title": "????",
-      "desc": "???????????????"
+      "title": "可见性",
+      "desc": "选择主页显示哪些模块。"
     },
     "reset_background": {
-      "title": "????",
-      "desc": "??????????????????"
+      "title": "重置背景",
+      "desc": "恢复主题背景，不更改其他外观设置。"
     }
   },
   "debug_simulation": {

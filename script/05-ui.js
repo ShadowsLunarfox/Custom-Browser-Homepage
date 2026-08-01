@@ -114,6 +114,12 @@ function renderSettingsPanel() {
   languageSelectEl.value = currentLanguage;
   themeModeEl.value = state.settings.theme;
   themeStyleEl.value = state.settings.themeStyle;
+  if (settingsColorsSectionEl) {
+    const hideColorSettings = !["default", "cartoon"].includes(state.settings.themeStyle);
+    settingsColorsSectionEl.hidden = hideColorSettings;
+    settingsColorsSectionEl.classList.toggle("is-hidden", hideColorSettings);
+    settingsColorsSectionEl.setAttribute("aria-hidden", hideColorSettings ? "true" : "false");
+  }
   searchSuggestionsSettingEl.value = state.settings.searchSuggestionsEnabled ? "on" : "off";
   searchSuggestionsAllEnginesSettingEl.value = state.settings.searchSuggestionsAllEnginesEnabled ? "all" : "selected";
   searchSuggestionsAllEnginesSettingEl.disabled = !state.settings.searchSuggestionsEnabled;
@@ -122,6 +128,14 @@ function renderSettingsPanel() {
   accentColorValueEl.textContent = state.settings.accentColor.toUpperCase();
   textColorEl.value = resolvedTextColor;
   textColorValueEl.textContent = resolvedTextColor.toUpperCase();
+  panelColorEl.value = state.settings.panelColor;
+  panelColorValueEl.textContent = state.settings.panelColor.toUpperCase();
+  dropdownColorEl.value = state.settings.dropdownColor;
+  dropdownColorValueEl.textContent = state.settings.dropdownColor.toUpperCase();
+  sliderTrackColorEl.value = state.settings.sliderTrackColor;
+  sliderTrackColorValueEl.textContent = state.settings.sliderTrackColor.toUpperCase();
+  sliderFillColorEl.value = state.settings.sliderFillColor;
+  sliderFillColorValueEl.textContent = state.settings.sliderFillColor.toUpperCase();
   fontScaleRangeEl.value = String(state.settings.fontScale);
   fontScaleValueEl.textContent = `${state.settings.fontScale}%`;
   radiusRangeEl.value = String(state.settings.radius);
@@ -696,6 +710,7 @@ function openCustomSelect(select) {
 
   activeCustomSelect = select;
   shell.classList.add("is-open");
+  setCustomSelectContainerLayer(select, true);
   button.setAttribute("aria-expanded", "true");
   list.hidden = false;
   positionCustomSelectList(select);
@@ -711,6 +726,7 @@ function closeCustomSelect(select, restoreFocus = false) {
   if (!shell || !button || !list) return;
 
   shell.classList.remove("is-open");
+  setCustomSelectContainerLayer(select, false);
   button.setAttribute("aria-expanded", "false");
   list.hidden = true;
   if (activeCustomSelect === select) {
@@ -719,6 +735,12 @@ function closeCustomSelect(select, restoreFocus = false) {
   if (restoreFocus) {
     button.focus();
   }
+}
+
+function setCustomSelectContainerLayer(select, isOpen) {
+  const shell = getCustomSelectShell(select);
+  shell?.closest(".settings-subsection")?.classList.toggle("is-select-menu-open", isOpen);
+  shell?.closest(".settings-section")?.classList.toggle("is-select-menu-open", isOpen);
 }
 
 function positionCustomSelectList(select) {
@@ -1219,6 +1241,10 @@ function applyThemeSettings() {
   document.body.dataset.theme = theme;
 
   const accent = normalizeHexColor(state.settings.accentColor, DEFAULT_SETTINGS.accentColor);
+  const panelBase = normalizeHexColor(state.settings.panelColor, PANEL_COLOR_DEFAULTS[theme]);
+  const dropdown = normalizeHexColor(state.settings.dropdownColor, DROPDOWN_COLOR_DEFAULTS[theme]);
+  const sliderTrack = normalizeHexColor(state.settings.sliderTrackColor, SLIDER_TRACK_COLOR_DEFAULTS[theme]);
+  const sliderFill = normalizeHexColor(state.settings.sliderFillColor, DEFAULT_SETTINGS.sliderFillColor);
   const accentStrong = mixHex(accent, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.12 : 0.16);
   const accentMuted = mixHex(accent, theme === "dark" ? "#0f1421" : "#ffffff", theme === "dark" ? 0.66 : 0.38);
   const mainText = resolveThemeTextColor(state.settings.textColor, theme);
@@ -1232,6 +1258,14 @@ function applyThemeSettings() {
   document.documentElement.style.setProperty("--accent-strong", accentStrong);
   document.documentElement.style.setProperty("--accent-muted", accentMuted);
   document.documentElement.style.setProperty("--accent-ink", buttonInk);
+  document.documentElement.style.setProperty("--dropdown", dropdown);
+  document.documentElement.style.setProperty("--dropdown-hover", mixHex(dropdown, accent, 0.18));
+  document.documentElement.style.setProperty("--dropdown-ink", pickReadableTextColor(dropdown));
+  document.documentElement.style.setProperty("--slider-track", sliderTrack);
+  document.documentElement.style.setProperty("--slider-track-strong", mixHex(sliderTrack, theme === "dark" ? "#000000" : "#ffffff", 0.18));
+  document.documentElement.style.setProperty("--slider-fill", sliderFill);
+  document.documentElement.style.setProperty("--slider-fill-strong", mixHex(sliderFill, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.16 : 0.12));
+  document.documentElement.style.setProperty("--slider-ink", pickReadableTextColor(sliderFill));
   document.documentElement.style.setProperty("--text-main", mainText);
   document.documentElement.style.setProperty("--text-soft", softText);
   document.documentElement.style.setProperty("--font-scale", String(state.settings.fontScale / 100));
@@ -1248,15 +1282,14 @@ function applyThemeSettings() {
   analogClockEl.classList.toggle("is-visible", state.settings.clockStyle.startsWith("analog"));
   syncClockTimer();
 
-  if (theme === "light") {
-    document.documentElement.style.setProperty("--panel", `rgba(255, 255, 255, ${panelOpacity})`);
-    document.documentElement.style.setProperty("--panel-strong", `rgba(255, 255, 255, ${panelStrongOpacity})`);
-    document.documentElement.style.setProperty("--panel-soft", `rgba(238, 243, 255, ${Math.max(0.68, panelStrongOpacity)})`);
-  } else {
-    document.documentElement.style.setProperty("--panel", `rgba(28, 36, 56, ${panelOpacity})`);
-    document.documentElement.style.setProperty("--panel-strong", `rgba(38, 47, 72, ${panelStrongOpacity})`);
-    document.documentElement.style.setProperty("--panel-soft", `rgba(50, 61, 92, ${panelSoftOpacity})`);
-  }
+  const panelStrong = mixHex(panelBase, theme === "dark" ? "#ffffff" : "#ffffff", theme === "dark" ? 0.12 : 0.34);
+  const panelSoft = mixHex(panelBase, theme === "dark" ? "#ffffff" : "#ffffff", theme === "dark" ? 0.22 : 0.48);
+  const panelRgb = hexToRgb(panelBase);
+  const panelStrongRgb = hexToRgb(panelStrong);
+  const panelSoftRgb = hexToRgb(panelSoft);
+  document.documentElement.style.setProperty("--panel", `rgba(${panelRgb.r}, ${panelRgb.g}, ${panelRgb.b}, ${panelOpacity})`);
+  document.documentElement.style.setProperty("--panel-strong", `rgba(${panelStrongRgb.r}, ${panelStrongRgb.g}, ${panelStrongRgb.b}, ${panelStrongOpacity})`);
+  document.documentElement.style.setProperty("--panel-soft", `rgba(${panelSoftRgb.r}, ${panelSoftRgb.g}, ${panelSoftRgb.b}, ${panelSoftOpacity})`);
 }
 
 // Load the optional external style theme file.

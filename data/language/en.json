@@ -199,6 +199,7 @@
   },
   "settings": {
     "developer_credit": "Extension developer: Lunarfox 月狐 · GitHub:",
+    "repository_link": "Project repository:",
     "title": "Settings",
     "library": {
       "title": "Library",
@@ -272,6 +273,18 @@
     },
     "font_color": {
       "label": "Font color"
+    },
+    "panel_color": {
+      "label": "Panel color"
+    },
+    "dropdown_color": {
+      "label": "Dropdown color"
+    },
+    "slider_track_color": {
+      "label": "Slider track"
+    },
+    "slider_fill_color": {
+      "label": "Slider progress"
     },
     "surface": {
       "title": "Surface",

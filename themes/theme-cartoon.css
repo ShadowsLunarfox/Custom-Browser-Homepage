@@ -54,8 +54,8 @@ body[data-theme-style="cartoon"] .custom-select-button,
 body[data-theme-style="cartoon"] .custom-select-list {
   border: 2px solid rgba(17, 24, 39, 0.72);
   border-radius: 18px;
-  background: color-mix(in srgb, var(--panel-strong) 78%, white 14%);
-  color: #ffffff;
+  background: color-mix(in srgb, var(--dropdown) 78%, white 14%);
+  color: var(--dropdown-ink);
   box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.2);
 }
 
@@ -74,8 +74,8 @@ body[data-theme-style="cartoon"] .custom-select-button:hover,
 body[data-theme-style="cartoon"] .custom-select-button:focus-visible,
 body[data-theme-style="cartoon"] .custom-select.is-open .custom-select-button {
   transform: translate(-1px, -1px);
-  background: color-mix(in srgb, white 22%, var(--accent-strong));
-  color: #ffffff;
+  background: color-mix(in srgb, white 22%, var(--dropdown-hover));
+  color: var(--dropdown-ink);
   box-shadow: 5px 5px 0 rgba(42, 48, 68, 0.22);
 }
 
@@ -101,7 +101,7 @@ body[data-theme-style="cartoon"] .custom-select-group-caution {
 body[data-theme-style="cartoon"] .custom-select-option {
   border: 2px solid transparent;
   border-radius: 14px;
-  color: #ffffff;
+  color: var(--dropdown-ink);
 }
 
 body[data-theme-style="cartoon"] .custom-select-option:hover,
@@ -123,13 +123,13 @@ body[data-theme-style="cartoon"] .custom-range {
 body[data-theme-style="cartoon"] .custom-range-track {
   height: 16px;
   border: 2px solid rgba(17, 24, 39, 0.62);
-  background: color-mix(in srgb, var(--panel-strong) 74%, white 16%);
+  background: color-mix(in srgb, var(--slider-track) 74%, white 16%);
   box-shadow: 3px 3px 0 rgba(42, 48, 68, 0.14);
 }
 
 body[data-theme-style="cartoon"] .custom-range-fill {
   background:
-    linear-gradient(180deg, color-mix(in srgb, white 24%, var(--accent-strong)), color-mix(in srgb, white 8%, var(--accent)));
+    linear-gradient(180deg, color-mix(in srgb, white 24%, var(--slider-fill-strong)), color-mix(in srgb, white 8%, var(--slider-fill)));
 }
 
 body[data-theme-style="cartoon"] .custom-range-thumb {
@@ -138,7 +138,7 @@ body[data-theme-style="cartoon"] .custom-range-thumb {
   border: 3px solid rgba(17, 24, 39, 0.72);
   background:
     radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.75), transparent 28%),
-    linear-gradient(180deg, color-mix(in srgb, white 22%, var(--accent-strong)), var(--accent));
+    linear-gradient(180deg, color-mix(in srgb, white 22%, var(--slider-fill-strong)), var(--slider-fill));
   box-shadow: 4px 4px 0 rgba(42, 48, 68, 0.22);
 }
 

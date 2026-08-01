@@ -1,3 +1,11 @@
+<!--
+ * @Author: Shadows_Lunarfox 91894334+ShadowsLunarfox@users.noreply.github.com
+ * @Date: 2026-05-20 03:36:40
+ * @LastEditors: Shadows_Lunarfox 91894334+ShadowsLunarfox@users.noreply.github.com
+ * @LastEditTime: 2026-08-02 00:45:26
+ * @FilePath: \extension home pag\home.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,12 +284,12 @@
               <label data-i18n="settings.language.label">
                 Language
                 <select id="language-select">
-                  <option value="en" data-i18n="languages.en">English</option>
-                  <option value="zh-CN" data-i18n="languages.zh-CN">简体中文</option>
-                  <option value="ko" data-i18n="languages.ko">한국어</option>
-                  <option value="ja" data-i18n="languages.ja">日本語</option>
-                  <option value="th" data-i18n="languages.th">ไทย</option>
-                  <option value="ms" data-i18n="languages.ms">Bahasa Melayu (Malaysia)</option>
+                  <option value="en">English</option>
+                  <option value="zh-CN">简体中文</option>
+                  <option value="ko">한국어</option>
+                  <option value="ja">日本語</option>
+                  <option value="th">ไทย</option>
+                  <option value="ms">Bahasa Melayu (Malaysia)</option>
                 </select>
               </label>
               <label data-i18n="settings.theme_mode.label">
@@ -303,7 +311,7 @@
               </label>
             </div>
           </div>
-          <div class="settings-subsection">
+          <div id="settings-colors-section" class="settings-subsection">
             <div class="settings-subhead">
               <h5 data-i18n="settings.colors.title">Colors</h5>
               <p data-i18n="settings.colors.desc">Adjust button and text colors.</p>
@@ -321,6 +329,34 @@
                 <div class="color-field">
                   <input id="text-color" type="color" value="#F3F6FF">
                   <span id="text-color-value" class="color-value">#F3F6FF</span>
+                </div>
+              </label>
+              <label data-i18n="settings.panel_color.label">
+                Panel color
+                <div class="color-field">
+                  <input id="panel-color" type="color" value="#1c2438">
+                  <span id="panel-color-value" class="color-value">#1C2438</span>
+                </div>
+              </label>
+              <label data-i18n="settings.dropdown_color.label">
+                Dropdown color
+                <div class="color-field">
+                  <input id="dropdown-color" type="color" value="#26304a">
+                  <span id="dropdown-color-value" class="color-value">#26304A</span>
+                </div>
+              </label>
+              <label data-i18n="settings.slider_track_color.label">
+                Slider track
+                <div class="color-field">
+                  <input id="slider-track-color" type="color" value="#33405e">
+                  <span id="slider-track-color-value" class="color-value">#33405E</span>
+                </div>
+              </label>
+              <label data-i18n="settings.slider_fill_color.label">
+                Slider progress
+                <div class="color-field">
+                  <input id="slider-fill-color" type="color" value="#7dc4ff">
+                  <span id="slider-fill-color-value" class="color-value">#7DC4FF</span>
                 </div>
               </label>
             </div>
@@ -370,66 +406,7 @@
           </div>
         </section>
 
-        <section class="settings-section">
-          <div class="settings-section-head">
-            <h4 data-i18n="settings.page_elements.title">Page elements</h4>
-            <p data-i18n="settings.page_elements.desc">Show, hide, and style the main page modules.</p>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.clock.title">Clock</h5>
-              <p data-i18n="settings.clock.desc">Control the clock module and its display style.</p>
-            </div>
-            <div class="settings-grid two-column">
-              <label data-i18n="settings.clock_display.label">
-                Clock display
-                <select id="clock-visibility">
-                  <option value="show" data-i18n="common.show">Show</option>
-                  <option value="hide" data-i18n="common.hide">Hide</option>
-                </select>
-              </label>
-              <label data-i18n="settings.clock_style.label">
-                Clock style
-                <select id="clock-style">
-                  <option value="classic" data-i18n="clock_styles.classic">Classic</option>
-                  <option value="compact" data-i18n="clock_styles.compact">Compact</option>
-                  <option value="stacked" data-i18n="clock_styles.stacked">Stacked</option>
-                  <option value="pill" data-i18n="clock_styles.pill">Pill</option>
-                  <option value="panel" data-i18n="clock_styles.panel">Panel</option>
-                  <option value="calendar" data-i18n="clock_styles.calendar">Calendar</option>
-                  <option value="neon" data-i18n="clock_styles.neon">Neon</option>
-                  <option value="analog" data-i18n="clock_styles.analog">Analog Dial</option>
-                  <option value="analog-minimal" data-i18n="clock_styles.analog_minimal">Analog Minimal</option>
-                  <option value="analog-bold" data-i18n="clock_styles.analog_bold">Analog Bold</option>
-                </select>
-              </label>
-            </div>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.visibility.title">Visibility</h5>
-              <p data-i18n="settings.visibility.desc">Choose which main modules appear on the page.</p>
-            </div>
-            <div class="settings-grid">
-              <div data-i18n="settings.search_ui.label">
-                Search box
-                <div class="layout-switch settings-layout-switch" role="group" aria-label="Search box visibility">
-                  <button id="search-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
-                  <button id="search-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
-                </div>
-              </div>
-              <div data-i18n="settings.shortcuts_ui.label">
-                Shortcuts
-                <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcuts visibility">
-                  <button id="shortcuts-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
-                  <button id="shortcuts-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="settings-section">
+        <section class="settings-section settings-section-layout">
           <div class="settings-section-head">
             <h4 data-i18n="settings.layout.title">Layout</h4>
             <p data-i18n="settings.layout.desc">Choose how many cards show per row and how many rows stay visible before scrolling.</p>
@@ -490,6 +467,65 @@
           </div>
         </section>
 
+        <section class="settings-section settings-section-page-elements">
+          <div class="settings-section-head">
+            <h4 data-i18n="settings.page_elements.title">Page elements</h4>
+            <p data-i18n="settings.page_elements.desc">Show, hide, and style the main page modules.</p>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.clock.title">Clock</h5>
+              <p data-i18n="settings.clock.desc">Control the clock module and its display style.</p>
+            </div>
+            <div class="settings-grid two-column">
+              <label data-i18n="settings.clock_display.label">
+                Clock display
+                <select id="clock-visibility">
+                  <option value="show" data-i18n="common.show">Show</option>
+                  <option value="hide" data-i18n="common.hide">Hide</option>
+                </select>
+              </label>
+              <label data-i18n="settings.clock_style.label">
+                Clock style
+                <select id="clock-style">
+                  <option value="classic" data-i18n="clock_styles.classic">Classic</option>
+                  <option value="compact" data-i18n="clock_styles.compact">Compact</option>
+                  <option value="stacked" data-i18n="clock_styles.stacked">Stacked</option>
+                  <option value="pill" data-i18n="clock_styles.pill">Pill</option>
+                  <option value="panel" data-i18n="clock_styles.panel">Panel</option>
+                  <option value="calendar" data-i18n="clock_styles.calendar">Calendar</option>
+                  <option value="neon" data-i18n="clock_styles.neon">Neon</option>
+                  <option value="analog" data-i18n="clock_styles.analog">Analog Dial</option>
+                  <option value="analog-minimal" data-i18n="clock_styles.analog_minimal">Analog Minimal</option>
+                  <option value="analog-bold" data-i18n="clock_styles.analog_bold">Analog Bold</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.visibility.title">Visibility</h5>
+              <p data-i18n="settings.visibility.desc">Choose which main modules appear on the page.</p>
+            </div>
+            <div class="settings-grid">
+              <div data-i18n="settings.search_ui.label">
+                Search box
+                <div class="layout-switch settings-layout-switch" role="group" aria-label="Search box visibility">
+                  <button id="search-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
+                  <button id="search-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
+                </div>
+              </div>
+              <div data-i18n="settings.shortcuts_ui.label">
+                Shortcuts
+                <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcuts visibility">
+                  <button id="shortcuts-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
+                  <button id="shortcuts-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="settings-section settings-section-wide">
           <div class="settings-section-head">
             <h4 data-i18n="settings.background.title">Background</h4>
@@ -535,10 +571,16 @@
           </div>
         </section>
       </div>
-      <p class="settings-developer-credit" data-i18n="settings.developer_credit">
-        Extension developer: Lunarfox 月狐 · GitHub:
-        <a href="https://github.com/ShadowsLunarfox" target="_blank" rel="noopener noreferrer">ShadowsLunarfox</a>
-      </p>
+      <div class="settings-footer-links">
+        <p class="settings-developer-credit" data-i18n="settings.developer_credit">
+          Extension developer: Lunarfox 月狐 · GitHub:
+          <a href="https://github.com/ShadowsLunarfox" target="_blank" rel="noopener noreferrer">ShadowsLunarfox</a>
+        </p>
+        <p class="settings-developer-credit">
+          <span data-i18n="settings.repository_link">Project repository:</span>
+          <a href="https://github.com/ShadowsLunarfox/Custom-Browser-Homepage" target="_blank" rel="noopener noreferrer">Custom-Browser-Homepage</a>
+        </p>
+      </div>
     </form>
   </dialog>
 

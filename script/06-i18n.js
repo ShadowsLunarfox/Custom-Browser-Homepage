@@ -12,10 +12,7 @@ function primeCachedLocalization(language = state.language || detectPreferredLan
     : (getCachedLanguageFile(DEFAULT_LANGUAGE) || {});
   currentLanguage = normalizedLanguage;
   state.language = normalizedLanguage;
-  translations = {
-    ...cachedFallback,
-    ...cachedTranslations
-  };
+  translations = deepMergeTranslations(cachedFallback, cachedTranslations);
   document.documentElement.lang = getActiveLocale();
   return true;
 }
@@ -33,11 +30,28 @@ async function loadLanguage(language) {
 
   currentLanguage = normalizedLanguage;
   state.language = normalizedLanguage;
-  translations = {
-    ...fallbackTranslations,
-    ...localizedTranslations
-  };
+  translations = deepMergeTranslations(fallbackTranslations, localizedTranslations);
   document.documentElement.lang = getActiveLocale();
+}
+
+function deepMergeTranslations(fallback, localized) {
+  const merged = { ...(fallback || {}) };
+  Object.entries(localized || {}).forEach(([key, value]) => {
+    const fallbackValue = merged[key];
+    if (
+      value
+      && typeof value === "object"
+      && !Array.isArray(value)
+      && fallbackValue
+      && typeof fallbackValue === "object"
+      && !Array.isArray(fallbackValue)
+    ) {
+      merged[key] = deepMergeTranslations(fallbackValue, value);
+    } else {
+      merged[key] = value;
+    }
+  });
+  return merged;
 }
 
 async function fetchLanguageFile(language) {

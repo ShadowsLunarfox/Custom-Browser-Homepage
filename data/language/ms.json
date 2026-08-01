@@ -95,6 +95,7 @@
     "url_placeholder": "https://example.com"
   },
   "settings": {
+    "repository_link": "Repositori projek:",
     "title": "Tetapan",
     "library": {
       "title": "Pustaka",
@@ -168,6 +169,18 @@
     },
     "font_color": {
       "label": "Warna fon"
+    },
+    "panel_color": {
+      "label": "Warna panel"
+    },
+    "dropdown_color": {
+      "label": "Warna menu juntai bawah"
+    },
+    "slider_track_color": {
+      "label": "Warna trek peluncur"
+    },
+    "slider_fill_color": {
+      "label": "Warna kemajuan peluncur"
     },
     "surface": {
       "title": "Permukaan",

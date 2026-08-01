@@ -114,6 +114,10 @@ function resetAppearanceSettings() {
     themeStyle: DEFAULT_SETTINGS.themeStyle,
     accentColor: DEFAULT_SETTINGS.accentColor,
     textColor: DEFAULT_SETTINGS.textColor,
+    panelColor: DEFAULT_SETTINGS.panelColor,
+    dropdownColor: DEFAULT_SETTINGS.dropdownColor,
+    sliderTrackColor: DEFAULT_SETTINGS.sliderTrackColor,
+    sliderFillColor: DEFAULT_SETTINGS.sliderFillColor,
     fontScale: DEFAULT_SETTINGS.fontScale,
     radius: DEFAULT_SETTINGS.radius,
     panelBlur: DEFAULT_SETTINGS.panelBlur,
@@ -143,10 +147,19 @@ function updateSetting(key, value) {
     value = value === "light" ? "light" : "dark";
     const currentTextColor = normalizeHexColor(state.settings.textColor, THEME_TEXT_DEFAULTS[state.settings.theme]);
     const isUsingThemeDefault = currentTextColor === THEME_TEXT_DEFAULTS.dark || currentTextColor === THEME_TEXT_DEFAULTS.light;
+    const currentPanelColor = normalizeHexColor(state.settings.panelColor, PANEL_COLOR_DEFAULTS[state.settings.theme]);
+    const isUsingPanelDefault = currentPanelColor === PANEL_COLOR_DEFAULTS.dark || currentPanelColor === PANEL_COLOR_DEFAULTS.light;
+    const currentDropdownColor = normalizeHexColor(state.settings.dropdownColor, DROPDOWN_COLOR_DEFAULTS[state.settings.theme]);
+    const isUsingDropdownDefault = currentDropdownColor === DROPDOWN_COLOR_DEFAULTS.dark || currentDropdownColor === DROPDOWN_COLOR_DEFAULTS.light;
+    const currentSliderTrackColor = normalizeHexColor(state.settings.sliderTrackColor, SLIDER_TRACK_COLOR_DEFAULTS[state.settings.theme]);
+    const isUsingSliderTrackDefault = currentSliderTrackColor === SLIDER_TRACK_COLOR_DEFAULTS.dark || currentSliderTrackColor === SLIDER_TRACK_COLOR_DEFAULTS.light;
     state.settings = sanitizeSettings({
       ...state.settings,
       theme: value,
-      textColor: isUsingThemeDefault ? THEME_TEXT_DEFAULTS[value] : currentTextColor
+      textColor: isUsingThemeDefault ? THEME_TEXT_DEFAULTS[value] : currentTextColor,
+      panelColor: isUsingPanelDefault ? PANEL_COLOR_DEFAULTS[value] : currentPanelColor,
+      dropdownColor: isUsingDropdownDefault ? DROPDOWN_COLOR_DEFAULTS[value] : currentDropdownColor,
+      sliderTrackColor: isUsingSliderTrackDefault ? SLIDER_TRACK_COLOR_DEFAULTS[value] : currentSliderTrackColor
     });
   } else {
     state.settings = sanitizeSettings({
@@ -285,6 +298,10 @@ function sanitizeSettings(value) {
     themeStyle: value?.themeStyle in THEME_STYLE_FILES ? value.themeStyle : DEFAULT_SETTINGS.themeStyle,
     accentColor: normalizeHexColor(value?.accentColor, DEFAULT_SETTINGS.accentColor),
     textColor,
+    panelColor: normalizeHexColor(value?.panelColor, PANEL_COLOR_DEFAULTS[theme]),
+    dropdownColor: normalizeHexColor(value?.dropdownColor, DROPDOWN_COLOR_DEFAULTS[theme]),
+    sliderTrackColor: normalizeHexColor(value?.sliderTrackColor, SLIDER_TRACK_COLOR_DEFAULTS[theme]),
+    sliderFillColor: normalizeHexColor(value?.sliderFillColor, DEFAULT_SETTINGS.sliderFillColor),
     searchSuggestionsEnabled: typeof value?.searchSuggestionsEnabled === "boolean"
       ? value.searchSuggestionsEnabled
       : DEFAULT_SETTINGS.searchSuggestionsEnabled,

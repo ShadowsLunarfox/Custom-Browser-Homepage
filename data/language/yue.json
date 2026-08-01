@@ -95,6 +95,7 @@
     "url_placeholder": "https://example.com"
   },
   "settings": {
+    "repository_link": "項目倉庫：",
     "title": "設定",
     "library": {
       "title": "資料庫",
@@ -169,9 +170,21 @@
     "font_color": {
       "label": "字體顏色"
     },
+    "panel_color": {
+      "label": "面板顏色"
+    },
+    "dropdown_color": {
+      "label": "下拉選單顏色"
+    },
+    "slider_track_color": {
+      "label": "滑桿軌道顏色"
+    },
+    "slider_fill_color": {
+      "label": "滑桿進度顏色"
+    },
     "surface": {
-      "title": "??",
-      "desc": "????????????????????"
+      "title": "表面",
+      "desc": "控制文字大小、圓角、透明度同玻璃效果。"
     },
     "font_size": {
       "label": "字體大小"
@@ -183,8 +196,8 @@
       "label": "面板模糊"
     },
     "layout": {
-      "title": "????",
-      "desc": "?????????????????"
+      "title": "捷徑版面",
+      "desc": "選擇捷徑顯示模式、密度同卡片大小。"
     },
     "grid": {
       "title": "格仔",
@@ -229,36 +242,36 @@
       "desc": "將目前外觀或者牆紙還原返預設。"
     },
     "search": {
-      "title": "??",
-      "desc": "??????????????"
+      "title": "搜尋",
+      "desc": "選擇搜尋供應商同建議行為。"
     },
     "search_provider": {
-      "title": "????",
-      "desc": "????????????????"
+      "title": "供應商",
+      "desc": "揀主搜尋框使用嘅預設引擎。"
     },
     "reset_appearance": {
-      "title": "????",
-      "desc": "???????????????????"
+      "title": "重設外觀",
+      "desc": "還原顏色同外觀數值，但唔會改書籤或壁紙。"
     },
     "page_elements": {
-      "title": "????",
-      "desc": "???????????????"
+      "title": "頁面元素",
+      "desc": "顯示、隱藏同調整首頁模組樣式。"
     },
     "clock": {
-      "title": "??",
-      "desc": "????????????"
+      "title": "時鐘",
+      "desc": "控制時鐘模組同顯示樣式。"
     },
     "visibility": {
-      "title": "????",
-      "desc": "??????????????"
+      "title": "可見性",
+      "desc": "選擇首頁會顯示邊啲模組。"
     },
     "reset_background": {
-      "title": "????",
-      "desc": "?????????????????"
+      "title": "重設背景",
+      "desc": "回復主題背景，但唔會改其他外觀設定。"
     },
     "debug": {
-      "title": "??",
-      "desc": "??????????????????"
+      "title": "偵錯",
+      "desc": "用嚟測試同重設本機瀏覽器資料嘅工具。"
     }
   },
   "layout": {

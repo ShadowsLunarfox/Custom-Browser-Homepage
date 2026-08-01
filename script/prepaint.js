@@ -22,6 +22,13 @@
     accentColor: "#7dc4ff",
     textColorDark: "#f3f6ff",
     textColorLight: "#182338",
+    panelColorDark: "#1c2438",
+    panelColorLight: "#ffffff",
+    dropdownColorDark: "#26304a",
+    dropdownColorLight: "#ffffff",
+    sliderTrackColorDark: "#33405e",
+    sliderTrackColorLight: "#d8e3f5",
+    sliderFillColor: "#7dc4ff",
     fontScale: 100,
     radius: 20,
     panelBlur: 22,
@@ -51,6 +58,13 @@
   function applyTheme(settings, body, root) {
     var theme = settings.theme === "light" ? "light" : "dark";
     var accent = normalizeHexColor(settings.accentColor, DEFAULTS.accentColor);
+    var panelColorFallback = theme === "light" ? DEFAULTS.panelColorLight : DEFAULTS.panelColorDark;
+    var dropdownColorFallback = theme === "light" ? DEFAULTS.dropdownColorLight : DEFAULTS.dropdownColorDark;
+    var sliderTrackColorFallback = theme === "light" ? DEFAULTS.sliderTrackColorLight : DEFAULTS.sliderTrackColorDark;
+    var panelBase = normalizeHexColor(settings.panelColor, panelColorFallback);
+    var dropdown = normalizeHexColor(settings.dropdownColor, dropdownColorFallback);
+    var sliderTrack = normalizeHexColor(settings.sliderTrackColor, sliderTrackColorFallback);
+    var sliderFill = normalizeHexColor(settings.sliderFillColor, DEFAULTS.sliderFillColor);
     var textFallback = theme === "light" ? DEFAULTS.textColorLight : DEFAULTS.textColorDark;
     var textColor = resolveThemeTextColor(settings.textColor, theme, textFallback);
     var softText = mixHex(textColor, theme === "dark" ? "#8f99ae" : "#5e6a81", 0.44);
@@ -63,6 +77,14 @@
     root.style.setProperty("--accent-strong", mixHex(accent, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.12 : 0.16));
     root.style.setProperty("--accent-muted", mixHex(accent, theme === "dark" ? "#0f1421" : "#ffffff", theme === "dark" ? 0.66 : 0.38));
     root.style.setProperty("--accent-ink", pickReadableTextColor(accent));
+    root.style.setProperty("--dropdown", dropdown);
+    root.style.setProperty("--dropdown-hover", mixHex(dropdown, accent, 0.18));
+    root.style.setProperty("--dropdown-ink", pickReadableTextColor(dropdown));
+    root.style.setProperty("--slider-track", sliderTrack);
+    root.style.setProperty("--slider-track-strong", mixHex(sliderTrack, theme === "dark" ? "#000000" : "#ffffff", 0.18));
+    root.style.setProperty("--slider-fill", sliderFill);
+    root.style.setProperty("--slider-fill-strong", mixHex(sliderFill, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.16 : 0.12));
+    root.style.setProperty("--slider-ink", pickReadableTextColor(sliderFill));
     root.style.setProperty("--text-main", textColor);
     root.style.setProperty("--text-soft", softText);
     root.style.setProperty("--font-scale", String(clampNumber(settings.fontScale, 90, 120, DEFAULTS.fontScale) / 100));
@@ -74,15 +96,14 @@
     root.style.setProperty("--card-height", clampNumber(settings.cardHeight, 160, 280, DEFAULTS.cardHeight) + "px");
     root.style.setProperty("--clock-display", settings.clockVisible === false ? "none" : "grid");
 
-    if (theme === "light") {
-      root.style.setProperty("--panel", "rgba(255, 255, 255, " + panelOpacity + ")");
-      root.style.setProperty("--panel-strong", "rgba(255, 255, 255, " + panelStrongOpacity + ")");
-      root.style.setProperty("--panel-soft", "rgba(238, 243, 255, " + Math.max(0.68, panelStrongOpacity) + ")");
-    } else {
-      root.style.setProperty("--panel", "rgba(28, 36, 56, " + panelOpacity + ")");
-      root.style.setProperty("--panel-strong", "rgba(38, 47, 72, " + panelStrongOpacity + ")");
-      root.style.setProperty("--panel-soft", "rgba(50, 61, 92, " + panelSoftOpacity + ")");
-    }
+    var panelStrong = mixHex(panelBase, "#ffffff", theme === "dark" ? 0.12 : 0.34);
+    var panelSoft = mixHex(panelBase, "#ffffff", theme === "dark" ? 0.22 : 0.48);
+    var panelRgb = hexToRgb(panelBase);
+    var panelStrongRgb = hexToRgb(panelStrong);
+    var panelSoftRgb = hexToRgb(panelSoft);
+    root.style.setProperty("--panel", formatRgba(panelRgb, panelOpacity));
+    root.style.setProperty("--panel-strong", formatRgba(panelStrongRgb, panelStrongOpacity));
+    root.style.setProperty("--panel-soft", formatRgba(panelSoftRgb, panelSoftOpacity));
 
     body.classList.toggle("search-ui-hidden", settings.searchUiVisible === false);
     body.classList.toggle("shortcuts-ui-hidden", settings.shortcutsVisible === false);
@@ -202,6 +223,10 @@
     var rgb = hexToRgb(hex);
     var luminance = (0.299 * rgb.r) + (0.587 * rgb.g) + (0.114 * rgb.b);
     return luminance > 165 ? "#111827" : "#f9fbff";
+  }
+
+  function formatRgba(rgb, alpha) {
+    return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + alpha + ")";
   }
 
   function escapeCssUrl(value) {

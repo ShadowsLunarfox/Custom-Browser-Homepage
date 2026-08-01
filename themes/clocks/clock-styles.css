@@ -12,7 +12,8 @@
   border-radius: var(--ui-radius-lg);
   background: var(--panel);
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(max(0px, calc(var(--panel-blur) - 4px))) saturate(120%);
+  backdrop-filter: var(--glass-filter-subtle);
+  -webkit-backdrop-filter: var(--glass-filter-subtle);
   transform: scale(var(--panel-scale, 1));
   transform-origin: top left;
 }
