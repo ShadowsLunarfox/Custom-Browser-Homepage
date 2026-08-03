@@ -6,7 +6,7 @@
 
 A customizable browser new tab extension with search, shortcuts, themes, wallpapers, clocks, and draggable panels.
 
-[GitHub Profile](https://github.com/ShadowsLunarfox) | [Project Repository](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage)
+
 
 </div>
 
