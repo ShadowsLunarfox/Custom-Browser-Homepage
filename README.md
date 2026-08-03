@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 <div align="center">
 
 # Lunar Start Page
@@ -44,3 +46,6 @@ A customizable browser new tab extension with search, shortcuts, themes, wallpap
 4. Select the extracted project folder.
 5. Open a new tab to use Lunar Start Page.
 
+=======
+
+>>>>>>> 9249f601e480a52593b7e279ab9f89c654041742
