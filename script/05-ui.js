@@ -739,8 +739,20 @@ function closeCustomSelect(select, restoreFocus = false) {
 
 function setCustomSelectContainerLayer(select, isOpen) {
   const shell = getCustomSelectShell(select);
-  shell?.closest(".settings-subsection")?.classList.toggle("is-select-menu-open", isOpen);
-  shell?.closest(".settings-section")?.classList.toggle("is-select-menu-open", isOpen);
+  [
+    ".custom-select",
+    ".search-engine-wrap",
+    ".search-box-combined",
+    ".search-form",
+    ".hero-content",
+    ".hero-card",
+    ".panel",
+    ".app-dialog",
+    ".settings-subsection",
+    ".settings-section"
+  ].forEach((selector) => {
+    shell?.closest(selector)?.classList.toggle("is-select-menu-open", isOpen);
+  });
 }
 
 function positionCustomSelectList(select) {

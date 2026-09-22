@@ -312,6 +312,8 @@ input[type="range"],
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 16px;
   width: 100%;
@@ -380,6 +382,18 @@ input[type="range"],
   position: relative;
   width: 100%;
   min-width: 0;
+}
+
+.custom-select.is-open {
+  z-index: 70;
+}
+
+.hero-content.is-select-menu-open,
+.search-form.is-select-menu-open,
+.search-box-combined.is-select-menu-open,
+.search-engine-wrap.is-select-menu-open {
+  position: relative;
+  z-index: 80;
 }
 
 .custom-select-search {
@@ -489,7 +503,7 @@ input[type="range"],
   left: 0;
   right: 0;
   top: calc(100% + 6px);
-  z-index: 20;
+  z-index: 71;
   max-height: min(380px, 58vh);
   padding: 6px;
   overflow-y: auto;
@@ -1929,9 +1943,17 @@ body[data-theme="light"] .settings-section {
   border: 1px solid color-mix(in srgb, var(--panel-border) 90%, transparent);
 }
 
+.hero-card.is-select-menu-open,
+.panel.is-select-menu-open,
+.app-dialog.is-select-menu-open,
 .settings-section.is-select-menu-open,
 .settings-subsection.is-select-menu-open {
   z-index: 40;
+}
+
+.hero-card.is-select-menu-open .panel-drag-handle,
+.hero-card.is-select-menu-open .resize-handle {
+  z-index: 1;
 }
 
 .settings-subhead {
