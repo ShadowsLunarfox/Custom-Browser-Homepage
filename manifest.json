@@ -8,9 +8,6 @@
     "newtab": "home.html"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
     "service_worker": "background.js"
   },
   "icons": {
