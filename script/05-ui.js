@@ -1,4 +1,4 @@
-﻿// Live clock rendering.
+// Live clock rendering.
 const BACKGROUND_VIDEO_HAVE_METADATA = 1;
 const BACKGROUND_VIDEO_HAVE_CURRENT_DATA = 2;
 const BACKGROUND_VIDEO_RECOVERY_DELAY_MS = 520;
@@ -63,7 +63,6 @@ function updateClock() {
 
 function renderPriorityBackgroundShell() {
   applyThemeSettings();
-  applyThemeStyle();
   renderInitialBackgroundShell();
 }
 
@@ -71,7 +70,6 @@ function renderPriorityBackgroundShell() {
 function renderAll(options = {}) {
   const includeBackground = options.includeBackground !== false;
   applyThemeSettings();
-  applyThemeStyle();
   renderPanelPositions();
   renderSearchEngine();
   renderCollection();
@@ -106,6 +104,7 @@ function renderSearchEngine() {
 function renderLayoutSwitch() {
   layoutGridButtonEl.classList.toggle("is-active", state.layout === "grid");
   layoutListButtonEl.classList.toggle("is-active", state.layout === "list");
+  syncWorkspaceLayout();
 }
 
 // Mirror settings values back into the settings UI controls.
@@ -113,13 +112,6 @@ function renderSettingsPanel() {
   const resolvedTextColor = resolveThemeTextColor(state.settings.textColor, state.settings.theme);
   languageSelectEl.value = currentLanguage;
   themeModeEl.value = state.settings.theme;
-  themeStyleEl.value = state.settings.themeStyle;
-  if (settingsColorsSectionEl) {
-    const hideColorSettings = !["default", "cartoon"].includes(state.settings.themeStyle);
-    settingsColorsSectionEl.hidden = hideColorSettings;
-    settingsColorsSectionEl.classList.toggle("is-hidden", hideColorSettings);
-    settingsColorsSectionEl.setAttribute("aria-hidden", hideColorSettings ? "true" : "false");
-  }
   searchSuggestionsSettingEl.value = state.settings.searchSuggestionsEnabled ? "on" : "off";
   searchSuggestionsAllEnginesSettingEl.value = state.settings.searchSuggestionsAllEnginesEnabled ? "all" : "selected";
   searchSuggestionsAllEnginesSettingEl.disabled = !state.settings.searchSuggestionsEnabled;
@@ -169,6 +161,9 @@ function renderSettingsPanel() {
 
 function renderSearchSuggestionEngineList() {
   if (!searchSuggestionEngineListEl) return;
+  const signature = JSON.stringify([currentLanguage, state.settings.searchSuggestionsEnabled, state.settings.searchSuggestionsAllEnginesEnabled, state.settings.searchSuggestionEngineKeys]);
+  if (searchSuggestionEngineListEl.dataset.renderSignature === signature) return;
+  searchSuggestionEngineListEl.dataset.renderSignature = signature;
 
   const selectedKeys = new Set(state.settings.searchSuggestionEngineKeys);
   const disabled = !state.settings.searchSuggestionsEnabled || !state.settings.searchSuggestionsAllEnginesEnabled;
@@ -762,12 +757,19 @@ function positionCustomSelectList(select) {
 
   shell.classList.remove("is-drop-up");
   const shellRect = shell.getBoundingClientRect();
-  const spaceBelow = window.innerHeight - shellRect.bottom;
-  const spaceAbove = shellRect.top;
-  const listHeight = Math.min(list.scrollHeight, window.innerHeight * 0.44, 280);
+  const scrollContainer = shell.closest(".debug-content, .settings-content");
+  const scrollBounds = scrollContainer?.getBoundingClientRect();
+  const visibleTop = Math.max(0, scrollBounds?.top || 0);
+  const visibleBottom = Math.min(window.innerHeight, scrollBounds?.bottom ?? window.innerHeight);
+  const spaceBelow = Math.max(0, visibleBottom - shellRect.bottom);
+  const spaceAbove = Math.max(0, shellRect.top - visibleTop);
+  const listHeight = Math.min(list.scrollHeight, window.innerHeight * 0.45, 320);
+  let availableSpace = spaceBelow;
   if (spaceBelow < listHeight + 12 && spaceAbove > spaceBelow) {
     shell.classList.add("is-drop-up");
+    availableSpace = spaceAbove;
   }
+  list.style.maxHeight = `${Math.max(0, Math.min(window.innerHeight * 0.45, 320, availableSpace - 12))}px`;
 }
 
 function chooseCustomSelectOption(select, index) {
@@ -819,6 +821,7 @@ function handleCustomSelectListKeydown(event, select) {
 }
 
 function openSettingsDialog() {
+  if (document.body.classList.contains("layout-editing")) setLayoutEditing(false);
   ensureSettingsControlsInitialized();
   ensurePresetButtonsRendered();
   renderSettingsPanel();
@@ -1260,7 +1263,7 @@ function applyThemeSettings() {
   const accentStrong = mixHex(accent, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.12 : 0.16);
   const accentMuted = mixHex(accent, theme === "dark" ? "#0f1421" : "#ffffff", theme === "dark" ? 0.66 : 0.38);
   const mainText = resolveThemeTextColor(state.settings.textColor, theme);
-  const softText = mixHex(mainText, theme === "dark" ? "#8f99ae" : "#5e6a81", 0.44);
+  const softText = mixHex(mainText, theme === "dark" ? "#a3b1a8" : "#4f6256", 0.35);
   const buttonInk = pickReadableTextColor(accent);
   const panelOpacity = state.settings.panelOpacity / 100;
   const panelStrongOpacity = Math.min(1, panelOpacity + 0.08);
@@ -1289,6 +1292,7 @@ function applyThemeSettings() {
   document.documentElement.style.setProperty("--card-height", `${state.settings.cardHeight}px`);
   document.documentElement.style.setProperty("--clock-display", state.settings.clockVisible ? "grid" : "none");
   document.body.classList.toggle("search-ui-hidden", !state.settings.searchUiVisible);
+  document.body.classList.toggle("clock-ui-hidden", !state.settings.clockVisible);
   document.body.classList.toggle("shortcuts-ui-hidden", !state.settings.shortcutsVisible);
   clockPanelEl.dataset.clockStyle = state.settings.clockStyle;
   analogClockEl.classList.toggle("is-visible", state.settings.clockStyle.startsWith("analog"));
@@ -1302,45 +1306,6 @@ function applyThemeSettings() {
   document.documentElement.style.setProperty("--panel", `rgba(${panelRgb.r}, ${panelRgb.g}, ${panelRgb.b}, ${panelOpacity})`);
   document.documentElement.style.setProperty("--panel-strong", `rgba(${panelStrongRgb.r}, ${panelStrongRgb.g}, ${panelStrongRgb.b}, ${panelStrongOpacity})`);
   document.documentElement.style.setProperty("--panel-soft", `rgba(${panelSoftRgb.r}, ${panelSoftRgb.g}, ${panelSoftRgb.b}, ${panelSoftOpacity})`);
-}
-
-// Load the optional external style theme file.
-function applyThemeStyle() {
-  const styleKey = state.settings.themeStyle in THEME_STYLE_FILES ? state.settings.themeStyle : "default";
-  const href = THEME_STYLE_FILES[styleKey];
-  const currentHref = themeStyleLinkEl.getAttribute("href") || "";
-  document.body.dataset.themeStyle = styleKey;
-  loadThemeFont(styleKey);
-
-  if (!href) {
-    if (currentHref) {
-      themeStyleLinkEl.removeAttribute("href");
-      refreshBackgroundVideoAfterThemeChange();
-    }
-    return;
-  }
-
-  if (currentHref === href) {
-    return;
-  }
-
-  themeStyleLinkEl.addEventListener("load", refreshBackgroundVideoAfterThemeChange, { once: true });
-  themeStyleLinkEl.addEventListener("error", refreshBackgroundVideoAfterThemeChange, { once: true });
-  themeStyleLinkEl.setAttribute("href", href);
-}
-
-function loadThemeFont(styleKey) {
-  const href = THEME_FONT_FILES[styleKey];
-  if (!href || loadedThemeFontKey === styleKey) return;
-
-  loadedThemeFontKey = styleKey;
-  runWhenIdle(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    link.dataset.themeFont = styleKey;
-    document.head.appendChild(link);
-  });
 }
 
 function runWhenIdle(callback) {
@@ -1361,7 +1326,16 @@ function applyGridSettings() {
 
 
 function showInlineNotice(message, tone = "info") {
-  if (!appNoticesEl || !message) return;
+  if (!message) return;
+  // A modal sits above page notices, so report debug results inside its visible footer.
+  const debugNotice = document.querySelector('#debug-dialog[open] [data-debug-notice]');
+  if (debugNotice) {
+    debugNotice.textContent = message;
+    debugNotice.dataset.tone = tone;
+    debugNotice.hidden = false;
+    return;
+  }
+  if (!appNoticesEl) return;
 
   const notice = document.createElement("section");
   notice.className = `app-notice${tone === "warning" || tone === "error" ? ` is-${tone}` : ""}`;

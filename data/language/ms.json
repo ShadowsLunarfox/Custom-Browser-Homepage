@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "Gambaran keseluruhan",
+    "storage": "Storan & data",
+    "testing": "Ujian keserasian",
+    "maintenance": "Tetapkan semula & bersihkan"
+  },
   "app": {
     "title": "Laman Utama Saya"
   },
@@ -123,9 +129,6 @@
     },
     "theme_mode": {
       "label": "Mod tema"
-    },
-    "ui_style": {
-      "label": "Gaya UI"
     },
     "search_engine": {
       "label": "Enjin carian lalai"
@@ -282,14 +285,6 @@
     "dark": "Gelap",
     "light": "Cerah"
   },
-  "ui": {
-    "default": "Lalai",
-    "cartoon": "Kartun",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "Terminal",
-    "paper": "Kertas"
-  },
   "languages": {
     "en": "English",
     "zh-CN": "Cina Ringkas",
@@ -354,5 +349,33 @@
     "import_failed": "Import gagal. Sila pilih fail eksport penanda buku yang sah.",
     "save_failed": "Perubahan tidak dapat disimpan dalam storan pelayar.",
     "all_engine_suggestions_warning": "Cadangan semua enjin akan memanggil beberapa penyedia carian serentak dan mungkin menggunakan lebih banyak rangkaian daripada biasa."
+  },
+  "workspace": {
+    "start_page": "Halaman mula anda",
+    "customize": "Sesuaikan",
+    "eyebrow": "Ruang kecil milik anda",
+    "caption": "Permulaan baharu. Pelbagai kemungkinan.",
+    "shortcuts": "Laman harian anda",
+    "footer": "Sudut internet yang lebih tenang.",
+    "settings_subtitle": "Ruang anda, hingga ke perincian.",
+    "personalize": "Jadikan milik anda",
+    "settings_categories": "Kategori tetapan",
+    "shortcut_count": "{count} pintasan",
+    "start_area": "Masa & carian",
+    "adjust_layout": "Laraskan susun atur",
+    "reset_layout": "Tetapkan semula susun atur",
+    "done": "Selesai",
+    "layout_help": "Seret latar atau teks modul untuk mengalih, dan penjuru untuk mengubah saiz.",
+    "filter_sites": "Cari laman tersimpan",
+    "clear_filter": "Kosongkan penapis",
+    "filtered_shortcut_count": "{count} daripada {total} pintasan",
+    "home_settings": "Laman utama",
+    "home_settings_desc": "Laraskan paparan modul, jam dan kepadatan pintasan di satu tempat.",
+    "appearance_settings": "Rupa & latar",
+    "appearance_settings_desc": "Laraskan teks, warna dan latar bersama.",
+    "data_settings": "Sandaran & alat",
+    "data_settings_desc": "Sandar dan pulihkan data serta gunakan diagnostik lanjutan.",
+    "filter_empty_title": "Tiada laman ditemui",
+    "filter_empty_desc": "Cuba nama atau alamat lain, atau kosongkan penapis."
   }
 }

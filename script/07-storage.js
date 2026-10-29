@@ -111,7 +111,6 @@ function resetAppearanceSettings() {
   state.settings = sanitizeSettings({
     ...state.settings,
     theme: DEFAULT_SETTINGS.theme,
-    themeStyle: DEFAULT_SETTINGS.themeStyle,
     accentColor: DEFAULT_SETTINGS.accentColor,
     textColor: DEFAULT_SETTINGS.textColor,
     panelColor: DEFAULT_SETTINGS.panelColor,
@@ -141,7 +140,11 @@ function clearDebugLocalStorage() {
   }
 }
 
-// Update a single setting, sanitize it, then redraw the UI.
+const pendingSettingChanges = new Set();
+let pendingSettingsFrame = 0;
+window.addEventListener("pagehide", flushPendingSettingChanges);
+
+// Update state immediately; coalesce rapid slider input into one render and save per frame.
 function updateSetting(key, value) {
   if (key === "theme") {
     value = value === "light" ? "light" : "dark";
@@ -167,26 +170,36 @@ function updateSetting(key, value) {
       [key]: value
     });
   }
+  pendingSettingChanges.add(key);
+  if (!pendingSettingsFrame) pendingSettingsFrame = window.requestAnimationFrame(flushPendingSettingChanges);
+}
+
+function flushPendingSettingChanges() {
+  if (pendingSettingsFrame) window.cancelAnimationFrame(pendingSettingsFrame);
+  pendingSettingsFrame = 0;
+  if (!pendingSettingChanges.size) return;
+  const keys = [...pendingSettingChanges];
+  pendingSettingChanges.clear();
+  renderAfterSettingChange(keys);
   saveState();
-  renderAfterSettingChange(key);
 }
 
 function renderAfterSettingChange(key) {
+  const keys = Array.isArray(key) ? key : [key];
   applyThemeSettings();
-  applyThemeStyle();
   applyGridSettings();
 
-  if (key === "theme" || key === "themeStyle") {
+  if (keys.includes("theme")) {
     refreshBackgroundVideoAfterThemeChange();
   }
 
-  if (key === "searchSuggestionsEnabled" && !state.settings.searchSuggestionsEnabled) {
+  if (keys.includes("searchSuggestionsEnabled") && !state.settings.searchSuggestionsEnabled) {
     cancelPendingSearchSuggestions();
   }
 
   renderSettingsPanelIfReady();
-  if (shouldNormalizePanelsAfterSettingChange(key)) {
-    requestAnimationFrame(() => normalizePanelsToViewport(true));
+  if (keys.some(shouldNormalizePanelsAfterSettingChange)) {
+    schedulePanelNormalization(true);
   }
 }
 
@@ -291,11 +304,30 @@ function sanitizeSearchHistory(value) {
 
 function sanitizeSettings(value) {
   const theme = value?.theme === "light" ? "light" : "dark";
+  // Old coordinates were relative to a fixed clock and large bordered panels.
+  // Migrate that presentation once; bookmark data and all feature settings are retained.
+  const currentLayout = value?.interfaceLayoutVersion === INTERFACE_LAYOUT_VERSION;
+  const compactCards = Number(value?.interfaceLayoutVersion) >= 2;
+  if (!currentLayout && value) {
+    value = { ...value };
+    const legacyDefaults = {
+      textColor: { "#f3f6ff": THEME_TEXT_DEFAULTS.dark, "#182338": THEME_TEXT_DEFAULTS.light },
+      panelColor: { "#1c2438": PANEL_COLOR_DEFAULTS.dark },
+      dropdownColor: { "#26304a": DROPDOWN_COLOR_DEFAULTS.dark },
+      sliderTrackColor: { "#33405e": SLIDER_TRACK_COLOR_DEFAULTS.dark, "#d8e3f5": SLIDER_TRACK_COLOR_DEFAULTS.light },
+      accentColor: { "#7dc4ff": DEFAULT_SETTINGS.accentColor },
+      sliderFillColor: { "#7dc4ff": DEFAULT_SETTINGS.sliderFillColor }
+    };
+    Object.entries(legacyDefaults).forEach(([key, replacements]) => {
+      const replacement = replacements[String(value[key]).toLowerCase()];
+      if (replacement) value[key] = replacement;
+    });
+  }
   const rawTextColor = normalizeHexColor(value?.textColor, THEME_TEXT_DEFAULTS[theme]);
   const textColor = resolveThemeTextColor(rawTextColor, theme);
   return {
+    interfaceLayoutVersion: INTERFACE_LAYOUT_VERSION,
     theme,
-    themeStyle: value?.themeStyle in THEME_STYLE_FILES ? value.themeStyle : DEFAULT_SETTINGS.themeStyle,
     accentColor: normalizeHexColor(value?.accentColor, DEFAULT_SETTINGS.accentColor),
     textColor,
     panelColor: normalizeHexColor(value?.panelColor, PANEL_COLOR_DEFAULTS[theme]),
@@ -322,12 +354,12 @@ function sanitizeSettings(value) {
     clockStyle: CLOCK_STYLES.includes(value?.clockStyle) ? value.clockStyle : DEFAULT_SETTINGS.clockStyle,
     columns: clampNumber(value?.columns, 2, 8, DEFAULT_SETTINGS.columns),
     rows: clampNumber(value?.rows, 1, 5, DEFAULT_SETTINGS.rows),
-    cardGap: clampNumber(value?.cardGap, 8, 28, DEFAULT_SETTINGS.cardGap),
-    cardHeight: clampNumber(value?.cardHeight, 160, 280, DEFAULT_SETTINGS.cardHeight),
+    cardGap: clampNumber(compactCards ? value?.cardGap : Number(value?.cardGap) * 0.75, 8, 28, DEFAULT_SETTINGS.cardGap),
+    cardHeight: clampNumber(compactCards ? value?.cardHeight : Number(value?.cardHeight) / 2, 80, compactCards ? 160 : 112, DEFAULT_SETTINGS.cardHeight),
     panelOpacity: clampNumber(value?.panelOpacity ?? value?.backgroundOpacity, 45, 100, DEFAULT_SETTINGS.panelOpacity),
-    panelPositions: sanitizePanelPositions(value?.panelPositions),
-    panelDesiredPositions: sanitizePanelDesiredPositions(value?.panelDesiredPositions, value?.panelPositions),
-    panelScales: sanitizePanelScales(value?.panelScales, value?.clockScale)
+    panelPositions: sanitizePanelPositions(currentLayout ? value?.panelPositions : undefined),
+    panelDesiredPositions: sanitizePanelDesiredPositions(currentLayout ? value?.panelDesiredPositions : undefined, currentLayout ? value?.panelPositions : undefined),
+    panelScales: sanitizePanelScales(currentLayout ? value?.panelScales : undefined, currentLayout ? value?.clockScale : undefined)
   };
 }
 

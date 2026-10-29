@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "概览",
+    "storage": "存储与数据",
+    "testing": "兼容性测试",
+    "maintenance": "重置与清理"
+  },
   "app": {
     "title": "我的主页"
   },
@@ -9,7 +15,7 @@
   },
   "search": {
     "label": "搜索",
-    "placeholder": "输入内容后按回车",
+    "placeholder": "搜索所想，前往所向",
     "aria_query": "搜索内容",
     "aria_engine": "搜索引擎",
     "suggestions_aria": "搜索建议",
@@ -216,20 +222,17 @@
     },
     "appearance": {
       "title": "外观",
-      "desc": "调整页面的整体视觉效果。"
+      "desc": "统一的现代界面，让每一处细节都合你心意。"
     },
     "theme": {
-      "title": "主题",
-      "desc": "选择基础模式和界面风格。"
+      "title": "显示",
+      "desc": "选择界面语言与深浅显示模式。"
     },
     "language": {
       "label": "语言"
     },
     "theme_mode": {
-      "label": "主题模式"
-    },
-    "ui_style": {
-      "label": "界面风格"
+      "label": "显示模式"
     },
     "search_engine": {
       "label": "默认搜索引擎"
@@ -411,14 +414,6 @@
     "dark": "深色",
     "light": "浅色"
   },
-  "ui": {
-    "default": "默认",
-    "cartoon": "卡通",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "终端",
-    "paper": "纸张"
-  },
   "languages": {
     "en": "English",
     "zh-CN": "简体中文",
@@ -468,7 +463,7 @@
     "custom_image_selected": "已选择自定义图片",
     "no_custom_image": "未选择自定义图片",
     "current_preset": "当前背景：{name}",
-    "current_theme": "当前背景：主题背景",
+    "current_theme": "?????????",
     "image_save_failed": "图片无法保存"
   },
   "alerts": {
@@ -512,5 +507,33 @@
     "force_first_run_flow_confirm": "这会清除浏览器预检缓存和兼容确认记录，然后重新加载页面，再次显示首次兼容检测流程。要继续吗？",
     "language_preview_applied": "已在本次会话中应用语言预览。",
     "language_preview_failed": "语言预览失败。"
+  },
+  "workspace": {
+    "start_page": "你的起始页",
+    "customize": "个性化",
+    "eyebrow": "留一方空间，给自己",
+    "caption": "从此刻出发，让可能发生。",
+    "shortcuts": "常用网站",
+    "footer": "互联网里，属于你的安静一角。",
+    "settings_subtitle": "每一个细节，都由你定义。",
+    "personalize": "随心设置",
+    "settings_categories": "设置分类",
+    "shortcut_count": "{count} 个快捷方式",
+    "start_area": "时间与搜索",
+    "adjust_layout": "调整布局",
+    "reset_layout": "恢复默认布局",
+    "done": "完成",
+    "layout_help": "???????????????????????",
+    "filter_sites": "筛选已保存的网站",
+    "clear_filter": "清除筛选",
+    "filtered_shortcut_count": "显示 {count} / {total} 个网站",
+    "home_settings": "主页",
+    "home_settings_desc": "集中调整组件显示、时钟样式和快捷方式密度。",
+    "appearance_settings": "外观与壁纸",
+    "appearance_settings_desc": "一起调整文字可读性、配色和背景。",
+    "data_settings": "备份与工具",
+    "data_settings_desc": "备份、恢复数据，并查看高级诊断工具。",
+    "filter_empty_title": "没有找到相关网站",
+    "filter_empty_desc": "试试其他名称或网址，或者清除筛选。"
   }
 }

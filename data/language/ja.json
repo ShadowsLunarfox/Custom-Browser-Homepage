@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "概要",
+    "storage": "ストレージとデータ",
+    "testing": "互換性テスト",
+    "maintenance": "リセットとクリーンアップ"
+  },
   "app": {
     "title": "マイホーム"
   },
@@ -123,9 +129,6 @@
     },
     "theme_mode": {
       "label": "テーマモード"
-    },
-    "ui_style": {
-      "label": "UI スタイル"
     },
     "search_engine": {
       "label": "既定の検索エンジン"
@@ -282,14 +285,6 @@
     "dark": "ダーク",
     "light": "ライト"
   },
-  "ui": {
-    "default": "既定",
-    "cartoon": "カートゥーン",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "ターミナル",
-    "paper": "ペーパー"
-  },
   "languages": {
     "en": "English",
     "zh-CN": "簡体字中国語",
@@ -354,5 +349,33 @@
     "import_failed": "インポートに失敗しました。有効なブックマークのエクスポートファイルを選択してください。",
     "save_failed": "変更をブラウザーのストレージに保存できませんでした。",
     "all_engine_suggestions_warning": "すべてのエンジン候補は複数の検索プロバイダーへ同時に問い合わせるため、通常よりネットワーク使用量が増える場合があります。"
+  },
+  "workspace": {
+    "start_page": "あなたのスタートページ",
+    "customize": "カスタマイズ",
+    "eyebrow": "自分だけの小さな空間",
+    "caption": "新しい始まり。広がる可能性。",
+    "shortcuts": "よく使うサイト",
+    "footer": "インターネットの、穏やかな片隅。",
+    "settings_subtitle": "細部まで、あなたらしく。",
+    "personalize": "自分らしく",
+    "settings_categories": "設定カテゴリー",
+    "shortcut_count": "{count} 件のショートカット",
+    "start_area": "時計と検索",
+    "adjust_layout": "配置を調整",
+    "reset_layout": "配置をリセット",
+    "done": "完了",
+    "layout_help": "??????????????????????????????????",
+    "filter_sites": "保存したサイトを絞り込む",
+    "clear_filter": "絞り込みを解除",
+    "filtered_shortcut_count": "{total} 件中 {count} 件",
+    "home_settings": "ホーム",
+    "home_settings_desc": "表示する項目、時計、ショートカットの密度をまとめて調整します。",
+    "appearance_settings": "外観と壁紙",
+    "appearance_settings_desc": "文字の読みやすさ、配色、背景をまとめて設定します。",
+    "data_settings": "バックアップとツール",
+    "data_settings_desc": "データの保存・復元と詳細な診断。",
+    "filter_empty_title": "サイトが見つかりません",
+    "filter_empty_desc": "別の名前やアドレスを試すか、絞り込みを解除してください。"
   }
 }

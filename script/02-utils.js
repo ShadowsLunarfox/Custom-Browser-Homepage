@@ -21,6 +21,7 @@ function bindDialogBackdropClose(dialog) {
   if (dialog.dataset.backdropClose === "false") return;
 
   dialog.addEventListener("click", (event) => {
+    if (event.target !== dialog) return;
     const rect = dialog.getBoundingClientRect();
     const clickedInsideDialog = (
       event.clientX >= rect.left

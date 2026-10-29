@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "Overview",
+    "storage": "Storage & data",
+    "testing": "Compatibility tests",
+    "maintenance": "Reset & cleanup"
+  },
   "app": {
     "title": "My Home"
   },
@@ -9,7 +15,7 @@
   },
   "search": {
     "label": "Search",
-    "placeholder": "Type and press Enter",
+    "placeholder": "Search anything, go anywhere",
     "aria_query": "Search query",
     "aria_engine": "Search engine",
     "suggestions_aria": "Search suggestions",
@@ -216,20 +222,17 @@
     },
     "appearance": {
       "title": "Appearance",
-      "desc": "Tune the overall look of the page."
+      "desc": "Make the details feel like you. One considered, consistent interface."
     },
     "theme": {
-      "title": "Theme",
-      "desc": "Choose the base mode and visual style."
+      "title": "Display",
+      "desc": "Choose your language and display mode."
     },
     "language": {
       "label": "Language"
     },
     "theme_mode": {
-      "label": "Theme mode"
-    },
-    "ui_style": {
-      "label": "UI style"
+      "label": "Display mode"
     },
     "search_engine": {
       "label": "Default search engine"
@@ -411,14 +414,6 @@
     "dark": "Dark",
     "light": "Light"
   },
-  "ui": {
-    "default": "Default",
-    "cartoon": "Cartoon",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "Terminal",
-    "paper": "Paper"
-  },
   "languages": {
     "en": "English",
     "zh-CN": "Simplified Chinese",
@@ -468,7 +463,7 @@
     "custom_image_selected": "Custom image selected",
     "no_custom_image": "No custom image selected",
     "current_preset": "Current background: {name}",
-    "current_theme": "Current background: Theme",
+    "current_theme": "Current background: Default",
     "image_save_failed": "Image could not be saved"
   },
   "alerts": {
@@ -512,5 +507,33 @@
     "force_first_run_flow_confirm": "This will clear browser preflight cache and compatibility acknowledgements, then reload to show the first-run compatibility flow again. Continue?",
     "language_preview_applied": "Language preview applied for this session.",
     "language_preview_failed": "Language preview failed."
+  },
+  "workspace": {
+    "start_page": "Your start page",
+    "customize": "Customize",
+    "eyebrow": "A little space to call your own",
+    "caption": "A fresh start. A world of possibilities.",
+    "shortcuts": "Your everyday",
+    "footer": "A calmer corner of the internet.",
+    "settings_subtitle": "Your space, down to the details.",
+    "personalize": "Make it yours",
+    "settings_categories": "Settings categories",
+    "shortcut_count": "{count} shortcuts",
+    "start_area": "Time & search",
+    "adjust_layout": "Adjust layout",
+    "reset_layout": "Reset layout",
+    "done": "Done",
+    "layout_help": "Drag a module background or text to move it. Drag a corner to resize.",
+    "filter_sites": "Find a saved site",
+    "clear_filter": "Clear filter",
+    "filtered_shortcut_count": "{count} of {total} shortcuts",
+    "home_settings": "Home",
+    "home_settings_desc": "Arrange modules, visibility, and shortcut density in one place.",
+    "appearance_settings": "Appearance & wallpaper",
+    "appearance_settings_desc": "Set readability, colors, and your background together.",
+    "data_settings": "Backup & tools",
+    "data_settings_desc": "Keep a backup of your data and find advanced diagnostics.",
+    "filter_empty_title": "No sites found",
+    "filter_empty_desc": "Try another name or address, or clear the filter."
   }
 }

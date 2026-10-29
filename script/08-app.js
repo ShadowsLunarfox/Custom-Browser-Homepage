@@ -48,7 +48,6 @@ let currentLanguage = DEFAULT_LANGUAGE;
 let translations = {};
 let didMarkAppReady = false;
 let didInitializeDebugTools = false;
-let loadedThemeFontKey = "";
 
 const clockEl = document.getElementById("clock");
 const dateTextEl = document.getElementById("date-text");
@@ -88,11 +87,8 @@ const importFileEl = document.getElementById("import-file");
 const backgroundUploadEl = document.getElementById("background-upload");
 const backgroundUploadTriggerEl = document.getElementById("background-upload-trigger");
 const backgroundUploadNameEl = document.getElementById("background-upload-name");
-const themeStyleLinkEl = document.getElementById("theme-style-link");
 const wallpaperStyleLinkEl = document.getElementById("wallpaper-style-link");
 const themeModeEl = document.getElementById("theme-mode");
-const themeStyleEl = document.getElementById("theme-style");
-const settingsColorsSectionEl = document.getElementById("settings-colors-section");
 const accentColorEl = document.getElementById("accent-color");
 const accentColorValueEl = document.getElementById("accent-color-value");
 const textColorEl = document.getElementById("text-color");
@@ -215,6 +211,7 @@ async function initialize() {
   void localizationReady.then(() => {
     applyTranslations();
     renderSearchEngine();
+    syncWorkspaceCollectionCount(getFilteredLinks().length);
     renderSettingsPanelIfReady();
   });
 
@@ -232,6 +229,7 @@ function markAppReady() {
 }
 
 function bindEvents() {
+  initializeWorkspaceInterface();
   bindBackgroundVideoRecovery();
   initializeCustomSelects();
   initializeCustomRanges();
@@ -273,7 +271,6 @@ function bindEvents() {
   document.getElementById("link-form").addEventListener("submit", saveLink);
 
   themeModeEl.addEventListener("change", () => updateSetting("theme", themeModeEl.value));
-  themeStyleEl.addEventListener("change", () => updateSetting("themeStyle", themeStyleEl.value));
   accentColorEl.addEventListener("input", () => updateSetting("accentColor", accentColorEl.value));
   textColorEl.addEventListener("input", () => updateSetting("textColor", textColorEl.value));
   panelColorEl.addEventListener("input", () => updateSetting("panelColor", panelColorEl.value));
@@ -323,14 +320,55 @@ function openDebugToolsDialog() {
   if (settingsDialogEl?.open) {
     closeDialog("settings-dialog");
   }
+  activateDebugPage("overview");
+  const notice = debugDialogEl.querySelector("[data-debug-notice]");
+  notice.textContent = "";
+  notice.hidden = true;
   openDialog("debug-dialog");
+  // showModal restores prior focus and can scroll to a previously focused descendant.
+  debugDialogEl.querySelector(".dialog-head [data-close-dialog]").focus({ preventScroll: true });
+  debugDialogEl.querySelector(".debug-content").scrollTop = 0;
+  debugDialogEl.querySelector(".debug-nav").scrollLeft = 0;
 }
 
 function ensureDebugToolsInitialized() {
   if (didInitializeDebugTools) return;
   didInitializeDebugTools = true;
   initializeCustomSelects(debugDialogEl);
+  const tabs = [...debugDialogEl.querySelectorAll("[data-debug-target]")];
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activateDebugPage(tab.dataset.debugTarget));
+    tab.addEventListener("keydown", (event) => {
+      let target = index;
+      if (event.key === "ArrowLeft") target = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "ArrowRight") target = (index + 1) % tabs.length;
+      else if (event.key === "Home") target = 0;
+      else if (event.key === "End") target = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      activateDebugPage(tabs[target].dataset.debugTarget);
+      tabs[target].focus();
+      tabs[target].scrollIntoView({ block: "nearest", inline: "nearest" });
+    });
+  });
+  debugDialogEl.addEventListener("close", () => {
+    if (activeCustomSelect?.closest("#debug-dialog")) closeCustomSelect(activeCustomSelect);
+  });
   bindDebugToolEvents();
+}
+
+function activateDebugPage(key) {
+  if (!debugDialogEl?.querySelector(`[data-debug-page="${key}"]`)) return;
+  if (activeCustomSelect) closeCustomSelect(activeCustomSelect);
+  debugDialogEl.querySelectorAll("[data-debug-target]").forEach((tab) => {
+    const selected = tab.dataset.debugTarget === key;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  debugDialogEl.querySelectorAll("[data-debug-page]").forEach((page) => {
+    page.hidden = page.dataset.debugPage !== key;
+  });
+  debugDialogEl.querySelector(".debug-content").scrollTop = 0;
 }
 
 function bindDebugToolEvents() {
@@ -697,21 +735,30 @@ async function createDebugDiagnostics() {
 
 async function copyTextToClipboard(text) {
   if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return;
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      // Permission or activation can be unavailable after collecting asynchronous diagnostics.
+    }
   }
 
+  const previouslyFocused = document.activeElement;
   const textarea = document.createElement("textarea");
   textarea.value = text;
   textarea.setAttribute("readonly", "");
   textarea.style.position = "fixed";
   textarea.style.left = "-9999px";
-  document.body.appendChild(textarea);
-  textarea.select();
-  const didCopy = document.execCommand("copy");
-  textarea.remove();
-  if (!didCopy) {
-    throw new Error("Fallback copy failed");
+  // Controls outside the active modal are inert and cannot receive the fallback selection.
+  const copyHost = document.querySelector("dialog[open]") || document.body;
+  copyHost.appendChild(textarea);
+  try {
+    textarea.focus({ preventScroll: true });
+    textarea.select();
+    if (!document.execCommand("copy")) throw new Error("Fallback copy failed");
+  } finally {
+    textarea.remove();
+    previouslyFocused?.focus({ preventScroll: true });
   }
 }
 

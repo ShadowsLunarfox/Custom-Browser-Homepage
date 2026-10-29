@@ -3,13 +3,6 @@
 
   var STORAGE_KEY = "customHomeState";
   var CHROME_BACKGROUND_VALUE = "__chrome_storage_background__";
-  var THEME_STYLE_FILES = {
-    default: "",
-    cartoon: "themes/theme-cartoon.css",
-    win98: "themes/theme-win98.css",
-    winxp: "themes/theme-winxp.css",
-    terminal: "themes/theme-terminal.css"
-  };
   var PRESET_WALLPAPERS = {
     wallpaper_1: { path: "themes/wallpaper/wallpaperflare.com_wallpaper (1).jpg", mediaType: "image" },
     wallpaper_2: { path: "themes/wallpaper/wallpaperflare.com_wallpaper (2).jpg", mediaType: "image" },
@@ -18,23 +11,22 @@
   };
   var DEFAULTS = {
     theme: "dark",
-    themeStyle: "default",
-    accentColor: "#7dc4ff",
-    textColorDark: "#f3f6ff",
-    textColorLight: "#182338",
-    panelColorDark: "#1c2438",
+    accentColor: "#b6d7c3",
+    textColorDark: "#edf2ef",
+    textColorLight: "#25362b",
+    panelColorDark: "#1a201f",
     panelColorLight: "#ffffff",
-    dropdownColorDark: "#26304a",
+    dropdownColorDark: "#202823",
     dropdownColorLight: "#ffffff",
-    sliderTrackColorDark: "#33405e",
-    sliderTrackColorLight: "#d8e3f5",
-    sliderFillColor: "#7dc4ff",
+    sliderTrackColorDark: "#354039",
+    sliderTrackColorLight: "#dfe4dc",
+    sliderFillColor: "#b6d7c3",
     fontScale: 100,
-    radius: 20,
+    radius: 24,
     panelBlur: 22,
-    cardGap: 16,
-    cardHeight: 208,
-    panelOpacity: 82
+    cardGap: 12,
+    cardHeight: 96,
+    panelOpacity: 88
   };
 
   var state = readState();
@@ -43,7 +35,6 @@
   var root = document.documentElement;
 
   applyTheme(settings, body, root);
-  applyThemeStyle(settings);
   applyWallpaper(state.background, body, root);
 
   function readState() {
@@ -67,7 +58,7 @@
     var sliderFill = normalizeHexColor(settings.sliderFillColor, DEFAULTS.sliderFillColor);
     var textFallback = theme === "light" ? DEFAULTS.textColorLight : DEFAULTS.textColorDark;
     var textColor = resolveThemeTextColor(settings.textColor, theme, textFallback);
-    var softText = mixHex(textColor, theme === "dark" ? "#8f99ae" : "#5e6a81", 0.44);
+    var softText = mixHex(textColor, theme === "dark" ? "#a3b1a8" : "#4f6256", 0.35);
     var panelOpacity = clampNumber(settings.panelOpacity, 45, 100, DEFAULTS.panelOpacity) / 100;
     var panelStrongOpacity = Math.min(1, panelOpacity + 0.08);
     var panelSoftOpacity = Math.min(1, Math.max(0.44, panelOpacity - 0.08));
@@ -92,8 +83,9 @@
     root.style.setProperty("--ui-radius-lg", Math.max(6, clampNumber(settings.radius, 8, 32, DEFAULTS.radius) - 4) + "px");
     root.style.setProperty("--ui-radius-md", Math.max(4, clampNumber(settings.radius, 8, 32, DEFAULTS.radius) - 8) + "px");
     root.style.setProperty("--panel-blur", clampNumber(settings.panelBlur, 0, 30, DEFAULTS.panelBlur) + "px");
-    root.style.setProperty("--card-gap", clampNumber(settings.cardGap, 8, 28, DEFAULTS.cardGap) + "px");
-    root.style.setProperty("--card-height", clampNumber(settings.cardHeight, 160, 280, DEFAULTS.cardHeight) + "px");
+    var compactCards = Number(settings.interfaceLayoutVersion) >= 2;
+    root.style.setProperty("--card-gap", clampNumber(compactCards ? settings.cardGap : Number(settings.cardGap) * 0.75, 8, 28, DEFAULTS.cardGap) + "px");
+    root.style.setProperty("--card-height", clampNumber(compactCards ? settings.cardHeight : Number(settings.cardHeight) / 2, 80, compactCards ? 160 : 112, DEFAULTS.cardHeight) + "px");
     root.style.setProperty("--clock-display", settings.clockVisible === false ? "none" : "grid");
 
     var panelStrong = mixHex(panelBase, "#ffffff", theme === "dark" ? 0.12 : 0.34);
@@ -106,17 +98,8 @@
     root.style.setProperty("--panel-soft", formatRgba(panelSoftRgb, panelSoftOpacity));
 
     body.classList.toggle("search-ui-hidden", settings.searchUiVisible === false);
+    body.classList.toggle("clock-ui-hidden", settings.clockVisible === false);
     body.classList.toggle("shortcuts-ui-hidden", settings.shortcutsVisible === false);
-  }
-
-  function applyThemeStyle(settings) {
-    var styleKey = settings.themeStyle in THEME_STYLE_FILES ? settings.themeStyle : DEFAULTS.themeStyle;
-    var href = THEME_STYLE_FILES[styleKey];
-    var link = document.getElementById("theme-style-link");
-    document.body.dataset.themeStyle = styleKey;
-    if (link && href) {
-      link.href = href;
-    }
   }
 
   function applyWallpaper(background, body, root) {

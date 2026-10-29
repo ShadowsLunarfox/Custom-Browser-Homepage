@@ -3,8 +3,10 @@ function renderCollection() {
   collectionGridEl.classList.toggle("list-mode", state.layout === "list");
   collectionShellEl.classList.toggle("list-mode", state.layout === "list");
   applyGridSettings();
+  schedulePanelNormalization();
 
   const filteredLinks = getFilteredLinks();
+  syncWorkspaceCollectionCount(filteredLinks.length);
   if (!filteredLinks.length) {
     collectionGridEl.appendChild(createEmptyStateElement());
     return;
@@ -21,6 +23,7 @@ function renderCollection() {
     card.dataset.id = link.id;
     card.classList.toggle("is-pinned", Boolean(link.pinned));
     mainLink.href = normalizeUrl(link.url);
+    mainLink.title = link.name;
     mainLink.innerHTML = `
       <span class="shortcut-icon" aria-hidden="true">
         <img src="${escapeAttribute(link.icon || faviconForUrl(link.url))}" alt="">
@@ -55,6 +58,14 @@ function renderCollection() {
 function createEmptyStateElement() {
   const wrapper = document.createElement("div");
   wrapper.className = "empty-state-card";
+  if (bookmarkFilter && state.links.length) {
+    wrapper.innerHTML = `
+      <p class="empty-state-title">${escapeHtml(t("workspace.filter_empty_title"))}</p>
+      <p class="empty-state">${escapeHtml(t("workspace.filter_empty_desc"))}</p>
+      <button class="secondary-button" type="button" data-action="clear-filter">${escapeHtml(t("workspace.clear_filter"))}</button>
+    `;
+    return wrapper;
+  }
   wrapper.innerHTML = `
     <p class="empty-state-title" data-i18n="empty.no_matching_title">${escapeHtml(t("empty.no_matching_title"))}</p>
     <p class="empty-state" data-i18n="empty.no_matching_desc">${escapeHtml(t("empty.no_matching_desc"))}</p>
@@ -74,6 +85,7 @@ function createAddShortcutCard() {
       <span class="add-shortcut-window-bar"></span>
       <span class="add-shortcut-plus">+</span>
     </span>
+    <span data-i18n="actions.add_site">${escapeHtml(t("actions.add_site"))}</span>
   `;
   return button;
 }
@@ -88,6 +100,10 @@ function getFilteredLinks() {
 
 function handleCollectionClick(event) {
   if (!(event.target instanceof Element)) return;
+  if (event.target.closest('[data-action="clear-filter"]')) {
+    clearBookmarkFilter();
+    return;
+  }
 
   const addButton = event.target.closest(".add-shortcut-card, #empty-state-add");
   if (addButton && collectionGridEl.contains(addButton)) {
@@ -120,6 +136,11 @@ function handleCollectionClick(event) {
 }
 
 function handleCollectionCardDragStart(event) {
+  // In layout editing, card backgrounds move their module. Native card sorting stays in normal mode.
+  if (document.body.classList.contains("layout-editing")) {
+    event.preventDefault();
+    return;
+  }
   const card = getEventShortcutCard(event);
   if (!card) return;
   handleCardDragStart(event, card.dataset.id, card);
@@ -158,32 +179,46 @@ function getEventShortcutCard(event) {
 // Panel dragging support for clock, search, and collection blocks.
 function bindPanelDragging() {
   draggablePanelEls.forEach((panel) => {
-    const handle = panel.querySelector("[data-drag-handle]");
-    if (!handle) return;
-    handle.addEventListener("pointerdown", (event) => startPanelDrag(event, panel));
+    panel.addEventListener("pointerdown", (event) => startPanelDrag(event, panel));
+    panel.addEventListener("lostpointercapture", endPanelDrag);
 
     const resizeHandle = panel.querySelector("[data-resize-handle]");
     if (resizeHandle) {
       resizeHandle.addEventListener("pointerdown", (event) => startPanelResize(event, panel));
+      resizeHandle.addEventListener("lostpointercapture", endPanelResize);
     }
   });
 
   window.addEventListener("pointermove", handlePanelDragMove);
   window.addEventListener("pointerup", endPanelDrag);
   window.addEventListener("pointercancel", endPanelDrag);
+  window.addEventListener("blur", () => endPanelDrag());
   window.addEventListener("resize", handleViewportResize);
+  window.visualViewport?.addEventListener("resize", handleViewportResize);
+  window.visualViewport?.addEventListener("scroll", handleViewportResize);
+}
+
+function canStartPanelDrag(event, panel) {
+  if (event.button !== 0 || event.isPrimary === false || activePanelDrag || activePanelResize) return false;
+  if (!document.body.classList.contains("layout-editing")) return false;
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+  if (!target || target.closest("[data-draggable-id]") !== panel) return false;
+  if (target.closest("[data-drag-handle]")) return true;
+  return !target.closest('a, button, input, textarea, select, label, summary, [role="button"], [role="link"], [role="slider"], [contenteditable]:not([contenteditable="false"]), [data-no-panel-drag]');
 }
 
 function startPanelDrag(event, panel) {
-  if (event.button !== 0) return;
+  if (!canStartPanelDrag(event, panel)) return;
   event.preventDefault();
+  keepPanelInViewport(panel);
   const id = panel.dataset.draggableId;
   const currentX = parseFloat(panel.style.getPropertyValue("--drag-x"));
   const currentY = parseFloat(panel.style.getPropertyValue("--drag-y"));
   activePanelDrag = {
     id,
     panel,
-    handle: event.currentTarget,
+    handle: panel,
+    moved: false,
     pointerId: event.pointerId,
     startX: event.clientX,
     startY: event.clientY,
@@ -192,52 +227,65 @@ function startPanelDrag(event, panel) {
     desiredX: Number.isFinite(currentX) ? currentX : 0,
     desiredY: Number.isFinite(currentY) ? currentY : 0
   };
-  panel.classList.add("is-dragging-panel");
-  event.currentTarget.setPointerCapture?.(event.pointerId);
+  if (event.isTrusted) panel.setPointerCapture?.(event.pointerId);
 }
 
 function handlePanelDragMove(event) {
   if (!activePanelDrag) return;
+  if (event.pointerId !== undefined && event.pointerId !== activePanelDrag.pointerId) return;
+  const deltaX = event.clientX - activePanelDrag.startX;
+  const deltaY = event.clientY - activePanelDrag.startY;
+  if (!activePanelDrag.moved) {
+    if (Math.hypot(deltaX, deltaY) < 5) return;
+    activePanelDrag.moved = true;
+    activePanelDrag.panel.classList.add("is-dragging-panel");
+  }
+  event.preventDefault?.();
   activePanelDrag.desiredX = activePanelDrag.originX + (event.clientX - activePanelDrag.startX);
   activePanelDrag.desiredY = activePanelDrag.originY + (event.clientY - activePanelDrag.startY);
   const constrainedPosition = setPanelPositionWithinViewport(
     activePanelDrag.panel,
     activePanelDrag.desiredX,
-    activePanelDrag.desiredY
+    activePanelDrag.desiredY,
+    { preserveSize: true }
   );
   activePanelDrag.desiredX = constrainedPosition.x;
   activePanelDrag.desiredY = constrainedPosition.y;
 }
 
-function endPanelDrag() {
+function endPanelDrag(event) {
   if (!activePanelDrag) return;
-  const panel = activePanelDrag.panel;
-  keepPanelInViewport(panel);
+  if (event?.pointerId !== undefined && event.pointerId !== activePanelDrag.pointerId) return;
+  const drag = activePanelDrag;
+  activePanelDrag = null;
+  const panel = drag.panel;
+  if (drag.handle?.hasPointerCapture?.(drag.pointerId)) {
+    drag.handle.releasePointerCapture(drag.pointerId);
+  }
+  panel.classList.remove("is-dragging-panel");
+  if (!drag.moved) return;
+  keepPanelInViewport(panel, { preserveSize: true });
   const x = parseFloat(panel.style.getPropertyValue("--drag-x")) || 0;
   const y = parseFloat(panel.style.getPropertyValue("--drag-y")) || 0;
   state.settings = sanitizeSettings({
     ...state.settings,
     panelPositions: {
       ...state.settings.panelPositions,
-      [activePanelDrag.id]: { x, y }
+      [drag.id]: { x, y }
     },
     panelDesiredPositions: {
       ...state.settings.panelDesiredPositions,
-      [activePanelDrag.id]: {
+      [drag.id]: {
         x,
         y
       }
     }
   });
-  if (activePanelDrag.handle?.hasPointerCapture?.(activePanelDrag.pointerId)) {
-    activePanelDrag.handle.releasePointerCapture(activePanelDrag.pointerId);
-  }
-  panel.classList.remove("is-dragging-panel");
-  activePanelDrag = null;
   saveState();
 }
 
 function renderPanelPositions() {
+  syncWorkspacePanelLayout();
   draggablePanelEls.forEach((panel) => {
     const id = panel.dataset.draggableId;
     const desiredPosition = state.settings.panelDesiredPositions?.[id]
@@ -247,12 +295,13 @@ function renderPanelPositions() {
     panel.style.setProperty("--panel-scale", String(scale));
     setPanelPosition(panel, desiredPosition.x || 0, desiredPosition.y || 0);
   });
-  requestAnimationFrame(() => normalizePanelsToViewport());
+  schedulePanelNormalization();
 }
 
 let activePanelResize = null;
 
 function startPanelResize(event, panel) {
+  if (event.button !== 0 || event.isPrimary === false || activePanelDrag || activePanelResize || !document.body.classList.contains("layout-editing")) return;
   event.preventDefault();
   event.stopPropagation();
   const id = panel.dataset.draggableId;
@@ -260,21 +309,24 @@ function startPanelResize(event, panel) {
   activePanelResize = {
     id,
     panel,
+    handle: event.currentTarget,
     pointerId: event.pointerId,
     startX: event.clientX,
     startY: event.clientY,
     startScale: currentScale
   };
   panel.classList.add("is-resizing-panel");
-  event.currentTarget.setPointerCapture?.(event.pointerId);
+  if (event.isTrusted) event.currentTarget.setPointerCapture?.(event.pointerId);
 }
 
 window.addEventListener("pointermove", handlePanelResizeMove);
 window.addEventListener("pointerup", endPanelResize);
 window.addEventListener("pointercancel", endPanelResize);
+window.addEventListener("blur", () => endPanelResize());
 
 function handlePanelResizeMove(event) {
   if (!activePanelResize) return;
+  if (event.pointerId !== undefined && event.pointerId !== activePanelResize.pointerId) return;
   const deltaX = event.clientX - activePanelResize.startX;
   const deltaY = event.clientY - activePanelResize.startY;
   const delta = Math.max(deltaX, deltaY);
@@ -284,9 +336,13 @@ function handlePanelResizeMove(event) {
   keepPanelInViewport(activePanelResize.panel);
 }
 
-function endPanelResize() {
+function endPanelResize(event) {
   if (!activePanelResize) return;
-  const panel = activePanelResize.panel;
+  if (event?.pointerId !== undefined && event.pointerId !== activePanelResize.pointerId) return;
+  const resize = activePanelResize;
+  activePanelResize = null;
+  const panel = resize.panel;
+  if (resize.handle?.hasPointerCapture?.(resize.pointerId)) resize.handle.releasePointerCapture(resize.pointerId);
   keepPanelInViewport(panel);
   const scale = parseFloat(panel.style.getPropertyValue("--panel-scale")) || 1;
   const x = parseFloat(panel.style.getPropertyValue("--drag-x")) || 0;
@@ -295,27 +351,82 @@ function endPanelResize() {
     ...state.settings,
     panelPositions: {
       ...state.settings.panelPositions,
-      [activePanelResize.id]: { x, y }
+      [resize.id]: { x, y }
+    },
+    panelDesiredPositions: {
+      ...state.settings.panelDesiredPositions,
+      [resize.id]: { x, y }
     },
     panelScales: {
       ...state.settings.panelScales,
-      [activePanelResize.id]: scale
+      [resize.id]: scale
     }
   });
   panel.classList.remove("is-resizing-panel");
-  activePanelResize = null;
   saveState();
 }
 
 function handleViewportResize() {
-  normalizePanelsToViewport(true);
+  schedulePanelNormalization(true);
+}
+
+let panelNormalizationFrame = 0;
+let shouldPersistPanelNormalization = false;
+
+function schedulePanelNormalization(shouldPersist = false) {
+  shouldPersistPanelNormalization ||= shouldPersist;
+  if (panelNormalizationFrame) return;
+  panelNormalizationFrame = window.requestAnimationFrame(() => {
+    panelNormalizationFrame = 0;
+    const persist = shouldPersistPanelNormalization;
+    shouldPersistPanelNormalization = false;
+    normalizePanelsToViewport(persist);
+  });
+}
+
+function getPanelViewportBounds() {
+  const viewport = window.visualViewport;
+  const offsetLeft = viewport?.offsetLeft || 0;
+  const offsetTop = viewport?.offsetTop || 0;
+  const left = offsetLeft + 16;
+  let top = offsetTop + 16;
+  const right = Math.max(left + 1, offsetLeft + (viewport?.width || window.innerWidth) - 16);
+  let bottom = offsetTop + (viewport?.height || window.innerHeight) - 16;
+  bottom = Math.max(top + 1, bottom);
+  return { left, top, right, bottom, width: right - left, height: bottom - top };
+}
+
+function getPanelRenderBounds(panel) {
+  const rect = panel.getBoundingClientRect();
+  let { left, top, right, bottom } = rect;
+  const scale = parseFloat(panel.style.getPropertyValue("--panel-scale")) || 1;
+  // Unclipped child controls may extend beyond a panel that was scaled in a narrow window.
+  right = Math.max(right, left + (panel.scrollWidth || 0) * scale);
+  if (document.body.classList.contains("layout-editing")) {
+    const style = getComputedStyle(panel);
+    const outline = style.outlineStyle === "none" ? 0 : Math.max(0, (parseFloat(style.outlineOffset) || 0) + (parseFloat(style.outlineWidth) || 0)) * scale;
+    left -= outline;
+    top -= outline;
+    right += outline;
+    bottom += outline;
+    for (const handle of panel.querySelectorAll?.("[data-drag-handle], [data-resize-handle]") || []) {
+      if (!handle.getClientRects().length) continue;
+      const bounds = handle.getBoundingClientRect();
+      left = Math.min(left, bounds.left);
+      top = Math.min(top, bounds.top);
+      right = Math.max(right, bounds.right);
+      bottom = Math.max(bottom, bounds.bottom);
+    }
+  }
+  return { left, top, right, bottom, width: right - left, height: bottom - top };
 }
 
 function normalizePanelsToViewport(shouldPersist = false) {
   let didChange = false;
   draggablePanelEls.forEach((panel) => {
-    restorePanelTowardDesired(panel);
-    didChange = keepPanelInViewport(panel) || didChange;
+    const moving = activePanelDrag?.panel === panel || activePanelResize?.panel === panel;
+    if (!moving) restorePanelTowardDesired(panel);
+    didChange = keepPanelInViewport(panel, { preserveSize: moving }) || didChange;
   });
 
   if (!shouldPersist || !didChange) return;
@@ -335,61 +446,42 @@ function normalizePanelsToViewport(shouldPersist = false) {
   saveState();
 }
 
-function keepPanelInViewport(panel) {
+function keepPanelInViewport(panel, options) {
   const x = parseFloat(panel.style.getPropertyValue("--drag-x")) || 0;
   const y = parseFloat(panel.style.getPropertyValue("--drag-y")) || 0;
-  return setPanelPositionWithinViewport(panel, x, y).didChange;
+  return setPanelPositionWithinViewport(panel, x, y, options).didChange;
 }
 
-function setPanelPositionWithinViewport(panel, proposedX, proposedY) {
-  if (isClockPanel(panel)) {
-    return setClockPositionWithinViewport(panel, proposedX, proposedY);
-  }
-
-  const margin = 16;
+function setPanelPositionWithinViewport(panel, proposedX, proposedY, options = {}) {
+  const viewport = getPanelViewportBounds();
   const originalX = parseFloat(panel.style.getPropertyValue("--drag-x")) || 0;
   const originalY = parseFloat(panel.style.getPropertyValue("--drag-y")) || 0;
 
   setPanelPosition(panel, proposedX, proposedY);
+  if (!options.preserveSize) fitCollectionToViewport(panel, viewport);
   if (!panel.getClientRects().length) {
     return { x: proposedX, y: proposedY, didChange: proposedX !== originalX || proposedY !== originalY };
   }
 
-  const rect = panel.getBoundingClientRect();
-  const availableWidth = window.innerWidth - (margin * 2);
-  const availableHeight = window.innerHeight - (margin * 2);
-  let correctionX = 0;
-  let correctionY = 0;
-
-  if (rect.width <= availableWidth) {
-    if (rect.left < margin) {
-      correctionX = margin - rect.left;
-    } else if (rect.right > window.innerWidth - margin) {
-      correctionX = (window.innerWidth - margin) - rect.right;
-    }
-  } else if (rect.left > margin) {
-    correctionX = margin - rect.left;
-  } else if (rect.right < window.innerWidth - margin) {
-    correctionX = (window.innerWidth - margin) - rect.right;
+  // Moving an oversized box cannot bring both edges back on screen; fit its scale first.
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const bounds = getPanelRenderBounds(panel);
+    const ratio = Math.min(1, viewport.width / Math.max(1, bounds.width), viewport.height / Math.max(1, bounds.height));
+    if (ratio >= 1 - 0.000001) break;
+    const scale = parseFloat(panel.style.getPropertyValue("--panel-scale")) || 1;
+    panel.style.setProperty("--panel-scale", String(Math.max(0.001, scale * ratio)));
+    fitCollectionToViewport(panel, viewport);
   }
 
-  if (rect.height <= availableHeight) {
-    if (rect.top < margin) {
-      correctionY = margin - rect.top;
-    } else if (rect.bottom > window.innerHeight - margin) {
-      correctionY = (window.innerHeight - margin) - rect.bottom;
-    }
-  } else if (rect.top > margin) {
-    correctionY = margin - rect.top;
-  } else if (rect.bottom < window.innerHeight - margin) {
-    correctionY = (window.innerHeight - margin) - rect.bottom;
-  }
+  const rect = getPanelRenderBounds(panel);
+  const correctionX = rect.left < viewport.left ? viewport.left - rect.left : Math.min(0, viewport.right - rect.right);
+  const correctionY = rect.top < viewport.top ? viewport.top - rect.top : Math.min(0, viewport.bottom - rect.bottom);
 
   if (Math.abs(correctionX) < 0.01 && Math.abs(correctionY) < 0.01) {
     return { x: proposedX, y: proposedY, didChange: proposedX !== originalX || proposedY !== originalY };
   }
 
-  const dragRatio = measurePanelDragRatio(panel, proposedX, proposedY, rect);
+  const dragRatio = measurePanelDragRatio(panel, proposedX, proposedY);
   const clampedX = proposedX + (correctionX / dragRatio.x);
   const clampedY = proposedY + (correctionY / dragRatio.y);
   const didChange = clampedX !== originalX || clampedY !== originalY;
@@ -398,55 +490,41 @@ function setPanelPositionWithinViewport(panel, proposedX, proposedY) {
   return { x: clampedX, y: clampedY, didChange };
 }
 
+function fitCollectionToViewport(panel, viewport = getPanelViewportBounds()) {
+  if (panel.dataset.draggableId !== "collection" || !panel.getClientRects().length) return;
+  const scale = parseFloat(panel.style.getPropertyValue("--panel-scale")) || 1;
+  let panelRect = panel.getBoundingClientRect();
+  let bounds = getPanelRenderBounds(panel);
+  const horizontalOutset = (panelRect.left - bounds.left) + (bounds.right - panelRect.right);
+  panel.style.setProperty("--collection-max-width", `${Math.max(1, (viewport.width - horizontalOutset) / scale)}px`);
+  panelRect = panel.getBoundingClientRect();
+  bounds = getPanelRenderBounds(panel);
+  const panelTop = panelRect.top;
+  const flowTop = panelTop - (parseFloat(panel.style.getPropertyValue("--drag-y")) || 0);
+  const topOutset = panelTop - bounds.top;
+  const bottomOutset = bounds.bottom - panelRect.bottom;
+  const gridTop = collectionGridEl.getBoundingClientRect().top;
+  const headingHeight = (gridTop - panelTop) / scale;
+  const rowHeight = parseFloat(getComputedStyle(collectionGridEl).gridAutoRows) || state.settings.cardHeight;
+  const windowHeight = (viewport.height - topOutset - bottomOutset) / scale;
+  const minimumGridHeight = Math.min(rowHeight + 6, Math.max(0, windowHeight - headingHeight));
+  // Capacity follows the normal layout slot, never the proposed drag position.
+  // Otherwise dragging down progressively collapses the list and looks like clipping.
+  const availableBelow = (viewport.bottom - bottomOutset - Math.max(viewport.top + topOutset, flowTop)) / scale;
+  const maxHeight = Math.max(minimumGridHeight, availableBelow - headingHeight);
+  collectionGridEl.style.setProperty("--collection-viewport-height", `${Math.max(0, Math.floor(maxHeight))}px`);
+}
+
 function setPanelPosition(panel, x, y) {
   const safeX = Number.isFinite(Number(x)) ? Number(x) : 0;
   const safeY = Number.isFinite(Number(y)) ? Number(y) : 0;
   panel.style.setProperty("--drag-x", `${safeX}px`);
   panel.style.setProperty("--drag-y", `${safeY}px`);
 
-  if (isClockPanel(panel)) {
-    const margin = getPanelViewportMargin(panel);
-    panel.style.setProperty("--clock-left", `${margin + safeX}px`);
-    panel.style.setProperty("--clock-top", `${margin + safeY}px`);
-  }
 }
 
-function setClockPositionWithinViewport(panel, proposedX, proposedY) {
-  const margin = getPanelViewportMargin(panel);
-  const originalX = parseFloat(panel.style.getPropertyValue("--drag-x")) || 0;
-  const originalY = parseFloat(panel.style.getPropertyValue("--drag-y")) || 0;
-  const safeX = Number.isFinite(Number(proposedX)) ? Number(proposedX) : originalX;
-  const safeY = Number.isFinite(Number(proposedY)) ? Number(proposedY) : originalY;
-
-  setPanelPosition(panel, safeX, safeY);
-  if (!panel.getClientRects().length) {
-    return { x: safeX, y: safeY, didChange: safeX !== originalX || safeY !== originalY };
-  }
-
+function measurePanelDragRatio(panel, x, y) {
   const rect = panel.getBoundingClientRect();
-  const minLeft = margin;
-  const minTop = margin;
-  const maxLeft = Math.max(minLeft, window.innerWidth - margin - rect.width);
-  const maxTop = Math.max(minTop, window.innerHeight - margin - rect.height);
-  const clampedLeft = clampValue(margin + safeX, minLeft, maxLeft, minLeft);
-  const clampedTop = clampValue(margin + safeY, minTop, maxTop, minTop);
-  const clampedX = clampedLeft - margin;
-  const clampedY = clampedTop - margin;
-  const didChange = clampedX !== originalX || clampedY !== originalY;
-
-  setPanelPosition(panel, clampedX, clampedY);
-  return { x: clampedX, y: clampedY, didChange };
-}
-
-function isClockPanel(panel) {
-  return panel?.dataset?.draggableId === "clock";
-}
-
-function getPanelViewportMargin(panel) {
-  return isClockPanel(panel) && window.innerWidth <= 640 ? 10 : 16;
-}
-
-function measurePanelDragRatio(panel, x, y, rect) {
   const nudge = 1;
   setPanelPosition(panel, x + nudge, y);
   const xRatio = panel.getBoundingClientRect().left - rect.left;

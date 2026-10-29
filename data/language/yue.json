@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "概覽",
+    "storage": "儲存同資料",
+    "testing": "相容性測試",
+    "maintenance": "重設同清理"
+  },
   "app": {
     "title": "我嘅主頁"
   },
@@ -123,9 +129,6 @@
     },
     "theme_mode": {
       "label": "主題模式"
-    },
-    "ui_style": {
-      "label": "介面風格"
     },
     "search_engine": {
       "label": "預設搜尋引擎"
@@ -281,14 +284,6 @@
   "theme": {
     "dark": "深色",
     "light": "淺色"
-  },
-  "ui": {
-    "default": "預設",
-    "cartoon": "卡通",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "終端機",
-    "paper": "紙張"
   },
   "languages": {
     "en": "English",
