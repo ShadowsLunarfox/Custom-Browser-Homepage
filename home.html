@@ -14,10 +14,8 @@
   <title data-i18n="app.title">New Tab</title>
   <script src="script/preflight.js"></script>
   <link rel="icon" type="image/png" href="resource/icons/lunar-32.png">
-  <!-- Core stylesheets. Theme display fonts are loaded lazily after first paint. -->
+  <!-- One unified, modular interface. -->
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="themes/clocks/clock-styles.css">
-  <link id="theme-style-link" rel="stylesheet">
   <link id="wallpaper-style-link" rel="stylesheet">
 </head>
 <body class="app-loading" data-theme="dark">
@@ -28,7 +26,23 @@
   <script src="script/prepaint.js"></script>
   <div id="app-notices" class="app-notices" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Draggable clock block. -->
+  <div class="workspace-controls">
+    <div class="workspace-actions">
+      <button class="customize-button corner-button layout-mode-button" type="button" data-layout-action="toggle" aria-pressed="false" aria-label="Adjust layout" data-i18n-aria-label="workspace.adjust_layout"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg></button>
+      <button id="open-settings" class="customize-button corner-button" type="button" aria-label="Customize" data-i18n-aria-label="workspace.customize"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10m4 0h2M4 17h2m4 0h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
+    </div>
+    <aside class="layout-toolbar" data-layout-toolbar hidden aria-label="Adjust layout" data-i18n-aria-label="workspace.adjust_layout">
+      <div class="layout-toolbar-actions">
+        <button class="ghost-button corner-button" type="button" data-layout-action="reset" aria-label="Reset layout" data-i18n-aria-label="workspace.reset_layout"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button>
+        <button class="accent-button corner-button" type="button" data-layout-action="done" aria-label="Done" data-i18n-aria-label="workspace.done"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></button>
+      </div>
+    </aside>
+  </div>
+  <div class="page-shell">
+    <section class="start-area" aria-label="Start area" data-i18n-aria-label="workspace.start_area">
+    <section class="workspace-intro" aria-label="Lunar">
+      <p class="workspace-eyebrow" data-i18n="workspace.eyebrow">A little space to call your own</p>
+      <!-- Draggable clock block. -->
   <aside class="floating-clock" aria-label="Current time" data-i18n-aria-label="clock.current_time" data-draggable-id="clock">
     <button class="drag-handle" type="button" data-drag-handle aria-label="Drag clock" data-i18n-aria-label="actions.drag_clock">::</button>
     <div class="clock-badge" data-i18n="clock.time">Time</div>
@@ -52,8 +66,8 @@
     </div>
     <button class="resize-handle" type="button" data-resize-handle aria-label="Resize clock panel"></button>
   </aside>
-
-  <div class="page-shell">
+      <h1 class="workspace-caption" data-i18n="workspace.caption">A fresh start. A world of possibilities.</h1>
+    </section>
     <!-- Draggable integrated search panel. -->
     <header class="hero-card" data-draggable-id="search">
       <button class="drag-handle panel-drag-handle" type="button" data-drag-handle aria-label="Drag search panel" data-i18n-aria-label="actions.drag_search_panel">::</button>
@@ -61,6 +75,7 @@
         <form id="search-form" class="search-form" autocomplete="off">
           <label class="search-label" for="search-input" data-i18n="search.label">Search</label>
           <div class="search-box search-box-combined">
+            <svg class="search-leading-icon ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
             <input
               id="search-input"
               type="text"
@@ -74,7 +89,9 @@
               aria-expanded="false"
               aria-controls="search-suggestions"
             >
-            <div class="search-engine-wrap search-engine-inline">
+            <button class="search-submit" type="submit" aria-label="Search" data-i18n-aria-label="search.label"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+          </div>
+          <div class="search-engine-wrap search-engine-inline">
               <select id="search-engine" class="search-engine" aria-label="Search engine" data-i18n-aria-label="search.aria_engine">
                 <option value="google" data-i18n="engines.google">Google</option>
                 <option value="duckduckgo" data-i18n="engines.duckduckgo">DuckDuckGo</option>
@@ -104,6 +121,7 @@
                 <option value="toutiao" data-i18n="engines.toutiao">Toutiao</option>
                 <option value="quark" data-i18n="engines.quark">Quark</option>
               </select>
+              <span class="search-tools-spacer" aria-hidden="true"></span>
               <button id="voice-search-button" class="voice-search-button" type="button" aria-label="Voice search" aria-pressed="false" data-i18n-aria-label="actions.voice_search">
                 <span class="voice-search-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
@@ -120,12 +138,13 @@
               </button>
               <button id="search-all-engines" class="search-all-button" type="button" aria-label="Use selected suggestion engines" aria-pressed="false" data-i18n-aria-label="actions.search_all_engines">Current</button>
             </div>
-          </div>
           <div id="search-suggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions" data-i18n-aria-label="search.suggestions_aria" hidden></div>
         </form>
       </div>
       <button class="resize-handle" type="button" data-resize-handle aria-label="Resize search panel"></button>
     </header>
+
+    </section>
 
     <!-- Draggable bookmark collection area. -->
     <main class="dashboard">
@@ -133,6 +152,19 @@
         <input id="import-file" type="file" accept="application/json" hidden>
         <div class="panel-head panel-head-stack">
           <div class="panel-toolbar">
+            <h2 class="collection-heading" data-i18n="workspace.shortcuts">Your everyday</h2>
+            <span id="collection-count" class="collection-count">0</span>
+            <label class="collection-filter">
+              <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="bookmark-filter" type="search" autocomplete="off" placeholder="Find a saved site" aria-label="Find a saved site" data-i18n-placeholder="workspace.filter_sites" data-i18n-aria-label="workspace.filter_sites">
+            </label>
+            <div class="collection-toolbar-actions">
+              <div class="collection-layout" role="group" aria-label="Shortcut layout" data-i18n-aria-label="settings.view_mode.aria">
+                <button type="button" data-workspace-layout="grid" aria-pressed="true" aria-label="Grid" data-i18n-aria-label="layout.grid"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></button>
+                <button type="button" data-workspace-layout="list" aria-pressed="false" aria-label="List" data-i18n-aria-label="layout.list"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
+              </div>
+              <button class="collection-add" id="workspace-add-link" type="button" aria-label="Add site" data-i18n-aria-label="actions.add_site"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="actions.add_site">Add site</span></button>
+            </div>
             <button class="drag-handle panel-drag-handle" type="button" data-drag-handle aria-label="Drag collection panel" data-i18n-aria-label="actions.drag_collection_panel">::</button>
           </div>
         </div>
@@ -149,11 +181,10 @@
     </main>
   </div>
 
-  <!-- Global settings shortcut. -->
-  <button id="open-settings" class="ghost-button customize-button" type="button" data-i18n="actions.settings">Settings</button>
+  <footer class="app-footer"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5 8.5 8.5 0 1 0 20.5 13.2Z"/><path d="m18 3 .5 2.5L21 6l-2.5.5L18 9l-.5-2.5L15 6l2.5-.5Z"/></svg><span data-i18n="workspace.footer">A calmer corner of the internet.</span></footer>
 
   <!-- Bookmark create/edit dialog. -->
-  <dialog id="link-dialog" class="app-dialog">
+  <dialog id="link-dialog" class="app-dialog" aria-labelledby="link-dialog-title">
     <form id="link-form" class="dialog-form" method="dialog">
       <div class="dialog-head">
         <h3 id="link-dialog-title" data-i18n="dialogs.add_site">Add Site</h3>
@@ -179,106 +210,149 @@
   <dialog id="settings-dialog" class="app-dialog settings-dialog">
     <form id="settings-form" class="dialog-form settings-form" method="dialog">
       <div class="dialog-head">
-        <h3 data-i18n="settings.title">Settings</h3>
+        <div class="settings-title-block"><span class="settings-title-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10m4 0h2M4 17h2m4 0h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span><div><h3 data-i18n="settings.title">Settings</h3><p data-i18n="workspace.settings_subtitle">Your space, down to the details.</p></div></div>
         <button class="icon-button" type="button" data-close-dialog="settings-dialog" aria-label="Close" data-i18n-aria-label="actions.close">&times;</button>
       </div>
 
-      <div class="settings-sections-grid">
-        <section class="settings-section settings-section-wide">
+      <div class="settings-layout">
+        <nav class="settings-nav" role="tablist" aria-label="Settings categories" data-i18n-aria-label="workspace.settings_categories" aria-orientation="vertical">
+          <p class="settings-nav-label" data-i18n="workspace.personalize">Make it yours</p>
+          <button id="settings-tab-layout" class="settings-nav-button" type="button" role="tab" data-settings-target="layout" aria-controls="settings-page-layout" aria-selected="true" tabindex="0"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg><span data-i18n="workspace.home_settings">Home</span></button>
+          <button id="settings-tab-appearance" class="settings-nav-button" type="button" role="tab" data-settings-target="appearance" aria-controls="settings-page-appearance" aria-selected="false" tabindex="-1"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z"/></svg><span data-i18n="workspace.appearance_settings">Appearance & wallpaper</span></button>
+          <button id="settings-tab-search" class="settings-nav-button" type="button" role="tab" data-settings-target="search" aria-controls="settings-page-search" aria-selected="false" tabindex="-1"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span data-i18n="settings.search.title">Search</span></button>
+          <button id="settings-tab-library" class="settings-nav-button" type="button" role="tab" data-settings-target="library" aria-controls="settings-page-library" aria-selected="false" tabindex="-1"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v17l-7-4-7 4Z"/></svg><span data-i18n="workspace.data_settings">Backup & tools</span></button>
+        </nav>
+        <div class="settings-content">
+          <div class="settings-sections-grid">
+        <section id="settings-page-layout" data-settings-page="layout" role="tabpanel" aria-labelledby="settings-tab-layout" class="settings-section settings-section-layout">
           <div class="settings-section-head">
-            <h4 data-i18n="settings.library.title">Library</h4>
-            <p data-i18n="settings.library.desc">Keep extra actions here instead of on the main page.</p>
+            <h4 data-i18n="workspace.home_settings">Home</h4>
+            <p data-i18n="workspace.home_settings_desc">Arrange your modules and shortcuts in one place.</p>
           </div>
           <div class="settings-subsection">
             <div class="settings-subhead">
-              <h5 data-i18n="settings.backup.title">Backup</h5>
-              <p data-i18n="settings.backup.desc">Save or restore your bookmarks.</p>
+              <h5 data-i18n="settings.view_mode.title">View mode</h5>
+              <p data-i18n="settings.view_mode.desc">Switch between grid and list layouts.</p>
+            </div>
+            <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcut layout mode" data-i18n-aria-label="settings.view_mode.aria">
+              <button id="layout-grid" class="switch-button is-active" type="button" data-layout="grid" data-i18n="layout.grid">Grid</button>
+              <button id="layout-list" class="switch-button" type="button" data-layout="list" data-i18n="layout.list">List</button>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.grid.title">Grid</h5>
+              <p data-i18n="settings.grid.desc">Adjust density and visible rows.</p>
+            </div>
+            <div class="settings-grid">
+              <label data-i18n="settings.cards_per_row.label">
+                Cards per row
+                <div class="range-field">
+                  <input id="columns-range" type="range" min="2" max="8" step="1">
+                  <span id="columns-value" class="range-value">6</span>
+                </div>
+              </label>
+              <label data-i18n="settings.visible_rows.label">
+                Visible rows
+                <div class="range-field">
+                  <input id="rows-range" type="range" min="1" max="5" step="1">
+                  <span id="rows-value" class="range-value">2</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.cards.title">Cards</h5>
+              <p data-i18n="settings.cards.desc">Fine-tune spacing and tile size.</p>
+            </div>
+            <div class="settings-grid">
+              <label data-i18n="settings.card_gap.label">
+                Card gap
+                <div class="range-field">
+                  <input id="card-gap-range" type="range" min="8" max="28" step="1">
+                  <span id="card-gap-value" class="range-value">12px</span>
+                </div>
+              </label>
+              <label data-i18n="settings.card_height.label">
+                Card height
+                <div class="range-field">
+                  <input id="card-height-range" type="range" min="80" max="160" step="4">
+                  <span id="card-height-value" class="range-value">96px</span>
+                </div>
+              </label>
+            </div>
+          </div>
+<div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.clock.title">Clock</h5>
+              <p data-i18n="settings.clock.desc">Control the clock module and its display style.</p>
             </div>
             <div class="settings-grid two-column">
-              <button id="export-links" class="ghost-button" type="button" data-i18n="actions.export">Export</button>
-              <button id="import-links" class="ghost-button" type="button" data-i18n="actions.import">Import</button>
+              <label data-i18n="settings.clock_display.label">
+                Clock display
+                <select id="clock-visibility">
+                  <option value="show" data-i18n="common.show">Show</option>
+                  <option value="hide" data-i18n="common.hide">Hide</option>
+                </select>
+              </label>
+              <label data-i18n="settings.clock_style.label">
+                Clock style
+                <select id="clock-style">
+                  <option value="classic" data-i18n="clock_styles.classic">Classic</option>
+                  <option value="compact" data-i18n="clock_styles.compact">Compact</option>
+                  <option value="stacked" data-i18n="clock_styles.stacked">Stacked</option>
+                  <option value="pill" data-i18n="clock_styles.pill">Pill</option>
+                  <option value="panel" data-i18n="clock_styles.panel">Panel</option>
+                  <option value="calendar" data-i18n="clock_styles.calendar">Calendar</option>
+                  <option value="neon" data-i18n="clock_styles.neon">Neon</option>
+                  <option value="analog" data-i18n="clock_styles.analog">Analog Dial</option>
+                  <option value="analog-minimal" data-i18n="clock_styles.analog_minimal">Analog Minimal</option>
+                  <option value="analog-bold" data-i18n="clock_styles.analog_bold">Analog Bold</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.visibility.title">Visibility</h5>
+              <p data-i18n="settings.visibility.desc">Choose which main modules appear on the page.</p>
+            </div>
+            <div class="settings-grid">
+              <div data-i18n="settings.search_ui.label">
+                Search box
+                <div class="layout-switch settings-layout-switch" role="group" aria-label="Search box visibility">
+                  <button id="search-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
+                  <button id="search-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
+                </div>
+              </div>
+              <div data-i18n="settings.shortcuts_ui.label">
+                Shortcuts
+                <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcuts visibility">
+                  <button id="shortcuts-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
+                  <button id="shortcuts-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead"><h5 data-i18n="workspace.adjust_layout">Adjust layout</h5><p data-i18n="workspace.layout_help">Drag a module background or text to move it. Drag a corner to resize.</p></div>
+            <div class="dialog-actions split-actions">
+              <button class="secondary-button" type="button" data-layout-action="edit-from-settings" data-i18n="workspace.adjust_layout">Adjust layout</button>
+              <button class="ghost-button" type="button" data-layout-action="reset" data-i18n="workspace.reset_layout">Reset layout</button>
             </div>
           </div>
         </section>
 
-        <section class="settings-section settings-section-wide">
+        <section id="settings-page-appearance" data-settings-page="appearance" hidden role="tabpanel" aria-labelledby="settings-tab-appearance" class="settings-section">
           <div class="settings-section-head">
-            <h4 data-i18n="settings.search.title">Search</h4>
-            <p data-i18n="settings.search.desc">Choose the search provider and suggestion behavior.</p>
+            <h4 data-i18n="workspace.appearance_settings">Appearance & wallpaper</h4>
+            <p data-i18n="workspace.appearance_settings_desc">Set the colors, readability, and background together.</p>
           </div>
           <div class="settings-subsection">
             <div class="settings-subhead">
-              <h5 data-i18n="settings.search_provider.title">Provider</h5>
-              <p data-i18n="settings.search_provider.desc">Pick the default engine used by the main search box.</p>
-            </div>
-            <div class="settings-grid two-column">
-              <label data-i18n="settings.search_engine.label">
-                Default search engine
-                <select id="settings-search-engine">
-                  <option value="google" data-i18n="engines.google">Google</option>
-                  <option value="duckduckgo" data-i18n="engines.duckduckgo">DuckDuckGo</option>
-                  <option value="bing" data-i18n="engines.bing">Bing</option>
-                  <option value="brave" data-i18n="engines.brave">Brave</option>
-                  <option value="yahoo" data-i18n="engines.yahoo">Yahoo</option>
-                  <option value="yandex" data-i18n="engines.yandex">Yandex</option>
-                  <option value="naver" data-i18n="engines.naver">Naver</option>
-                  <option value="ecosia" data-i18n="engines.ecosia">Ecosia</option>
-                  <option value="startpage" data-i18n="engines.startpage">Startpage</option>
-                  <option value="qwant" data-i18n="engines.qwant">Qwant</option>
-                  <option value="mojeek" data-i18n="engines.mojeek">Mojeek</option>
-                  <option value="yep" data-i18n="engines.yep">Yep</option>
-                  <option value="swisscows" data-i18n="engines.swisscows">Swisscows</option>
-                  <option value="daum" data-i18n="engines.daum">Daum</option>
-                  <option value="seznam" data-i18n="engines.seznam">Seznam</option>
-                  <option value="wolframalpha" data-i18n="engines.wolframalpha">WolframAlpha</option>
-                  <option value="perplexity" data-i18n="engines.perplexity">Perplexity</option>
-                  <option value="you" data-i18n="engines.you">You.com</option>
-                  <option value="presearch" data-i18n="engines.presearch">Presearch</option>
-                  <option value="searxng" data-i18n="engines.searxng">SearXNG</option>
-                  <option value="bing_cn" data-i18n="engines.bing_cn">Bing China</option>
-                  <option value="baidu" data-i18n="engines.baidu">Baidu</option>
-                  <option value="sogou" data-i18n="engines.sogou">Sogou</option>
-                  <option value="so360" data-i18n="engines.so360">360 Search</option>
-                  <option value="shenma" data-i18n="engines.shenma">Shenma</option>
-                  <option value="toutiao" data-i18n="engines.toutiao">Toutiao</option>
-                  <option value="quark" data-i18n="engines.quark">Quark</option>
-                </select>
-              </label>
-              <label data-i18n="settings.search_suggestions.label">
-                Search suggestions
-                <select id="search-suggestions-setting">
-                  <option value="off" data-i18n="common.off">Off</option>
-                  <option value="on" data-i18n="common.on">On</option>
-                </select>
-              </label>
-              <label class="settings-grid-span-two" data-i18n="settings.search_suggestions_all_engines.label">
-                Suggestion mode
-                <select id="search-suggestions-all-engines-setting">
-                  <option value="selected" data-i18n="common.selected_engine">Selected engine</option>
-                  <option value="all" data-i18n="common.all_engines">Selected list</option>
-                </select>
-                <span class="field-note" data-i18n="settings.search_suggestions_all_engines.note">Choose whether suggestions use the current engine or the checked engine list below.</span>
-              </label>
-            </div>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.search_suggestion_engine_list.label">Suggestion engine list</h5>
-              <p data-i18n="settings.search_suggestion_engine_list.note">Choose which engines can run at the same time when multi-suggestions are enabled.</p>
-            </div>
-            <div id="search-suggestion-engine-list" class="engine-check-list" role="group" aria-label="Suggestion engines" data-i18n-aria-label="settings.search_suggestion_engine_list.label"></div>
-          </div>
-        </section>
-
-        <section class="settings-section">
-          <div class="settings-section-head">
-            <h4 data-i18n="settings.appearance.title">Appearance</h4>
-            <p data-i18n="settings.appearance.desc">Tune the overall look of the page.</p>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.theme.title">Theme</h5>
-              <p data-i18n="settings.theme.desc">Choose the base mode and visual style.</p>
+              <h5 data-i18n="settings.theme.title">Display</h5>
+              <p data-i18n="settings.theme.desc">Choose your language and display mode.</p>
             </div>
             <div class="settings-grid two-column">
               <label data-i18n="settings.language.label">
@@ -293,20 +367,10 @@
                 </select>
               </label>
               <label data-i18n="settings.theme_mode.label">
-                Theme mode
+                Display mode
                 <select id="theme-mode">
                   <option value="dark" data-i18n="theme.dark">Dark</option>
                   <option value="light" data-i18n="theme.light">Light</option>
-                </select>
-              </label>
-              <label data-i18n="settings.ui_style.label">
-                UI style
-                <select id="theme-style">
-                  <option value="default" data-i18n="ui.default">Default</option>
-                  <option value="cartoon" data-i18n="ui.cartoon">Cartoon</option>
-                  <option value="win98" data-i18n="ui.win98">Windows 98</option>
-                  <option value="winxp" data-i18n="ui.winxp">Windows XP</option>
-                  <option value="terminal" data-i18n="ui.terminal">Terminal</option>
                 </select>
               </label>
             </div>
@@ -404,136 +468,10 @@
             </div>
             <button id="reset-appearance" class="ghost-button full-width" type="button" data-i18n="actions.reset_colors">Reset Colors</button>
           </div>
-        </section>
-
-        <section class="settings-section settings-section-layout">
-          <div class="settings-section-head">
-            <h4 data-i18n="settings.layout.title">Layout</h4>
-            <p data-i18n="settings.layout.desc">Choose how many cards show per row and how many rows stay visible before scrolling.</p>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.view_mode.title">View mode</h5>
-              <p data-i18n="settings.view_mode.desc">Switch between grid and list layouts.</p>
-            </div>
-            <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcut layout mode" data-i18n-aria-label="settings.view_mode.aria">
-              <button id="layout-grid" class="switch-button is-active" type="button" data-layout="grid" data-i18n="layout.grid">Grid</button>
-              <button id="layout-list" class="switch-button" type="button" data-layout="list" data-i18n="layout.list">List</button>
-            </div>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.grid.title">Grid</h5>
-              <p data-i18n="settings.grid.desc">Adjust density and visible rows.</p>
-            </div>
-            <div class="settings-grid">
-              <label data-i18n="settings.cards_per_row.label">
-                Cards per row
-                <div class="range-field">
-                  <input id="columns-range" type="range" min="2" max="8" step="1">
-                  <span id="columns-value" class="range-value">6</span>
-                </div>
-              </label>
-              <label data-i18n="settings.visible_rows.label">
-                Visible rows
-                <div class="range-field">
-                  <input id="rows-range" type="range" min="1" max="5" step="1">
-                  <span id="rows-value" class="range-value">2</span>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.cards.title">Cards</h5>
-              <p data-i18n="settings.cards.desc">Fine-tune spacing and tile size.</p>
-            </div>
-            <div class="settings-grid">
-              <label data-i18n="settings.card_gap.label">
-                Card gap
-                <div class="range-field">
-                  <input id="card-gap-range" type="range" min="8" max="28" step="1">
-                  <span id="card-gap-value" class="range-value">16px</span>
-                </div>
-              </label>
-              <label data-i18n="settings.card_height.label">
-                Card height
-                <div class="range-field">
-                  <input id="card-height-range" type="range" min="160" max="280" step="4">
-                  <span id="card-height-value" class="range-value">208px</span>
-                </div>
-              </label>
-            </div>
-          </div>
-        </section>
-
-        <section class="settings-section settings-section-page-elements">
-          <div class="settings-section-head">
-            <h4 data-i18n="settings.page_elements.title">Page elements</h4>
-            <p data-i18n="settings.page_elements.desc">Show, hide, and style the main page modules.</p>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.clock.title">Clock</h5>
-              <p data-i18n="settings.clock.desc">Control the clock module and its display style.</p>
-            </div>
-            <div class="settings-grid two-column">
-              <label data-i18n="settings.clock_display.label">
-                Clock display
-                <select id="clock-visibility">
-                  <option value="show" data-i18n="common.show">Show</option>
-                  <option value="hide" data-i18n="common.hide">Hide</option>
-                </select>
-              </label>
-              <label data-i18n="settings.clock_style.label">
-                Clock style
-                <select id="clock-style">
-                  <option value="classic" data-i18n="clock_styles.classic">Classic</option>
-                  <option value="compact" data-i18n="clock_styles.compact">Compact</option>
-                  <option value="stacked" data-i18n="clock_styles.stacked">Stacked</option>
-                  <option value="pill" data-i18n="clock_styles.pill">Pill</option>
-                  <option value="panel" data-i18n="clock_styles.panel">Panel</option>
-                  <option value="calendar" data-i18n="clock_styles.calendar">Calendar</option>
-                  <option value="neon" data-i18n="clock_styles.neon">Neon</option>
-                  <option value="analog" data-i18n="clock_styles.analog">Analog Dial</option>
-                  <option value="analog-minimal" data-i18n="clock_styles.analog_minimal">Analog Minimal</option>
-                  <option value="analog-bold" data-i18n="clock_styles.analog_bold">Analog Bold</option>
-                </select>
-              </label>
-            </div>
-          </div>
-          <div class="settings-subsection">
-            <div class="settings-subhead">
-              <h5 data-i18n="settings.visibility.title">Visibility</h5>
-              <p data-i18n="settings.visibility.desc">Choose which main modules appear on the page.</p>
-            </div>
-            <div class="settings-grid">
-              <div data-i18n="settings.search_ui.label">
-                Search box
-                <div class="layout-switch settings-layout-switch" role="group" aria-label="Search box visibility">
-                  <button id="search-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
-                  <button id="search-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
-                </div>
-              </div>
-              <div data-i18n="settings.shortcuts_ui.label">
-                Shortcuts
-                <div class="layout-switch settings-layout-switch" role="group" aria-label="Shortcuts visibility">
-                  <button id="shortcuts-ui-show" class="switch-button is-active" type="button" data-i18n="common.show">Show</button>
-                  <button id="shortcuts-ui-hide" class="switch-button" type="button" data-i18n="common.hide">Hide</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="settings-section settings-section-wide">
-          <div class="settings-section-head">
-            <h4 data-i18n="settings.background.title">Background</h4>
-            <p id="background-status" class="settings-status">Current background: Midnight</p>
-          </div>
-          <div class="settings-subsection">
+<div class="settings-subsection">
             <div class="settings-subhead">
               <h5 data-i18n="settings.wallpaper.title">Wallpaper</h5>
+              <p id="background-status" class="settings-status">Current background: Default</p>
               <p data-i18n="settings.wallpaper.desc">Supported formats: JPG, PNG, WebP, GIF, MP4.</p>
             </div>
             <div class="preset-grid" id="preset-grid"></div>
@@ -555,12 +493,91 @@
           </div>
         </section>
 
-        <section class="settings-section settings-section-wide">
+        <section id="settings-page-search" data-settings-page="search" hidden role="tabpanel" aria-labelledby="settings-tab-search" class="settings-section settings-section-wide">
           <div class="settings-section-head">
-            <h4 data-i18n="settings.debug.title">Debug</h4>
-            <p data-i18n="settings.debug.desc">Tools for testing and resetting local browser data.</p>
+            <h4 data-i18n="settings.search.title">Search</h4>
+            <p data-i18n="settings.search.desc">Choose the search provider and suggestion behavior.</p>
           </div>
           <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.search_provider.title">Provider</h5>
+              <p data-i18n="settings.search_provider.desc">Pick the default engine used by the main search box.</p>
+            </div>
+            <div class="settings-grid two-column">
+              <label data-i18n="settings.search_engine.label">
+                Default search engine
+                <select id="settings-search-engine">
+                  <option value="google" data-i18n="engines.google">Google</option>
+                  <option value="duckduckgo" data-i18n="engines.duckduckgo">DuckDuckGo</option>
+                  <option value="bing" data-i18n="engines.bing">Bing</option>
+                  <option value="brave" data-i18n="engines.brave">Brave</option>
+                  <option value="yahoo" data-i18n="engines.yahoo">Yahoo</option>
+                  <option value="yandex" data-i18n="engines.yandex">Yandex</option>
+                  <option value="naver" data-i18n="engines.naver">Naver</option>
+                  <option value="ecosia" data-i18n="engines.ecosia">Ecosia</option>
+                  <option value="startpage" data-i18n="engines.startpage">Startpage</option>
+                  <option value="qwant" data-i18n="engines.qwant">Qwant</option>
+                  <option value="mojeek" data-i18n="engines.mojeek">Mojeek</option>
+                  <option value="yep" data-i18n="engines.yep">Yep</option>
+                  <option value="swisscows" data-i18n="engines.swisscows">Swisscows</option>
+                  <option value="daum" data-i18n="engines.daum">Daum</option>
+                  <option value="seznam" data-i18n="engines.seznam">Seznam</option>
+                  <option value="wolframalpha" data-i18n="engines.wolframalpha">WolframAlpha</option>
+                  <option value="perplexity" data-i18n="engines.perplexity">Perplexity</option>
+                  <option value="you" data-i18n="engines.you">You.com</option>
+                  <option value="presearch" data-i18n="engines.presearch">Presearch</option>
+                  <option value="searxng" data-i18n="engines.searxng">SearXNG</option>
+                  <option value="bing_cn" data-i18n="engines.bing_cn">Bing China</option>
+                  <option value="baidu" data-i18n="engines.baidu">Baidu</option>
+                  <option value="sogou" data-i18n="engines.sogou">Sogou</option>
+                  <option value="so360" data-i18n="engines.so360">360 Search</option>
+                  <option value="shenma" data-i18n="engines.shenma">Shenma</option>
+                  <option value="toutiao" data-i18n="engines.toutiao">Toutiao</option>
+                  <option value="quark" data-i18n="engines.quark">Quark</option>
+                </select>
+              </label>
+              <label data-i18n="settings.search_suggestions.label">
+                Search suggestions
+                <select id="search-suggestions-setting">
+                  <option value="off" data-i18n="common.off">Off</option>
+                  <option value="on" data-i18n="common.on">On</option>
+                </select>
+              </label>
+              <label class="settings-grid-span-two" data-i18n="settings.search_suggestions_all_engines.label">
+                Suggestion mode
+                <select id="search-suggestions-all-engines-setting">
+                  <option value="selected" data-i18n="common.selected_engine">Selected engine</option>
+                  <option value="all" data-i18n="common.all_engines">Selected list</option>
+                </select>
+                <span class="field-note" data-i18n="settings.search_suggestions_all_engines.note">Choose whether suggestions use the current engine or the checked engine list below.</span>
+              </label>
+            </div>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.search_suggestion_engine_list.label">Suggestion engine list</h5>
+              <p data-i18n="settings.search_suggestion_engine_list.note">Choose which engines can run at the same time when multi-suggestions are enabled.</p>
+            </div>
+            <div id="search-suggestion-engine-list" class="engine-check-list" role="group" aria-label="Suggestion engines" data-i18n-aria-label="settings.search_suggestion_engine_list.label"></div>
+          </div>
+        </section>
+
+        <section id="settings-page-library" data-settings-page="library" hidden role="tabpanel" aria-labelledby="settings-tab-library" class="settings-section settings-section-wide">
+          <div class="settings-section-head">
+            <h4 data-i18n="workspace.data_settings">Backup & tools</h4>
+            <p data-i18n="workspace.data_settings_desc">Back up your data and find advanced diagnostics.</p>
+          </div>
+          <div class="settings-subsection">
+            <div class="settings-subhead">
+              <h5 data-i18n="settings.backup.title">Backup</h5>
+              <p data-i18n="settings.backup.desc">Save or restore your bookmarks.</p>
+            </div>
+            <div class="settings-grid two-column">
+              <button id="export-links" class="ghost-button" type="button" data-i18n="actions.export">Export</button>
+              <button id="import-links" class="ghost-button" type="button" data-i18n="actions.import">Import</button>
+            </div>
+          </div>
+<div class="settings-subsection">
             <div class="settings-subhead">
               <h5 data-i18n="settings.debug_tools.title">Debug tools</h5>
               <p data-i18n="settings.debug_tools.desc">Open browser checks, test notices, and local storage tools.</p>
@@ -570,6 +587,8 @@
             </div>
           </div>
         </section>
+          </div>
+        </div>
       </div>
       <div class="settings-footer-links">
         <p class="settings-developer-credit" data-i18n="settings.developer_credit">
@@ -585,95 +604,121 @@
   </dialog>
 
   <!-- Developer/debug utilities for compatibility and storage checks. -->
-  <dialog id="debug-dialog" class="app-dialog debug-dialog">
+  <dialog id="debug-dialog" class="app-dialog debug-dialog" aria-labelledby="debug-dialog-title" aria-describedby="debug-dialog-description">
     <form class="dialog-form debug-form" method="dialog">
       <div class="dialog-head">
         <div>
-          <h3 data-i18n="dialogs.debug_title">Debug tools</h3>
-          <p class="dialog-subtitle" data-i18n="dialogs.debug_desc">Run browser checks and test compatibility surfaces.</p>
+          <h3 id="debug-dialog-title" data-i18n="dialogs.debug_title">Debug tools</h3>
+          <p id="debug-dialog-description" class="dialog-subtitle" data-i18n="dialogs.debug_desc">Run browser checks and test compatibility surfaces.</p>
         </div>
         <button class="icon-button" type="button" data-close-dialog="debug-dialog" aria-label="Close" data-i18n-aria-label="actions.close">&times;</button>
       </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_status_heading">Current detection</h4>
-        <dl id="debug-status-list" class="debug-status-list"></dl>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_issues_heading">Detected issues</h4>
-        <ul id="debug-issues-list" class="browser-support-list debug-issues-list"></ul>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_features_heading">Feature checks</h4>
-        <ul id="debug-feature-list" class="debug-feature-list"></ul>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_storage_heading">Storage usage</h4>
-        <dl id="debug-storage-usage-list" class="debug-status-list"></dl>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_local_storage_heading">Local storage viewer</h4>
-        <div class="debug-actions-grid">
-          <button id="debug-refresh-storage" class="ghost-button" type="button" data-i18n="actions.refresh_storage">Refresh storage</button>
-          <button id="debug-clear-compat-acks" class="ghost-button" type="button" data-i18n="actions.clear_compatibility_acks">Clear compatibility acknowledgements</button>
-        </div>
-        <div id="debug-local-storage-list" class="debug-storage-list"></div>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_preflight_heading">Preflight cache details</h4>
-        <pre id="debug-preflight-cache" class="debug-json-view"></pre>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_simulation_heading">Compatibility simulation</h4>
-        <div class="settings-grid two-column">
-          <label data-i18n="settings.debug_simulation.label">
-            Simulation
-            <select id="debug-simulation-select">
-              <option value="current" data-i18n="debug_simulation.current">Current browser</option>
-              <option value="firefox" data-i18n="debug_simulation.firefox">Firefox limited features</option>
-              <option value="chinese" data-i18n="debug_simulation.chinese">Chinese dual-core browser</option>
-              <option value="old-chromium" data-i18n="debug_simulation.old_chromium">Old Chromium 79</option>
-              <option value="ie-mode" data-i18n="debug_simulation.ie_mode">Compatibility/IE mode</option>
-              <option value="missing-core" data-i18n="debug_simulation.missing_core">Missing core APIs</option>
-            </select>
-          </label>
-          <label data-i18n="settings.debug_language.label">
-            Language preview
-            <select id="debug-language-preview">
-              <option value="current" data-i18n="debug_language.current">Current language</option>
-              <option value="en">English</option>
-              <option value="zh-CN">中文</option>
-              <option value="ko">한국어</option>
-              <option value="ja">日本語</option>
-              <option value="th">ไทย</option>
-              <option value="ms">Bahasa Melayu</option>
-            </select>
-          </label>
-        </div>
-        <div class="debug-actions-grid">
-          <button id="debug-preview-language" class="ghost-button" type="button" data-i18n="actions.preview_language">Preview language</button>
-          <button id="debug-force-first-run" class="ghost-button" type="button" data-i18n="actions.force_first_run_flow">Force first-run flow</button>
-          <button id="debug-show-simulated-notice" class="ghost-button" type="button" data-i18n="actions.show_simulated_notice">Show simulated notice</button>
-          <button id="debug-preview-simulated-unsupported" class="ghost-button" type="button" data-i18n="actions.preview_simulated_unsupported">Preview simulated unsupported page</button>
-        </div>
-      </div>
-      <div class="debug-block">
-        <h4 data-i18n="dialogs.debug_actions_heading">Actions</h4>
-        <div class="debug-actions-grid">
-          <button id="debug-refresh-status" class="ghost-button" type="button" data-i18n="actions.refresh_debug_status">Refresh status</button>
-          <button id="debug-copy-diagnostics" class="ghost-button" type="button" data-i18n="actions.copy_diagnostics">Copy diagnostics</button>
-          <button id="debug-rerun-browser-check" class="ghost-button" type="button" data-i18n="actions.rerun_browser_check">Re-run browser check</button>
-          <button id="debug-show-compatibility-notice" class="ghost-button" type="button" data-i18n="actions.show_compatibility_notice">Show compatibility notice</button>
-          <button id="debug-open-unsupported-preview" class="ghost-button" type="button" data-i18n="actions.open_unsupported_preview">Preview unsupported page</button>
-          <button id="debug-clear-wallpaper-cache" class="ghost-button" type="button" data-i18n="actions.clear_wallpaper_cache">Clear wallpaper cache</button>
-          <button id="debug-reset-settings-keep-bookmarks" class="ghost-button" type="button" data-i18n="actions.reset_settings_keep_bookmarks">Reset settings only</button>
-          <button id="debug-reset-bookmarks-keep-settings" class="ghost-button" type="button" data-i18n="actions.reset_bookmarks_keep_settings">Reset bookmarks only</button>
-          <button id="debug-export-backup" class="ghost-button" type="button" data-i18n="actions.export_debug_backup">Export debug backup</button>
-          <button id="debug-import-backup-trigger" class="ghost-button" type="button" data-i18n="actions.import_debug_backup">Import debug backup</button>
-          <button id="clear-local-storage" class="ghost-button danger-button full-width" type="button" data-i18n="actions.clear_local_storage">Clear localStorage</button>
-          <input id="debug-backup-import" type="file" accept="application/json,.json" hidden>
-        </div>
+      <nav class="debug-nav" role="tablist" aria-label="Debug tools" data-i18n-aria-label="dialogs.debug_title">
+        <button id="debug-tab-overview" class="debug-nav-button" type="button" role="tab" data-debug-target="overview" aria-controls="debug-page-overview" aria-selected="true" data-i18n="debug_tabs.overview">Overview</button>
+        <button id="debug-tab-storage" class="debug-nav-button" type="button" role="tab" data-debug-target="storage" aria-controls="debug-page-storage" aria-selected="false" tabindex="-1" data-i18n="debug_tabs.storage">Storage &amp; data</button>
+        <button id="debug-tab-testing" class="debug-nav-button" type="button" role="tab" data-debug-target="testing" aria-controls="debug-page-testing" aria-selected="false" tabindex="-1" data-i18n="debug_tabs.testing">Compatibility tests</button>
+      </nav>
+      <div class="debug-content">
+        <section id="debug-page-overview" class="debug-page" data-debug-page="overview" role="tabpanel" aria-labelledby="debug-tab-overview" tabindex="0">
+          <div class="debug-actions-grid">
+            <button id="debug-refresh-status" class="secondary-button" type="button" data-i18n="actions.refresh_debug_status">Refresh status</button>
+            <button id="debug-copy-diagnostics" class="secondary-button" type="button" data-i18n="actions.copy_diagnostics">Copy diagnostics</button>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_status_heading">Current detection</h4>
+            <dl id="debug-status-list" class="debug-status-list"></dl>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_issues_heading">Detected issues</h4>
+            <ul id="debug-issues-list" class="browser-support-list debug-issues-list"></ul>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_features_heading">Feature checks</h4>
+            <ul id="debug-feature-list" class="debug-feature-list"></ul>
+          </div>
+        </section>
+        <section id="debug-page-storage" class="debug-page" data-debug-page="storage" role="tabpanel" aria-labelledby="debug-tab-storage" tabindex="0" hidden>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_storage_heading">Storage usage</h4>
+            <dl id="debug-storage-usage-list" class="debug-status-list"></dl>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_local_storage_heading">Local storage viewer</h4>
+            <div class="debug-actions-grid">
+              <button id="debug-refresh-storage" class="ghost-button" type="button" data-i18n="actions.refresh_storage">Refresh storage</button>
+              <button id="debug-clear-compat-acks" class="ghost-button" type="button" data-i18n="actions.clear_compatibility_acks">Clear compatibility acknowledgements</button>
+            </div>
+            <div id="debug-local-storage-list" class="debug-local-storage-list"></div>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_preflight_heading">Preflight cache details</h4>
+            <pre id="debug-preflight-cache" class="debug-preflight-cache"></pre>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="settings.backup.title">Backup</h4>
+            <div class="debug-actions-grid">
+              <button id="debug-export-backup" class="secondary-button" type="button" data-i18n="actions.export_debug_backup">Export debug backup</button>
+              <button id="debug-import-backup-trigger" class="secondary-button" type="button" data-i18n="actions.import_debug_backup">Import debug backup</button>
+              <input id="debug-backup-import" type="file" accept="application/json,.json" hidden>
+            </div>
+          </div>
+          <div class="debug-block debug-maintenance">
+            <h4 data-i18n="debug_tabs.maintenance">Reset &amp; cleanup</h4>
+            <div class="debug-actions-grid">
+              <button id="debug-clear-wallpaper-cache" class="ghost-button" type="button" data-i18n="actions.clear_wallpaper_cache">Clear wallpaper cache</button>
+              <button id="debug-reset-settings-keep-bookmarks" class="ghost-button danger-button" type="button" data-i18n="actions.reset_settings_keep_bookmarks">Reset settings only</button>
+              <button id="debug-reset-bookmarks-keep-settings" class="ghost-button danger-button" type="button" data-i18n="actions.reset_bookmarks_keep_settings">Reset bookmarks only</button>
+              <button id="clear-local-storage" class="ghost-button danger-button" type="button" data-i18n="actions.clear_local_storage">Clear localStorage</button>
+            </div>
+          </div>
+        </section>
+        <section id="debug-page-testing" class="debug-page" data-debug-page="testing" role="tabpanel" aria-labelledby="debug-tab-testing" tabindex="0" hidden>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_actions_heading">Actions</h4>
+            <div class="debug-actions-grid">
+              <button id="debug-rerun-browser-check" class="secondary-button" type="button" data-i18n="actions.rerun_browser_check">Re-run browser check</button>
+              <button id="debug-show-compatibility-notice" class="ghost-button" type="button" data-i18n="actions.show_compatibility_notice">Show compatibility notice</button>
+              <button id="debug-open-unsupported-preview" class="ghost-button full-width" type="button" data-i18n="actions.open_unsupported_preview">Preview unsupported page</button>
+            </div>
+          </div>
+          <div class="debug-block">
+            <h4 data-i18n="dialogs.debug_simulation_heading">Compatibility simulation</h4>
+            <div class="settings-grid two-column">
+              <label data-i18n="settings.debug_simulation.label">
+                Simulation
+                <select id="debug-simulation-select">
+                  <option value="current" data-i18n="debug_simulation.current">Current browser</option>
+                  <option value="firefox" data-i18n="debug_simulation.firefox">Firefox limited features</option>
+                  <option value="chinese" data-i18n="debug_simulation.chinese">Chinese dual-core browser</option>
+                  <option value="old-chromium" data-i18n="debug_simulation.old_chromium">Old Chromium 79</option>
+                  <option value="ie-mode" data-i18n="debug_simulation.ie_mode">Compatibility/IE mode</option>
+                  <option value="missing-core" data-i18n="debug_simulation.missing_core">Missing core APIs</option>
+                </select>
+              </label>
+              <label data-i18n="settings.debug_language.label">
+                Language preview
+                <select id="debug-language-preview">
+                  <option value="current" data-i18n="debug_language.current">Current language</option>
+                  <option value="en">English</option>
+                  <option value="zh-CN">中文</option>
+                  <option value="ko">한국어</option>
+                  <option value="ja">日本語</option>
+                  <option value="th">ไทย</option>
+                  <option value="ms">Bahasa Melayu</option>
+                </select>
+              </label>
+            </div>
+            <div class="debug-actions-grid">
+              <button id="debug-preview-language" class="ghost-button" type="button" data-i18n="actions.preview_language">Preview language</button>
+              <button id="debug-force-first-run" class="ghost-button" type="button" data-i18n="actions.force_first_run_flow">Force first-run flow</button>
+              <button id="debug-show-simulated-notice" class="ghost-button" type="button" data-i18n="actions.show_simulated_notice">Show simulated notice</button>
+              <button id="debug-preview-simulated-unsupported" class="ghost-button" type="button" data-i18n="actions.preview_simulated_unsupported">Preview simulated unsupported page</button>
+            </div>
+          </div>
+        </section>
       </div>
       <div class="dialog-actions">
+        <p class="debug-notice" data-debug-notice role="status" aria-live="polite" aria-atomic="true" hidden></p>
         <button class="accent-button" type="button" data-close-dialog="debug-dialog" data-i18n="actions.close">Close</button>
       </div>
     </form>

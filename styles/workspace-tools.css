@@ -1,0 +1,78 @@
+/* Shared start area, intentional layout editing, and local shortcut filtering. */
+.workspace-controls { position: fixed; top: 16px; right: 16px; z-index: 80; pointer-events: none; }
+.workspace-actions { display: flex; align-items: center; gap: 8px; }
+.workspace-controls .corner-button { position: relative; display: grid; place-items: center; width: 38px; height: 38px; min-height: 38px; padding: 9px; pointer-events: auto; border: 1px solid var(--panel-border); border-radius: 11px; background: var(--panel); color: var(--text-main); backdrop-filter: var(--glass-filter-subtle); }
+.workspace-controls .corner-button:hover { border-color: var(--accent); background: var(--panel-strong); }
+.workspace-controls .corner-button svg { width: 18px; height: 18px; }
+.workspace-controls [data-layout-action="done"] { background: var(--accent); color: var(--accent-ink); }
+.workspace-controls [data-layout-action="done"]:hover { background: var(--accent-strong); }
+.workspace-controls .corner-button::after { content: attr(aria-label); position: absolute; top: calc(100% + 8px); right: 0; padding: 6px 9px; border: 1px solid var(--panel-border); border-radius: 7px; background: var(--dropdown); color: var(--dropdown-ink); font-size: var(--font-xs); white-space: nowrap; opacity: 0; pointer-events: none; }
+.workspace-controls .corner-button:hover::after, .workspace-controls .corner-button:focus-visible::after { opacity: 1; }
+.layout-mode-button[aria-pressed="true"] { background: var(--accent-muted); border-color: var(--accent); }
+.start-area { position: relative; z-index: 2; display: grid; flex-shrink: 0; grid-template-columns: minmax(220px, .42fr) minmax(0, 1fr); align-items: center; gap: 28px; padding: 18px 22px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-xl); background: color-mix(in srgb, var(--panel) 70%, transparent); backdrop-filter: var(--glass-filter-subtle); }
+.start-area .workspace-intro { justify-items: start; text-align: left; }
+.start-area .workspace-eyebrow, .start-area .workspace-caption { display: none; }
+.start-area .clock-digital { justify-items: start; }
+.start-area .clock { font-size: clamp(2.4rem, 3.8vw, 3.6rem); }
+.start-area .date-text { font-size: var(--font-sm); letter-spacing: 0; }
+.start-area .hero-card { width: 100%; margin: 0; }
+.start-area .floating-clock[data-clock-style="compact"] .clock { font-size: 2.4rem; }
+.start-area .floating-clock[data-clock-style^="analog"] .clock { font-size: 21px; }
+.start-area .floating-clock[data-clock-style^="analog"] .clock-content { grid-template-columns: 104px minmax(0, 1fr); align-items: center; gap: 14px; }
+.start-area .floating-clock[data-clock-style^="analog"] .analog-clock { width: 104px; height: 104px; }
+.start-area .floating-clock[data-clock-style^="analog"] .analog-face { transform: scale(.72); }
+.start-area .floating-clock[data-clock-style^="analog"] .date-text { font-size: var(--font-xs); }
+.has-custom-panel-layout .start-area, .layout-editing .start-area { z-index: auto; background: transparent; backdrop-filter: none; border-color: transparent; }
+body.clock-ui-hidden .workspace-intro { display: none; }
+body.clock-ui-hidden .start-area, body.search-ui-hidden .start-area { grid-template-columns: 1fr; }
+body.clock-ui-hidden.search-ui-hidden .start-area { display: none; }
+.collection-filter { display: flex; flex: 1; align-items: center; gap: 8px; min-width: 100px; max-width: 260px; margin-left: auto; padding: 7px 10px; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--panel); color: var(--text-soft); }
+.collection-filter:focus-within { border-color: var(--accent); }
+.collection-filter svg { width: 16px; height: 16px; flex-shrink: 0; }
+.collection-filter input { width: 100%; min-width: 0; height: 23px; padding: 0; border: 0; outline: none; background: transparent; color: var(--text-main); font-size: var(--font-sm); }
+.collection-filter input::placeholder { color: var(--text-soft); opacity: 1; }
+.collection-toolbar-actions { margin-left: 0; }
+.collection-count { flex-shrink: 0; }
+.drag-handle, .resize-handle { visibility: hidden; pointer-events: none; }
+.layout-editing .drag-handle, .layout-editing .resize-handle { visibility: visible; pointer-events: auto; opacity: 1; }
+.layout-editing [data-draggable-id] { outline: 1px dashed color-mix(in srgb, var(--accent) 65%, transparent); outline-offset: 6px; cursor: grab; touch-action: none; user-select: none; }
+.layout-editing [data-draggable-id].is-dragging-panel, .layout-editing [data-draggable-id].is-dragging-panel * { cursor: grabbing; }
+.layout-editing [data-draggable-id] input, .layout-editing [data-draggable-id] textarea, .layout-editing [data-draggable-id] [contenteditable="true"] { cursor: text; user-select: text; }
+.layout-editing [data-draggable-id] a, .layout-editing [data-draggable-id] button { cursor: pointer; }
+.layout-editing [data-resize-handle] { cursor: nwse-resize !important; }
+.layout-editing .hero-card > .drag-handle { top: -16px; right: -16px; }
+.layout-editing .drag-handle, .layout-editing .resize-handle { background: var(--dropdown); color: var(--dropdown-ink); border: 1px solid var(--panel-border); box-shadow: var(--shadow-sm); }
+.layout-toolbar { display: flex; flex: 0 1 auto; min-width: 0; align-items: center; gap: 18px; margin-left: auto; color: var(--text-main); }
+.layout-toolbar > span { font-size: var(--font-sm); }
+.layout-toolbar-actions { display: flex; flex-shrink: 0; gap: 8px; }
+.app-footer { pointer-events: none; }
+.has-custom-panel-layout .app-footer { visibility: hidden; }
+.layout-editing .app-footer { display: none; }
+.layout-editing .workspace-actions { display: none; }
+@media (max-width: 1000px) {
+  .start-area { grid-template-columns: minmax(190px, .4fr) minmax(0, 1fr); padding: 16px; gap: 20px; }
+  .collection-filter { max-width: 210px; }
+}
+@media (max-width: 760px) {
+  .start-area { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .start-area .clock-digital { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .start-area .clock { font-size: 2rem; }
+  .start-area .date-text { margin: 0; font-size: var(--font-xs); }
+  .start-area .floating-clock[data-clock-style^="analog"] .clock-digital { display: grid; }
+  .collection-heading { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+  .collection-count { display: none; }
+  .collection-filter { max-width: none; margin: 0; }
+  .collection-add { width: 36px; padding: 8px; justify-content: center; }
+  .collection-add span { display: none; }
+  .layout-mode-button { width: 38px; justify-content: center; padding: 8px; }
+  .layout-mode-button span { display: none; }
+  .layout-toolbar { gap: 10px; }
+  .layout-toolbar > span { display: none; }
+  .layout-toolbar-actions { min-width: 0; justify-content: flex-end; }
+  .layout-toolbar-actions button { padding-inline: 10px; }
+  .layout-toolbar-actions .ghost-button { max-width: 42vw; }
+}
+@media (max-height: 600px) {
+  .start-area { padding-top: 8px; padding-bottom: 8px; }
+  .layout-toolbar > span { display: none; }
+}

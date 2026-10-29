@@ -1,0 +1,92 @@
+@media (max-width: 1000px) {
+  .page-shell { width: calc(100% - 80px); }
+  .collection-grid:not(.list-mode) { grid-template-columns: repeat(min(var(--column-count, 6), 4), minmax(0, 1fr)); }
+  .settings-dialog { width: calc(100% - 36px); }
+  .settings-layout { grid-template-columns: 160px minmax(0, 1fr); }
+  .settings-sections-grid { padding: 25px; }
+  .engine-check-group-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .customize-button { min-height: 36px; padding: 7px 11px; font-size: var(--font-xs); }
+  .page-shell { width: calc(100% - 40px); padding: 12px 0; }
+  .workspace-intro { gap: 7px; }
+  .workspace-eyebrow { font-size: 8px; letter-spacing: .13em; }
+  .workspace-caption { font-size: var(--font-xs); }
+  .hero-card { margin-top: 16px; }
+  .search-box-combined { min-height: 52px; padding: 6px 7px 6px 15px; gap: 12px; }
+  .search-form input { font-size: var(--font-sm); }
+  .search-submit { width: 40px; height: 40px; }
+  .search-leading-icon { width: 18px; height: 18px; }
+  .search-engine-wrap { gap: 3px; padding-top: 9px; }
+  .search-engine-wrap .custom-select-search { min-width: 115px; max-width: 160px; }
+  .search-engine-wrap .custom-select-button { font-size: var(--font-xs); }
+  .search-suggestions { top: 60px; }
+  .dashboard { margin-top: 18px; }
+  .panel-toolbar { gap: 8px; }
+  .collection-heading { font-size: var(--font-sm); }
+  .collection-add { width: 34px; padding: 8px; justify-content: center; }
+  .collection-add span { display: none; }
+  .collection-grid:not(.list-mode) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--card-gap); }
+  .shortcut-card { padding: 10px 9px 6px; }
+  .shortcut-title { font-size: var(--font-md); }
+  .shortcut-url { font-size: var(--font-xs); }
+  .shortcut-main { gap: 7px; }
+  .shortcut-icon { width: 28px; height: 28px; border-radius: 8px; }
+  .shortcut-icon img { width: 17px; height: 17px; }
+  .shortcut-actions { gap: 1px; }
+  .mini-button { padding: 2px 5px; font-size: var(--font-xs); }
+  .panel-drag-handle { right: 0; top: -32px; }
+  .organizer-panel .panel-drag-handle { position: absolute; top: 4px; right: -19px; margin: 0; }
+  .floating-clock > .drag-handle { right: -22px; }
+  .settings-dialog { width: calc(100% - 20px); height: calc(100dvh - 24px); border-radius: 18px; }
+  .settings-form > .dialog-head { padding: 17px 18px; }
+  .settings-title-block p { font-size: var(--font-xs); }
+  .settings-layout { display: flex; flex-direction: column; }
+  .settings-nav { flex-direction: row; gap: 5px; padding: 10px 12px; border-right: 0; border-bottom: 1px solid var(--panel-border); overflow-x: auto; overflow-y: hidden; flex-shrink: 0; }
+  .settings-nav-label { display: none; }
+  .settings-nav-button { width: auto; min-width: max-content; min-height: 36px; padding: 8px 11px; font-size: var(--font-xs); }
+  .settings-nav-button svg { width: 14px; height: 14px; }
+  .settings-content { flex: 1; }
+  .settings-sections-grid { padding: 23px 20px 32px; }
+  .settings-section-head h4 { font-size: 21px; }
+  .settings-grid.two-column { gap: 16px; }
+  .settings-footer-links { padding: 10px 18px; }
+  .settings-footer-links p:last-child { display: none; }
+  .preset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dialog-form:not(.settings-form):not(.debug-form) { padding: 23px; }
+  .debug-dialog { width: calc(100% - 24px); height: calc(100dvh - 24px); }
+  .debug-form > .dialog-head { padding: 20px 18px 16px; }
+  .debug-nav { padding: 0 18px 12px; }
+  .debug-nav-button { padding: 8px 10px; }
+  .debug-page { padding: 20px 18px 28px; }
+  .debug-feature-list, .debug-page .debug-actions-grid, .debug-page .settings-grid.two-column { grid-template-columns: 1fr; }
+  .debug-form > .dialog-actions { padding: 12px 18px; }
+  .collection-grid.list-mode .shortcut-card { padding-left: 14px; }
+  .collection-grid.list-mode .shortcut-actions { opacity: 1; }
+}
+@media (max-width: 380px) {
+  .collection-grid:not(.list-mode) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .workspace-eyebrow { letter-spacing: .06em; }
+  .settings-grid.two-column, .debug-actions-grid, .debug-simulation-grid { grid-template-columns: 1fr; }
+  .settings-grid-span-two { grid-column: auto; }
+  .engine-check-group-items { grid-template-columns: 1fr; }
+}
+@media (max-height: 700px) {
+  .page-shell { padding-top: 6px; padding-bottom: 10px; }
+  .workspace-eyebrow, .workspace-caption { display: none; }
+  .hero-card { margin-top: 12px; }
+  .dashboard { margin-top: 14px; }
+  .panel-head { margin-bottom: 8px; }
+  .app-footer { padding-bottom: 6px; font-size: var(--font-xs); }
+}
+@media (max-height: 450px) {
+  .date-text { margin-top: 4px; }
+  .hero-card { margin-top: 7px; }
+  .search-box-combined { min-height: 46px; padding-top: 3px; padding-bottom: 3px; }
+  .search-engine-wrap { padding-top: 3px; }
+  .dashboard { margin-top: 8px; }
+  .app-footer { display: none; }
+}
+@media (hover: none) { .shortcut-actions, .pin-toggle, .drag-handle, .resize-handle { opacity: .75; } }
+/* Initial placement clears the corner buttons; dragging still uses the full viewport. */
+@media (max-width: 1240px) { .page-shell { padding-top: 64px; } }

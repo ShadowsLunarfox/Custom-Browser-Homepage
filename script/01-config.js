@@ -1,9 +1,10 @@
-// App storage and theme registries.
+// App storage, display defaults, and feature registries.
 const STORAGE_KEY = "customHomeState";
 const BROWSER_PREFLIGHT_CACHE_KEY = "lunarBrowserPreflightCache:v2";
 const FIREFOX_COMPAT_NOTICE_ACK_KEY = "firefoxCompatibilityNoticeAcknowledged:v1";
 const BROWSER_COMPAT_NOTICE_ACK_PREFIX = "browserCompatibilityNoticeAcknowledged:v1:";
 const DATA_VERSION = 3;
+const INTERFACE_LAYOUT_VERSION = 2;
 const PENDING_LINKS_KEY = "pendingSavedLinks";
 const PENDING_LINK_IDS_KEY = "pendingSavedLinkIds";
 const PENDING_LINK_KEY_PREFIX = "pendingSavedLink:";
@@ -106,36 +107,24 @@ const PRESET_LABELS = {
   komainu_desktop: "Komainu Desktop"
 };
 
-const THEME_STYLE_FILES = {
-  default: "",
-  cartoon: "themes/theme-cartoon.css",
-  win98: "themes/theme-win98.css",
-  winxp: "themes/theme-winxp.css",
-  terminal: "themes/theme-terminal.css"
-};
-
-const THEME_FONT_FILES = {
-  cartoon: "https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
-};
-
 const THEME_TEXT_DEFAULTS = {
-  dark: "#f3f6ff",
-  light: "#182338"
+  dark: "#edf2ef",
+  light: "#25362b"
 };
 
 const PANEL_COLOR_DEFAULTS = {
-  dark: "#1c2438",
+  dark: "#1a201f",
   light: "#ffffff"
 };
 
 const DROPDOWN_COLOR_DEFAULTS = {
-  dark: "#26304a",
+  dark: "#202823",
   light: "#ffffff"
 };
 
 const SLIDER_TRACK_COLOR_DEFAULTS = {
-  dark: "#33405e",
-  light: "#d8e3f5"
+  dark: "#354039",
+  light: "#dfe4dc"
 };
 
 const CLOCK_STYLES = [
@@ -152,16 +141,16 @@ const CLOCK_STYLES = [
 ];
 
 const DEFAULT_SETTINGS = {
+  interfaceLayoutVersion: INTERFACE_LAYOUT_VERSION,
   theme: "dark",
-  themeStyle: "default",
-  accentColor: "#7dc4ff",
+  accentColor: "#b6d7c3",
   textColor: THEME_TEXT_DEFAULTS.dark,
-  panelColor: "#1c2438",
-  dropdownColor: "#26304a",
-  sliderTrackColor: "#33405e",
-  sliderFillColor: "#7dc4ff",
+  panelColor: "#1a201f",
+  dropdownColor: "#202823",
+  sliderTrackColor: "#354039",
+  sliderFillColor: "#b6d7c3",
   fontScale: 100,
-  radius: 20,
+  radius: 24,
   panelBlur: 22,
   searchSuggestionsEnabled: true,
   searchSuggestionsAllEnginesEnabled: false,
@@ -172,9 +161,9 @@ const DEFAULT_SETTINGS = {
   clockStyle: "classic",
   columns: 6,
   rows: 2,
-  cardGap: 16,
-  cardHeight: 208,
-  panelOpacity: 82,
+  cardGap: 12,
+  cardHeight: 96,
+  panelOpacity: 88,
   panelPositions: {
     clock: { x: 0, y: 0 },
     search: { x: 0, y: 0 },

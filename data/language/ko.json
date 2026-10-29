@@ -1,4 +1,10 @@
 {
+  "debug_tabs": {
+    "overview": "개요",
+    "storage": "저장소 및 데이터",
+    "testing": "호환성 테스트",
+    "maintenance": "초기화 및 정리"
+  },
   "app": {
     "title": "내 홈"
   },
@@ -123,9 +129,6 @@
     },
     "theme_mode": {
       "label": "테마 모드"
-    },
-    "ui_style": {
-      "label": "UI 스타일"
     },
     "search_engine": {
       "label": "기본 검색 엔진"
@@ -282,14 +285,6 @@
     "dark": "어두움",
     "light": "밝음"
   },
-  "ui": {
-    "default": "기본",
-    "cartoon": "카툰",
-    "win98": "Windows 98",
-    "winxp": "Windows XP",
-    "terminal": "터미널",
-    "paper": "종이"
-  },
   "languages": {
     "en": "English",
     "zh-CN": "중국어 간체",
@@ -354,5 +349,33 @@
     "import_failed": "가져오기에 실패했습니다. 올바른 북마크 내보내기 파일을 선택하세요.",
     "save_failed": "변경 사항을 브라우저 저장소에 저장할 수 없습니다.",
     "all_engine_suggestions_warning": "모든 엔진 제안은 여러 검색 제공자에 동시에 요청하므로 평소보다 네트워크 사용량이 늘어날 수 있습니다."
+  },
+  "workspace": {
+    "start_page": "나만의 시작 페이지",
+    "customize": "꾸미기",
+    "eyebrow": "나만을 위한 작은 공간",
+    "caption": "새로운 시작, 무한한 가능성.",
+    "shortcuts": "자주 찾는 사이트",
+    "footer": "인터넷 속 나만의 편안한 공간.",
+    "settings_subtitle": "작은 부분까지 나답게.",
+    "personalize": "나만의 설정",
+    "settings_categories": "설정 카테고리",
+    "shortcut_count": "바로가기 {count}개",
+    "start_area": "시간과 검색",
+    "adjust_layout": "배치 조정",
+    "reset_layout": "배치 초기화",
+    "done": "완료",
+    "layout_help": "??? ???? ???? ?? ???? ???? ??? ?????.",
+    "filter_sites": "저장한 사이트 찾기",
+    "clear_filter": "필터 지우기",
+    "filtered_shortcut_count": "{total}개 중 {count}개",
+    "home_settings": "홈",
+    "home_settings_desc": "모듈 표시, 시계, 바로가기 밀도를 한곳에서 조정하세요.",
+    "appearance_settings": "화면과 배경",
+    "appearance_settings_desc": "글자, 색상, 배경을 함께 설정하세요.",
+    "data_settings": "백업과 도구",
+    "data_settings_desc": "데이터 백업 및 복원과 고급 진단 도구.",
+    "filter_empty_title": "사이트를 찾을 수 없습니다",
+    "filter_empty_desc": "다른 이름이나 주소를 입력하거나 필터를 지우세요."
   }
 }
