@@ -377,5 +377,12 @@
     "data_settings_desc": "Sandar dan pulihkan data serta gunakan diagnostik lanjutan.",
     "filter_empty_title": "Tiada laman ditemui",
     "filter_empty_desc": "Cuba nama atau alamat lain, atau kosongkan penapis."
+  },
+  "interface_version": {
+    "label": "Versi antara muka",
+    "modern": "Versi baharu",
+    "legacy": "Versi lama",
+    "note": "Tema, mod cerah atau gelap dan warna tema disimpan berasingan. Penanda halaman, bahasa, carian, kertas dinding, jam dan susun atur disegerakkan. Koleksi sedia ada digabungkan tanpa pendua.",
+    "storage_error": "Versi antara muka tidak dapat disimpan. Sila cuba lagi."
   }
 }

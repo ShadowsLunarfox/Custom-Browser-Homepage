@@ -19,7 +19,7 @@
 .dialog-form input:not([type="color"]):not([type="range"]):not([type="checkbox"]):not([type="file"]):not([type="hidden"]), .dialog-form select {
   width: 100%; min-height: 44px; padding: 10px 13px; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--secondary); color: var(--text-main); outline-offset: 2px;
 }
-.dialog-form input::placeholder { color: var(--text-soft); opacity: .65; }
+.dialog-form input::placeholder { color: var(--text-soft); opacity: .8; }
 input[type="checkbox"] { width: 15px; height: 15px; margin: 0; flex-shrink: 0; accent-color: var(--accent); }
 .custom-select { position: relative; width: 100%; min-width: 0; }
 .custom-select.is-open { z-index: 25; }

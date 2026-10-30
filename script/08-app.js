@@ -183,6 +183,7 @@ const CHINESE_BROWSER_COMPAT_MESSAGES = {
 void initialize();
 
 async function initialize() {
+  initializeSharedState();
   document.documentElement.lang = normalizeLanguage(state.language || detectPreferredLanguage());
   renderPriorityBackgroundShell();
   const backgroundReady = initializeBackgroundStorage().then(
@@ -660,7 +661,7 @@ function handleDebugLocalStorageClick(event) {
   if (!button) return;
 
   const key = button.dataset.debugStorageKey || "";
-  if (!key) return;
+  if (!ownsInterfaceStorageKey(key)) return;
   const confirmed = window.confirm(t("alerts.delete_local_storage_key_confirm", { key }));
   if (!confirmed) return;
 
@@ -873,9 +874,9 @@ async function importDebugBackup(parsed) {
   if (!confirmed) return;
 
   if (parsed?.localStorage && typeof parsed.localStorage === "object") {
-    localStorage.clear();
+    clearInterfaceLocalStorage();
     Object.entries(parsed.localStorage).forEach(([key, value]) => {
-      localStorage.setItem(key, String(value));
+      if (ownsInterfaceStorageKey(key)) localStorage.setItem(key, String(value));
     });
   }
 
@@ -891,6 +892,7 @@ async function importDebugBackup(parsed) {
     state = loadState();
   }
 
+  saveState(true);
   bookmarkFilter = "";
   renderAll();
   renderDebugToolsDialog();
@@ -1052,7 +1054,7 @@ function getLocalStorageEntries() {
     const keys = [];
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index);
-      if (key) keys.push(key);
+      if (ownsInterfaceStorageKey(key)) keys.push(key);
     }
 
     return keys.sort((left, right) => left.localeCompare(right)).map((key) => {
@@ -1073,7 +1075,7 @@ function getLocalStorageSnapshot() {
   try {
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index);
-      if (!key) continue;
+      if (!ownsInterfaceStorageKey(key)) continue;
       snapshot[key] = localStorage.getItem(key) || "";
     }
   } catch {
@@ -1197,7 +1199,7 @@ function removeLocalStorageKeysByPrefix(prefix) {
   const keys = [];
   for (let index = 0; index < localStorage.length; index += 1) {
     const key = localStorage.key(index);
-    if (key?.startsWith(prefix)) {
+    if (key?.startsWith(prefix) && ownsInterfaceStorageKey(key)) {
       keys.push(key);
     }
   }

@@ -1,4 +1,17 @@
 // Small utility helpers.
+function ownsInterfaceStorageKey(key) {
+  if (typeof key !== "string") return false;
+  if (STORAGE_KEY === "customHomeStateLegacy") return key === STORAGE_KEY || key.startsWith("legacy:") || key.startsWith(LANGUAGE_CACHE_PREFIX);
+  return key === STORAGE_KEY || key === BROWSER_PREFLIGHT_CACHE_KEY || key === FIREFOX_COMPAT_NOTICE_ACK_KEY
+    || key.startsWith(BROWSER_COMPAT_NOTICE_ACK_PREFIX)
+    || (key.startsWith(LANGUAGE_CACHE_PREFIX) && !key.startsWith("language:legacy:"));
+}
+
+function clearInterfaceLocalStorage() {
+  const keys = Array.from({ length: localStorage.length }, (_, index) => localStorage.key(index)).filter(ownsInterfaceStorageKey);
+  keys.forEach(key => localStorage.removeItem(key));
+}
+
 function openDialog(id) {
   document.getElementById(id).showModal();
 }
@@ -67,15 +80,14 @@ function normalizeHexColor(value, fallback) {
   return fallback;
 }
 
+function resolveThemeColor(value, theme, defaults) {
+  const normalized = normalizeHexColor(value, defaults[theme]);
+  // Saved defaults follow the display mode; explicit custom colors are retained.
+  return normalized === defaults.dark || normalized === defaults.light ? defaults[theme] : normalized;
+}
+
 function resolveThemeTextColor(value, theme) {
-  const normalized = normalizeHexColor(value, THEME_TEXT_DEFAULTS[theme]);
-  if (theme === "light" && normalized === THEME_TEXT_DEFAULTS.dark) {
-    return THEME_TEXT_DEFAULTS.light;
-  }
-  if (theme === "dark" && normalized === THEME_TEXT_DEFAULTS.light) {
-    return THEME_TEXT_DEFAULTS.dark;
-  }
-  return normalized;
+  return resolveThemeColor(value, theme, THEME_TEXT_DEFAULTS);
 }
 
 function clampNumber(value, min, max, fallback) {

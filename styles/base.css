@@ -17,8 +17,7 @@ button:active:not(:disabled) { filter: brightness(.93); }
 button svg { width: 20px; height: 20px; flex-shrink: 0; }
 svg.ui-icon { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 h1, h2, h3, h4, h5, h6, p { margin: 0; }
-a { color: var(--accent); text-underline-offset: 3px; }
-body[data-theme="light"] a:not(.shortcut-main) { color: color-mix(in srgb, var(--accent) 40%, #193424); }
+a { color: var(--accent-text); text-underline-offset: 3px; }
 [hidden], .is-hidden { display: none !important; }
 .sr-only, .native-select-source, .native-range-source { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 .native-select-source, .native-range-source { visibility: hidden; }

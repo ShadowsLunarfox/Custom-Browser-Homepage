@@ -23,8 +23,8 @@
 .analog-hand { position: absolute; left: 50%; bottom: 50%; border-radius: 99px; background: var(--text-main); transform-origin: 50% 100%; }
 .hour-hand { width: 4px; height: 34px; }
 .minute-hand { width: 3px; height: 48px; }
-.second-hand { width: 1px; height: 56px; background: var(--accent); }
-.analog-center { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; transform: translate(-50%, -50%); border-radius: 50%; background: var(--accent); }
+.second-hand { width: 1px; height: 56px; background: var(--accent-text); }
+.analog-center { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; transform: translate(-50%, -50%); border-radius: 50%; background: var(--accent-text); }
 .floating-clock[data-clock-style="compact"] .clock { font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 400; }
 .floating-clock[data-clock-style="stacked"] .clock-digital { gap: 16px; }
 .floating-clock[data-clock-style="stacked"] .clock { letter-spacing: .02em; font-size: clamp(3.5rem, 7vw, 5.7rem); }
@@ -34,7 +34,7 @@
 .floating-clock[data-clock-style="pill"] .clock, .floating-clock[data-clock-style="panel"] .clock, .floating-clock[data-clock-style="calendar"] .clock { font-size: clamp(2.3rem, 5vw, 3.8rem); }
 .floating-clock[data-clock-style="panel"] { border-left: 3px solid var(--accent); }
 .floating-clock[data-clock-style="calendar"] .clock-badge { display: block; padding: 3px 9px; margin-bottom: 8px; border-radius: 5px; background: var(--accent-muted); color: var(--text-soft); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
-.floating-clock[data-clock-style="neon"] .clock { color: var(--accent); text-shadow: 0 0 28px color-mix(in srgb, var(--accent) 28%, transparent); }
+.floating-clock[data-clock-style="neon"] .clock { color: var(--accent-text); text-shadow: 0 0 28px color-mix(in srgb, var(--accent) 28%, transparent); }
 .floating-clock[data-clock-style^="analog"] .clock-content { gap: 18px; }
 .floating-clock[data-clock-style^="analog"] .clock-digital { order: 2; }
 .floating-clock[data-clock-style^="analog"] .clock { font-size: 21px; font-weight: 400; letter-spacing: -.02em; }

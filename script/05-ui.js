@@ -1254,6 +1254,7 @@ function clearBackgroundLayerImage() {
 function applyThemeSettings() {
   const theme = state.settings.theme;
   document.body.dataset.theme = theme;
+  document.documentElement.dataset.theme = theme;
 
   const accent = normalizeHexColor(state.settings.accentColor, DEFAULT_SETTINGS.accentColor);
   const panelBase = normalizeHexColor(state.settings.panelColor, PANEL_COLOR_DEFAULTS[theme]);

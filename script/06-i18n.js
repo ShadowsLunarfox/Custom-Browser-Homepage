@@ -17,7 +17,10 @@ function primeCachedLocalization(language = state.language || detectPreferredLan
   return true;
 }
 
+let languageLoadSequence = 0;
+
 async function loadLanguage(language) {
+  const sequence = ++languageLoadSequence;
   const normalizedLanguage = normalizeLanguage(language);
   const fallbackTranslationsPromise = normalizedLanguage === DEFAULT_LANGUAGE
     ? Promise.resolve({})
@@ -28,6 +31,7 @@ async function loadLanguage(language) {
     localizedTranslationsPromise
   ]);
 
+  if (sequence !== languageLoadSequence) return;
   currentLanguage = normalizedLanguage;
   state.language = normalizedLanguage;
   translations = deepMergeTranslations(fallbackTranslations, localizedTranslations);
@@ -85,7 +89,7 @@ function cacheLanguageFile(language, languageFile) {
 }
 
 function getLanguageCacheKey(language) {
-  return `language:${DATA_VERSION}:${language}`;
+  return `${LANGUAGE_CACHE_PREFIX}${DATA_VERSION}:${language}`;
 }
 
 function applyTranslations() {

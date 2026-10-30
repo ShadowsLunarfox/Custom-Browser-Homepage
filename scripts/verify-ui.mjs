@@ -84,6 +84,42 @@ assert.equal(migrated.panelScales.clock, 1);
 const newDisplayDefaults = JSON.parse(vm.runInContext('JSON.stringify(sanitizeSettings({textColor: "#f3f6ff", panelColor: "#1c2438", accentColor: "#7dc4ff"}))', context));
 assert.equal(newDisplayDefaults.textColor, '#edf2ef', 'Legacy default text must migrate for readable display-mode switching');
 assert.equal(newDisplayDefaults.accentColor, '#b6d7c3');
+const migratedLight = JSON.parse(vm.runInContext('JSON.stringify(sanitizeSettings({theme: "light", textColor: "#f3f6ff", panelColor: "#1c2438", dropdownColor: "#26304a", sliderTrackColor: "#33405e"}))', context));
+assert.equal(migratedLight.textColor, '#25362b');
+assert.equal(migratedLight.panelColor, '#ffffff', 'Legacy light text must not sit on a dark default panel');
+assert.equal(migratedLight.dropdownColor, '#ffffff');
+assert.equal(migratedLight.sliderTrackColor, '#dfe4dc');
+
+// Reloading and changing themes must paint the same colors, including migrated settings.
+const themeUiSource = read('script/05-ui.js');
+for (const settings of [
+  { theme: 'light' },
+  { theme: 'dark' },
+  { theme: 'light', textColor: '#f3f6ff', panelColor: '#1c2438', dropdownColor: '#26304a', accentColor: '#7dc4ff', sliderTrackColor: '#33405e', sliderFillColor: '#7dc4ff' },
+  { theme: 'light', panelColor: '#1a201f', dropdownColor: '#202823' },
+  { theme: 'light', interfaceLayoutVersion: 2, textColor: '#123456', panelColor: '#f0e6d2', dropdownColor: '#e8ddd2', accentColor: '#c0ffee' },
+  { theme: 'dark', interfaceLayoutVersion: 2, panelColor: '#ffffff', dropdownColor: '#ffffff' }
+]) {
+  const properties = {};
+  const body = { dataset: {}, classList: { toggle: noop } };
+  const rootElement = { dataset: {}, style: { setProperty(key, value) { properties[key] = value; } } };
+  const paintContext = vm.createContext({ window: {}, document: { body, documentElement: rootElement }, localStorage: { getItem: () => JSON.stringify({ settings }) } });
+  vm.runInContext(read('script/prepaint.js'), paintContext);
+  const initialColors = { ...properties };
+  const runtimeContext = vm.createContext({
+    document: { body, documentElement: rootElement },
+    state: { settings: JSON.parse(vm.runInContext(`JSON.stringify(sanitizeSettings(${JSON.stringify(settings)}))`, context)) },
+    clockPanelEl: { dataset: {} }, analogClockEl: { classList: { toggle: noop } }, syncClockTimer: noop
+  });
+  vm.runInContext(read('script/01-config.js') + '\n' + read('script/02-utils.js'), runtimeContext);
+  vm.runInContext(themeUiSource.slice(themeUiSource.indexOf('function applyThemeSettings('), themeUiSource.indexOf('function runWhenIdle(')), runtimeContext);
+  vm.runInContext('applyThemeSettings()', runtimeContext);
+  for (const key of Object.keys(initialColors).filter(key => /accent|text|panel$|panel-strong|panel-soft|dropdown|slider/.test(key))) {
+    assert.equal(properties[key], initialColors[key], `First paint and initialized theme differ at ${key}: ${JSON.stringify(settings)}`);
+  }
+  assert.equal(rootElement.dataset.theme, settings.theme);
+  assert.equal(body.dataset.theme, settings.theme);
+}
 context.current = { ...legacy, interfaceLayoutVersion: 2 };
 const restored = JSON.parse(vm.runInContext('JSON.stringify(sanitizeSettings(current))', context));
 assert.deepEqual(restored.panelPositions.clock, legacy.panelPositions.clock, 'Newly saved dragging must persist');
@@ -128,6 +164,20 @@ assert.equal(settingsFits, 1);
 vm.runInContext('updateSetting("panelOpacity", 90); flushPendingSettingChanges()', context);
 assert.equal(settingsSaves, 2, 'A pagehide flush must retain the final setting');
 assert.equal(animationFrames.size, 0);
+
+context.refreshBackgroundVideoAfterThemeChange = noop;
+context.state.settings = JSON.parse(vm.runInContext('JSON.stringify(sanitizeSettings())', context));
+for (const theme of ['light', 'dark', 'light']) {
+  vm.runInContext(`updateSetting("theme", "${theme}"); flushPendingSettingChanges()`, context);
+  assert.equal(context.state.settings.textColor, theme === 'light' ? '#25362b' : '#edf2ef');
+  assert.equal(context.state.settings.panelColor, theme === 'light' ? '#ffffff' : '#1a201f');
+  assert.equal(context.state.settings.dropdownColor, theme === 'light' ? '#ffffff' : '#202823');
+}
+vm.runInContext('updateSetting("textColor", "#123456"); updateSetting("panelColor", "#f0e6d2"); updateSetting("theme", "dark"); flushPendingSettingChanges()', context);
+assert.equal(context.state.settings.textColor, '#123456', 'Changing modes must preserve custom text colors');
+assert.equal(context.state.settings.panelColor, '#f0e6d2', 'Changing modes must preserve custom panel colors');
+vm.runInContext('updateSetting("panelColor", "#ffffff"); flushPendingSettingChanges()', context);
+assert.equal(context.state.settings.panelColor, '#ffffff', 'Choosing a white custom panel in dark mode must remain possible');
 
 // Exercise the actual category navigation and toolbar handlers with a small DOM boundary.
 const element = dataset => ({ dataset, attributes: {}, events: {}, tabIndex: -1, hidden: false, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(key, handler) { this.events[key] = handler; }, focus() { this.focused = true; } });
@@ -272,4 +322,4 @@ assert.equal(debugNotice.hidden, false, 'Action feedback must be visible inside 
 noticeContext.showInlineNotice('Copy failed', 'error');
 assert.equal(debugNotice.dataset.tone, 'error');
 
-console.log(`PASS: ${ids.length} controls, settings and debug categories, JavaScript syntax, six locales, saved-data migration, batched settings persistence, layout edit/reset, bookmark filtering, modal action feedback, and clipboard recovery.`);
+console.log(`PASS: ${ids.length} controls, settings and debug categories, JavaScript syntax, six locales, saved-data and light-theme migration, first-paint color consistency, theme switching and custom colors, batched settings persistence, layout edit/reset, bookmark filtering, modal action feedback, and clipboard recovery.`);

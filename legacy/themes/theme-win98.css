@@ -1,0 +1,444 @@
+/* Windows 98 inspired classic desktop theme. */
+body[data-theme-style="win98"] {
+  font-family: "MS Sans Serif", Tahoma, Verdana, sans-serif;
+  --ui-radius-xl: 4px;
+  --ui-radius-lg: 4px;
+  --ui-radius-md: 2px;
+}
+
+body[data-theme-style="win98"] .hero-card,
+body[data-theme-style="win98"] .panel,
+body[data-theme-style="win98"] .floating-clock,
+body[data-theme-style="win98"] .app-dialog,
+body[data-theme-style="win98"] .settings-section,
+body[data-theme-style="win98"] .settings-subsection,
+body[data-theme-style="win98"] .shortcut-card,
+body[data-theme-style="win98"] .empty-state-card,
+body[data-theme-style="win98"] .search-box-combined,
+body[data-theme-style="win98"] .search-engine-wrap,
+body[data-theme-style="win98"] .search-suggestions,
+body[data-theme-style="win98"] .layout-switch {
+  border-radius: 2px;
+  border: 1px solid #000;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0 rgba(54, 54, 54, 0.85);
+  background: color-mix(in srgb, var(--panel-strong) 70%, #c0c0c0 30%);
+}
+
+body[data-theme-style="win98"] .accent-button,
+body[data-theme-style="win98"] .secondary-button,
+body[data-theme-style="win98"] .ghost-button,
+body[data-theme-style="win98"] .mini-button,
+body[data-theme-style="win98"] .icon-button,
+body[data-theme-style="win98"] .switch-button,
+body[data-theme-style="win98"] .search-all-button,
+body[data-theme-style="win98"] .voice-search-button,
+body[data-theme-style="win98"] .image-search-button,
+body[data-theme-style="win98"] .search-engine,
+body[data-theme-style="win98"] .settings-form select,
+body[data-theme-style="win98"] .custom-select-button,
+body[data-theme-style="win98"] input[type="text"],
+body[data-theme-style="win98"] input[type="url"] {
+  border-radius: 2px;
+  border: 1px solid #000;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+}
+
+body[data-theme-style="win98"] .accent-button,
+body[data-theme-style="win98"] .switch-button.is-active,
+body[data-theme-style="win98"] .search-all-button.is-active,
+body[data-theme-style="win98"] .voice-search-button.is-listening {
+  background: linear-gradient(180deg, #0a65d9, #004ca8);
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .secondary-button,
+body[data-theme-style="win98"] .ghost-button,
+body[data-theme-style="win98"] .mini-button,
+body[data-theme-style="win98"] .icon-button,
+body[data-theme-style="win98"] .switch-button,
+body[data-theme-style="win98"] .search-all-button,
+body[data-theme-style="win98"] .voice-search-button,
+body[data-theme-style="win98"] .image-search-button,
+body[data-theme-style="win98"] .custom-select-button,
+body[data-theme-style="win98"] .search-suggestion {
+  background: #c0c0c0;
+  color: #111;
+}
+
+body[data-theme-style="win98"] .voice-search-button,
+body[data-theme-style="win98"] .image-search-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 2px;
+}
+
+body[data-theme-style="win98"] .image-search-button {
+  color: #111;
+}
+
+body[data-theme-style="win98"] .voice-search-button:hover,
+body[data-theme-style="win98"] .voice-search-button:focus-visible,
+body[data-theme-style="win98"] .image-search-button:hover,
+body[data-theme-style="win98"] .image-search-button:focus-visible {
+  background: #d4d0c8;
+  border-color: #000;
+  color: #111;
+  outline: 1px dotted #111;
+  outline-offset: -4px;
+}
+
+body[data-theme-style="win98"] .voice-search-button:active,
+body[data-theme-style="win98"] .voice-search-button.is-pressed,
+body[data-theme-style="win98"] .image-search-button:active {
+  background: #b8b8b8;
+  box-shadow:
+    inset 1px 1px 0 rgba(80, 80, 80, 0.9),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body[data-theme-style="win98"] .voice-search-button.is-listening,
+body[data-theme-style="win98"] .voice-search-button.is-listening:hover,
+body[data-theme-style="win98"] .voice-search-button.is-listening:focus-visible {
+  border-color: #000;
+  background: linear-gradient(180deg, #0a65d9, #004ca8);
+  color: #fff;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.72),
+    inset -1px -1px 0 rgba(0, 18, 70, 0.78);
+}
+
+body[data-theme-style="win98"] .voice-search-button.is-listening:active,
+body[data-theme-style="win98"] .voice-search-button.is-listening.is-pressed {
+  background: linear-gradient(180deg, #004ca8, #0a65d9);
+  box-shadow:
+    inset 1px 1px 0 rgba(0, 18, 70, 0.72),
+    inset -1px -1px 0 rgba(150, 200, 255, 0.72);
+}
+
+body[data-theme-style="win98"] .search-all-button {
+  min-width: 74px;
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+body[data-theme-style="win98"] .search-all-button:hover,
+body[data-theme-style="win98"] .search-all-button:focus-visible {
+  background: #d4d0c8;
+  border-color: #000;
+  outline: 1px dotted #111;
+  outline-offset: -4px;
+}
+
+body[data-theme-style="win98"] .search-all-button:active {
+  background: #b8b8b8;
+  box-shadow:
+    inset 1px 1px 0 rgba(80, 80, 80, 0.9),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body[data-theme-style="win98"] .search-all-button.is-active:hover,
+body[data-theme-style="win98"] .search-all-button.is-active:focus-visible {
+  background: linear-gradient(180deg, #1f75e8, #0055bb);
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .search-all-button.is-active:active {
+  background: linear-gradient(180deg, #004ca8, #0a65d9);
+  color: #fff;
+  box-shadow:
+    inset 1px 1px 0 rgba(0, 18, 70, 0.72),
+    inset -1px -1px 0 rgba(150, 200, 255, 0.72);
+}
+
+body[data-theme-style="win98"] .custom-select-button {
+  min-height: 34px;
+  padding: 0 8px 0 10px;
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+body[data-theme-style="win98"] .custom-select-button:hover,
+body[data-theme-style="win98"] .custom-select-button:focus-visible,
+body[data-theme-style="win98"] .custom-select.is-open .custom-select-button {
+  background: #d4d0c8;
+  border-color: #000;
+  outline: 1px dotted #111;
+  outline-offset: -4px;
+}
+
+body[data-theme-style="win98"] .custom-select-arrow {
+  width: 18px;
+  height: 18px;
+  border-left: 1px solid #808080;
+  background: #c0c0c0;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #505050;
+}
+
+body[data-theme-style="win98"] .custom-select-arrow::before {
+  left: 5px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #111;
+  background: transparent;
+  transform: none;
+}
+
+body[data-theme-style="win98"] .custom-select-arrow::after {
+  display: none;
+}
+
+body[data-theme-style="win98"] .custom-select.is-open .custom-select-arrow::before {
+  transform: none;
+}
+
+body[data-theme-style="win98"] .custom-select-list {
+  padding: 2px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #c0c0c0;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #505050;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body[data-theme-style="win98"] .custom-select-group {
+  position: sticky;
+  top: -2px;
+  margin: 2px 0;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 0;
+  background: #000080;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: none;
+}
+
+body[data-theme-style="win98"] .custom-select-group-caution {
+  background: #806000;
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .custom-select-option {
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: 0;
+  color: #111;
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+body[data-theme-style="win98"] .custom-select-option:hover,
+body[data-theme-style="win98"] .custom-select-option:focus-visible,
+body[data-theme-style="win98"] .custom-select-option.is-selected {
+  background: #0a65d9;
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .custom-select-option.is-selected::after {
+  width: 6px;
+  height: 10px;
+  border-color: #fff;
+}
+
+body[data-theme-style="win98"] .custom-range {
+  height: 24px;
+}
+
+body[data-theme-style="win98"] .custom-range-track {
+  height: 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #808080;
+  box-shadow:
+    inset 1px 1px 0 #404040,
+    inset -1px -1px 0 #fff;
+}
+
+body[data-theme-style="win98"] .custom-range-fill {
+  border-radius: 0;
+  background: #0a65d9;
+}
+
+body[data-theme-style="win98"] .custom-range-thumb {
+  width: 16px;
+  height: 22px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #c0c0c0;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #505050;
+}
+
+body[data-theme-style="win98"] .custom-range:hover .custom-range-thumb,
+body[data-theme-style="win98"] .custom-range:focus-visible .custom-range-thumb,
+body[data-theme-style="win98"] .custom-range.is-dragging .custom-range-thumb {
+  transform: translate(-50%, -50%);
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #505050;
+}
+
+body[data-theme-style="win98"] .custom-range:focus-visible {
+  outline: 1px dotted #111;
+  outline-offset: 1px;
+}
+
+body[data-theme-style="win98"] .search-suggestions {
+  gap: 4px;
+  padding: 6px;
+  background: #c0c0c0;
+  border-radius: 2px;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body[data-theme-style="win98"] .search-suggestion {
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding: 8px 10px;
+}
+
+body[data-theme-style="win98"] .search-suggestion:hover,
+body[data-theme-style="win98"] .search-suggestion.is-active {
+  background: #0a65d9;
+  border-color: #000;
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .search-suggestion-meta {
+  color: #333;
+}
+
+body[data-theme-style="win98"] .search-suggestion:hover .search-suggestion-meta,
+body[data-theme-style="win98"] .search-suggestion.is-active .search-suggestion-meta {
+  color: #e6f0ff;
+}
+
+body[data-theme-style="win98"] .pin-toggle {
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background: #c0c0c0;
+  color: #111;
+  font-family: "Segoe UI Symbol", "Arial Unicode MS", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+}
+
+body[data-theme-style="win98"] .pin-toggle.is-active {
+  background: #0a65d9;
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .shortcut-actions {
+  justify-content: flex-end;
+  margin-right: 0;
+}
+
+body[data-theme-style="win98"] .collection-grid.list-mode .shortcut-actions {
+  margin-right: 0;
+}
+
+body[data-theme-style="win98"] .add-shortcut-card {
+  border-style: solid;
+  border-color: #000;
+  background: #aeb4c2;
+}
+
+body[data-theme-style="win98"] .add-shortcut-window {
+  border: 1px solid #000;
+  border-radius: 2px;
+  background: #c0c0c0;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+}
+
+body[data-theme-style="win98"] .add-shortcut-window-bar {
+  background: #7e7e7e;
+}
+
+body[data-theme-style="win98"] .add-shortcut-plus {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  background: #c0c0c0;
+  color: #0a65d9;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+  text-shadow: none;
+}
+
+body[data-theme-style="win98"] .engine-check-item {
+  border: 1px solid #000;
+  border-radius: 2px;
+  background: #c0c0c0;
+  color: #111;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(80, 80, 80, 0.9);
+}
+
+body[data-theme-style="win98"] .engine-check-group {
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid #808080;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+body[data-theme-style="win98"] .engine-check-group:first-child {
+  padding-top: 0;
+  border-top: 0;
+  box-shadow: none;
+}
+
+body[data-theme-style="win98"] .engine-check-group-head {
+  min-height: 24px;
+  padding: 4px 6px;
+  background: #000080;
+  color: #fff;
+}
+
+body[data-theme-style="win98"] .engine-check-group-head strong,
+body[data-theme-style="win98"] .engine-check-group-head span {
+  color: #fff;
+  font-size: 0.76rem;
+}
+
+body[data-theme-style="win98"] .engine-check-group-caution .engine-check-group-head {
+  background: #806000;
+}
+
+body[data-theme-style="win98"] .engine-check-item:hover {
+  background: #d4d0c8;
+  outline: 1px dotted #111;
+  outline-offset: -4px;
+}
+
+body[data-theme-style="win98"] .engine-check-icon {
+  border-radius: 0;
+}

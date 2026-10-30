@@ -10,6 +10,7 @@
     "script/05-workspace.js",
     "script/06-i18n.js",
     "script/07-storage.js",
+    "script/07-sync.js",
     "script/08-app.js"
   ];
 

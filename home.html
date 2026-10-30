@@ -1,19 +1,13 @@
-<!--
- * @Author: Shadows_Lunarfox 91894334+ShadowsLunarfox@users.noreply.github.com
- * @Date: 2026-05-20 03:36:40
- * @LastEditors: Shadows_Lunarfox 91894334+ShadowsLunarfox@users.noreply.github.com
- * @LastEditTime: 2026-08-02 00:45:26
- * @FilePath: \extension home pag\home.html
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-interface-version="modern">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="app.title">New Tab</title>
+  <script src="script/interface-version.js"></script>
   <script src="script/preflight.js"></script>
-  <link rel="icon" type="image/png" href="resource/icons/lunar-32.png">
+  <link rel="icon" type="image/png" href="resource/icons/lunar-v2-32.png">
   <!-- One unified, modular interface. -->
   <link rel="stylesheet" href="styles.css">
   <link id="wallpaper-style-link" rel="stylesheet">
@@ -374,6 +368,16 @@
                 </select>
               </label>
             </div>
+          </div>
+          <div class="settings-subsection">
+            <label data-i18n="interface_version.label">
+              Interface version
+              <select id="interface-version" aria-describedby="interface-version-note">
+                <option value="modern" data-i18n="interface_version.modern">New version</option>
+                <option value="legacy" data-i18n="interface_version.legacy">Old version</option>
+              </select>
+            </label>
+            <p id="interface-version-note" class="field-note" data-i18n="interface_version.note">Switch now and use this version for every new tab. Each version keeps its own appearance settings.</p>
           </div>
           <div id="settings-colors-section" class="settings-subsection">
             <div class="settings-subhead">
