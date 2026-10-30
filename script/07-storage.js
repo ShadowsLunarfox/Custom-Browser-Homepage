@@ -132,7 +132,7 @@ function clearDebugLocalStorage() {
   if (!confirmed) return;
 
   try {
-    localStorage.clear();
+    clearInterfaceLocalStorage();
     window.location.reload();
   } catch (error) {
     console.warn("Local storage clear failed", error);
@@ -148,21 +148,13 @@ window.addEventListener("pagehide", flushPendingSettingChanges);
 function updateSetting(key, value) {
   if (key === "theme") {
     value = value === "light" ? "light" : "dark";
-    const currentTextColor = normalizeHexColor(state.settings.textColor, THEME_TEXT_DEFAULTS[state.settings.theme]);
-    const isUsingThemeDefault = currentTextColor === THEME_TEXT_DEFAULTS.dark || currentTextColor === THEME_TEXT_DEFAULTS.light;
-    const currentPanelColor = normalizeHexColor(state.settings.panelColor, PANEL_COLOR_DEFAULTS[state.settings.theme]);
-    const isUsingPanelDefault = currentPanelColor === PANEL_COLOR_DEFAULTS.dark || currentPanelColor === PANEL_COLOR_DEFAULTS.light;
-    const currentDropdownColor = normalizeHexColor(state.settings.dropdownColor, DROPDOWN_COLOR_DEFAULTS[state.settings.theme]);
-    const isUsingDropdownDefault = currentDropdownColor === DROPDOWN_COLOR_DEFAULTS.dark || currentDropdownColor === DROPDOWN_COLOR_DEFAULTS.light;
-    const currentSliderTrackColor = normalizeHexColor(state.settings.sliderTrackColor, SLIDER_TRACK_COLOR_DEFAULTS[state.settings.theme]);
-    const isUsingSliderTrackDefault = currentSliderTrackColor === SLIDER_TRACK_COLOR_DEFAULTS.dark || currentSliderTrackColor === SLIDER_TRACK_COLOR_DEFAULTS.light;
     state.settings = sanitizeSettings({
       ...state.settings,
       theme: value,
-      textColor: isUsingThemeDefault ? THEME_TEXT_DEFAULTS[value] : currentTextColor,
-      panelColor: isUsingPanelDefault ? PANEL_COLOR_DEFAULTS[value] : currentPanelColor,
-      dropdownColor: isUsingDropdownDefault ? DROPDOWN_COLOR_DEFAULTS[value] : currentDropdownColor,
-      sliderTrackColor: isUsingSliderTrackDefault ? SLIDER_TRACK_COLOR_DEFAULTS[value] : currentSliderTrackColor
+      textColor: resolveThemeColor(state.settings.textColor, value, THEME_TEXT_DEFAULTS),
+      panelColor: resolveThemeColor(state.settings.panelColor, value, PANEL_COLOR_DEFAULTS),
+      dropdownColor: resolveThemeColor(state.settings.dropdownColor, value, DROPDOWN_COLOR_DEFAULTS),
+      sliderTrackColor: resolveThemeColor(state.settings.sliderTrackColor, value, SLIDER_TRACK_COLOR_DEFAULTS)
     });
   } else {
     state.settings = sanitizeSettings({
@@ -322,6 +314,9 @@ function sanitizeSettings(value) {
       const replacement = replacements[String(value[key]).toLowerCase()];
       if (replacement) value[key] = replacement;
     });
+    value.panelColor = resolveThemeColor(value.panelColor, theme, PANEL_COLOR_DEFAULTS);
+    value.dropdownColor = resolveThemeColor(value.dropdownColor, theme, DROPDOWN_COLOR_DEFAULTS);
+    value.sliderTrackColor = resolveThemeColor(value.sliderTrackColor, theme, SLIDER_TRACK_COLOR_DEFAULTS);
   }
   const rawTextColor = normalizeHexColor(value?.textColor, THEME_TEXT_DEFAULTS[theme]);
   const textColor = resolveThemeTextColor(rawTextColor, theme);
@@ -474,13 +469,13 @@ function sanitizeLink(link) {
 }
 
 function saveState(showSaveError = false) {
-  const payload = JSON.stringify(state);
-
   try {
+    if (typeof publishSharedState === "function") publishSharedState();
+    const payload = JSON.stringify(state);
     localStorage.setItem(STORAGE_KEY, payload);
     return true;
   } catch (error) {
-    const retried = retrySaveStateAfterCleanup(payload);
+    const retried = retrySaveStateAfterCleanup(JSON.stringify(state));
     if (retried) {
       return true;
     }
@@ -494,16 +489,20 @@ function saveState(showSaveError = false) {
 }
 
 function retrySaveStateAfterCleanup(payload) {
+  const previous = localStorage.getItem(STORAGE_KEY);
   try {
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.setItem(STORAGE_KEY, payload);
+    if (typeof publishSharedState === "function") publishSharedState();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     return true;
   } catch {
+    try { if (previous !== null) localStorage.setItem(STORAGE_KEY, previous); } catch {}
     return false;
   }
 }
 
 async function initializeBackgroundStorage() {
+  if (typeof migrateSharedBackgroundStorage === "function") await migrateSharedBackgroundStorage();
   if (state.background.type !== "image") {
     storedBackgroundImageDataUrl = "";
     return;
@@ -540,6 +539,7 @@ async function normalizeBackgroundStorage(targetState) {
 }
 
 async function createExportableState() {
+  if (typeof publishSharedState === "function") publishSharedState();
   const exportableState = structuredClone(state);
   if (exportableState.background.type === "image" && exportableState.background.value === CHROME_BACKGROUND_VALUE) {
     exportableState.background.value = await getStoredBackgroundImageForExport();
@@ -663,6 +663,7 @@ async function setStoredBackgroundImage(asset) {
     if (canUseExtensionStorage()) {
       await extensionStorageRemove(BACKGROUND_IMAGE_KEY);
     }
+    if (typeof notifySharedBackgroundChange === "function") notifySharedBackgroundChange();
     return;
   }
 
@@ -672,6 +673,7 @@ async function setStoredBackgroundImage(asset) {
   storedBackgroundImageDataUrl = dataUrl;
   if (!canUseExtensionStorage()) return;
   await extensionStorageSet({ [BACKGROUND_IMAGE_KEY]: dataUrl });
+  if (typeof notifySharedBackgroundChange === "function") notifySharedBackgroundChange();
 }
 
 async function createStoredBackgroundAsset(asset) {
@@ -702,8 +704,8 @@ async function clearStoredBackgroundImage() {
       console.warn("IndexedDB background clear failed", error);
     }
   }
-  if (!canUseExtensionStorage()) return;
-  await extensionStorageRemove(BACKGROUND_IMAGE_KEY);
+  if (canUseExtensionStorage()) await extensionStorageRemove(BACKGROUND_IMAGE_KEY);
+  if (typeof notifySharedBackgroundChange === "function") notifySharedBackgroundChange();
 }
 
 function revokeStoredBackgroundObjectUrl() {
@@ -746,9 +748,9 @@ async function getStoredBackgroundImageForExport() {
   return storedBackgroundImageDataUrl || await getStoredBackgroundImage();
 }
 
-function openBackgroundAssetDatabase() {
+function openBackgroundAssetDatabase(databaseName = BACKGROUND_DB_NAME) {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(BACKGROUND_DB_NAME, BACKGROUND_DB_VERSION);
+    const request = indexedDB.open(databaseName, BACKGROUND_DB_VERSION);
     request.onerror = () => reject(request.error || new Error("IndexedDB open failed"));
     request.onupgradeneeded = () => {
       const database = request.result;
@@ -760,8 +762,8 @@ function openBackgroundAssetDatabase() {
   });
 }
 
-async function withBackgroundAssetStore(mode, callback) {
-  const database = await openBackgroundAssetDatabase();
+async function withBackgroundAssetStore(mode, callback, databaseName = BACKGROUND_DB_NAME) {
+  const database = await openBackgroundAssetDatabase(databaseName);
   return await new Promise((resolve, reject) => {
     const transaction = database.transaction(BACKGROUND_DB_STORE, mode);
     const store = transaction.objectStore(BACKGROUND_DB_STORE);
@@ -796,7 +798,7 @@ async function withBackgroundAssetStore(mode, callback) {
   });
 }
 
-async function getBackgroundAssetFromIndexedDb() {
+async function getBackgroundAssetFromIndexedDb(databaseName = BACKGROUND_DB_NAME) {
   let result = "";
   await withBackgroundAssetStore("readonly", (store, finishResolve, finishReject) => {
     const request = store.get(BACKGROUND_DB_RECORD_KEY);
@@ -805,7 +807,7 @@ async function getBackgroundAssetFromIndexedDb() {
       result = request.result || "";
       finishResolve(result);
     };
-  });
+  }, databaseName);
   return result;
 }
 
@@ -941,66 +943,67 @@ function loadImageFile(file) {
   });
 }
 
-async function importPendingSavedLinks() {
-  if (!canUseExtensionStorage()) return;
+let pendingLinkImport = null;
+let pendingLinkImportRequested = false;
 
+function importPendingSavedLinks() {
+  if (!canUseExtensionStorage()) return Promise.resolve();
+  pendingLinkImportRequested = true;
+  if (!pendingLinkImport) {
+    pendingLinkImport = (async () => {
+      do {
+        pendingLinkImportRequested = false;
+        await importPendingSavedLinkBatch();
+      } while (pendingLinkImportRequested);
+    })().finally(() => {
+      pendingLinkImport = null;
+      if (pendingLinkImportRequested) void importPendingSavedLinks();
+    });
+  }
+  return pendingLinkImport;
+}
+
+async function importPendingSavedLinkBatch() {
   try {
-    const { pendingLinks, keysToRemove, shouldPersistEmptyIndex } = await readPendingSavedLinks();
-    if (!pendingLinks.length) {
-      if (shouldPersistEmptyIndex) {
-        await extensionStorageSet({ [PENDING_LINK_IDS_KEY]: [] });
-      }
-      return;
-    }
-
+    const { pendingLinks, keysToRemove } = await readPendingSavedLinks();
+    const previousLinks = state.links;
+    const nextLinks = [...previousLinks];
     let didChange = false;
-    const existingUrls = new Set(state.links.map((link) => normalizeUrl(link.url).toLowerCase()));
+    const existingUrls = new Set(nextLinks.map((link) => normalizeUrl(link.url).toLowerCase()));
 
     pendingLinks.forEach((rawLink) => {
       const link = sanitizeLink(rawLink);
       if (!link) return;
+      if (typeof isSharedBookmarkDeleted === "function" && isSharedBookmarkDeleted(link.id)) return;
 
       const normalizedUrl = normalizeUrl(link.url).toLowerCase();
       if (existingUrls.has(normalizedUrl)) return;
 
       existingUrls.add(normalizedUrl);
-      state.links.push(link);
+      nextLinks.push(link);
       didChange = true;
     });
 
+    if (didChange) {
+      state.links = reorderPinnedLinks(nextLinks);
+      if (!persistAndRender(true)) {
+        state.links = previousLinks;
+        renderAll();
+        return;
+      }
+    }
+
+    // Acknowledge only after the bookmark is saved; the other interface's records stay intact.
     if (keysToRemove.length) {
       await extensionStorageRemove(keysToRemove);
     }
-    await extensionStorageSet({ [PENDING_LINK_IDS_KEY]: [] });
-
-    if (!didChange) return;
-
-    state.links = reorderPinnedLinks(state.links);
-    persistAndRender(true);
   } catch (error) {
     console.warn("Pending link import failed", error);
   }
 }
 
 async function readPendingSavedLinks() {
-  const indexed = await extensionStorageGet(PENDING_LINK_IDS_KEY);
-  const hasIndex = Array.isArray(indexed[PENDING_LINK_IDS_KEY]);
-
-  if (hasIndex) {
-    const pendingIds = [...new Set(indexed[PENDING_LINK_IDS_KEY].filter((id) => typeof id === "string" && id))];
-    if (!pendingIds.length) {
-      return { pendingLinks: [], keysToRemove: [], shouldPersistEmptyIndex: false };
-    }
-
-    const pendingKeys = pendingIds.map((id) => `${PENDING_LINK_KEY_PREFIX}${id}`);
-    const stored = await extensionStorageGet(pendingKeys);
-    return {
-      pendingLinks: pendingKeys.map((key) => stored[key]).filter(Boolean),
-      keysToRemove: pendingKeys,
-      shouldPersistEmptyIndex: true
-    };
-  }
-
+  // Read durable records directly so a stale/empty index cannot hide newly saved pages.
   const stored = await extensionStorageGet(null);
   const pendingKeys = Object.keys(stored).filter((key) => key.startsWith(PENDING_LINK_KEY_PREFIX));
   const pendingLinks = pendingKeys.map((key) => stored[key]).filter(Boolean);
@@ -1009,8 +1012,11 @@ async function readPendingSavedLinks() {
 
   return {
     pendingLinks,
-    keysToRemove: legacyPendingLinks.length ? [...pendingKeys, PENDING_LINKS_KEY] : pendingKeys,
-    shouldPersistEmptyIndex: true
+    keysToRemove: [
+      ...pendingKeys,
+      ...(Object.prototype.hasOwnProperty.call(stored, PENDING_LINKS_KEY) ? [PENDING_LINKS_KEY] : []),
+      ...(Object.prototype.hasOwnProperty.call(stored, PENDING_LINK_IDS_KEY) ? [PENDING_LINK_IDS_KEY] : [])
+    ]
   };
 }
 

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="resource/icons/lunar-128.png" alt="Lunar Start Page logo" width="128" />
+  <img src="resource/icons/lunar-v2-128.png" alt="Lunar Start Page logo" width="128" />
 
   <h1>🌙 Lunar Start Page</h1>
 
@@ -62,10 +62,11 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 - Open a new tab and use the search bar or your shortcut cards.
 - The shared start area brings the clock, search engine, voice search, and image search together.
 - Select **Customize** to change the search engine, display mode, language, clock, layout, and wallpaper.
+- Under **Appearance & wallpaper → Interface version**, choose **New version** or **Old version**. The choice applies immediately and to every new tab, including after restarting the browser. In the old interface, the same selector is in **Settings → Appearance**. Collections, language, search, wallpaper, clock, and layout preferences synchronize between both interfaces. Theme skins, light/dark mode, and theme colors stay independent.
 - The top navigation bar is removed. Compact corner buttons provide settings and layout editing; hover or focus a button to see its label.
 - Select **Adjust layout**, then drag a module's background or ordinary text to move it. Inputs, links, and buttons remain interactive; drag a corner to resize. Select **Done** to return to normal browsing and bookmark sorting, or **Reset layout** to restore default positions and sizes while retaining bookmarks, wallpaper, and other preferences.
 - Use **Find a saved site** to filter shortcuts locally by name or address.
-- To add a shortcut, use the add card in the shortcuts panel. To save a page while browsing, right-click the page and choose **Save This Page to Lunar Start**.
+- To add a shortcut, use the add card in the shortcuts panel. To save a page while browsing, right-click the page and choose **Save This Page to Lunar Start**. Right-click saves are delivered to both interface versions; an unopened version receives them when opened. Repeated saves of the same address are deduplicated.
 - Use the bookmark import/export controls in settings to move or back up your shortcut list.
 - Debug tools under **Backup & tools** group diagnostics, storage, and compatibility tests into three tabs. The content scrolls within the window while the heading and close controls stay visible.
 
@@ -75,7 +76,7 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 - Chrome Extensions Manifest V3
 - Browser storage for preferences and saved shortcuts
 
-For a local interface preview, run `node scripts/preview-ui.cjs` and open `http://127.0.0.1:4173/home.html`. Run `node scripts/verify-ui.mjs` for interface and saved-data compatibility checks. Browser-only previews do not include extension permissions or context menu actions.
+For a local interface preview, run `node scripts/preview-ui.cjs` and open `http://127.0.0.1:4173/newtab.html` to use the saved interface choice, or `http://127.0.0.1:4173/home.html` to inspect the modern interface directly. Run `node scripts/verify-ui.mjs` for interface and saved-data compatibility checks. Browser-only previews do not include extension permissions or context menu actions.
 
 Run `node scripts/verify-panel-drag.mjs` to check whole-module dragging, input and link exclusions, pointer handling, and bookmark sorting.
 
@@ -83,7 +84,17 @@ Run `node scripts/verify-panel-bounds.mjs` to check real bottom-edge access, sta
 
 Run `node scripts/check-browser-ui.mjs --debug-only` for debug-menu checks in an isolated headless Chrome profile, including small windows, enlarged text, scrolling, dropdowns, keyboard navigation, action feedback, and reopening. Set `LUNAR_CHROME_PATH` if Chrome is installed elsewhere. Omit `--debug-only` to include workspace checks.
 
-The unified interface replaces the former Cartoon, Windows 98, Windows XP, and Terminal skins. Existing bookmark and wallpaper data is retained. Panel positions and scales migrate once to the new layout; dragging and resizing remain available.
+The browser checks also measure text contrast in both display modes across the homepage, settings, and dialogs, and verify repeated theme switching. Use `node scripts/check-browser-ui.mjs --preview theme=light language=zh-CN` to capture a light-mode debug preview. Saved custom colors are retained; legacy default colors migrate together so light-mode text and panels stay readable.
+
+The modern interface uses a unified layout. The original interface, including its Cartoon, Windows 98, Windows XP, and Terminal skins, is bundled independently under `legacy/`. Both versions use the current wallpaper and icon files from `themes/wallpaper/` and `resource/icons/`. The lightweight new-tab entry reads the saved version before loading a page, so legacy mode does not load modern interface HTML, scripts, styles, or translations. No files from the Downloads folder are required after installation.
+
+User data and non-theme preferences synchronize live. Existing collections merge by address on first use, with the first opened interface supplying the initial preferences. Changes are stored per preference and per bookmark field, so concurrent edits to different items or fields cannot overwrite an entire older snapshot. Deletion markers prevent stale tabs and pending deliveries from restoring deleted bookmarks. Reordering, pinning, searching, language, wallpaper, clock, font scale, transparency, spacing, and desired module layout synchronize; card heights adapt to each interface's size range. Actual viewport-constrained panel positions stay local to avoid layout feedback between different designs or window sizes.
+
+Only theme skins, light/dark mode, and theme colors are private to each interface. Language/compatibility caches and pending delivery acknowledgements remain separate implementation details. Each right-click save sends a durable copy to both queues; queued pages are acknowledged only after saving succeeds. Uploaded wallpapers use a common database and refresh in both interfaces, including replacement uploads with the same file name. Existing custom wallpaper migrates from the prior store when first needed. Backups include current shared data and the current interface's theme; importing data synchronizes it without changing the other theme. Local cache cleanup preserves shared user data.
+
+Run `node scripts/verify-interface-version.mjs` for routing, local theme/cache boundaries, shared media paths, bookmark queues, and storage-failure checks. Run `node scripts/verify-shared-state.mjs` for collection migration, concurrent edits, deletions, history merging, layout adaptation, and independent themes. Run `node scripts/check-browser-ui.mjs --versions-only` for real-browser checks of version selection, live bookmark and preference updates, wallpaper uploads, safe backups/cache cleanup, repeated new tabs, and preserved theme controls.
+
+Run `node scripts/verify-quick-save.mjs` for delivery to both versions, unopened-version retention, rapid saves, stale-index recovery, URL deduplication, and retry after local saving fails. The version browser checks also exercise shared right-click delivery through both interfaces' import and rendering code.
 
 The homepage fits the browser window. Extra shortcuts scroll inside their own area in both grid and list layouts. Cards default to 96px high; legacy card sizes migrate to 80–112px. Open `http://127.0.0.1:4173/scripts/viewport-check.html` while the preview server runs to check window sizing and scrolling in a browser.
 

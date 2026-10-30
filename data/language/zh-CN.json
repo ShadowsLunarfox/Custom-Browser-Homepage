@@ -535,5 +535,12 @@
     "data_settings_desc": "备份、恢复数据，并查看高级诊断工具。",
     "filter_empty_title": "没有找到相关网站",
     "filter_empty_desc": "试试其他名称或网址，或者清除筛选。"
+  },
+  "interface_version": {
+    "label": "界面版本",
+    "modern": "新版",
+    "legacy": "旧版",
+    "note": "主题风格、明暗模式和配色分别保存；收藏、语言、搜索、壁纸、时钟和布局在两版间同步。已有收藏会自动合并、去重。",
+    "storage_error": "无法保存界面版本，请重试。"
   }
 }

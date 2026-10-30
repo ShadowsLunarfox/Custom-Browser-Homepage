@@ -1,6 +1,5 @@
 const CONTEXT_MENU_ID = "save-page-to-lunar-start";
 const CONTEXT_MENU_TITLE = "Save This Page to Lunar Start";
-const PENDING_LINK_IDS_KEY = "pendingSavedLinkIds";
 const PENDING_LINK_KEY_PREFIX = "pendingSavedLink:";
 const extensionApi = getExtensionApi();
 const contextMenusApi = getContextMenusApi();
@@ -61,11 +60,11 @@ function createContextMenu() {
 }
 
 async function queueSavedLink(link) {
-  const ids = await getPendingLinkIds();
-  const nextIds = ids.includes(link.id) ? ids : [...ids, link.id];
+  // Deliver one durable record to each interface; each acknowledges only its own copy.
+  // Unique keys also prevent rapid saves from overwriting a shared ID index.
   await extensionStorageSet({
-    [PENDING_LINK_IDS_KEY]: nextIds,
-    [`${PENDING_LINK_KEY_PREFIX}${link.id}`]: link
+    [`${PENDING_LINK_KEY_PREFIX}${link.id}`]: link,
+    [`legacy:${PENDING_LINK_KEY_PREFIX}${link.id}`]: link
   });
 }
 
@@ -143,17 +142,6 @@ function extensionStorageSet(items) {
       resolve();
     });
   });
-}
-
-async function getPendingLinkIds() {
-  try {
-    const stored = await extensionStorageGet(PENDING_LINK_IDS_KEY);
-    return Array.isArray(stored[PENDING_LINK_IDS_KEY])
-      ? stored[PENDING_LINK_IDS_KEY].filter((id) => typeof id === "string" && id)
-      : [];
-  } catch {
-    return [];
-  }
 }
 
 function sanitizeTitle(title) {

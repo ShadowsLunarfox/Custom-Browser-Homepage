@@ -5,23 +5,23 @@
   "description": "A customizable new tab page with draggable panels, themed clocks, search, bookmarks, wallpapers, and visual style presets.",
   "version": "1.2.0",
   "chrome_url_overrides": {
-    "newtab": "home.html"
+    "newtab": "newtab.html"
   },
   "background": {
     "service_worker": "background.js"
   },
   "icons": {
-    "16": "resource/icons/lunar-16.png",
-    "32": "resource/icons/lunar-32.png",
-    "48": "resource/icons/lunar-48.png",
-    "128": "resource/icons/lunar-128.png"
+    "16": "resource/icons/lunar-v2-16.png",
+    "32": "resource/icons/lunar-v2-32.png",
+    "48": "resource/icons/lunar-v2-48.png",
+    "128": "resource/icons/lunar-v2-128.png"
   },
   "action": {
     "default_title": "Lunar Start Page",
     "default_icon": {
-      "16": "resource/icons/lunar-16.png",
-      "32": "resource/icons/lunar-32.png",
-      "48": "resource/icons/lunar-48.png"
+      "16": "resource/icons/lunar-v2-16.png",
+      "32": "resource/icons/lunar-v2-32.png",
+      "48": "resource/icons/lunar-v2-48.png"
     }
   },
   "host_permissions": [

@@ -535,5 +535,12 @@
     "data_settings_desc": "Keep a backup of your data and find advanced diagnostics.",
     "filter_empty_title": "No sites found",
     "filter_empty_desc": "Try another name or address, or clear the filter."
+  },
+  "interface_version": {
+    "label": "Interface version",
+    "modern": "New version",
+    "legacy": "Old version",
+    "note": "Themes, light/dark mode, and theme colors are saved separately. Bookmarks, language, search, wallpaper, clock, and layout synchronize between both versions. Existing collections merge and deduplicate automatically.",
+    "storage_error": "Could not save the interface version. Please try again."
   }
 }

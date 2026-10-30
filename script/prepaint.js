@@ -48,6 +48,25 @@
 
   function applyTheme(settings, body, root) {
     var theme = settings.theme === "light" ? "light" : "dark";
+    // Match saved-data migration before the first paint, including old light-mode surfaces.
+    if (settings.interfaceLayoutVersion !== 2) {
+      settings = Object.assign({}, settings);
+      var legacyDefaults = {
+        textColor: { "#f3f6ff": DEFAULTS.textColorDark, "#182338": DEFAULTS.textColorLight },
+        panelColor: { "#1c2438": DEFAULTS.panelColorDark },
+        dropdownColor: { "#26304a": DEFAULTS.dropdownColorDark },
+        sliderTrackColor: { "#33405e": DEFAULTS.sliderTrackColorDark, "#d8e3f5": DEFAULTS.sliderTrackColorLight },
+        accentColor: { "#7dc4ff": DEFAULTS.accentColor },
+        sliderFillColor: { "#7dc4ff": DEFAULTS.sliderFillColor }
+      };
+      Object.keys(legacyDefaults).forEach(function (key) {
+        var replacement = legacyDefaults[key][String(settings[key]).toLowerCase()];
+        if (replacement) settings[key] = replacement;
+      });
+      settings.panelColor = resolveThemeColor(settings.panelColor, DEFAULTS.panelColorDark, DEFAULTS.panelColorLight, theme === "light" ? DEFAULTS.panelColorLight : DEFAULTS.panelColorDark);
+      settings.dropdownColor = resolveThemeColor(settings.dropdownColor, DEFAULTS.dropdownColorDark, DEFAULTS.dropdownColorLight, theme === "light" ? DEFAULTS.dropdownColorLight : DEFAULTS.dropdownColorDark);
+      settings.sliderTrackColor = resolveThemeColor(settings.sliderTrackColor, DEFAULTS.sliderTrackColorDark, DEFAULTS.sliderTrackColorLight, theme === "light" ? DEFAULTS.sliderTrackColorLight : DEFAULTS.sliderTrackColorDark);
+    }
     var accent = normalizeHexColor(settings.accentColor, DEFAULTS.accentColor);
     var panelColorFallback = theme === "light" ? DEFAULTS.panelColorLight : DEFAULTS.panelColorDark;
     var dropdownColorFallback = theme === "light" ? DEFAULTS.dropdownColorLight : DEFAULTS.dropdownColorDark;
@@ -64,6 +83,7 @@
     var panelSoftOpacity = Math.min(1, Math.max(0.44, panelOpacity - 0.08));
 
     body.dataset.theme = theme;
+    root.dataset.theme = theme;
     root.style.setProperty("--accent", accent);
     root.style.setProperty("--accent-strong", mixHex(accent, theme === "dark" ? "#ffffff" : "#000000", theme === "dark" ? 0.12 : 0.16));
     root.style.setProperty("--accent-muted", mixHex(accent, theme === "dark" ? "#0f1421" : "#ffffff", theme === "dark" ? 0.66 : 0.38));
@@ -163,10 +183,12 @@
   }
 
   function resolveThemeTextColor(value, theme, fallback) {
+    return resolveThemeColor(value, DEFAULTS.textColorDark, DEFAULTS.textColorLight, fallback);
+  }
+
+  function resolveThemeColor(value, darkDefault, lightDefault, fallback) {
     var normalized = normalizeHexColor(value, fallback);
-    if (theme === "light" && normalized === DEFAULTS.textColorDark) return DEFAULTS.textColorLight;
-    if (theme === "dark" && normalized === DEFAULTS.textColorLight) return DEFAULTS.textColorDark;
-    return normalized;
+    return normalized === darkDefault || normalized === lightDefault ? fallback : normalized;
   }
 
   function clampNumber(value, min, max, fallback) {

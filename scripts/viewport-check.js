@@ -4,13 +4,17 @@
   const debugOnly = options.has('debug-only') || options.has('debug-preview');
   const debugPreview = options.has('debug-preview');
   const saved = localStorage.getItem("customHomeState");
+  const sharedKeys = () => Object.keys(localStorage).filter(key => key.startsWith('lunarShared:v1:'));
+  const savedShared = new Map(sharedKeys().map(key => [key, localStorage.getItem(key)]));
   const restoreStorage = () => {
     if (saved === null) localStorage.removeItem("customHomeState");
     else localStorage.setItem("customHomeState", saved);
+    sharedKeys().forEach(key => localStorage.removeItem(key));
+    for (const [key, value] of savedShared) localStorage.setItem(key, value);
   };
   window.addEventListener('pagehide', restoreStorage, { once: true });
   const results = document.getElementById("results");
-  const scenarios = debugPreview ? [{ width: Number(options.get('width')) || 1280, height: Number(options.get('height')) || 720, fontScale: Number(options.get('font')) || 100, language: options.get('language') || 'en' }] : [
+  const scenarios = debugPreview ? [{ width: Number(options.get('width')) || 1280, height: Number(options.get('height')) || 720, fontScale: Number(options.get('font')) || 100, language: options.get('language') || 'en', theme: options.get('theme') || 'dark' }] : [
     { width: 1440, height: 900 },
     { width: 1280, height: 720 },
     { width: 786, height: 880 },
@@ -26,7 +30,10 @@
     { width: 390, height: 520, clockVisible: false, searchUiVisible: false },
     { width: 390, height: 520, fontScale: 120, language: "zh-CN" },
     { width: 390, height: 700, language: "ms" },
-    { width: 1024, height: 500, language: "th" }
+    { width: 1024, height: 500, language: "th" },
+    { width: 1280, height: 720, theme: "light" },
+    { width: 390, height: 700, theme: "light", language: "zh-CN" },
+    { width: 1280, height: 720, theme: "light", clockStyle: "neon" }
   ];
   let passed = 0;
   const report = [];
@@ -35,17 +42,18 @@
   try {
     for (let scenarioIndex = 0; scenarioIndex < scenarios.length; scenarioIndex++) {
       const scenario = scenarios[scenarioIndex];
-      const { width, height, layout = "grid", scale = 1, count = 36, fontScale = 100, clockStyle = "classic", clockVisible = true, searchUiVisible = true, language = "en" } = scenario;
-      const label = `${width} × ${height}, ${layout}, ${count} shortcuts, font ${fontScale}%, ${language}${scale !== 1 ? `, scale ${scale}` : ""}`;
+      const { width, height, layout = "grid", scale = 1, count = 36, fontScale = 100, clockStyle = "classic", clockVisible = true, searchUiVisible = true, language = "en", theme = "dark" } = scenario;
+      const label = `${width} × ${height}, ${theme}, ${layout}, ${count} shortcuts, font ${fontScale}%, ${language}${scale !== 1 ? `, scale ${scale}` : ""}`;
       const result = document.createElement("li");
       result.textContent = `Running: ${label}`;
       results.append(result);
       const sample = {
         version: 3, language, layout, searchEngine: "google",
-        links: Array.from({ length: count }, (_, index) => ({ id: `test-${index}`, name: `Saved website ${index + 1}`, url: `https://example.com/site-${index}`, pinned: false, icon: "resource/icons/lunar-32.png" })),
+        links: Array.from({ length: count }, (_, index) => ({ id: `test-${index}`, name: `Saved website ${index + 1}`, url: `https://example.com/site-${index}`, pinned: false, icon: "resource/icons/lunar-v2-32.png" })),
         background: { type: "theme", value: "", name: "" },
-        settings: { interfaceLayoutVersion: scale === 1 ? 1 : 2, cardHeight: scale === 1 ? 280 : 96, cardGap: 16, columns: 4, rows: 5, fontScale, clockVisible, searchUiVisible, clockStyle, panelScales: { clock: 1, search: 1, collection: scale } }
+        settings: { theme, interfaceLayoutVersion: scale === 1 ? 1 : 2, cardHeight: scale === 1 ? 280 : 96, cardGap: 16, columns: 4, rows: 5, fontScale, clockVisible, searchUiVisible, clockStyle, panelScales: { clock: 1, search: 1, collection: scale } }
       };
+      sharedKeys().forEach(key => localStorage.removeItem(key));
       localStorage.setItem("customHomeState", JSON.stringify(sample));
       frame = document.createElement("iframe");
       frame.style.width = `${width}px`;
@@ -75,6 +83,56 @@
         const root = page.scrollingElement;
         const assert = (condition, message) => { if (!condition) throw new Error(message); };
         const settle = () => new Promise(resolve => win.requestAnimationFrame(() => win.requestAnimationFrame(resolve)));
+        // Measure rendered text against its composited CSS surface, including translucent panels.
+        // Photo thumbnails have their own image/gradient treatment and are checked visually.
+        const canvas = page.createElement('canvas');
+        canvas.width = canvas.height = 1;
+        const paint = canvas.getContext('2d', { willReadFrequently: true });
+        const colorCache = new Map();
+        const rgba = color => {
+          if (!colorCache.has(color)) {
+            paint.clearRect(0, 0, 1, 1);
+            paint.fillStyle = color;
+            paint.fillRect(0, 0, 1, 1);
+            const pixel = [...paint.getImageData(0, 0, 1, 1).data];
+            colorCache.set(color, [...pixel.slice(0, 3), pixel[3] / 255]);
+          }
+          return colorCache.get(color);
+        };
+        const composite = (front, back) => front.slice(0, 3).map((channel, index) => channel * front[3] + back[index] * (1 - front[3]));
+        const luminance = rgb => rgb.reduce((sum, channel, index) => {
+          const value = channel / 255;
+          return sum + (value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4) * [.2126, .7152, .0722][index];
+        }, 0);
+        const assertTextContrast = (container, pseudo = null) => {
+          page.getAnimations().forEach(animation => animation.finish());
+          const nodes = pseudo ? [container] : [container, ...container.querySelectorAll('*')].filter(node => [...node.childNodes].some(child => child.nodeType === 3 && child.textContent.trim()));
+          for (const node of nodes) {
+            const style = win.getComputedStyle(node, pseudo);
+            if (!node.getClientRects().length || style.visibility !== 'visible' || node.closest('.sr-only, .native-select-source, .native-range-source, .preset-button, .is-disabled, :disabled')) continue;
+            let background = [255, 255, 255];
+            let opacity = Number(style.opacity);
+            const ancestors = [];
+            for (let ancestor = node; ancestor; ancestor = ancestor.parentElement) ancestors.unshift(ancestor);
+            for (const ancestor of ancestors) {
+              const ancestorStyle = win.getComputedStyle(ancestor);
+              background = composite(rgba(ancestorStyle.backgroundColor), background);
+              if (ancestor !== node || pseudo) opacity *= Number(ancestorStyle.opacity);
+            }
+            if (!opacity) continue;
+            const ink = [...rgba(style.color)];
+            ink[3] *= opacity;
+            const foreground = composite(ink, background);
+            const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+            const ratio = (values[0] + .05) / (values[1] + .05);
+            const large = parseFloat(style.fontSize) >= 24 || (parseFloat(style.fontSize) >= 18.66 && Number(style.fontWeight) >= 700);
+            assert(ratio >= (large ? 3 : 4.5), `Unreadable ${theme} text: ${node.id || node.className || node.tagName}${pseudo || ''}, contrast ${ratio.toFixed(2)}:1`);
+          }
+        };
+        assert(win.getComputedStyle(page.documentElement).colorScheme === theme, 'Native controls use the wrong display mode');
+        card?.querySelector('.shortcut-icon')?.classList.add('is-fallback');
+        assertTextContrast(page.body);
+        assertTextContrast(page.getElementById('search-input'), '::placeholder');
         if (!debugOnly) {
         assert(root.scrollHeight <= root.clientHeight + 1, `Page overflows vertically: ${root.scrollHeight} > ${root.clientHeight}`);
         assert(root.scrollWidth <= root.clientWidth + 1, "Page overflows horizontally");
@@ -117,9 +175,19 @@
           tab.click();
           assert(page.querySelectorAll('[data-settings-page]:not([hidden])').length === 1, 'Settings pages overlap');
           assert(!page.querySelector(`[data-settings-page="${tab.dataset.settingsTarget}"]`).hidden, 'Selected settings category is hidden');
+          assertTextContrast(page.getElementById('settings-dialog'));
         }
         page.querySelector('[data-settings-target="appearance"]').click();
         assert(page.getElementById('background-upload-trigger').getClientRects().length > 0, 'Wallpaper controls are missing from appearance');
+        const themeSelect = page.getElementById('theme-mode');
+        for (const nextTheme of ['light', 'dark', theme]) {
+          themeSelect.value = nextTheme;
+          themeSelect.dispatchEvent(new win.Event('change', { bubbles: true }));
+          await settle();
+          assert(page.documentElement.dataset.theme === nextTheme && page.body.dataset.theme === nextTheme, 'Theme switching leaves parts of the interface in the previous mode');
+          assert(win.getComputedStyle(page.documentElement).colorScheme === nextTheme, 'Native controls did not follow the theme switch');
+          assertTextContrast(page.getElementById('settings-dialog'));
+        }
         page.querySelector('[data-settings-target="search"]').click();
         const firstEngineGroup = page.getElementById('search-suggestion-engine-list').firstElementChild;
         win.updateSetting('accentColor', '#a5ceb6');
@@ -161,6 +229,7 @@
           tab.click();
           await settle();
           const debugPage = debug.querySelector(`[data-debug-page="${tab.dataset.debugTarget}"]`);
+          assertTextContrast(debug);
           assert(!debugPage.hidden && debug.querySelectorAll('[data-debug-page]:not([hidden])').length === 1, 'Debug tabs overlap or show the wrong category');
           assert(debugContent.scrollTop === 0, 'Debug category starts scrolled past its heading');
           assert(debug.scrollHeight <= debug.clientHeight + 1 && debug.scrollWidth <= debug.clientWidth + 1, `Debug shell scrolls or overflows: ${debug.scrollHeight}/${debug.clientHeight}, ${debug.scrollWidth}/${debug.clientWidth}`);
@@ -194,6 +263,13 @@
         assert(!page.getElementById('debug-page-overview').hidden && debugContent.scrollTop === 0, `Reopening debug tools did not return to its overview: open=${debug.open}, hidden=${page.getElementById('debug-page-overview').hidden}, scroll=${debugContent.scrollTop}`);
         debug.querySelector('.dialog-head [data-close-dialog]').click();
         assert(!debug.open, 'Debug header close action failed');
+        for (const id of ['link-dialog', 'image-search-dialog', 'browser-compatibility-dialog']) {
+          const dialog = page.getElementById(id);
+          dialog.showModal();
+          assertTextContrast(dialog);
+          for (const input of dialog.querySelectorAll('input[placeholder]')) assertTextContrast(input, '::placeholder');
+          dialog.close();
+        }
         if (debugOnly) {
           passed++;
           result.textContent = `PASS: ${label}. Debug tabs, refresh, dropdowns, keyboard navigation, bottom actions, and close controls.`;
