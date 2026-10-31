@@ -574,9 +574,9 @@
     "session_gone": "This media session has closed. Refreshing…",
     "manage": "Player permissions and setup",
     "consent_intro": "This optional widget connects to Windows media. The homepage works without it.",
-    "consent_data": "When enabled and visible, it reads the current app, title, artist, cover, playback state and progress to display and control your media. Media data stays in memory on this computer; it is not saved or uploaded.",
+    "consent_data": "When enabled, the widget reads the current app, title, artist, cover, playback state and progress. With background updates selected below, the connector keeps reading while the browser runs even when the widget is hidden or all homepages are closed. Only the latest state is cached in browser-session memory; it is not saved as history, included in backups or uploaded.",
     "consent_install": "Requires Windows 10 version 1809 or later and a separately installed connector. Nothing is installed automatically.",
-    "consent_scope": "The connector runs while a visible modern homepage is connected. Playback changes only when you use a control. You can disable it and revoke its permission here.",
+    "consent_scope": "Uncheck background updates to read only for visible homepage widgets. Disable and revoke permission stops media access across tabs and clears the cache. Playback changes only when you use a control.",
     "privacy": "Privacy policy",
     "install_guide": "Connector installation and removal",
     "enable": "Agree and enable",
@@ -591,7 +591,8 @@
     "connector_start_failed": "The Windows connector could not start. Repair or reinstall it.",
     "connector_timeout": "The Windows connector did not respond. Check the connection again.",
     "connected_idle": "Windows connector connected. No current media session.",
-    "check_connection": "Check connection"
+    "check_connection": "Check connection",
+    "background": "Keep updating in the background, even when the homepage is closed"
   },
   "legal": {
     "privacy": "Privacy policy",
@@ -618,7 +619,7 @@
     "find_id": "Open the music-note button on the homepage and find the extension ID in the player setup dialog. Developers can also find it at {chrome} or {edge}.",
     "run_installer": "Run {install} from the extracted package. Store packages use their configured official IDs; development packages ask for your extension ID. Review the displayed installation path, IDs and current-user registration changes, then explicitly confirm.",
     "enable": "The installer copies the connector files and registers native messaging for Chrome/Edge for your Windows user only. Administrator access is not required. In the player, choose {enable}, grant the browser permission, then choose {check}.",
-    "install_location": "Files are installed at {path}. There is no startup entry or network listener. The connector runs on demand when an authorized, visible modern homepage connects.",
+    "install_location": "Files are installed at {path}. There is no startup entry or network listener. After permission and explicit opt-in, the connector follows Windows while the browser runs if background updates are selected; otherwise it runs only while a visible modern homepage widget is connected.",
     "media_selection": "The player follows Windows' current media selection automatically. Pause, seeking and progress depend on the source application's capabilities.",
     "remove_title": "Disable and uninstall",
     "disable": "Open the help button beside the player title and choose {disable}. This stops media access across all of this extension's tabs.",
@@ -628,5 +629,37 @@
     "not_connected": "If the player still says it is disconnected after installation, check that the installer used the ID shown in this extension's setup dialog. Reinstall with the correct ID if needed, return to the homepage and choose {check}.",
     "permission": "Granting browser permission alone does not install the connector or confirm a working connection. A connected player with no current media session is a normal idle state.",
     "already_removed": "If the uninstaller reports that the connector is already uninstalled or has not been installed, there is nothing to remove. This is not an error."
+  },
+  "monitor": {
+    "title": "System monitor",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "cpu_usage": "CPU usage",
+    "memory_usage": "Memory usage",
+    "manage": "Monitor permissions",
+    "move": "Move system monitor",
+    "hide": "Hide system monitor",
+    "resize": "Resize system monitor",
+    "setup_title": "Show system usage",
+    "consent_intro": "This optional widget shows CPU and physical memory usage for your whole computer.",
+    "consent_data": "CPU and memory readings update every two seconds through a shared browser sampler. With background updates selected below, it continues when this widget is hidden or all homepages are closed, so reopening can show the latest cached reading. Readings stay in browser-session memory and are not saved as history, included in backups or uploaded.",
+    "consent_scope": "No connector or extra program is needed. Process lists and memory contents are not read. Uncheck background updates to sample only for visible homepage widgets. Disable and revoke permission stops all system sampling and clears the cache.",
+    "enable": "Enable system monitor",
+    "disable": "Disable and revoke permission",
+    "retry": "Retry",
+    "sampling": "Measuring CPU usage…",
+    "live": "Whole computer · updates every 2 seconds",
+    "error": "Could not read system usage. Try again.",
+    "unsupported": "System monitoring is not available in this browser. Open the installed extension in Chrome or Edge.",
+    "permission_denied": "CPU and memory access was not granted.",
+    "disabled": "System monitoring is disabled.",
+    "active": "CPU and memory access is enabled.",
+    "memory_detail": "{used} / {total} GiB used",
+    "background": "Keep updating in the background, even when the homepage is closed"
+  },
+  "browser_theme": {
+    "open": "Browser theme colors",
+    "unavailable": "Open the installed extension in Chrome or Edge to change browser colors.",
+    "failed": "Could not open browser theme settings. Please try again."
   }
 }

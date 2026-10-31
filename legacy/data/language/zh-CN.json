@@ -533,5 +533,10 @@
       "decline": "拒绝并离开",
       "storage_error": "无法保存接受记录。请释放浏览器存储空间或允许本地存储，然后重试。"
     }
+  },
+  "browser_theme": {
+    "open": "浏览器主题颜色",
+    "unavailable": "请在 Chrome 或 Edge 中打开已安装的扩展来调整浏览器配色。",
+    "failed": "无法打开浏览器主题设置，请重试。"
   }
 }

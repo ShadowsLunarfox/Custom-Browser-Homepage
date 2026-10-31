@@ -18,7 +18,9 @@ Published English pages: [Privacy Policy](https://github.com/ShadowsLunarfox/Lun
 
 These general drafts describe the current implementation. They select no national law, mandatory arbitration or exclusive court. The publisher is identified using the project's existing Lunarfox / ShadowsLunarfox name; no company, address, email or effective date has been invented. Mandatory local rights are preserved, and the repository's GPL license controls copying, modification and redistribution of source code.
 
-English as the primary publication language does not override the drafts' protection of mandatory rights or create a new jurisdiction clause. Translations aim to express the same content. The extension's six existing interface languages link to their respective documents, with additional Traditional Cantonese documents available through the language navigation. These links do not add a mandatory acceptance flow or replace the Windows widget's separate data disclosure and optional permission consent.
+English as the primary publication language does not override the drafts' protection of mandatory rights or create a new jurisdiction clause. Translations aim to express the same content. The extension's six existing interface languages link to their respective documents, with additional Traditional Cantonese documents available through the language navigation. First opening requires agreement to the presented terms and acknowledgment of the privacy policy. The optional media widget and system monitor each have a separate disclosure and permission choice; accepting general terms does not enable either widget.
+
+The privacy drafts dated 2026-11-01 include CPU/memory permissions, separate background-update choices for system usage and media, and the browser-session-only latest-state caches. Earlier visible-page consent does not enable background operation. Upload the updated Markdown files along with a release so that the online policy matches the implementation and recorded policy revision.
 
 ## Before public release
 

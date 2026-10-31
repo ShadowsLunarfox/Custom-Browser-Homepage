@@ -533,5 +533,10 @@
       "decline": "Decline and leave",
       "storage_error": "Your agreement could not be saved. Free up browser storage or allow local storage, then try again."
     }
+  },
+  "browser_theme": {
+    "open": "Browser theme colors",
+    "unavailable": "Open the installed extension in Chrome or Edge to change browser colors.",
+    "failed": "Could not open browser theme settings. Please try again."
   }
 }

@@ -25,15 +25,27 @@ for (const [size, asset] of Object.entries({ ...manifest.icons, ...manifest.acti
   assert(!fs.existsSync(path.join(root, `resource/icons/lunar-${size}.png`)), 'Retired icon files must not remain in the package');
 }
 const entry = read('newtab.html');
-assert(!/stylesheet|iframe|home\.html/.test(entry), 'The entry must not preload either interface');
-for (const preference of [null, 'modern', 'legacy', 'invalid']) {
-  let destination;
-  vm.runInNewContext(router, { localStorage: { getItem: () => preference }, window: { location: { replace(value) { destination = value; } } } });
-  assert.equal(destination, preference === 'legacy' ? 'legacy/home.html' : 'home.html');
+assert(!/stylesheet|src="(?:legacy\/)?home\.html"/.test(entry), 'The entry must not preload either interface');
+assert(entry.includes('newtab-router.js" defer'), 'Mount after the host document is ready');
+function mount(preference, blocked=false) {
+  const frames=[];
+  vm.runInNewContext(router, {
+    localStorage:{getItem(){if(blocked)throw new Error('Blocked');return preference;}},
+    document:{createElement(name){assert.equal(name,'iframe');return{setAttribute(){}};},body:{appendChild(frame){frames.push(frame);}}},
+    window:{location:{replace(){throw new Error('New Tab must not navigate to the extension URL');}}}
+  });
+  assert.equal(frames.length,1,'Only one selected interface may load');
+  assert.equal(frames[0].id,'lunar-start-frame');return frames[0].src;
 }
-let fallback;
-vm.runInNewContext(router, { localStorage: { getItem() { throw new Error('Blocked'); } }, window: { location: { replace(value) { fallback = value; } } } });
-assert.equal(fallback, 'home.html');
+for (const preference of [null, 'modern', 'legacy', 'invalid']) {
+  assert.equal(mount(preference), preference === 'legacy' ? 'legacy/home.html' : 'home.html');
+}
+assert.equal(mount(null,true), 'home.html');
+const shell={location:{origin:'chrome-extension://fixture',pathname:'/newtab.html'},document:{getElementById:()=>({contentWindow:child})}};
+const child={parent:shell,location:{origin:'chrome-extension://fixture'}};
+const navigation=vm.createContext({window:child});vm.runInContext(read('script/newtab-navigation.js'),navigation);
+assert.equal(vm.runInContext('getHomepageNavigationTarget()',navigation),shell);
+shell.location.pathname='/unrelated.html';assert.equal(vm.runInContext('getHomepageNavigationTarget()',navigation),child);
 
 async function selectVersion(version, entries, next, blocked = false) {
   const storage = new Map(Object.entries(entries));

@@ -416,9 +416,9 @@
     "session_gone": "Sesi media ini telah ditutup. Memuat semula…",
     "manage": "Kebenaran dan persediaan pemain",
     "consent_intro": "Widget pilihan ini menyambung ke media Windows. Laman utama tetap boleh digunakan tanpanya.",
-    "consent_data": "Apabila didayakan dan kelihatan, widget membaca aplikasi, tajuk, artis, kulit, status dan kemajuan semasa untuk memaparkan dan mengawal media. Data media hanya berada dalam memori komputer ini; tiada rekod disimpan atau dimuat naik.",
+    "consent_data": "Apabila aktif, widget membaca aplikasi semasa, tajuk, artis, kulit, status main dan kemajuan. Dengan latar belakang dipilih di bawah, bacaan diteruskan semasa pelayar berjalan walaupun widget disembunyikan atau semua halaman utama ditutup. Hanya keadaan terkini dicache dalam memori sesi pelayar, tanpa sejarah, sandaran atau muat naik.",
     "consent_install": "Memerlukan Windows 10 versi 1809 atau lebih baharu dan penyambung yang dipasang berasingan. Tiada pemasangan automatik.",
-    "consent_scope": "Penyambung berjalan ketika laman utama baharu kelihatan dan disambungkan. Main balik hanya berubah apabila anda menggunakan kawalan. Anda boleh melumpuhkannya dan menarik balik kebenaran di sini.",
+    "consent_scope": "Nyahpilih latar belakang untuk membaca hanya widget yang kelihatan. Nyahdayakan dan tarik balik kebenaran menghentikan akses media semua tab dan mengosongkan cache. Main balik berubah hanya apabila anda menggunakan kawalan.",
     "privacy": "Dasar privasi",
     "install_guide": "Pemasangan dan pembuangan penyambung",
     "enable": "Setuju dan dayakan",
@@ -433,7 +433,8 @@
     "connector_start_failed": "Penyambung Windows gagal bermula. Baiki atau pasang semula.",
     "connector_timeout": "Penyambung Windows tidak memberi respons. Semak semula sambungan.",
     "connected_idle": "Penyambung Windows disambungkan. Tiada sesi media semasa.",
-    "check_connection": "Semak sambungan"
+    "check_connection": "Semak sambungan",
+    "background": "Terus kemas kini di latar belakang walaupun halaman utama ditutup"
   },
   "legal": {
     "privacy": "Dasar privasi",
@@ -460,7 +461,7 @@
     "find_id": "Buka butang nota muzik pada halaman utama dan cari ID sambungan dalam dialog persediaan pemain. Pembangun juga boleh mencarinya di {chrome} atau {edge}.",
     "run_installer": "Jalankan {install} daripada pakej yang diekstrak. Pakej gedung menggunakan ID rasmi yang dikonfigurasikan; pakej pembangunan meminta ID sambungan anda. Semak laluan pemasangan, ID dan perubahan pendaftaran untuk pengguna semasa yang dipaparkan, kemudian berikan pengesahan jelas.",
     "enable": "Pemasang menyalin fail penyambung dan mendaftarkan pemesejan natif Chrome/Edge untuk pengguna Windows semasa sahaja. Akses pentadbir tidak diperlukan. Dalam pemain, pilih “{enable}”, berikan kebenaran pelayar, kemudian pilih “{check}”.",
-    "install_location": "Fail dipasang di {path}. Tiada entri permulaan atau port rangkaian yang mendengar sambungan. Penyambung berjalan apabila diperlukan semasa halaman utama moden yang dibenarkan dan kelihatan menyambung.",
+    "install_location": "Fail dipasang di {path}. Tiada entri permulaan atau port pendengar rangkaian. Selepas kebenaran dan pengaktifan jelas, penyambung mengikuti Windows semasa pelayar berjalan jika latar belakang dipilih; jika tidak, ia berjalan hanya semasa widget moden yang kelihatan disambungkan.",
     "media_selection": "Pemain mengikuti pilihan media semasa Windows secara automatik. Jeda, pelarasan kedudukan dan kemajuan bergantung pada sokongan aplikasi sumber.",
     "remove_title": "Nyahdayakan dan nyahpasang",
     "disable": "Buka butang bantuan di sebelah tajuk pemain dan pilih “{disable}”. Ini menghentikan akses media pada semua tab sambungan ini.",
@@ -470,5 +471,37 @@
     "not_connected": "Jika pemain masih memaparkan status tidak bersambung selepas pemasangan, pastikan ID yang digunakan oleh pemasang sama dengan ID dalam dialog persediaan sambungan ini. Pasang semula dengan ID yang betul jika perlu, kembali ke halaman utama dan pilih “{check}”.",
     "permission": "Memberikan kebenaran pelayar sahaja tidak memasang penyambung atau mengesahkan sambungan berfungsi. Pemain yang bersambung tanpa sesi media semasa berada dalam keadaan melahu yang normal.",
     "already_removed": "Jika penyahpasang menyatakan penyambung telah dinyahpasang atau belum pernah dipasang, tiada apa-apa yang perlu dibuang. Ini bukan ralat."
+  },
+  "monitor": {
+    "title": "Pemantau sistem",
+    "cpu": "CPU",
+    "memory": "Memori",
+    "cpu_usage": "Penggunaan CPU",
+    "memory_usage": "Penggunaan memori",
+    "manage": "Kebenaran pemantau",
+    "move": "Alih pemantau sistem",
+    "hide": "Sembunyi pemantau sistem",
+    "resize": "Ubah saiz pemantau sistem",
+    "setup_title": "Paparkan penggunaan sistem",
+    "consent_intro": "Widget pilihan ini memaparkan penggunaan CPU dan memori fizikal bagi seluruh komputer anda.",
+    "consent_data": "Pensampel bersama mengemas kini CPU dan memori setiap dua saat. Dengan kemas kini latar belakang dipilih di bawah, bacaan berterusan apabila widget disembunyikan atau semua halaman utama ditutup, supaya cache terkini boleh dipaparkan apabila dibuka semula. Bacaan hanya berada dalam memori sesi pelayar, tanpa sejarah, sandaran atau muat naik.",
+    "consent_scope": "Tiada penyambung atau program tambahan diperlukan. Senarai proses dan kandungan memori tidak dibaca. Nyahpilih latar belakang untuk membaca hanya widget yang kelihatan. Nyahdayakan dan tarik balik kebenaran untuk menghentikan semua bacaan dan mengosongkan cache.",
+    "enable": "Aktifkan pemantau sistem",
+    "disable": "Nyahdayakan dan tarik balik kebenaran",
+    "retry": "Cuba lagi",
+    "sampling": "Mengukur penggunaan CPU…",
+    "live": "Seluruh komputer · kemas kini setiap 2 saat",
+    "error": "Penggunaan sistem tidak dapat dibaca. Cuba lagi.",
+    "unsupported": "Pemantauan sistem tidak tersedia dalam pelayar ini. Buka sambungan yang dipasang dalam Chrome atau Edge.",
+    "permission_denied": "Akses CPU dan memori tidak diberikan.",
+    "disabled": "Pemantauan sistem dinyahdayakan.",
+    "active": "Akses CPU dan memori diaktifkan.",
+    "memory_detail": "{used} / {total} GiB digunakan",
+    "background": "Terus kemas kini di latar belakang walaupun halaman utama ditutup"
+  },
+  "browser_theme": {
+    "open": "Warna tema pelayar",
+    "unavailable": "Buka sambungan yang dipasang dalam Chrome atau Edge untuk mengubah warna pelayar.",
+    "failed": "Tetapan tema pelayar tidak dapat dibuka. Sila cuba lagi."
   }
 }

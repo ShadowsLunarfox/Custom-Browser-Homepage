@@ -158,4 +158,4 @@ function deriveNameFromUrl(url) {
   }
 }
 
-if (typeof importScripts === "function") importScripts("script/windows-media-broker.js");
+if (typeof importScripts === "function") importScripts("script/widget-background-state.js", "script/system-usage.js", "script/system-monitor-broker.js", "script/windows-media-broker.js");

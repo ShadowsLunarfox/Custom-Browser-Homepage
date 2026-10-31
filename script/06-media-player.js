@@ -1,7 +1,7 @@
 // Modern-only Windows media session widget. No media files or preferences enter shared sync.
 (() => {
   const PREFS_KEY = "lunarWindowsMediaWidget:v1";
-  const CONSENT_VERSION = 1;
+  const CONSENT_VERSION = 2;
   const fallbackArtwork = "resource/icons/lunar-v2-128.png";
   let initialized = false;
   let prefs = {};
@@ -10,6 +10,7 @@
   let sequence = 0;
   let generation = 0;
   let lastApplied = 0;
+  let lastSampledAt = 0;
   let selectedId = "";
   let artworkKey = "";
   let snapshot = null;
@@ -67,6 +68,7 @@
     node("disable").disabled = consentBusy;
     node("check").hidden = !enabled();
     node("check").disabled = connection === "connecting" || consentBusy;
+    node("background").disabled = consentBusy;
     node("consent-status").textContent = setupNotice || (!supported() ? label("windows_only") : enabled() ? label("permission_only").replace("{status}", connectionText()) : "");
   }
   function stopMedia() {
@@ -90,6 +92,7 @@
     bindPermissions();
     node("extension-id").value = api()?.runtime?.id || "Preview";
     updateSetup("");
+    node("background").checked = prefs.background !== false;
     document.getElementById("player-setup-dialog").showModal();
   }
   async function enableFromClick() {
@@ -101,14 +104,17 @@
       permissionGranted = Boolean(granted);
       if (!permissionGranted) { updateSetup(label("permission_denied")); return; }
       prefs.enabled = true; prefs.visible = true; prefs.consentVersion = CONSENT_VERSION;
+      prefs.background = node("background").checked;
+      await configureBackground(true,prefs.background);
       savePrefs(); renderVisibility();
       document.getElementById("player-setup-dialog").close();
       await reconnect();
-    } catch { updateSetup(label("permission_denied")); }
+    } catch { revokeLocally(); try { await permissions()?.remove({permissions:["nativeMessaging"]}); } catch {} updateSetup(label("permission_denied")); }
     finally { consentBusy = false; updateSetup(); }
   }
   async function disableFromClick() {
     revokeLocally();
+    try { await configureBackground(false,false); } catch {}
     try { await permissions()?.remove({ permissions: ["nativeMessaging"] }); } catch { /* Local consent remains off even when browser removal fails. */ }
   }
   const format = seconds => {
@@ -167,8 +173,10 @@
     for (const key of ["title", "artist", "app", "sessionId"]) clean[key] = typeof raw[key] === "string" ? raw[key].slice(0, 1000) : "";
     return clean;
   }
-  function apply(raw, id, requestGeneration) {
+  function apply(raw, id, requestGeneration, sampledAt) {
     if (requestGeneration !== generation || id < lastApplied) return;
+    if (Number.isFinite(sampledAt) && sampledAt < lastSampledAt) return;
+    if (Number.isFinite(sampledAt)) lastSampledAt = sampledAt;
     lastApplied = id;
     const previousSessionId = snapshot?.sessionId;
     snapshot = normalize(raw);
@@ -178,7 +186,8 @@
       notice = "";
       noticeUntil = 0;
     }
-    observedAt = performance.now();
+    const age = Number.isFinite(sampledAt) ? Math.max(0,Math.min(10000,Date.now()-sampledAt)) : 0;
+    observedAt = performance.now() - age;
     connection = "connected";
     setupNotice = "";
     selectedId = snapshot.sessionId || "";
@@ -195,6 +204,7 @@
     const previous = port;
     port = null;
     generation++;
+    lastSampledAt = 0;
     if (previous) { try { previous.disconnect(); } catch {} }
     for (const request of requests.values()) { clearTimeout(request.timer); request.reject(new Error("bridge_unavailable")); }
     requests.clear();
@@ -207,10 +217,11 @@
     notice = ""; noticeUntil = 0; setupNotice = "";
     artwork.src = fallbackArtwork;
     localize();
+    if (visible()) pollTimer = setTimeout(() => { if (visible()) void reconnect(); },5000);
   }
-  function openPort() {
+  function openPort(allowDisabled = false) {
     if (port) return port;
-    if (!enabled()) throw new Error("permission_required");
+    if (!enabled() && !allowDisabled) throw new Error("permission_required");
     if (location.hostname === "127.0.0.1" && typeof window.__lunarMediaTestTransport === "function") port = window.__lunarMediaTestTransport();
     else {
       const api = typeof browser !== "undefined" ? browser : typeof chrome !== "undefined" ? chrome : null;
@@ -226,7 +237,7 @@
       if (!request) return;
       requests.delete(message.id);
       clearTimeout(request.timer);
-      if (message.ok) request.resolve(message.snapshot);
+      if (message.ok) request.resolve(message);
       else request.reject(new Error(message.error || "bridge_unavailable"));
     });
     current.onDisconnect.addListener(() => {
@@ -240,7 +251,7 @@
   async function request(command, extra = {}) {
     const id = ++sequence;
     const requestGeneration = generation;
-    const current = openPort();
+    const current = openPort(command === "configure");
     const value = await new Promise((resolve, reject) => {
       const timer = setTimeout(() => { requests.delete(id); reject(new Error("bridge_timeout")); }, 10000);
       requests.set(id, { resolve, reject, timer });
@@ -249,7 +260,14 @@
       try { current.postMessage({ id, command, sessionId: command === "status" ? "" : selectedId, artworkKey, ...extra }); }
       catch (error) { clearTimeout(timer); requests.delete(id); reject(error); }
     });
-    apply(value, id, requestGeneration);
+    if (command !== "configure") apply(value.snapshot, id, requestGeneration, value.sampledAt);
+    return value;
+  }
+  async function configureBackground(enabled = prefs.enabled, background = prefs.background) {
+    if (location.hostname === "127.0.0.1" && typeof window.__lunarMediaTestTransport === "function") return;
+    if (!api()?.runtime?.connect) return;
+    try { await request("configure",{enabled:enabled === true,background:background === true,consentVersion:CONSENT_VERSION}); }
+    finally { if (!visible()) disconnect(); }
   }
   function schedulePoll() {
     clearTimeout(pollTimer);
@@ -313,6 +331,11 @@
     node("reconnect").addEventListener("click", () => void reconnect());
     node("enable").addEventListener("click", () => void enableFromClick());
     node("disable").addEventListener("click", () => void disableFromClick());
+    node("background").addEventListener("change", async () => {
+      if (!enabled()) return;
+      prefs.background = node("background").checked; savePrefs();
+      try { await configureBackground(); } catch { updateSetup(label("offline")); }
+    });
     node("manage").addEventListener("click", showSetup);
     node("check").addEventListener("click", () => void reconnect());
     progress.addEventListener("input", () => {
@@ -348,6 +371,7 @@
     renderVisibility();
     localize();
     void resume();
+    if (!prefs.enabled || prefs.consentVersion !== CONSENT_VERSION) void configureBackground(false,false).catch(()=>{});
   }
   async function resume() {
     // Old visible-widget preferences do not imply consent to Windows media access.

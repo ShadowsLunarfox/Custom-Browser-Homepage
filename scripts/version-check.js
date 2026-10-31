@@ -7,6 +7,7 @@
   const results = [];
   let frame;
   let peer;
+  const activeFrame = () => frame?.contentDocument?.getElementById("lunar-start-frame") || frame;
   const assert = (condition, message) => { if (!condition) throw new Error(message); };
   const wait = async predicate => {
     const deadline = Date.now() + 12000;
@@ -16,10 +17,11 @@
     }
     throw new Error('Interface did not initialize');
   };
-  const stylesReady = () => [...frame.contentDocument.querySelectorAll('link[rel="stylesheet"]')].every(link => !link.getAttribute('href') || link.sheet);
+  const stylesReady = () => [...activeFrame().contentDocument.querySelectorAll('link[rel="stylesheet"]')].every(link => !link.getAttribute('href') || link.sheet);
   const ready = async version => {
-    await wait(() => frame.contentDocument?.documentElement?.dataset.interfaceVersion === version && frame.contentDocument.body?.classList.contains('app-ready'));
+    await wait(() => activeFrame().contentDocument?.documentElement?.dataset.interfaceVersion === version && activeFrame().contentDocument.body?.classList.contains('app-ready'));
     await wait(stylesReady);
+    assert(frame.contentWindow.location.pathname.endsWith("/newtab.html"), "New Tab navigated to an interface URL");
   };
   const record = name => {
     results.push({ scenario: name, passed: true });
@@ -35,20 +37,20 @@
     await ready(version);
   };
   const assertIsolated = () => {
-    const page = frame.contentDocument;
-    const win = frame.contentWindow;
+    const page = activeFrame().contentDocument;
+    const win = activeFrame().contentWindow;
     assert(win.location.pathname.endsWith('/legacy/home.html'), 'Legacy entry loaded the wrong page');
     assert(!page.querySelector('.start-area, .workspace-controls, [data-settings-page]'), 'Modern interface HTML appeared in legacy mode');
     assert(page.getElementById('theme-style'), 'Original legacy theme controls are missing');
     const resources = win.performance.getEntriesByType('resource').map(entry => new URL(entry.name)).filter(url => url.origin === location.origin);
     assert(resources.some(url => url.pathname.endsWith('/legacy/script/08-app.js')), 'Legacy app was not initialized');
-    const allowed = url => url.pathname.startsWith('/legacy/') || ['/script/legal-consent.js', '/styles/legal-consent.css'].includes(url.pathname) || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
+    const allowed = url => url.pathname.startsWith('/legacy/') || ['/script/legal-consent.js', '/styles/legal-consent.css', '/script/newtab-navigation.js', '/script/browser-theme.js'].includes(url.pathname) || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
     assert(!resources.some(url => url.pathname.startsWith('/legacy/resource/')), 'Legacy mode loaded outdated bundled icons');
     assert(resources.every(allowed), `Legacy mode requested modern interface code: ${resources.filter(url => !allowed(url)).map(url => url.pathname).join(', ')}`);
   };
   const assertSharedMedia = async () => {
-    const page = frame.contentDocument;
-    const win = frame.contentWindow;
+    const page = activeFrame().contentDocument;
+    const win = activeFrame().contentWindow;
     const imageLoads = async source => {
       const image = new win.Image();
       image.src = source;
@@ -78,9 +80,9 @@
     assertIsolated();
   };
   const choose = async next => {
-    const page = frame.contentDocument;
+    const page = activeFrame().contentDocument;
     page.getElementById('open-settings').click();
-    frame.contentWindow.activateSettingsPage?.('appearance');
+    activeFrame().contentWindow.activateSettingsPage?.('appearance');
     const select = page.getElementById('interface-version');
     assert(select.value !== next, 'Version selector did not reflect its current page');
     const shell = select.nextElementSibling;
@@ -162,14 +164,14 @@
     };
     localStorage.setItem('customHomeState', JSON.stringify(sample));
     await open('modern');
-    assert(frame.contentDocument.querySelector('.start-area'), 'Default mode is not the modern interface');
+    assert(activeFrame().contentDocument.querySelector('.start-area'), 'Default mode is not the modern interface');
     record('A fresh profile opens the modern interface');
     await choose('legacy');
     assert(localStorage.getItem('lunarInterfaceVersion') === 'legacy', 'Legacy choice was not saved');
     assertIsolated();
-    const legacyPage = frame.contentDocument;
+    const legacyPage = activeFrame().contentDocument;
     assert(legacyPage.querySelector('.shortcut-title').textContent === 'Existing bookmark', 'Existing bookmarks did not carry over');
-    assert(frame.contentWindow.eval('state.settings.cardHeight') === 192, 'Legacy card height did not adapt the shared compact height');
+    assert(activeFrame().contentWindow.eval('state.settings.cardHeight') === 192, 'Legacy card height did not adapt the shared compact height');
     record('The settings dropdown switches to the original legacy interface and keeps bookmarks');
     await assertSharedMedia();
     record('Legacy uses current icons, image previews, first-paint wallpaper, and a playable shared video');
@@ -181,16 +183,16 @@
     }
 
     // Persist a legacy theme and bookmark through the actual legacy handlers.
-    frame.contentWindow.updateSetting('themeStyle', 'win98');
+    activeFrame().contentWindow.updateSetting('themeStyle', 'win98');
     await wait(stylesReady);
-    frame.contentWindow.eval('state.links.push({id:"legacy-bookmark",name:"Added in legacy",url:"https://example.org/",pinned:false}); saveState();');
+    activeFrame().contentWindow.eval('state.links.push({id:"legacy-bookmark",name:"Added in legacy",url:"https://example.org/",pinned:false}); saveState();');
     for (let index = 0; index < 2; index++) {
       await open('legacy');
       assertIsolated();
-      assert(frame.contentDocument.body.dataset.themeStyle === 'win98', 'Legacy theme was not retained on a new tab');
+      assert(activeFrame().contentDocument.body.dataset.themeStyle === 'win98', 'Legacy theme was not retained on a new tab');
       assert(JSON.parse(localStorage.getItem('customHomeStateLegacy')).links.length === 2, 'Legacy bookmark was not retained');
-      assert(frame.contentDocument.body.dataset.wallpaperPreset === 'wallpaper_2', 'Shared wallpaper choice was not retained');
-      assert(frame.contentDocument.documentElement.style.getPropertyValue('--initial-wallpaper-image').includes('../themes/wallpaper/'), 'A new legacy tab no longer uses the shared wallpaper at first paint');
+      assert(activeFrame().contentDocument.body.dataset.wallpaperPreset === 'wallpaper_2', 'Shared wallpaper choice was not retained');
+      assert(activeFrame().contentDocument.documentElement.style.getPropertyValue('--initial-wallpaper-image').includes('../themes/wallpaper/'), 'A new legacy tab no longer uses the shared wallpaper at first paint');
     }
     record('Repeated new tabs retain legacy code, current wallpaper assets, theme, and saved bookmarks');
     await choose('modern');
@@ -199,12 +201,12 @@
     assert(modernState.settings.radius === 18 && modernState.settings.theme === 'light', 'Returning to modern mode lost its appearance');
     assert(localStorage.getItem('lunarInterfaceVersion') === 'modern', 'Modern choice was not saved');
     await open('modern');
-    assert(frame.contentDocument.querySelector('.start-area'), 'A new tab did not retain modern mode');
+    assert(activeFrame().contentDocument.querySelector('.start-area'), 'A new tab did not retain modern mode');
     record('Switching versions retains shared bookmarks and each version’s own theme');
     await choose('legacy');
     assertIsolated();
-    assert(frame.contentDocument.body.dataset.themeStyle === 'win98', 'Switching back to legacy lost its old theme');
-    await wait(() => frame.contentDocument.documentElement.lang.startsWith('zh'));
+    assert(activeFrame().contentDocument.body.dataset.themeStyle === 'win98', 'Switching back to legacy lost its old theme');
+    await wait(() => activeFrame().contentDocument.documentElement.lang.startsWith('zh'));
     record('Legacy appearance survives a round trip and the selector is translated');
 
     // Keep both actual interfaces open while editing, switching, and maintaining their stores.
@@ -213,7 +215,7 @@
     document.body.append(peer);
     await wait(() => peer.contentDocument?.body?.classList.contains('app-ready'));
     const modernWin = peer.contentWindow;
-    const legacyWin = frame.contentWindow;
+    const legacyWin = activeFrame().contentWindow;
     modernWin.eval('state.links.find(link=>link.id==="existing-bookmark").name="Renamed in modern"; state.links.push({id:"modern-concurrent",name:"Modern concurrent edit",url:"https://modern.example/",pinned:false}); saveState();');
     legacyWin.eval('state.links.find(link=>link.id==="existing-bookmark").pinned=false; state.links.push({id:"legacy-concurrent",name:"Legacy concurrent edit",url:"https://legacy.example/",pinned:false}); saveState();');
     await wait(() => [modernWin, legacyWin].every(win => win.eval('state.links.some(link=>link.id==="modern-concurrent") && state.links.some(link=>link.id==="legacy-concurrent") && state.links.find(link=>link.id==="existing-bookmark").name==="Renamed in modern" && !state.links.find(link=>link.id==="existing-bookmark").pinned')));
@@ -271,8 +273,8 @@
     assert(localStorage.getItem('lunarInterfaceVersion') === 'legacy', 'Importing legacy backup changed the selected interface');
     legacyWin.clearInterfaceLocalStorage();
     await open('legacy');
-    assert(frame.contentWindow.eval('state.links.some(link=>link.id==="imported-shared") && state.settings.clockStyle==="calendar"'), 'Clearing a local cache removed shared user data');
-    assert(frame.contentDocument.body.dataset.themeStyle === 'default', 'Clearing the legacy theme cache did not restore its default skin');
+    assert(activeFrame().contentWindow.eval('state.links.some(link=>link.id==="imported-shared") && state.settings.clockStyle==="calendar"'), 'Clearing a local cache removed shared user data');
+    assert(activeFrame().contentDocument.body.dataset.themeStyle === 'default', 'Clearing the legacy theme cache did not restore its default skin');
     assert(modernWin.eval('state.settings.theme') === 'light', 'Clearing legacy data changed the modern theme');
     assert(localStorage.getItem('lunarInterfaceVersion') === 'legacy', 'Clearing legacy data changed the selected interface');
     record('Backup imports synchronize user data, preserve the other theme, and survive local cache cleanup');

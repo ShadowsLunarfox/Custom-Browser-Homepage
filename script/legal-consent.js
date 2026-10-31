@@ -5,7 +5,7 @@
   const STORAGE_KEY = "lunarLegalConsent:v1";
   // Bump these when publishing a revision that requires renewed agreement.
   const TERMS_VERSION = "2026-10-31";
-  const PRIVACY_VERSION = "2026-10-31";
+  const PRIVACY_VERSION = "2026-11-01-background-v1";
   const LEGAL_BASE = "https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/";
   const LANGUAGES = { en: "English", "zh-CN": "简体中文", yue: "繁體粵語", ja: "日本語", ko: "한국어", th: "ไทย", ms: "Bahasa Melayu" };
   const fallback = {

@@ -1,4 +1,4 @@
-// Resolve the saved version before requesting either interface's HTML, styles, or app code.
+// Keep the browser's actual New Tab entry; load only the chosen interface inside it.
 (function () {
   var version = "modern";
   try {
@@ -6,5 +6,10 @@
   } catch (error) {
     // Fresh profiles and blocked storage use the current interface.
   }
-  window.location.replace(version === "legacy" ? "legacy/home.html" : "home.html");
+  var frame = document.createElement("iframe");
+  frame.id = "lunar-start-frame";
+  frame.title = "Lunar Start Page";
+  frame.setAttribute("allow", "microphone; fullscreen");
+  frame.src = version === "legacy" ? "legacy/home.html" : "home.html";
+  document.body.appendChild(frame);
 }());

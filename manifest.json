@@ -35,8 +35,9 @@
   ],
   "permissions": [
     "storage",
+    "alarms",
     "contextMenus",
     "activeTab"
   ],
-  "optional_permissions": ["nativeMessaging"]
+  "optional_permissions": ["nativeMessaging", "system.cpu", "system.memory"]
 }

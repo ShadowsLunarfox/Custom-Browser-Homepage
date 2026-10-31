@@ -3,9 +3,9 @@ html { height: 100%; overflow: hidden; color-scheme: dark; }
 html.app-unsupported-redirect body { display: none !important; }
 body { display: flex; flex-direction: column; margin: 0; width: 100%; min-width: 300px; height: 100dvh; min-height: 0; overflow: hidden; font-family: "Segoe UI Variable", "Segoe UI", "Noto Sans SC", system-ui, sans-serif; font-size: calc(15px * var(--font-scale)); line-height: 1.5; color: var(--text-main); background: var(--page-grad-start); -webkit-font-smoothing: antialiased; }
 body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 22%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 58%); }
-body.app-loading .workspace-controls, body.app-loading .page-shell, body.app-loading .app-footer, body.app-loading .app-notices, body.app-loading .media-player { opacity: 0; pointer-events: none; }
+body.app-loading .workspace-controls, body.app-loading .page-shell, body.app-loading .app-footer, body.app-loading .app-notices, body.app-loading .media-player, body.app-loading .system-monitor { opacity: 0; pointer-events: none; }
 body.app-loading .workspace-controls * { pointer-events: none; }
-body.app-ready .workspace-controls, body.app-ready .page-shell, body.app-ready .app-footer, body.app-ready .media-player { animation: arrive .4s ease both; }
+body.app-ready .workspace-controls, body.app-ready .page-shell, body.app-ready .app-footer, body.app-ready .media-player, body.app-ready .system-monitor { animation: arrive .4s ease both; }
 body.app-ready .page-shell { animation-delay: .04s; }
 @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 button, input, select { font: inherit; color: inherit; }

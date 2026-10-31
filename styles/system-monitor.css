@@ -1,0 +1,21 @@
+/* Modern-only, browser-provided whole-device usage. */
+/* Composite its translucent theme color over a stable base, so content behind the
+   card cannot show through as a highlighted strip near the status text. */
+.system-monitor { position: fixed; left: 24px; bottom: 30px; z-index: 45; width: min(300px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-lg); color: var(--text-main); background: linear-gradient(var(--panel-strong), var(--panel-strong)), var(--page-grad-start); box-shadow: var(--shadow-md); transform: translate(var(--drag-x, 0px), var(--drag-y, 0px)) scale(var(--panel-scale, 1)); transform-origin: top left; }
+.monitor-heading-row { display: flex; align-items: center; gap: 3px; margin-bottom: 14px; }
+.monitor-heading-row h2 { flex: 1; min-width: 0; margin: 0; color: var(--text-soft); font-size: var(--font-xs); font-weight: 500; }
+.monitor-heading-row .drag-handle { margin: 0; font-size: inherit; }
+.monitor-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.monitor-metric { display: grid; min-width: 0; gap: 6px; }
+.monitor-metric > span { color: var(--text-soft); font-size: var(--font-xs); }
+.monitor-metric strong { font-size: 27px; font-weight: 550; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.monitor-meter { height: 5px; overflow: hidden; background: var(--slider-track); border-radius: 20px; }
+.monitor-meter > span { display: block; width: var(--usage, 0%); height: 100%; background: var(--accent); transition: width .3s ease; }
+.monitor-memory-detail { margin: 12px 0 0; color: var(--text-soft); font-size: var(--font-xs); font-variant-numeric: tabular-nums; }
+.monitor-status-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 6px; font-size: var(--font-xs); }
+.monitor-status-row p { flex: 1; min-width: 0; color: var(--text-soft); }
+.monitor-status-row button { padding: 0; border: 0; background: transparent; color: var(--accent-text); font: inherit; text-decoration: underline; text-underline-offset: 3px; }
+#monitor-setup-dialog .dialog-form { gap: 16px; }
+#monitor-setup-dialog .dialog-actions { flex-wrap: wrap; }
+@media (max-width: 700px) { .system-monitor { left: 16px; bottom: var(--monitor-bottom, 18px); } }
+@media (prefers-reduced-motion: reduce) { .monitor-meter > span { transition: none; } }

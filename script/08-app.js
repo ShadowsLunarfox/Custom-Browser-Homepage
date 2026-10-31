@@ -196,6 +196,7 @@ async function initialize() {
   bindPendingLinkSync();
   primeCachedLocalization();
   window.lunarMediaPlayer?.initialize();
+  window.lunarSystemMonitor?.initialize();
   const localizationReady = initializeLocalization();
 
   renderAll({ includeBackground: false });

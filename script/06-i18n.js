@@ -113,6 +113,7 @@ function applyTranslations() {
     syncCustomSelects();
   }
   window.lunarMediaPlayer?.localize();
+  window.lunarSystemMonitor?.localize();
   syncLegalDocumentLinks();
   syncConnectorGuideLinks();
 }

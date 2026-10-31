@@ -26,6 +26,7 @@ On first opening, both interfaces show a required agreement dialog with links to
 
 | Feature | What you can do |
 | --- | --- |
+| **System monitor (modern only)** | View whole-computer CPU usage and physical memory used/total GiB. Click the chip icon to enable optional permissions. A single background sampler serves every page. Select background updates to keep reading while homepages are closed and show the latest session-memory cache immediately when reopening. Uncheck it for visible-widget-only sampling. No connector, history, backup or upload. |
 | **Windows media player (modern only)** | Automatically follow Windows' current media with play/pause, forward/back 10 seconds, a seek bar, track controls, and cover artwork. Requires the local Windows connector. |
 | 🔎 **Flexible search** | Choose from a wide range of search engines, use search suggestions, or try voice and image search. |
 | 🔖 **Shortcuts & bookmarks** | Add, edit, pin, and arrange your favorite links. Import or export your bookmark list for backup. |
@@ -82,6 +83,10 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 
 For a local interface preview, run `node scripts/preview-ui.cjs` and open `http://127.0.0.1:4173/newtab.html` to use the saved interface choice, or `http://127.0.0.1:4173/home.html` to inspect the modern interface directly. Run `node scripts/verify-ui.mjs` for interface and saved-data compatibility checks. Browser-only previews do not include extension permissions or context menu actions.
 
+The actual New Tab entry stays at `newtab.html` and hosts only the selected modern or legacy interface. It does not redirect the browser tab to `home.html` or `legacy/home.html`, preserving the browser's normal New Tab address display. Switching versions navigates only the selected interface; searches and image-search submissions leave the New Tab host normally. Directly opening an extension page still shows its address and browser-controlled source indicator. Run `node scripts/verify-newtab-shell.mjs` for an isolated unpacked Edge check of the real New Tab override, switching, permissions and full-tab search navigation.
+
+Use the palette button in the modern toolbar, or **Browser theme colors** in the legacy settings footer, to open the browser's own color controls in a new tab. Chrome opens its built-in Customize Chrome appearance panel; Edge opens its native Appearance settings. The Lunar page stays open, and colors change only when you choose them in the browser's UI. No additional extension permission is required.
+
 Run `node scripts/verify-panel-drag.mjs` to check whole-module dragging, input and link exclusions, pointer handling, and bookmark sorting.
 
 Run `node scripts/verify-panel-bounds.mjs` to check real bottom-edge access, stable module dimensions during dragging, resize controls, and fitting enlarged modules into the visible window. Compact corner buttons provide layout actions. Modules stop at the true window edge without a navigation bar reserving a full-width strip; extra shortcuts scroll inside the collection.
@@ -102,7 +107,9 @@ Run `node scripts/verify-quick-save.mjs` for delivery to both versions, unopened
 
 Run `node scripts/verify-media-broker.mjs` for client validation and native connection routing. Run `node scripts/check-browser-ui.mjs --player-only` for isolated player checks covering the arrival fade, controls, seeking, automatic Windows source changes, stale actions and seeks, private preferences, connection recovery, light/dark colors, narrow windows, and legacy isolation. These browser checks use simulated media and do not control real playback.
 
-The player checks also verify that existing “visible widget” preferences do not imply consent, and cover canceled/denied permission requests, explicit opt-in, browser permission removal, cleared temporary media and stopped polling. The broker checks permission before forwarding requests and closes all native connections when permission is removed. Context-menu saving now uses `activeTab` instead of broad `tabs` access. An unused suggestion host permission was removed.
+The player checks also verify that existing visibility preferences do not imply consent, and cover canceled/denied permission requests, explicit opt-in, permission removal and display cleanup. Media and system usage have independent background-update checkboxes in their setup dialogs. Enabling the new disclosure is required before background access; earlier visible-page consent does not enable it automatically. With background updates selected, hiding widgets or closing every homepage only disconnects those pages: one shared worker keeps reading and caches the latest state in `chrome.storage.session`. Disabling or revoking a feature stops its background work and clears its cache. No history, disk-persisted readings or backups are created; browser shutdown clears the session cache. If background updates are off, closing the last visible widget stops reading. Browser restart, sleep or a worker/connector failure may still require recovery before fresh readings are available.
+
+Run `node scripts/verify-background-widgets.mjs` to check shared sampling, warm-cache responses, closed-page operation, foreground-only opt-out, startup recovery, session-only data and independent revocation. `node scripts/verify-system-monitor-extension.mjs` verifies real CPU/memory data and warm reopen behavior in a fresh hidden Edge profile. Context-menu saving uses `activeTab` rather than broad `tabs` access.
 
 The installed connector lives under `%LOCALAPPDATA%\LunarStart\MediaConnector`. The project's `native/windows-media/bin/` is a separate build cache: uninstalling the installed connector preserves it. Once your installed registration points to the independent directory, that project cache can be deleted; building or packaging the connector creates it again.
 

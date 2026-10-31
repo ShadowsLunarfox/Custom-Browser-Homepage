@@ -375,5 +375,10 @@
       "decline": "Tolak dan keluar",
       "storage_error": "Rekod persetujuan tidak dapat disimpan. Kosongkan ruang storan pelayar atau benarkan storan setempat, kemudian cuba lagi."
     }
+  },
+  "browser_theme": {
+    "open": "Warna tema pelayar",
+    "unavailable": "Buka sambungan yang dipasang dalam Chrome atau Edge untuk mengubah warna pelayar.",
+    "failed": "Tetapan tema pelayar tidak dapat dibuka. Sila cuba lagi."
   }
 }

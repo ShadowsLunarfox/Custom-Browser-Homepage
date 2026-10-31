@@ -14,7 +14,7 @@ for(const kind of ['PRIVACY','TERMS'])for(const language of languages) {
   const name=path.join(root,relative),text=readFileSync(name,'utf8');
   assert(text.startsWith('# ')&&text.length>1800,`Incomplete document: ${relative}`);
   assert.equal((text.match(/^## \d+\./gm)||[]).length,kind==='PRIVACY'?8:9,`Missing translated sections: ${relative}`);
-  assert(text.includes('2026-10-31')&&text.includes('ShadowsLunarfox'));
+  assert(text.includes(kind==='PRIVACY'?'2026-11-01':'2026-10-31')&&text.includes('ShadowsLunarfox'));
   assert(!text.includes('\ufffd')&&!/<\/?[a-z][^>]*>/i.test(text),`Legal document contains invalid text or HTML: ${relative}`);
   for(const[,target]of text.matchAll(/\]\(([^)]+)\)/g)) {
     if(/^https:\/\//.test(target))continue;

@@ -19,7 +19,8 @@ function submitSearchQuery(query) {
   hideSearchSuggestions();
 
   const engine = SEARCH_ENGINES[state.searchEngine] || SEARCH_ENGINES.google;
-  window.location.href = engine.url.replace("%s", encodeURIComponent(normalizedQuery));
+  const target = typeof getHomepageNavigationTarget === "function" ? getHomepageNavigationTarget() : window;
+  target.location.href = engine.url.replace("%s", encodeURIComponent(normalizedQuery));
 }
 
 function handleSearchInput() {
@@ -357,7 +358,7 @@ function submitGoogleImageSearchFile(file, sourceInput = null) {
   form.method = "post";
   form.action = GOOGLE_IMAGE_SEARCH_UPLOAD_URL;
   form.enctype = "multipart/form-data";
-  form.target = "_self";
+  form.target = typeof getHomepageNavigationTarget === "function" && getHomepageNavigationTarget() !== window ? "_parent" : "_self";
   form.style.display = "none";
 
   form.appendChild(imageInput);

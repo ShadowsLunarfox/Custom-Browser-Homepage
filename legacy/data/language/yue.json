@@ -375,5 +375,10 @@
       "decline": "拒絕並離開",
       "storage_error": "無法儲存接受紀錄。請釋放瀏覽器儲存空間或允許本機儲存，然後再試。"
     }
+  },
+  "browser_theme": {
+    "open": "瀏覽器主題顏色",
+    "unavailable": "請喺 Chrome 或 Edge 打開已安裝嘅擴充功能，再調整瀏覽器配色。",
+    "failed": "打唔開瀏覽器主題設定，請再試。"
   }
 }

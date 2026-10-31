@@ -74,6 +74,7 @@
     doc.getElementById('toggle-media-player').click();get('enable').click();
     await wait(()=>get('consent-status').textContent.includes('未获得'));
     assert(commands.length===0&&doc.getElementById('windows-media-player').hidden, 'Denied permission started native access');
+    get('background').checked=false;
     permissionAnswer=true;get('enable').click();
     await wait(()=>!doc.getElementById('windows-media-player').hidden&&!get('play').disabled);
     record('Default-off disclosure, cancellation, denied permission, and explicit opt-in before native access');

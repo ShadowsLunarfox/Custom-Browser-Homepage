@@ -1,6 +1,6 @@
 # Lunar Start Page Privacy Policy
 
-Status: general draft, not yet effective as a public-release policy. Last updated: 2026-10-31. The publisher will announce an effective date when publishing.
+Status: general draft, not yet effective as a public-release policy. Last updated: 2026-11-01. The publisher will announce an effective date when publishing.
 
 Languages: [English](PRIVACY.md) · [简体中文](docs/legal/PRIVACY.zh-CN.md) · [繁體粵語](docs/legal/PRIVACY.yue.md) · [日本語](docs/legal/PRIVACY.ja.md) · [한국어](docs/legal/PRIVACY.ko.md) · [ไทย](docs/legal/PRIVACY.th.md) · [Bahasa Melayu](docs/legal/PRIVACY.ms.md)
 
@@ -16,6 +16,8 @@ The extension stores saved/imported shortcut names and URLs, icon information, o
 
 Modern/legacy synchronization takes place within the same browser profile, not through a developer cloud. The extension does not upload these records through Chrome Storage Sync. Diagnostics are generated locally; their contents leave that local interface only if you choose to copy, export or submit them.
 
+The optional modern system monitor requests system.cpu and system.memory browser permissions only after you enable it. A shared sampler reads whole-device CPU counters and total/available physical memory about every two seconds. With background updates selected, this continues while the browser is running even when widgets are hidden or all homepages are closed. Without background updates, sampling runs only for visible homepage widgets. Only the latest reading is cached in browser-session memory for immediate display when reopening; there is no history, backup inclusion or upload. It does not read process lists or memory contents and needs no native connector. Disable or permission revocation stops sampling and clears the cache. Enable/background/visibility choices and layout are saved locally; closing the browser clears the session cache.
+
 ## 3. Search and third-party requests
 
 - A submitted search sends the query to the selected provider. Online suggestions send typed text to the relevant configured suggestion providers and, when necessary, fallback providers. Multi-engine mode may contact several providers. You can turn suggestions off.
@@ -27,11 +29,11 @@ Providers ordinarily receive IP addresses, request times and normal network info
 
 ## 4. Optional Windows media widget
 
-The widget starts disabled. Connecting requires reading its disclosure, choosing Agree and enable, granting optional native-messaging permission, and separately installing the connector. The extension never installs it automatically.
+The media widget starts disabled. Enable it after reading its disclosure and granting optional native-messaging permission; the separately installed Windows connector is also required. The background-update checkbox is a separate choice in the disclosure. Earlier consent for visible-page access does not automatically enable background access.
 
-While enabled and visible in a visible modern homepage, the connector reads Windows' current media session: app, title, artist, cover, playback state, duration, position and supported controls. This information is used only to display/control that media, held temporarily in local memory, and not uploaded to the developer, stored as playback history or included in backups. Playback commands follow your use of a control.
+When enabled, the connector reads Windows’ current app, title, artist, cover, playback state, duration, position and supported controls. With background updates selected, it keeps following Windows while the browser runs, even when the widget is hidden or all homepages are closed. A shared latest-state cache in browser-session memory allows a reopened page to display immediately. There is no playback history, backup inclusion or upload to the developer. Playback changes only after you use a control.
 
-Hiding the widget or leaving the page disconnects that client and clears its temporary media display; other visible enabled pages may remain connected. Disable and revoke permission stops this extension's media connections across tabs. Legacy mode does not load the widget.
+Hiding the widget or leaving a homepage disconnects that page and clears its display; an explicitly enabled background connection can remain active. With background updates off, the connector disconnects when the last visible authorized widget leaves. Disable and revoke permission stops media access across tabs and clears the cache. Browser shutdown clears the session cache. Legacy pages do not load the widget or start readings; an already enabled background task can continue until disabled.
 
 The installer registers only explicitly supplied IDs or official package IDs under the current Windows user's native-messaging keys. It does not inspect browser profiles, add startup entries, listen on a network port or install unrelated software.
 

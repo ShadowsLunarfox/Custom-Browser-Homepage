@@ -12,6 +12,8 @@
     "script/07-storage.js",
     "script/07-sync.js",
     "script/06-media-player.js",
+    "script/system-usage.js",
+    "script/06-system-monitor.js",
     "script/08-app.js"
   ];
 

@@ -1,5 +1,7 @@
 # Windows media connector
 
+The modern widget has a separate **Keep updating in the background** checkbox. After its updated disclosure and permission are accepted, this keeps one shared connector running while the browser runs, even when all homepages are closed. Reopened pages reuse the latest browser-session cache. Uncheck it for visible-widget-only access; disable/revoke permission to stop the connector and clear its cache. Earlier foreground-only consent does not enable background operation automatically. This adds no Windows startup entry and requires no native rebuild for existing compatible installations.
+
 The modern-only widget automatically follows the exact current media session selected by Windows, including sessions within the same browser. There is no manual source selector or remembered source. It reads the current title, artist, artwork, playback state, and timeline. Playback, pause, track changes, and seeking are enabled only when the source advertises support. Live streams and some applications cannot seek.
 
 The widget is disabled by default. Its setup explains the data used before the user chooses **Agree and enable** and grants the optional `nativeMessaging` permission. Canceling or denying access leaves the homepage usable and does not start a native connection. Disabling the feature revokes the permission across extension tabs and clears temporary media data.

@@ -27,7 +27,7 @@
       <li data-connector-i18n="run_installer">Run <code>Install.cmd</code> from the extracted package. Store packages use their configured official IDs; development packages ask for your extension ID. Review the displayed installation path, IDs and current-user registration changes, then explicitly confirm.</li>
       <li data-connector-i18n="enable">The installer copies the connector files and registers native messaging for Chrome/Edge for your Windows user only. Administrator access is not required. In the player, choose <strong>Agree and enable</strong>, grant the browser permission, then choose <strong>Check connection</strong>.</li>
     </ol>
-    <p data-connector-i18n="install_location">Files are installed at <code>%LOCALAPPDATA%\LunarStart\MediaConnector</code>. There is no startup entry or network listener. The connector runs on demand when an authorized, visible modern homepage connects.</p>
+    <p data-connector-i18n="install_location">Files are installed at <code>%LOCALAPPDATA%\LunarStart\MediaConnector</code>. There is no startup entry or network listener. After permission and explicit opt-in, the connector follows Windows while the browser runs if background updates are selected; otherwise it runs only while a visible modern homepage widget is connected.</p>
     <p data-connector-i18n="media_selection">The player follows Windows' current media selection automatically. Pause, seeking and progress depend on the source application's capabilities.</p>
   </section>
   <section aria-labelledby="connector-remove-title">

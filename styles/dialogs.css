@@ -6,6 +6,8 @@
 .dialog-subtitle { margin-top: 7px; font-size: var(--font-sm); color: var(--text-soft); line-height: 1.6; }
 .dialog-form label, .upload-field { display: grid; gap: 9px; color: var(--text-soft); font-size: var(--font-sm); }
 .dialog-actions { display: flex; align-items: center; justify-content: flex-end; gap: 9px; padding-top: 4px; }
+.dialog-form .widget-background-option { display: flex; align-items: flex-start; gap: 10px; color: var(--text-main); line-height: 1.6; }
+.widget-background-option input { flex-shrink: 0; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); }
 .settings-dialog { width: min(1020px, calc(100% - 48px)); height: min(760px, calc(100dvh - 64px)); max-height: none; overflow: hidden; }
 .settings-form { display: flex; flex-direction: column; gap: 0; height: 100%; padding: 0; }
 .settings-form > .dialog-head { flex-shrink: 0; padding: 24px 28px; border-bottom: 1px solid var(--panel-border); }

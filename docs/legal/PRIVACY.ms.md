@@ -1,6 +1,6 @@
 # Dasar Privasi Lunar Start Page
 
-Status: draf umum, belum berkuat kuasa sebagai dasar keluaran awam. Dikemas kini: 2026-10-31. Penerbit akan mengumumkan tarikh kuat kuasa semasa penerbitan.
+Status: draf umum, belum berkuat kuasa sebagai dasar keluaran awam. Dikemas kini: 2026-11-01. Penerbit akan mengumumkan tarikh kuat kuasa semasa penerbitan.
 
 Bahasa: [English](../../PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md) · [繁體粵語](PRIVACY.yue.md) · [日本語](PRIVACY.ja.md) · [한국어](PRIVACY.ko.md) · [ไทย](PRIVACY.th.md) · [Bahasa Melayu](PRIVACY.ms.md)
 
@@ -16,6 +16,8 @@ Nama dan URL pintasan yang disimpan/diimport, maklumat ikon, susunan dan pin, se
 
 Penyegerakan versi baharu/lama berlaku dalam profil pelayar yang sama, bukan melalui awan pembangun. Sambungan tidak memuat naik rekod ini melalui Chrome Storage Sync. Diagnostik dijana setempat; kandungannya keluar daripada antara muka setempat itu hanya jika anda menyalin, mengeksport atau menghantarnya.
 
+Pemantau sistem pilihan moden meminta kebenaran system.cpu dan system.memory hanya selepas anda mengaktifkannya. Pensampel bersama membaca pembilang CPU seluruh peranti serta jumlah/baki memori fizikal kira-kira setiap dua saat. Jika kemas kini latar belakang dipilih, bacaan berterusan semasa pelayar berjalan walaupun widget disembunyikan atau semua halaman utama ditutup; jika tidak, bacaan hanya dibuat untuk widget yang kelihatan. Hanya bacaan terkini dicache dalam memori sesi pelayar untuk paparan segera apabila dibuka semula, tanpa sejarah, sandaran atau muat naik. Senarai proses dan kandungan memori tidak dibaca dan penyambung natif tidak diperlukan. Penyahaktifan atau pembatalan kebenaran menghentikan bacaan dan mengosongkan cache. Pilihan pengaktifan/latar belakang/keterlihatan dan susun atur disimpan setempat; menutup pelayar mengosongkan cache sesi.
+
 ## 3. Carian dan permintaan pihak ketiga
 
 - Menghantar carian menghantar pertanyaan kepada penyedia dipilih. Cadangan dalam talian menghantar teks ditaip kepada penyedia cadangan berkaitan yang dikonfigurasi serta penyedia gantian apabila perlu. Mod berbilang enjin boleh menghubungi beberapa penyedia. Anda boleh mematikan cadangan.
@@ -27,11 +29,11 @@ Penyedia lazimnya menerima alamat IP, masa permintaan dan maklumat rangkaian bia
 
 ## 4. Widget media Windows pilihan
 
-Widget dimatikan secara lalai. Sambungan memerlukan anda membaca penerangan, memilih Setuju dan dayakan, memberi kebenaran pemesejan natif pilihan, serta memasang penyambung secara berasingan. Tiada pemasangan automatik oleh sambungan.
+Widget media bermula dalam keadaan tidak aktif. Baca pendedahan, aktifkan secara jelas, berikan kebenaran pemesejan natif pilihan dan pasang penyambung Windows secara berasingan. Kemas kini latar belakang ialah pilihan berasingan dalam dialog. Persetujuan terdahulu untuk halaman yang kelihatan tidak mengaktifkan akses latar belakang secara automatik.
 
-Apabila widget didayakan dan kelihatan dalam laman utama baharu yang kelihatan, penyambung membaca sesi media Windows semasa: aplikasi, tajuk, artis, kulit, status, tempoh, kedudukan dan kawalan yang disokong. Data hanya digunakan untuk paparan/kawalan semasa dan disimpan sementara dalam memori setempat, bukan sejarah main balik, sandaran atau muat naik kepada pembangun. Arahan main balik berlaku melalui penggunaan kawalan anda.
+Apabila aktif, penyambung membaca aplikasi semasa Windows, tajuk, artis, kulit, status main, tempoh, kedudukan dan kawalan yang disokong. Dengan latar belakang dipilih, ia terus mengikuti Windows semasa pelayar berjalan walaupun widget disembunyikan atau semua halaman utama ditutup. Hanya keadaan terkini dicache bersama dalam memori sesi pelayar untuk paparan segera apabila dibuka semula. Tiada sejarah main balik, sandaran atau penghantaran kepada pembangun. Main balik berubah hanya apabila anda menggunakan kawalan.
 
-Menyembunyikan widget atau meninggalkan halaman memutuskan klien itu dan memadam paparan media sementara; halaman aktif lain yang kelihatan mungkin kekal tersambung. Lumpuhkan dan tarik balik kebenaran menghentikan sambungan media semua tab sambungan ini. Versi lama tidak memuatkan widget.
+Menyembunyikan widget atau meninggalkan halaman memutuskan klien halaman itu dan mengosongkan paparannya; sambungan latar belakang yang diaktifkan secara jelas boleh kekal. Jika latar belakang dimatikan, penyambung terputus apabila widget terakhir yang kelihatan dan dibenarkan ditutup. Nyahdayakan dan tarik balik kebenaran menghentikan akses semua tab dan mengosongkan cache. Penutupan pelayar mengosongkan cache sesi. Halaman legasi tidak memuatkan widget atau memulakan bacaan; tugas latar belakang yang sudah aktif boleh berjalan sehingga dinyahdayakan.
 
 Pemasang hanya mendaftarkan ID yang anda nyatakan atau ID pakej rasmi dalam tetapan pemesejan natif pengguna Windows semasa. Ia tidak membaca profil pelayar, membuat entri permulaan, mendengar port rangkaian atau memasang perisian tidak berkaitan.
 

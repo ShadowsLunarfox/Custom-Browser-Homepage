@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const read = file => readFileSync(new URL('../'+file,import.meta.url),'utf8');
+const context = vm.createContext({}); vm.runInContext(read('script/system-usage.js'),context);
+vm.runInContext('const {cpuSample,cpuUsage,memoryUsage}=globalThis.lunarSystemUsage',context);
+const run = expression => vm.runInContext(expression,context);
+assert.equal(run('cpuUsage(null,[{total:100,idle:70}])'),null,'First sample must establish a baseline');
+assert.equal(run('cpuUsage([{total:100,idle:70}],[{total:200,idle:130}])'),40);
+assert.equal(run('cpuUsage([{total:100,idle:70}],[{total:200,idle:170}])'),0);
+assert.equal(run('cpuUsage([{total:100,idle:70}],[{total:200,idle:70}])'),100);
+assert.equal(run('cpuUsage([{total:100,idle:70},{total:200,idle:150}],[{total:200,idle:170},{total:500,idle:150}])'),75,'Aggregate elapsed time across logical processors');
+for(const sample of ['[{total:50,idle:30}]','[{total:100,idle:70}]','[{total:200,idle:60}]','[{total:200,idle:180}]','[{total:200,idle:80},{total:100,idle:30}]'])assert.equal(run(`cpuUsage([{total:100,idle:70}],${sample})`),null,'Reset or changed counters need a new baseline');
+for(const info of ['{}','{processors:[]}','{processors:[{usage:{total:NaN,idle:0}}]}','{processors:[{usage:{total:5,idle:6}}]}'])assert.throws(()=>run(`cpuSample(${info})`));
+assert.equal(run('memoryUsage({capacity:16*1024**3,availableCapacity:6*1024**3}).percent'),62.5);
+assert.equal(run('memoryUsage({capacity:16*1024**3,availableCapacity:6*1024**3}).used'),10*1024**3);
+for(const info of ['{}','{capacity:0,availableCapacity:0}','{capacity:8,availableCapacity:-1}','{capacity:8,availableCapacity:9}','{capacity:Infinity,availableCapacity:0}'])assert.throws(()=>run(`memoryUsage(${info})`));
+const manifest=JSON.parse(read('manifest.json'));
+for(const permission of ['system.cpu','system.memory'])assert(manifest.optional_permissions.includes(permission)&&!manifest.permissions.includes(permission),'System access must stay optional');
+const html=read('home.html');
+const keys=[...html.matchAll(/data-i18n(?:-aria-label)?="monitor\.([^"]+)"/g)].map(match=>match[1]);
+for(const locale of ['en','zh-CN','yue','ja','ko','th','ms']){
+ const translations=JSON.parse(read(`data/language/${locale}.json`)).monitor;
+ for(const key of [...keys,'sampling','live','error','unsupported','permission_denied','disabled','active','memory_detail'])assert.equal(typeof translations[key],'string',`Missing ${locale} monitor.${key}`);
+ const policy=read(locale==='en'?'PRIVACY.md':`docs/legal/PRIVACY.${locale}.md`);
+ assert(policy.includes('system.cpu')&&policy.includes('system.memory'),'System access disclosure is missing');
+}
+assert(!read('legacy/home.html').includes('system-monitor'));
+assert(!read('legacy/script/script-loader.js').includes('system-monitor'));
+console.log('PASS: CPU interval and multi-core calculations, first-sample/reset behavior, physical-memory math, invalid samples, optional permissions, seven locales, privacy disclosures and legacy isolation.');
