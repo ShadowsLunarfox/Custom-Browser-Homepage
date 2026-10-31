@@ -26,7 +26,6 @@
   },
   "host_permissions": [
     "https://duckduckgo.com/*",
-    "https://suggestqueries.google.com/*",
     "https://www.google.com/*",
     "https://api.bing.com/*",
     "https://search.yahoo.com/*",
@@ -37,6 +36,7 @@
   "permissions": [
     "storage",
     "contextMenus",
-    "tabs"
-  ]
+    "activeTab"
+  ],
+  "optional_permissions": ["nativeMessaging"]
 }

@@ -361,5 +361,19 @@
     "legacy": "Versi lama",
     "note": "Tema, mod cerah atau gelap dan warna tema disimpan berasingan. Penanda halaman, bahasa, carian, kertas dinding, jam dan susun atur disegerakkan. Koleksi sedia ada digabungkan tanpa pendua.",
     "storage_error": "Versi antara muka tidak dapat disimpan. Sila cuba lagi."
+  },
+  "legal": {
+    "privacy": "Dasar privasi",
+    "terms": "Terma perkhidmatan",
+    "consent": {
+      "title": "Sebelum anda bermula",
+      "intro": "Sila baca Terma Perkhidmatan dan Dasar Privasi sebelum menggunakan Lunar Start Page.",
+      "language": "Bahasa",
+      "agreement": "Saya bersetuju dengan Terma Perkhidmatan dan mengakui bahawa saya telah membaca Dasar Privasi.",
+      "note": "Rekod persetujuan disimpan hanya dalam profil pelayar ini. Akses media Windows adalah pilihan dan memerlukan kebenaran berasingan.",
+      "accept": "Setuju dan teruskan",
+      "decline": "Tolak dan keluar",
+      "storage_error": "Rekod persetujuan tidak dapat disimpan. Kosongkan ruang storan pelayar atau benarkan storan setempat, kemudian cuba lagi."
+    }
   }
 }

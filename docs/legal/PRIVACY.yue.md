@@ -8,7 +8,7 @@
 
 本政策適用於 Lunar Start Page 新版、舊版介面，同埋本項目提供嘅可選 Windows 媒體連接器。項目由 Lunarfox（GitHub 用戶名 ShadowsLunarfox）維護。瀏覽器、商店、搜尋引擎同其他第三方自行處理資料嘅活動，適用佢哋各自嘅政策。
 
-私隱問題可以透過[項目支援入口](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)提出。呢度係公開地方，請唔好貼私人網址、媒體內容、備份、密碼或者敏感資料；如需私下溝通，請先要求提供合適渠道。
+私隱問題可以透過[項目支援入口](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)提出。呢度係公開地方，請唔好貼私人網址、媒體內容、備份、密碼或者敏感資料；如需私下溝通，請先要求提供合適渠道。
 
 ## 2. 儲存喺本機嘅資料
 

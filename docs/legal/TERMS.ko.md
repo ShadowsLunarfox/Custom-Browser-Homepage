@@ -8,7 +8,7 @@
 
 Lunarfox(GitHub: ShadowsLunarfox)가 관리하는 확장 프로그램과 본 프로젝트 Windows 연결 프로그램의 이용 조건입니다. 공개 버전 이용 전에 읽어주세요. 적절히 약관을 제시했고 적용 법률이 인정하는 범위에서만 명시적 동의나 계속 이용을 수락으로 봅니다. 동의하지 않으면 이용을 중단하고 제거할 수 있습니다.
 
-거주 지역의 법적 이용 조건을 충족하고 필요하면 보호자 동의를 받으세요. 연락은 [프로젝트 지원](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)을 이용하세요. Google, Microsoft 또는 다른 업체와 체결하는 계약이 아닙니다.
+거주 지역의 법적 이용 조건을 충족하고 필요하면 보호자 동의를 받으세요. 연락은 [프로젝트 지원](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)을 이용하세요. Google, Microsoft 또는 다른 업체와 체결하는 계약이 아닙니다.
 
 ## 2. 기능과 외부 서비스
 

@@ -10,6 +10,7 @@
   <link rel="icon" type="image/png" href="resource/icons/lunar-v2-32.png">
   <!-- One unified, modular interface. -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/legal-consent.css">
   <link id="wallpaper-style-link" rel="stylesheet">
 </head>
 <body class="app-loading" data-theme="dark">
@@ -22,6 +23,7 @@
 
   <div class="workspace-controls">
     <div class="workspace-actions">
+      <button id="toggle-media-player" class="customize-button corner-button" type="button" aria-label="Windows media player" aria-pressed="true" data-i18n-aria-label="player.title"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg></button>
       <button class="customize-button corner-button layout-mode-button" type="button" data-layout-action="toggle" aria-pressed="false" aria-label="Adjust layout" data-i18n-aria-label="workspace.adjust_layout"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg></button>
       <button id="open-settings" class="customize-button corner-button" type="button" aria-label="Customize" data-i18n-aria-label="workspace.customize"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10m4 0h2M4 17h2m4 0h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
     </div>
@@ -176,6 +178,48 @@
   </div>
 
   <footer class="app-footer"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5 8.5 8.5 0 1 0 20.5 13.2Z"/><path d="m18 3 .5 2.5L21 6l-2.5.5L18 9l-.5-2.5L15 6l2.5-.5Z"/></svg><span data-i18n="workspace.footer">A calmer corner of the internet.</span></footer>
+
+  <aside id="windows-media-player" class="media-player" data-draggable-id="player" aria-labelledby="player-heading" hidden>
+    <div class="player-heading-row">
+      <h2 id="player-heading" data-i18n="player.title">Windows media player</h2>
+      <button id="player-manage" class="player-icon-button" type="button" aria-label="Player permissions and setup" data-i18n-aria-label="player.manage"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg></button>
+      <button class="player-icon-button drag-handle" type="button" data-drag-handle aria-label="Move player" data-i18n-aria-label="player.move"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 3m-3-3L9 6m3-3v18m0 0 3-3m-3 3-3-3M3 12h18M3 12l3-3m-3 3 3 3m15-3-3-3m3 3-3 3"/></svg></button>
+      <button id="player-expand" class="player-icon-button" type="button" aria-expanded="true" aria-label="Expand or collapse player" data-i18n-aria-label="player.expand"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"/></svg></button>
+      <button id="player-hide" class="player-icon-button" type="button" aria-label="Hide player" data-i18n-aria-label="player.hide"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+    </div>
+    <div class="player-track-row">
+      <div class="player-artwork"><img id="player-artwork" src="resource/icons/lunar-v2-128.png" alt="" draggable="false"></div>
+      <div class="player-track-text"><strong id="player-track-title" data-i18n="player.empty_title">Nothing playing</strong><p id="player-track-artist" data-i18n="player.empty_hint">Play music or a video on your computer.</p></div>
+      <button id="player-play" class="player-play-button" type="button" aria-label="Play" disabled><svg class="ui-icon player-play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><svg class="ui-icon player-pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+    </div>
+    <div class="player-body">
+      <input id="player-progress" class="player-progress" type="range" min="0" max="1000" value="0" step="1" disabled data-player-range aria-label="Playback progress" data-i18n-aria-label="player.progress">
+      <div class="player-times"><span id="player-current">0:00</span><span id="player-duration">0:00</span></div>
+      <div class="player-actions">
+        <button id="player-previous" class="player-icon-button" type="button" disabled aria-label="Previous track" data-i18n-aria-label="player.previous"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14m12-14-9 7 9 7Z"/></svg></button>
+        <button id="player-rewind" class="player-skip" type="button" disabled aria-label="Back 10 seconds" data-i18n-aria-label="player.rewind"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9a8 8 0 1 1 0 7M4 4v5h5"/></svg><span>10</span></button>
+        <button id="player-forward" class="player-skip" type="button" disabled aria-label="Forward 10 seconds" data-i18n-aria-label="player.forward"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 9a8 8 0 1 0 0 7m0-12v5h-5"/></svg><span>10</span></button>
+        <button id="player-next" class="player-icon-button" type="button" disabled aria-label="Next track" data-i18n-aria-label="player.next"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button>
+        <button id="player-reconnect" class="player-icon-button" type="button" aria-label="Reconnect" data-i18n-aria-label="player.reconnect"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10a8 8 0 1 0-1 8M20 4v6h-6"/></svg></button>
+      </div>
+      <div class="player-status-row"><p id="player-status" role="status" aria-live="polite"></p><button id="player-setup" type="button" data-i18n="player.setup">Connection help</button></div>
+    </div>
+    <button class="resize-handle" type="button" data-resize-handle aria-label="Resize player" data-i18n-aria-label="player.resize"></button>
+  </aside>
+
+  <dialog id="player-setup-dialog" class="app-dialog" aria-labelledby="player-setup-title">
+    <form method="dialog" class="dialog-form">
+      <div class="dialog-head"><h3 id="player-setup-title" data-i18n="player.setup_title">Connect Windows media</h3><button class="icon-button" type="submit" aria-label="Close" data-i18n-aria-label="actions.close">&times;</button></div>
+      <p class="dialog-subtitle" data-i18n="player.consent_intro">This optional widget connects to Windows media. The homepage works without it.</p>
+      <p class="field-note" data-i18n="player.consent_data">When enabled and visible, it reads the current app, title, artist, cover, playback state and progress to display and control your media. Media data stays in memory on this computer; it is not saved or uploaded.</p>
+      <p class="field-note" data-i18n="player.consent_install">Requires Windows 10 version 1809 or later and a separately installed connector. Nothing is installed automatically.</p>
+      <p class="field-note" data-i18n="player.consent_scope">The connector runs while a visible modern homepage is connected. Playback changes only when you use a control. You can disable it and revoke its permission here.</p>
+      <div class="player-help-links"><a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer" data-legal-document="privacy" data-i18n="legal.privacy">Privacy policy</a><a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md" target="_blank" rel="noopener noreferrer" data-legal-document="terms" data-i18n="legal.terms">Terms of service</a><a href="connector.html" target="_blank" rel="noopener noreferrer" data-connector-guide data-i18n="player.install_guide">Connector installation and removal</a></div>
+      <label><span data-i18n="player.extension_id">Extension ID</span><input id="player-extension-id" type="text" readonly></label>
+      <p id="player-consent-status" class="field-note" role="status" aria-live="polite"></p>
+      <div class="dialog-actions"><button id="player-disable" class="secondary-button danger-button" type="button" hidden data-i18n="player.disable">Disable and revoke permission</button><button id="player-check" class="secondary-button" type="button" hidden data-i18n="player.check_connection">Check connection</button><button class="ghost-button" type="submit" data-i18n="actions.close">Close</button><button id="player-enable" type="button" class="accent-button" data-i18n="player.enable">Agree and enable</button></div>
+    </form>
+  </dialog>
 
   <!-- Bookmark create/edit dialog. -->
   <dialog id="link-dialog" class="app-dialog" aria-labelledby="link-dialog-title">
@@ -595,13 +639,14 @@
         </div>
       </div>
       <div class="settings-footer-links">
+        <p class="settings-developer-credit"><a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer" data-legal-document="privacy" data-i18n="legal.privacy">Privacy policy</a> · <a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md" target="_blank" rel="noopener noreferrer" data-legal-document="terms" data-i18n="legal.terms">Terms of service</a></p>
         <p class="settings-developer-credit" data-i18n="settings.developer_credit">
           Extension developer: Lunarfox 月狐 · GitHub:
           <a href="https://github.com/ShadowsLunarfox" target="_blank" rel="noopener noreferrer">ShadowsLunarfox</a>
         </p>
         <p class="settings-developer-credit">
           <span data-i18n="settings.repository_link">Project repository:</span>
-          <a href="https://github.com/ShadowsLunarfox/Custom-Browser-Homepage" target="_blank" rel="noopener noreferrer">Custom-Browser-Homepage</a>
+          <a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page" target="_blank" rel="noopener noreferrer">Lunar-Start-Page</a>
         </p>
       </div>
     </form>
@@ -784,6 +829,7 @@
     </article>
   </template>
 
+  <script src="script/legal-consent.js"></script>
   <script src="script/script-loader.js"></script>
   
 </body>

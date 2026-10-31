@@ -8,7 +8,7 @@
 
 本規約は Lunarfox（GitHub：ShadowsLunarfox）が管理する拡張機能と本プロジェクトの Windows 接続プログラムの利用条件です。公開版の利用前にお読みください。適切に規約を提示し、適用法が認める場合に限り、明示的な同意または継続利用を受諾と扱います。同意しない場合は利用を停止し、削除できます。
 
-所在地の法的な利用条件を満たし、必要に応じて保護者の同意を得てください。連絡先は[プロジェクトサポート](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)です。Google、Microsoft その他の事業者との契約ではありません。
+所在地の法的な利用条件を満たし、必要に応じて保護者の同意を得てください。連絡先は[プロジェクトサポート](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)です。Google、Microsoft その他の事業者との契約ではありません。
 
 ## 2. 機能と外部サービス
 

@@ -386,7 +386,8 @@ function sanitizePanelPositions(value) {
   return {
     clock: sanitizePanelPositionItem(value?.clock, defaults.clock),
     search: sanitizePanelPositionItem(value?.search, defaults.search),
-    collection: sanitizePanelPositionItem(value?.collection, defaults.collection)
+    collection: sanitizePanelPositionItem(value?.collection, defaults.collection),
+    player: sanitizePanelPositionItem(value?.player, defaults.player)
   };
 }
 
@@ -409,7 +410,8 @@ function sanitizePanelScales(value, legacyClockScale) {
   return {
     clock: sanitizePanelScaleItem(value?.clock, migratedClockScale),
     search: sanitizePanelScaleItem(value?.search, defaults.search),
-    collection: sanitizePanelScaleItem(value?.collection, defaults.collection)
+    collection: sanitizePanelScaleItem(value?.collection, defaults.collection),
+    player: sanitizePanelScaleItem(value?.player, defaults.player)
   };
 }
 

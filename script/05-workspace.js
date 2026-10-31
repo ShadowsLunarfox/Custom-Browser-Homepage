@@ -81,8 +81,10 @@ function resetPanelLayout() {
 }
 
 function syncWorkspacePanelLayout() {
-  const moved = Object.values(state.settings.panelDesiredPositions || state.settings.panelPositions).some(({ x, y }) => x !== 0 || y !== 0);
-  const resized = Object.values(state.settings.panelScales).some((scale) => scale !== 1);
+  const sharedPanels = ["clock", "search", "collection"];
+  const positions = state.settings.panelDesiredPositions || state.settings.panelPositions;
+  const moved = sharedPanels.some(key => (positions[key]?.x || 0) !== 0 || (positions[key]?.y || 0) !== 0);
+  const resized = sharedPanels.some(key => (state.settings.panelScales[key] || 1) !== 1);
   document.body.classList.toggle("has-custom-panel-layout", moved || resized);
 }
 

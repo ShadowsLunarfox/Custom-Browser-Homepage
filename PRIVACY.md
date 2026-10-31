@@ -8,7 +8,7 @@ Languages: [English](PRIVACY.md) · [简体中文](docs/legal/PRIVACY.zh-CN.md) 
 
 This policy covers the modern and legacy Lunar Start Page interfaces and this project's optional Windows media connector. The project is maintained by Lunarfox, GitHub username ShadowsLunarfox. It does not govern browsers, stores, search engines or other third parties' own processing.
 
-Contact [project support](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues) with privacy questions. Issues are public: do not post private URLs, media details, backups, passwords or sensitive information. Ask for an appropriate private channel before sharing such information.
+Contact [project support](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues) with privacy questions. Issues are public: do not post private URLs, media details, backups, passwords or sensitive information. Ask for an appropriate private channel before sharing such information.
 
 ## 2. Information on your device
 

@@ -8,7 +8,7 @@
 
 本条款说明由 Lunarfox（GitHub 用户名 ShadowsLunarfox）维护的 Lunar Start Page 及本项目 Windows 媒体连接器的使用条件。正式发布后，请在使用前阅读；只有在适用法律认可且已向你适当提供条款的范围内，主动同意或继续使用才构成接受。不接受时可以停止使用并卸载。
 
-你应具备所在地法律要求的使用资格，必要时取得监护人同意。项目支持入口为 [GitHub Issues](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)。本条款不是与 Google、Microsoft 或第三方服务订立的协议。
+你应具备所在地法律要求的使用资格，必要时取得监护人同意。项目支持入口为 [GitHub Issues](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)。本条款不是与 Google、Microsoft 或第三方服务订立的协议。
 
 ## 2. 功能与第三方依赖
 

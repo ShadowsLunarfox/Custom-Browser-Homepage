@@ -157,3 +157,5 @@ function deriveNameFromUrl(url) {
     return "Saved Page";
   }
 }
+
+if (typeof importScripts === "function") importScripts("script/windows-media-broker.js");

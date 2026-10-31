@@ -519,5 +519,19 @@
     "legacy": "Old version",
     "note": "Themes, light/dark mode, and theme colors are saved separately. Bookmarks, language, search, wallpaper, clock, and layout synchronize between both versions. Existing collections merge and deduplicate automatically.",
     "storage_error": "Could not save the interface version. Please try again."
+  },
+  "legal": {
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "consent": {
+      "title": "Before you begin",
+      "intro": "Please review the Terms of Service and Privacy Policy before using Lunar Start Page.",
+      "language": "Language",
+      "agreement": "I agree to the Terms of Service and acknowledge the Privacy Policy.",
+      "note": "Your agreement is saved only in this browser profile. Optional Windows media access requires separate permission.",
+      "accept": "Accept and continue",
+      "decline": "Decline and leave",
+      "storage_error": "Your agreement could not be saved. Free up browser storage or allow local storage, then try again."
+    }
   }
 }

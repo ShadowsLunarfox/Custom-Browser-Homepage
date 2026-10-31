@@ -316,7 +316,7 @@ function initializeCustomSelects(root = document) {
 
 function initializeCustomRanges(root = document) {
   const scope = root || document;
-  scope.querySelectorAll("input[type='range']").forEach((input) => {
+  scope.querySelectorAll("input[type='range']:not([data-player-range])").forEach((input) => {
     if (scope === document && input.closest("#settings-dialog, #debug-dialog")) {
       return;
     }

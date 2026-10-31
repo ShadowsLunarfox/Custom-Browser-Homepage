@@ -8,7 +8,7 @@
 
 이 방침은 Lunar Start Page의 새 화면과 기존 화면, 프로젝트의 선택형 Windows 미디어 연결 프로그램에 적용됩니다. 관리자는 Lunarfox(GitHub: ShadowsLunarfox)입니다. 브라우저, 스토어, 검색업체 등의 독자적인 처리는 각 업체 방침에 따릅니다.
 
-[프로젝트 지원](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)에 문의할 수 있습니다. 공개 게시판이므로 사적인 URL, 미디어 내용, 백업, 비밀번호나 민감한 정보를 게시하지 마세요. 비공개 정보 공유가 필요하면 먼저 적절한 연락 방법을 요청하세요.
+[프로젝트 지원](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)에 문의할 수 있습니다. 공개 게시판이므로 사적인 URL, 미디어 내용, 백업, 비밀번호나 민감한 정보를 게시하지 마세요. 비공개 정보 공유가 필요하면 먼저 적절한 연락 방법을 요청하세요.
 
 ## 2. 기기에 저장하는 정보
 

@@ -168,16 +168,19 @@ const DEFAULT_SETTINGS = {
   panelPositions: {
     clock: { x: 0, y: 0 },
     search: { x: 0, y: 0 },
-    collection: { x: 0, y: 0 }
+    collection: { x: 0, y: 0 },
+    player: { x: 0, y: 0 }
   },
   panelDesiredPositions: {
     clock: { x: 0, y: 0 },
     search: { x: 0, y: 0 },
-    collection: { x: 0, y: 0 }
+    collection: { x: 0, y: 0 },
+    player: { x: 0, y: 0 }
   },
   panelScales: {
     clock: 1,
     search: 1,
-    collection: 1
+    collection: 1,
+    player: 1
   }
 };

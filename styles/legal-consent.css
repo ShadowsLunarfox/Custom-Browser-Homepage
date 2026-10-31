@@ -1,0 +1,54 @@
+/* Shared consent UI uses explicit colors so custom themes cannot hide its text. */
+#legal-consent-dialog {
+  --legal-surface: #202823;
+  --legal-text: #edf2ef;
+  --legal-muted: #b4c2b9;
+  --legal-border: #52645a;
+  --legal-accent: #b6d7c3;
+  --legal-ink: #15251b;
+  color-scheme: dark;
+  width: min(540px, calc(100% - 32px));
+  max-width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--legal-border);
+  border-radius: 20px;
+  background: var(--legal-surface);
+  color: var(--legal-text);
+  box-shadow: 0 28px 90px #0006;
+  font: 15px/1.6 "Segoe UI", system-ui, sans-serif;
+  overflow: auto;
+  text-align: start;
+}
+body[data-theme="light"] #legal-consent-dialog {
+  --legal-surface: #fafcfb;
+  --legal-text: #192b21;
+  --legal-muted: #45594c;
+  --legal-border: #b6c9bc;
+  --legal-accent: #245e3b;
+  --legal-ink: #fff;
+  color-scheme: light;
+}
+#legal-consent-dialog::backdrop { background: #0c1712cc; backdrop-filter: blur(8px); }
+#legal-consent-form { display: grid; gap: 18px; padding: 28px; margin: 0; }
+#legal-consent-dialog * { box-sizing: border-box; }
+#legal-consent-dialog h2, #legal-consent-dialog p { margin: 0; }
+#legal-consent-dialog h2 { font-size: 25px; line-height: 1.25; font-weight: 600; }
+#legal-consent-dialog .legal-consent-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+#legal-consent-dialog .legal-consent-header strong { font-size: 13px; color: var(--legal-muted); }
+#legal-consent-dialog .legal-consent-header label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+#legal-consent-dialog select { max-width: 150px; padding: 7px 8px; border: 1px solid var(--legal-border); border-radius: 8px; color: var(--legal-text); background: var(--legal-surface); font: inherit; }
+#legal-consent-dialog .legal-consent-links { display: grid; gap: 8px; }
+#legal-consent-dialog a { display: block; padding: 12px 14px; border: 1px solid var(--legal-border); border-radius: 10px; color: var(--legal-accent); text-decoration: underline; text-underline-offset: 3px; }
+#legal-consent-dialog .legal-consent-agreement { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: var(--legal-text); }
+#legal-consent-dialog input[type="checkbox"] { flex: 0 0 19px; width: 19px; height: 19px; margin: 3px 0 0; accent-color: var(--legal-accent); appearance: auto; }
+#legal-consent-dialog .legal-consent-note { color: var(--legal-muted); font-size: 13px; }
+#legal-consent-dialog .legal-consent-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+#legal-consent-dialog button { min-height: 42px; padding: 9px 14px; border: 1px solid var(--legal-border); border-radius: 9px; background: var(--legal-surface); color: var(--legal-text); font: inherit; cursor: pointer; }
+#legal-consent-dialog #legal-consent-accept { background: var(--legal-accent); color: var(--legal-ink); border-color: var(--legal-accent); font-weight: 600; }
+#legal-consent-dialog button:disabled { opacity: .45; cursor: not-allowed; }
+#legal-consent-dialog :focus-visible { outline: 2px solid var(--legal-accent); outline-offset: 3px; }
+#legal-consent-dialog #legal-consent-error { color: var(--legal-text); border-left: 3px solid var(--legal-accent); padding-left: 12px; }
+#legal-consent-dialog [hidden] { display: none; }
+@media (max-width: 420px) { #legal-consent-form { padding: 20px; gap: 16px; } #legal-consent-dialog .legal-consent-actions button { width: 100%; } }

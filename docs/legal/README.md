@@ -2,6 +2,8 @@
 
 **English is the primary publication language.** The complete English drafts are [PRIVACY.md](../../PRIVACY.md) and [TERMS.md](../../TERMS.md) in the repository root. Complete translations are listed below. All legal documents remain Markdown; there is no HTML legal-document version.
 
+Published English pages: [Privacy Policy](https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md) · [Terms of Service](https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md). The modern and legacy interfaces open the corresponding language on GitHub. Bundled copies remain in the project; viewing the online pages requires an internet connection. Publication of a draft does not by itself change its stated effective status.
+
 | Language | Privacy policy | Terms of service |
 | --- | --- | --- |
 | English — primary | [Privacy Policy](../../PRIVACY.md) | [Terms of Service](../../TERMS.md) |

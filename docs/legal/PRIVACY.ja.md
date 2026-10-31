@@ -8,7 +8,7 @@
 
 本方針は Lunar Start Page の新版・旧版と、本プロジェクトの任意の Windows メディア接続プログラムに適用されます。管理者は Lunarfox（GitHub：ShadowsLunarfox）です。ブラウザー、ストア、検索サービスなどの独自の処理には各事業者の方針が適用されます。
 
-お問い合わせは[プロジェクトサポート](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)へお願いします。公開の場なので、私的な URL、メディア情報、バックアップ、パスワードなどを投稿しないでください。非公開の情報を共有する前に、適切な連絡方法をお尋ねください。
+お問い合わせは[プロジェクトサポート](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)へお願いします。公開の場なので、私的な URL、メディア情報、バックアップ、パスワードなどを投稿しないでください。非公開の情報を共有する前に、適切な連絡方法をお尋ねください。
 
 ## 2. 端末上の情報
 

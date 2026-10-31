@@ -8,7 +8,7 @@ Languages: [English](TERMS.md) · [简体中文](docs/legal/TERMS.zh-CN.md) · [
 
 These Terms describe use of Lunar Start Page and this project's Windows media connector, maintained by Lunarfox, GitHub username ShadowsLunarfox. Review them before using a published version. Affirmative agreement or continued use constitutes acceptance only where applicable law recognizes it and the Terms were properly presented. You can stop using and uninstall if you disagree.
 
-You must meet local legal requirements for use and obtain guardian consent where required. Contact [project support](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues). These are not an agreement with Google, Microsoft or another provider.
+You must meet local legal requirements for use and obtain guardian consent where required. Contact [project support](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues). These are not an agreement with Google, Microsoft or another provider.
 
 ## 2. Features and third parties
 

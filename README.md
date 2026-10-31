@@ -14,11 +14,13 @@
   <p>
     <a href="#-installation">Get started</a> ·
     <a href="#-features">Explore features</a> ·
-    <a href="https://github.com/ShadowsLunarfox/Custom-Browser-Homepage">View repository</a>
+    <a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page">View repository</a>
   </p>
 </div>
 
 ---
+
+On first opening, both interfaces show a required agreement dialog with links to the published Terms of Service and Privacy Policy. Check the agreement box and choose **Accept and continue** to start the homepage; declining leaves the page. The document versions, agreement time and dialog language stay in the current browser profile and are shared between modern and legacy mode. They are excluded from homepage backups. Clearing extension data requires agreement again. Windows media access remains a separate optional permission.
 
 ## ✨ Features
 
@@ -42,7 +44,7 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 
 ### 1. Download the project
 
-1. Open the [project repository](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage).
+1. Open the [project repository](https://github.com/ShadowsLunarfox/Lunar-Start-Page).
 2. Select **Code → Download ZIP**.
 3. Extract the ZIP file to a folder on your computer. Keep the extracted folder in a place where it will not be moved or deleted.
 
@@ -104,7 +106,7 @@ The player checks also verify that existing “visible widget” preferences do 
 
 The installed connector lives under `%LOCALAPPDATA%\LunarStart\MediaConnector`. The project's `native/windows-media/bin/` is a separate build cache: uninstalling the installed connector preserves it. Once your installed registration points to the independent directory, that project cache can be deleted; building or packaging the connector creates it again.
 
-Read the [privacy policy](PRIVACY.md) and [terms of service](TERMS.md). English is the primary publication language, and the root documents are in English. Complete translations are available in 简体中文, 繁體粵語, 日本語, 한국어, ไทย and Bahasa Melayu. See the [language index and publication notes](docs/legal/README.md). Both interfaces' settings and player setup link to the matching language. The policy covers local data, third-party requests, temporary media, retention and deletion; the general terms preserve mandatory consumer and GPL rights without selecting a particular jurisdiction. Publish readable Markdown at a public HTTPS URL before store submission; no HTML legal-document version is needed.
+Read the online [privacy policy](https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md) and [terms of service](https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md). English is the primary publication language, and the root documents are in English. Complete translations are available in 简体中文, 繁體粵語, 日本語, 한국어, ไทย and Bahasa Melayu. See the [language index and publication notes](docs/legal/README.md). Both interfaces' settings and player setup open the matching published GitHub Markdown page, with English as the fallback. Bundled Markdown copies remain available in the project. The policy covers local data, third-party requests, temporary media, retention and deletion; the general terms preserve mandatory consumer and GPL rights without selecting a particular jurisdiction. The published English URLs are recorded in the store configuration; no HTML legal-document version is needed.
 
 For store preparation, see [review and publication instructions](release/STORE-REVIEW.md). On Windows, `node scripts/package-release.mjs --draft` generates separate extension and Windows connector ZIPs plus SHA-256 checksums in `dist/`. Both packages include the Markdown legal documents and translations. `--native-executable PATH` can reuse a prebuilt connector without rebuilding the project's bin cache. `node scripts/verify-release.mjs` verifies package contents, and `node scripts/verify-legal-docs.mjs` checks language navigation and legal links; `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-connector-install.ps1` tests prepared installation and owned-file removal without changing existing registrations. The Git-ignored `bin/` and `dist/` folders are not repository uploads. Configure the real store ID, public privacy-policy URL and connector download URL before a final build; `termsOfServiceUrl` can hold a published terms URL. The packager refuses incomplete required configuration. No build command publishes anything.
 

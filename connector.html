@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Windows media connector — Lunar Start Page</title>
+  <link rel="icon" type="image/png" href="resource/icons/lunar-v2-32.png">
+  <link rel="stylesheet" href="styles/information.css">
+  <script src="script/connector-i18n.js" defer></script>
+</head>
+<body><main>
+  <header class="information-header">
+    <strong>Lunar Start Page</strong>
+    <label class="information-language" for="connector-language"><span data-connector-i18n="language">Language</span>
+      <select id="connector-language">
+        <option value="en">English</option><option value="zh-CN">简体中文</option><option value="yue">繁體粵語</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="th">ไทย</option><option value="ms">Bahasa Melayu</option>
+      </select>
+    </label>
+  </header>
+  <h1 data-connector-i18n="title">Windows media connector</h1>
+  <p class="note" data-connector-i18n="intro">This optional feature requires Windows 10 version 1809 or later. The homepage works without it. The extension never installs the connector automatically. Only run packages you trust, and review the release notes and file checksums.</p>
+  <section aria-labelledby="connector-install-title">
+    <h2 id="connector-install-title" data-connector-i18n="install_title">Installation</h2>
+    <ol>
+      <li><span data-connector-i18n="download">Download the separate Windows connector ZIP from the official Releases page and extract it. Development packages are marked draft; store packages are provided with the release.</span> <a id="connector-download" href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/releases" target="_blank" rel="noopener noreferrer" data-connector-i18n="releases">Project releases</a></li>
+      <li data-connector-i18n="find_id">Open the music-note button on the homepage and find the extension ID in the player setup dialog. Developers can also find it at <code>chrome://extensions</code> or <code>edge://extensions</code>.</li>
+      <li data-connector-i18n="run_installer">Run <code>Install.cmd</code> from the extracted package. Store packages use their configured official IDs; development packages ask for your extension ID. Review the displayed installation path, IDs and current-user registration changes, then explicitly confirm.</li>
+      <li data-connector-i18n="enable">The installer copies the connector files and registers native messaging for Chrome/Edge for your Windows user only. Administrator access is not required. In the player, choose <strong>Agree and enable</strong>, grant the browser permission, then choose <strong>Check connection</strong>.</li>
+    </ol>
+    <p data-connector-i18n="install_location">Files are installed at <code>%LOCALAPPDATA%\LunarStart\MediaConnector</code>. There is no startup entry or network listener. The connector runs on demand when an authorized, visible modern homepage connects.</p>
+    <p data-connector-i18n="media_selection">The player follows Windows' current media selection automatically. Pause, seeking and progress depend on the source application's capabilities.</p>
+  </section>
+  <section aria-labelledby="connector-remove-title">
+    <h2 id="connector-remove-title" data-connector-i18n="remove_title">Disable and uninstall</h2>
+    <ol>
+      <li data-connector-i18n="disable">Open the help button beside the player title and choose <strong>Disable and revoke permission</strong>. This stops media access across all of this extension's tabs.</li>
+      <li data-connector-i18n="uninstall">Run <code>Uninstall.cmd</code> from the project, extracted package or installed connector folder. The project/package entry finds the default installation folder. Check the displayed path and enter <code>YES</code> to remove the connector's registration and installed files.</li>
+    </ol>
+    <p data-connector-i18n="preserved">Uninstalling the connector keeps the extension, project source, bookmarks, wallpapers and homepage settings. The development build cache at <code>native\windows-media\bin</code> is separate from the installed connector and is not removed by the uninstaller.</p>
+  </section>
+  <section aria-labelledby="connector-help-title">
+    <h2 id="connector-help-title" data-connector-i18n="help_title">Connection checks</h2>
+    <ul>
+      <li data-connector-i18n="not_connected">If the player still says it is disconnected after installation, check that the installer used the ID shown in this extension's setup dialog. Reinstall with the correct ID if needed, return to the homepage and choose <strong>Check connection</strong>.</li>
+      <li data-connector-i18n="permission">Granting browser permission alone does not install the connector or confirm a working connection. A connected player with no current media session is a normal idle state.</li>
+      <li data-connector-i18n="already_removed">If the uninstaller reports that the connector is already uninstalled or has not been installed, there is nothing to remove. This is not an error.</li>
+    </ul>
+  </section>
+  <footer class="information-footer"><a data-legal-document="privacy" href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer" data-connector-i18n="privacy">Privacy policy</a><span aria-hidden="true"> · </span><a data-legal-document="terms" href="https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md" target="_blank" rel="noopener noreferrer" data-connector-i18n="terms">Terms of service</a></footer>
+</main></body>
+</html>

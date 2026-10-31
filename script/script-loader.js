@@ -11,6 +11,7 @@
     "script/06-i18n.js",
     "script/07-storage.js",
     "script/07-sync.js",
+    "script/06-media-player.js",
     "script/08-app.js"
   ];
 
@@ -29,5 +30,6 @@
     });
   }
 
-  loadScripts();
+  // Fail closed if the consent module cannot load; a reload can retry it.
+  if (window.lunarLegalConsent) window.lunarLegalConsent.ready.then(loadScripts);
 }());

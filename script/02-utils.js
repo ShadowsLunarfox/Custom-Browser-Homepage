@@ -2,7 +2,7 @@
 function ownsInterfaceStorageKey(key) {
   if (typeof key !== "string") return false;
   if (STORAGE_KEY === "customHomeStateLegacy") return key === STORAGE_KEY || key.startsWith("legacy:") || key.startsWith(LANGUAGE_CACHE_PREFIX);
-  return key === STORAGE_KEY || key === BROWSER_PREFLIGHT_CACHE_KEY || key === FIREFOX_COMPAT_NOTICE_ACK_KEY
+  return key === STORAGE_KEY || key === "lunarWindowsMediaWidget:v1" || key === BROWSER_PREFLIGHT_CACHE_KEY || key === FIREFOX_COMPAT_NOTICE_ACK_KEY
     || key.startsWith(BROWSER_COMPAT_NOTICE_ACK_PREFIX)
     || (key.startsWith(LANGUAGE_CACHE_PREFIX) && !key.startsWith("language:legacy:"));
 }

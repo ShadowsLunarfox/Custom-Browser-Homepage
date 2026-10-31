@@ -8,7 +8,7 @@
 
 本政策适用于 Lunar Start Page 的新版、旧版界面及本项目提供的可选 Windows 媒体连接器。项目由 Lunarfox（GitHub 用户名 ShadowsLunarfox）维护。政策不适用于浏览器、应用商店、搜索引擎或其他第三方服务自身的处理活动。
 
-隐私问题可通过[项目支持入口](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues)提出。该入口是公开的，请勿提交私人网址、媒体内容、备份、密码或其他敏感信息；需要私下沟通时，请先请求提供适当渠道。
+隐私问题可通过[项目支持入口](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues)提出。该入口是公开的，请勿提交私人网址、媒体内容、备份、密码或其他敏感信息；需要私下沟通时，请先请求提供适当渠道。
 
 ## 2. 本机保存的数据
 

@@ -8,7 +8,7 @@ Bahasa: [English](../../PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md) · [繁�
 
 Dasar ini meliputi antara muka baharu dan lama Lunar Start Page serta penyambung media Windows pilihan projek ini. Projek diselenggara oleh Lunarfox, nama GitHub ShadowsLunarfox. Pemprosesan bebas oleh pelayar, kedai, enjin carian dan pihak ketiga tertakluk pada dasar masing-masing.
 
-Hubungi [sokongan projek](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues) untuk pertanyaan privasi. Ruang itu awam: jangan siarkan URL peribadi, butiran media, sandaran, kata laluan atau maklumat sensitif. Minta saluran peribadi yang sesuai sebelum berkongsi maklumat sedemikian.
+Hubungi [sokongan projek](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues) untuk pertanyaan privasi. Ruang itu awam: jangan siarkan URL peribadi, butiran media, sandaran, kata laluan atau maklumat sensitif. Minta saluran peribadi yang sesuai sebelum berkongsi maklumat sedemikian.
 
 ## 2. Maklumat pada peranti
 

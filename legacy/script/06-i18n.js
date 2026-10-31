@@ -112,6 +112,19 @@ function applyTranslations() {
   if (typeof syncCustomSelects === "function") {
     syncCustomSelects();
   }
+  syncLegalDocumentLinks();
+}
+
+function syncLegalDocumentLinks() {
+  const legalLanguages = ["en", "zh-CN", "ja", "ko", "th", "ms", "yue"];
+  const language = legalLanguages.includes(currentLanguage) ? currentLanguage : "en";
+  const base = "https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main";
+  document.querySelectorAll("[data-legal-document]").forEach(link => {
+    const name = link.dataset.legalDocument === "terms" ? "TERMS" : "PRIVACY";
+    const path = language === "en" ? `${name}.md` : `docs/legal/${name}.${language}.md`;
+    link.setAttribute("href", `${base}/${path}`);
+    link.setAttribute("rel", "noopener noreferrer");
+  });
 }
 
 function setTranslatedNodeText(node, text) {

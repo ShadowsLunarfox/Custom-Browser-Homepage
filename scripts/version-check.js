@@ -42,7 +42,7 @@
     assert(page.getElementById('theme-style'), 'Original legacy theme controls are missing');
     const resources = win.performance.getEntriesByType('resource').map(entry => new URL(entry.name)).filter(url => url.origin === location.origin);
     assert(resources.some(url => url.pathname.endsWith('/legacy/script/08-app.js')), 'Legacy app was not initialized');
-    const allowed = url => url.pathname.startsWith('/legacy/') || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
+    const allowed = url => url.pathname.startsWith('/legacy/') || ['/script/legal-consent.js', '/styles/legal-consent.css'].includes(url.pathname) || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
     assert(!resources.some(url => url.pathname.startsWith('/legacy/resource/')), 'Legacy mode loaded outdated bundled icons');
     assert(resources.every(allowed), `Legacy mode requested modern interface code: ${resources.filter(url => !allowed(url)).map(url => url.pathname).join(', ')}`);
   };

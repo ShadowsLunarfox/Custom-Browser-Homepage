@@ -8,7 +8,7 @@ Bahasa: [English](../../TERMS.md) · [简体中文](TERMS.zh-CN.md) · [繁體�
 
 Terma menerangkan penggunaan Lunar Start Page dan penyambung Windows projek ini, diselenggara oleh Lunarfox (GitHub: ShadowsLunarfox). Baca sebelum menggunakan keluaran awam. Persetujuan nyata atau penggunaan berterusan hanya menjadi penerimaan jika undang-undang mengiktirafnya dan terma telah dipersembahkan dengan sewajarnya. Jika tidak bersetuju, anda boleh berhenti dan menyahpasang.
 
-Penuhi syarat undang-undang tempatan untuk penggunaan dan dapatkan persetujuan penjaga apabila perlu. Hubungi [sokongan projek](https://github.com/ShadowsLunarfox/Custom-Browser-Homepage/issues). Ini bukan perjanjian dengan Google, Microsoft atau penyedia lain.
+Penuhi syarat undang-undang tempatan untuk penggunaan dan dapatkan persetujuan penjaga apabila perlu. Hubungi [sokongan projek](https://github.com/ShadowsLunarfox/Lunar-Start-Page/issues). Ini bukan perjanjian dengan Google, Microsoft atau penyedia lain.
 
 ## 2. Fungsi dan pihak ketiga
 

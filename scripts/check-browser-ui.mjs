@@ -10,6 +10,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const preview = process.argv.includes('--preview');
 const debugOnly = process.argv.includes('--debug-only');
 const versionsOnly = process.argv.includes('--versions-only');
+const playerOnly = process.argv.includes('--player-only');
+const consentOnly = process.argv.includes('--consent-only');
 const profile = await mkdtemp(path.join(tmpdir(), 'lunar-ui-qa-'));
 const chromePath = process.env.LUNAR_CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -28,7 +30,7 @@ try {
     catch (error) { if (attempt >= 40) throw error; await delay(100); }
   }
   const query = preview ? `?debug-preview&${process.argv.find(arg => arg.startsWith('width=')) || 'width=640'}&${process.argv.find(arg => arg.startsWith('height=')) || 'height=520'}&${process.argv.find(arg => arg.startsWith('language=')) || 'language=en'}&${process.argv.find(arg => arg.startsWith('tab=')) || 'tab=overview'}&${process.argv.find(arg => arg.startsWith('theme=')) || 'theme=dark'}` : debugOnly ? '?debug-only' : '';
-  const url = versionsOnly ? `${origin}/scripts/version-check.html${preview ? '?preview' : ''}` : `${origin}/scripts/viewport-check.html${query}`;
+  const url = consentOnly ? `${origin}/scripts/consent-check.html${preview ? '?preview' : ''}` : playerOnly ? `${origin}/scripts/media-player-check.html${preview ? '?preview' : ''}` : versionsOnly ? `${origin}/scripts/version-check.html${preview ? '?preview' : ''}` : `${origin}/scripts/viewport-check.html${query}`;
   chrome = spawn(chromePath, ['--headless=new', '--no-first-run', '--no-default-browser-check', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--remote-debugging-port=0', '--window-size=1440,1000', `--user-data-dir=${profile}`, 'about:blank'], { windowsHide: true, stdio: 'ignore' });
   let debugPort;
   for (let attempt = 0; ; attempt++) {
@@ -51,7 +53,7 @@ try {
     if (message.method === 'Network.loadingFailed' && ['Script', 'Stylesheet'].includes(message.params.type)) {
       const failedUrl = requests.get(message.params.requestId);
       console.error('Preview resource failed:', message.params.errorText, failedUrl);
-      if (/\/scripts\/(?:viewport|version)-check\.js$/.test(failedUrl || '') && pageLoadRetries++ < 2) {
+      if (/\/scripts\/(?:viewport|version|media-player)-check\.js$/.test(failedUrl || '') && pageLoadRetries++ < 2) {
         setTimeout(() => send('Page.reload').catch(() => {}), 200);
       }
     }
